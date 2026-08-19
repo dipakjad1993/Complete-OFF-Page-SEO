@@ -1,0 +1,583 @@
+{
+  "5": {
+    "schema": {
+      "brand_id": 5,
+      "name": "The New York Times",
+      "kg_mid": "",
+      "wikidata_id": "",
+      "crunchbase_id": "",
+      "wikipedia_url": "",
+      "logo_url": null,
+      "description": null,
+      "topical_taxonomy": null,
+      "primary_categories": [
+        "news media"
+      ],
+      "seed_keywords": [
+        "news",
+        "live updates",
+        "local news",
+        "current events",
+        "livestream",
+        "live video",
+        "world news",
+        "us news",
+        "breaking news",
+        "india news",
+        "politics",
+        "business",
+        "entertainment",
+        "sports",
+        "current affairs",
+        "top stories"
+      ],
+      "official_messaging": null
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-07-30T12:34:27.815271"
+    }
+  },
+  "7": {
+    "schema": {
+      "brand_id": 7,
+      "name": "The Indian Express",
+      "kg_mid": "",
+      "wikidata_id": "Q1954843",
+      "crunchbase_id": null,
+      "wikipedia_url": "",
+      "logo_url": null,
+      "description": "The Indian Express is an Indian English-language daily newspaper.",
+      "topical_taxonomy": null,
+      "primary_categories": [
+        "news media"
+      ],
+      "seed_keywords": [
+        "news",
+        "india news",
+        "politics",
+        "world news",
+        "breaking news",
+        "business",
+        "entertainment",
+        "sports",
+        "current affairs",
+        "top stories"
+      ],
+      "official_messaging": null
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "updated_at": "2026-07-31T06:36:04.100926"
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes",
+        "expired",
+        "sponsorship",
+        "forum",
+        "reddit",
+        "conference"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-07-31T06:36:04.129661"
+    }
+  },
+  "10": {
+    "schema": {
+      "brand_id": 10,
+      "name": "BBC Home",
+      "kg_mid": null,
+      "wikidata_id": null,
+      "crunchbase_id": null,
+      "wikipedia_url": null,
+      "logo_url": null,
+      "description": "British Broadcasting Corporation - news media",
+      "topical_taxonomy": null,
+      "primary_categories": [
+        "news media"
+      ],
+      "seed_keywords": [
+        "news",
+        "headlines",
+        "world news",
+        "breaking news",
+        "india news",
+        "politics",
+        "business",
+        "entertainment",
+        "sports",
+        "current affairs",
+        "top stories"
+      ],
+      "official_messaging": null
+    }
+  },
+  "11": {
+    "schema": {
+      "brand_id": 11,
+      "name": "India Today",
+      "kg_mid": "",
+      "wikidata_id": "Q1661219",
+      "crunchbase_id": null,
+      "wikipedia_url": "https://en.wikipedia.org/wiki/India_Today",
+      "logo_url": null,
+      "description": "indiatoday.in is a leading Indian news website providing news coverage in English.",
+      "topical_taxonomy": null,
+      "primary_categories": [
+        "news media"
+      ],
+      "seed_keywords": [
+        "news",
+        "india news",
+        "current affairs",
+        "politics",
+        "world news",
+        "breaking news",
+        "business",
+        "entertainment",
+        "sports",
+        "top stories"
+      ],
+      "official_messaging": null
+    }
+  },
+  "12": {
+    "schema": {
+      "brand_id": 12,
+      "name": "SERPrecon",
+      "kg_mid": "",
+      "wikidata_id": "",
+      "crunchbase_id": null,
+      "wikipedia_url": "",
+      "logo_url": null,
+      "description": "SERPrecon is a semantic SEO tool that measures topical authority using the same methods as Google, Bing, Yandex, and major AI models.",
+      "topical_taxonomy": null,
+      "primary_categories": [
+        "marketing"
+      ],
+      "seed_keywords": [
+        "semantic seo",
+        "topical authority",
+        "search engine optimization",
+        "google seo",
+        "bing seo",
+        "yandex seo",
+        "ai search"
+      ],
+      "official_messaging": null
+    }
+  },
+  "13": {
+    "schema": {
+      "brand_id": 13,
+      "name": "Filmibeat",
+      "kg_mid": "",
+      "wikidata_id": "",
+      "crunchbase_id": null,
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Oneindia",
+      "logo_url": null,
+      "description": "Oneindia.com is an Indian news website established in January 2006 by BG Mahesh. The website provides news updates, information on sports, events, travel, entertainment, business, lifestyle, videos, and classifieds in seven different Indian languages and English. In June 2021, its Alexa ranking in India is 134. It is owned by Greynium Information Technologies Pvt Ltd.",
+      "topical_taxonomy": null,
+      "primary_categories": [
+        "news media"
+      ],
+      "seed_keywords": [
+        "Bollywood",
+        "Bigg Boss",
+        "Television",
+        "Reviews",
+        "Celebrities",
+        "news",
+        "breaking news",
+        "india news",
+        "politics",
+        "business",
+        "world news",
+        "entertainment",
+        "sports",
+        "current affairs",
+        "top stories"
+      ],
+      "official_messaging": null
+    }
+  },
+  "14": {
+    "schema": {
+      "brand_id": 14,
+      "name": "MakeUseOf",
+      "kg_mid": "/g/11b6s0c6ly",
+      "wikidata_id": "Q135456040",
+      "crunchbase_id": "makeuseof",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Valnet",
+      "logo_url": null,
+      "description": "MakeUseOf (MUO) is an online technology magazine and digital publishing media outlet that produces practical how-to guides, consumer electronics reviews, software tutorials, and technical explanations. Founded in 2006 and owned by Valnet Inc. since 2020, MUO simplifies modern digital ecosystems\u00e2\u20ac\u201dincluding desktop OS, mobile platforms, web applications, cybersecurity, and smart home tech\u00e2\u20ac\u201dfor a global consumer audience.",
+      "topical_taxonomy": {
+        "pillars": [
+          "consumer technology tutorials",
+          "software troubleshooting",
+          "digital lifestyle guides",
+          "operating system how-tos",
+          "tech buying recommendations",
+          "accessible hardware analysis"
+        ]
+      },
+      "primary_categories": [
+        "consumer technology",
+        "how-to guides",
+        "tech tutorials"
+      ],
+      "seed_keywords": [
+        "muo tech",
+        "how to fix windows error",
+        "macOS tutorial",
+        "iphone tips and tricks",
+        "linux beginner guide",
+        "smart home setup",
+        "cybersecurity tips"
+      ],
+      "official_messaging": "\"Technology, Simplified.\"\n\n\nCore Value Proposition: Providing practical, accessible guidance and actionable solutions for everyday consumer technology, helping users make the best use of their gadgets, applications, and digital platforms."
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes",
+        "conference",
+        "reddit",
+        "forum",
+        "expired",
+        "sponsorship"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-08-18T08:44:53.400591"
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "updated_at": "2026-08-18T08:44:53.427656"
+    }
+  },
+  "15": {
+    "schema": {
+      "brand_id": 15,
+      "name": "The Hindu",
+      "kg_mid": "",
+      "wikidata_id": "Q926175",
+      "crunchbase_id": "",
+      "wikipedia_url": "",
+      "logo_url": null,
+      "description": "",
+      "topical_taxonomy": null,
+      "primary_categories": [
+        "news media"
+      ],
+      "seed_keywords": [],
+      "official_messaging": null
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-08-19T09:19:19.286501"
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "updated_at": "2026-08-19T09:19:19.309528"
+    }
+  },
+  "16": {
+    "schema": {
+      "brand_id": 16,
+      "name": "NDTV Profit",
+      "kg_mid": "",
+      "wikidata_id": "Q6953329",
+      "crunchbase_id": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NDTV_Profit",
+      "logo_url": null,
+      "description": "NDTV Profit is an Indian business and financial news television channel by NDTV. In mid-2020, NDTV re-launched NDTV Profit with live market news, which caused the shutdown of NDTV Prime.",
+      "topical_taxonomy": {
+        "pillars": [
+          "news media",
+          "India",
+          "Videos",
+          "Health Risks Behind The Drink",
+          "Technology",
+          "Shopping"
+        ]
+      },
+      "primary_categories": [
+        "news media"
+      ],
+      "seed_keywords": [
+        "news",
+        "headlines",
+        "world news",
+        "live updates",
+        "journalism",
+        "newspaper",
+        "media",
+        "ndtvprofit.com",
+        "NDTV Profit news media",
+        "NDTV Profit Daily",
+        "Personal Finance",
+        "World",
+        "Economy",
+        "breaking news",
+        "india news",
+        "politics",
+        "business",
+        "entertainment",
+        "sports",
+        "current affairs",
+        "top stories"
+      ],
+      "official_messaging": "Business News LIVE: Get the latest and breaking business news, finance news, stock market updates from India and International markets on NDTV Profit."
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-08-19T08:04:09.875800"
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "updated_at": "2026-08-19T08:04:09.899379"
+    }
+  },
+  "17": {
+    "schema": {
+      "brand_id": 17,
+      "name": "Healthline",
+      "kg_mid": "",
+      "wikidata_id": "Q16983671",
+      "crunchbase_id": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Healthline",
+      "logo_url": null,
+      "description": "Healthline Media, Inc. is an American website and provider of health information headquartered in San Francisco, California. It was founded in 1999, and purchased by Red Ventures in 2019. Healthline claimed to be using AI to generate content from 2023\u20132026, although that claim has now been reversed.",
+      "topical_taxonomy": {
+        "pillars": [
+          "healthcare",
+          "Explore by health topic",
+          "Featured programs",
+          "ABOUT US",
+          "Medical Integrity",
+          "Chronic Condition Communities",
+          "Follow Us",
+          "POLICIES"
+        ]
+      },
+      "primary_categories": [
+        "healthcare"
+      ],
+      "seed_keywords": [
+        "healthcare",
+        "telehealth",
+        "digital health",
+        "clinical",
+        "patient care",
+        "medical",
+        "health technology",
+        "hospital",
+        "health records",
+        "Healthline",
+        "healthline.com",
+        "Healthline healthcare",
+        "Trending",
+        "Latest videos",
+        "Healthline Editorial",
+        "About Healthline Media",
+        "Our Approach to Content Integrity",
+        "Our approach to content creation",
+        "Our approach to brand and product vetting",
+        "Our approach to conscious language",
+        "Our Editorial Process",
+        "Our Editorial Process",
+        "Created for You",
+        "Weight Management",
+        "Nutrition",
+        "Fitness",
+        "Mental Well-Being",
+        "Lifestyle/adherence",
+        "Treatment & Medications"
+      ],
+      "official_messaging": "We're committed to being your source for expert health guidance. Come to us in your pursuit of wellness."
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-08-19T09:07:27.347769"
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "updated_at": "2026-08-19T09:07:27.370166"
+    }
+  }
+}

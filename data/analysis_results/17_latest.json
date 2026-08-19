@@ -1,0 +1,2717 @@
+{
+  "brand": "Healthline",
+  "domain": "healthline.com",
+  "category": "healthcare",
+  "started_at": "2026-08-19T09:07:27.381462+00:00",
+  "completed_at": "2026-08-19T09:08:49.548377+00:00",
+  "sections": {
+    "llm_perception": {
+      "feature_name": "LLM Co-Mention & Perception Auditing",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY",
+      "detail": "No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+      "assessment": "unavailable",
+      "recommendation": "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data. No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+      "detailed_analysis": "No data was fabricated for \"LLM Co-Mention & Perception Auditing\". Configure OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY and re-run the analysis to get real, verified output. Reason: No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data",
+        "No LLM provider is configured, so no real AI-assistant co-mention audit can run"
+      ],
+      "methodology": "LLM Co-Mention & Perception Auditing: live signals collected in real time for Healthline via live signal collection. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "unlinked_citations": {
+      "feature_name": "Unlinked Citation & Co-Occurrence Converter",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+link_verification",
+      "retrieved_at": "2026-08-19T09:07:43.012798+00:00",
+      "total_mentions_found": 1,
+      "examined": 1,
+      "linked_count": 0,
+      "unlinked_count": 1,
+      "conversion_rate": 0.0,
+      "mentions": [
+        {
+          "url": "https://en.volleyballworld.com/volleyball/competitions/volleyball-nations-league",
+          "title": "VNL 2026 - FIVB Men's & Women's Volleyball Nations League",
+          "domain": "en.volleyballworld.com",
+          "snippet": "Official home of VNL 2026. Find full competition schedules, rosters, team stats, results and match news at Volleyball World.",
+          "relevance_score": 0.45,
+          "links_to_brand": false,
+          "verified": true
+        }
+      ],
+      "assessment": "opportunities",
+      "recommendation": "1 of 1 examined third-party pages mention \"Healthline\" without a link back to healthline.com (0.0% conversion). Pitch a link placement on each.",
+      "detailed_analysis": "Unlinked-citation audit for Healthline: found 1 brand mentions from real searches; fetched and inspected the top 1 pages to check whether they hyperlink to healthline.com. Every \"linked\" verdict is based on the live page content fetched at 2026-08-19T09:07:43.012787+00:00.",
+      "runtime_secs": 15.6,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Mentions Found",
+          "value": "1"
+        },
+        {
+          "metric": "Examined",
+          "value": "1"
+        },
+        {
+          "metric": "Linked Count",
+          "value": "0"
+        },
+        {
+          "metric": "Unlinked Count",
+          "value": "1"
+        },
+        {
+          "metric": "Conversion Rate",
+          "value": "0.0%"
+        }
+      ],
+      "actions": [
+        "1 of 1 examined third-party pages mention \"Healthline\" without a link back to healthline",
+        "Pitch a link placement on each"
+      ],
+      "methodology": "Unlinked Citation & Co-Occurrence Converter: live signals collected in real time for Healthline via live search+link verification. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "consensus": {
+      "feature_name": "Third-Party Consensus Engine",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+llm_sentiment",
+      "retrieved_at": "2026-08-19T09:07:40.331543+00:00",
+      "total_mentions": 1,
+      "sentiment_scored": 0,
+      "avg_sentiment": null,
+      "overall_sentiment_score": null,
+      "sentiment_distribution": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0
+      },
+      "mentions": [
+        {
+          "url": "https://www.homeessentialsguide.com/best-heavy-duty-degreaser-for-kitchen",
+          "title": "7 Best Heavy Duty Degreaser For Kitchen 2026",
+          "domain": "homeessentialsguide.com",
+          "snippet": "What brands make the best heavy duty degreaser for kitchen? Zep, Easy-Off, Spray Nine, and Dawn Professional are consistently top-rated brands known for reliability and strength in both residential and commercial settings.",
+          "query": "\"Healthline\" pros cons"
+        }
+      ],
+      "sentiment_available": false,
+      "assessment": "no_sentiment_data",
+      "recommendation": "Collected 1 real third-party mentions of \"Healthline\". Sentiment scoring requires an LLM key (OPENAI_API_KEY/ANTHROPIC_API_KEY/PERPLEXITY_API_KEY); mention data is real regardless.",
+      "detailed_analysis": "Consensus audit for Healthline: 6 queries, 1 real mentions collected. 0 snippets scored by a live LLM sentiment call. No sentiment values are fabricated.",
+      "runtime_secs": 12.7,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Mentions",
+          "value": "1"
+        },
+        {
+          "metric": "Sentiment Scored",
+          "value": "0%"
+        }
+      ],
+      "actions": [
+        "Collected 1 real third-party mentions of \"Healthline\"",
+        "Sentiment scoring requires an LLM key (OPENAI_API_KEY/ANTHROPIC_API_KEY/PERPLEXITY_API_KEY); mention data is real regardless"
+      ],
+      "methodology": "Third-Party Consensus Engine: live signals collected in real time for Healthline via live search+llm sentiment. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "rag_repair": {
+      "feature_name": "RAG Hallucination & Citation Repair",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY",
+      "detail": "No LLM provider is configured, so RAG citation testing cannot run.",
+      "assessment": "unavailable",
+      "recommendation": "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data. No LLM provider is configured, so RAG citation testing cannot run.",
+      "detailed_analysis": "No data was fabricated for \"RAG Hallucination & Citation Repair\". Configure OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY and re-run the analysis to get real, verified output. Reason: No LLM provider is configured, so RAG citation testing cannot run.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data",
+        "No LLM provider is configured, so RAG citation testing cannot run"
+      ],
+      "methodology": "RAG Hallucination & Citation Repair: live signals collected in real time for Healthline via live signal collection. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "vector_mapping": {
+      "feature_name": "Vector Co-Location & Embedding Mapping",
+      "status": "ok",
+      "verified": true,
+      "method": "tfidf_cosine",
+      "retrieved_at": "2026-08-19T09:07:49.141540+00:00",
+      "brand_texts_embedded": 5,
+      "competitors_embedded": 3,
+      "competitor_distances": [
+        {
+          "competitor": "Epic Systems",
+          "cosine_similarity": 0.1913
+        },
+        {
+          "competitor": "Cerner",
+          "cosine_similarity": 0.179
+        },
+        {
+          "competitor": "Teladoc",
+          "cosine_similarity": 0.2872
+        }
+      ],
+      "avg_cosine_similarity": 0.2192,
+      "assessment": "computed",
+      "recommendation": "Embedded 5 brand text passages and 3 competitor passages. Average cosine similarity to competitors: 0.2192.",
+      "detailed_analysis": "Vector mapping for Healthline: real TF-IDF vectors computed from the fetched site text for 8 passages. Similarity values are actual cosine distances between the real vectors.",
+      "runtime_secs": 21.2,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Brand Texts Embedded",
+          "value": "5"
+        },
+        {
+          "metric": "Competitors Embedded",
+          "value": "3"
+        },
+        {
+          "metric": "Avg Cosine Similarity",
+          "value": "0.22%"
+        }
+      ],
+      "actions": [
+        "Embedded 5 brand text passages and 3 competitor passages",
+        "Average cosine similarity to competitors: 0"
+      ],
+      "methodology": "Vector Co-Location & Embedding Mapping: live signals collected in real time for Healthline via tfidf cosine. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "pr_hooks": {
+      "feature_name": "Predictive Digital PR & Trend Hook Engine",
+      "status": "ok",
+      "verified": true,
+      "method": "news_rss/newsapi+llm_or_term_frequency",
+      "retrieved_at": "2026-08-19T09:07:38.114715+00:00",
+      "trending_articles": [
+        {
+          "title": "Childhood Vaccine Exemptions Hit Record High as Measles Cases Surge Across U.S.",
+          "url": "https://www.healthline.com/health-news/cdc-vaccine-exemptions-hit-record-high",
+          "snippet": "Vaccination rates among U.S. kindergartners have fallen below the level generally needed to prevent infectious diseases like measles from spreading, while vaccine exemptions for medical or religious ...",
+          "published": "Tue, 18 Aug 2026 06:58:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Are You Really \u2018Maxxing\u2019 Your Health? What to Know About 4 Viral Health Hacks",
+          "url": "https://www.healthline.com/health-news/maxxing-health-viral-trends",
+          "snippet": "Maxxing\u201d trends are growing in popularity on social media, but experts say these health hacks, which promote optimizing nutrition, sleep, and fertility, may be ineffective or even pose health risks.",
+          "published": "Sat, 15 Aug 2026 19:00:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Taking the Stairs May Lower Your Risk of Death From Cardiovascular Disease",
+          "url": "https://www.healthline.com/health-news/taking-stairs-lower-risk-death-cardiovascular-disease",
+          "snippet": "New research suggests that stair climbing may help significantly reduce your risk of cardiovascular disease and premature death. Here\u2019s why.",
+          "published": "Fri, 14 Aug 2026 07:32:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "RFK Jr.'s \u2018Real Food Show\u2019 Flips the Food Pyramid With His Brand of \u2018Healthy\u2019 Cooking",
+          "url": "https://www.healthline.com/health-news/rfk-jr-new-healthy-cooking-show-upside-down-food-pyramid",
+          "snippet": "Health Secretary Robert F. Kennedy Jr. is the host of \"The Real Food Show,\" a new MAHA-inspired cooking show featuring healthy, real foods on a budget. But the real star of the show is the ...",
+          "published": "Thu, 06 Aug 2026 04:55:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "\u2018Poop Pills\u2019 Show Promise for Severe Peanut Allergy, Early Research Shows",
+          "url": "https://www.healthline.com/health-news/poop-pills-show-early-promise-for-severe-peanut-allergy-tolerance",
+          "snippet": "A preliminary study found that \u201cpoop pills\u201d \u2014 oral fecal microbiome transplantation (FMT) \u2014 increased tolerance to peanuts in some adults with a peanut allergy. Researchers found similar results in ...",
+          "published": "Fri, 14 Aug 2026 22:55:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Trump Administration Considering Executive Order On Vaccines, Autism",
+          "url": "https://www.healthline.com/health-news/trump-administration-executive-order-autism-vaccines",
+          "snippet": "The Trump Administration is reportedly drafting an executive order on autism and vaccines. While the exact details of the order are not yet available, it is expected to include autism research and the ...",
+          "published": "Fri, 07 Aug 2026 02:45:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Chipotle, Qdoba Pull Jalape\u00f1os Amid Salmonella Outbreak: Should You Worry?",
+          "url": "https://www.healthline.com/health-news/chipotle-pulls-jalapenos-from-restaurants-salmonella-outbreak",
+          "snippet": "Chipotle Mexican Grill has removed jalape\u00f1os from Minnesota restaurants and other locations due to potential links to a Salmonella outbreak currently under investigation by the Food and Drug ...",
+          "published": "Wed, 05 Aug 2026 05:14:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "GLP-1s Like Ozempic, Mounjaro May Lower Fracture Risk in Type 2 Diabetes",
+          "url": "https://www.healthline.com/health-news/glp-1-drugs-may-lower-fracture-risk-type-2-diabetes",
+          "snippet": "A new study has found that GLP-1 medications, like Ozempic and Mounjaro, may help reduce the risk of fragility-related fractures in people with type 2 diabetes.",
+          "published": "Sat, 08 Aug 2026 23:37:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Longevity: Eating Less Protein Linked to Healthy Aging in New Studies",
+          "url": "https://www.healthline.com/health-news/longevity-less-protein-linked-healthy-aging",
+          "snippet": "New research suggests eating less protein may support healthy aging and longevity, but the potential benefits may depend on factors such as age, activity level, and overall health.",
+          "published": "Thu, 06 Aug 2026 06:06:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "5 Mental Health Benefits of GLP-1 Drugs Like Ozempic, Wegovy",
+          "url": "https://www.healthline.com/health-news/five-mental-health-benefits-glp-1-ozempic-wegovy",
+          "snippet": "Research has shown that GLP-1 drugs, like Ozempic, Wegovy, and Mounjaro, may have positive benefits on mental health, including a reduction in anxiety and depression symptoms and quieting \"food noise.",
+          "published": "Thu, 13 Aug 2026 01:22:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Why Taking GLP-1s Like Ozempic Before Bariatric Surgery May Not Lead to More Weight Loss",
+          "url": "https://www.healthline.com/health-news/glp1-ozempic-before-bariatric-surgery-may-not-boost-weight-loss",
+          "snippet": "Taking GLP-1 medications like Ozempic and Wegovy before bariatric surgery may not boost weight loss after the procedure, a new study found. However, experts say the medications may still provide ...",
+          "published": "Thu, 13 Aug 2026 08:11:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Trump Orders Changes to Childhood Vaccines Despite Medical Opposition",
+          "url": "https://www.healthline.com/health-news/trump-executive-order-splitting-mmr-vaccine",
+          "snippet": "President Trump signed an executive order to split the measles, mumps, and rubella (MMR) vaccine into individual shots, as medical experts warn that the changes are not supported by scientific ...",
+          "published": "Tue, 11 Aug 2026 04:53:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Mounjaro May Help Protect Heart Health in People With Type 2 Diabetes",
+          "url": "https://www.healthline.com/health-news/mounjaro-protect-heart-health-diabetes",
+          "snippet": "A new study suggests Mounjaro may lower the risk of heart attack and other major cardiovascular events in people with type 2 diabetes and established heart disease.",
+          "published": "Tue, 11 Aug 2026 04:34:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Taylor Farms Recalls Salsa, Guacamole Products With Jalape\u00f1os Due to Salmonella",
+          "url": "https://www.healthline.com/health-news/taylor-farms-recalls-salsa-guacamole-jalapenos-salmonella",
+          "snippet": "Several Taylor Farms products containing jalape\u00f1o peppers, such as guacamole and salsa, have been recalled by Whole Foods, Walmart, Target, and other major U.S. Retailers due to concerns about ...",
+          "published": "Wed, 12 Aug 2026 06:34:00 GMT",
+          "source_name": "healthline.com",
+          "is_news": true
+        },
+        {
+          "title": "Healthcare beats Nifty 50: Should investors shift from broader-market index funds to growth sectors?",
+          "url": "https://www.msn.com/en-in/news/other/healthcare-beats-nifty-50-should-investors-shift-from-broader-market-index-funds-to-growth-sectors/ar-AA2aoq7p",
+          "snippet": "Healthcare has outperformed the Nifty 50 across several periods, with the BSE Healthcare TRI delivering a 22.7% CAGR over seven years. But does this mean investors should look beyond their ...",
+          "published": "Tue, 18 Aug 2026 09:35:46 GMT",
+          "source_name": "msn.com",
+          "is_news": true
+        }
+      ],
+      "brand_mentions_in_news": 0,
+      "industry_articles_scanned": 28,
+      "total_articles_scanned": 28,
+      "hook_count": 10,
+      "hooks": [
+        {
+          "title": "Trending topic: \"Health\" (covered in 3 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live Health topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://www.healthline.com/health-news/five-mental-health-benefits-glp-1-ozempic-wegovy",
+          "source_articles": [
+            "https://www.healthline.com/health-news/five-mental-health-benefits-glp-1-ozempic-wegovy",
+            "https://www.healthline.com/health-news/maxxing-health-viral-trends",
+            "https://www.healthline.com/health-news/mounjaro-protect-heart-health-diabetes"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending topic: \"With\" (covered in 3 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live With topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://www.healthline.com/health-news/mounjaro-protect-heart-health-diabetes",
+          "source_articles": [
+            "https://www.healthline.com/health-news/mounjaro-protect-heart-health-diabetes",
+            "https://www.healthline.com/health-news/rfk-jr-new-healthy-cooking-show-upside-down-food-pyramid",
+            "https://www.healthline.com/health-news/taylor-farms-recalls-salsa-guacamole-jalapenos-salmonella"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending topic: \"Like Ozempic\" (covered in 3 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live Like Ozempic topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://www.healthline.com/health-news/five-mental-health-benefits-glp-1-ozempic-wegovy",
+          "source_articles": [
+            "https://www.healthline.com/health-news/five-mental-health-benefits-glp-1-ozempic-wegovy",
+            "https://www.healthline.com/health-news/glp-1-drugs-may-lower-fracture-risk-type-2-diabetes",
+            "https://www.healthline.com/health-news/glp1-ozempic-before-bariatric-surgery-may-not-boost-weight-loss"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending topic: \"Childhood\" (covered in 2 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live Childhood topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://www.healthline.com/health-news/cdc-vaccine-exemptions-hit-record-high",
+          "source_articles": [
+            "https://www.healthline.com/health-news/cdc-vaccine-exemptions-hit-record-high",
+            "https://www.healthline.com/health-news/trump-executive-order-splitting-mmr-vaccine"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending topic: \"Across\" (covered in 2 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live Across topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://www.healthline.com/health-news/cdc-vaccine-exemptions-hit-record-high",
+          "source_articles": [
+            "https://www.healthline.com/health-news/cdc-vaccine-exemptions-hit-record-high",
+            "https://www.msn.com/en-in/money/general/lord-s-mark-industries-outlines-strategic-expansion-across-global-healthcare-advanced-diagnostics-oncology/ar-AA2anAu7"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending topic: \"Your\" (covered in 2 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live Your topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://www.healthline.com/health-news/maxxing-health-viral-trends",
+          "source_articles": [
+            "https://www.healthline.com/health-news/maxxing-health-viral-trends",
+            "https://www.healthline.com/health-news/taking-stairs-lower-risk-death-cardiovascular-disease"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending topic: \"Taking\" (covered in 2 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live Taking topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://www.healthline.com/health-news/glp1-ozempic-before-bariatric-surgery-may-not-boost-weight-loss",
+          "source_articles": [
+            "https://www.healthline.com/health-news/glp1-ozempic-before-bariatric-surgery-may-not-boost-weight-loss",
+            "https://www.healthline.com/health-news/taking-stairs-lower-risk-death-cardiovascular-disease"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending topic: \"Risk\" (covered in 2 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live Risk topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://www.healthline.com/health-news/glp-1-drugs-may-lower-fracture-risk-type-2-diabetes",
+          "source_articles": [
+            "https://www.healthline.com/health-news/glp-1-drugs-may-lower-fracture-risk-type-2-diabetes",
+            "https://www.healthline.com/health-news/taking-stairs-lower-risk-death-cardiovascular-disease"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending topic: \"From\" (covered in 2 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live From topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://health.economictimes.indiatimes.com/news/industry/apple-hosted-healthcare-roundtable-explores-the-next-leap-from-digital-hospitals-to-on-premise-ai-intelligence/133318131",
+          "source_articles": [
+            "https://health.economictimes.indiatimes.com/news/industry/apple-hosted-healthcare-roundtable-explores-the-next-leap-from-digital-hospitals-to-on-premise-ai-intelligence/133318131",
+            "https://www.healthline.com/health-news/taking-stairs-lower-risk-death-cardiovascular-disease"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending topic: \"May Lower\" (covered in 2 articles in the last-14-days news set)",
+          "angle": "Pitch Healthline commentary/data on the live May Lower topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+          "source_url": "https://www.healthline.com/health-news/glp-1-drugs-may-lower-fracture-risk-type-2-diabetes",
+          "source_articles": [
+            "https://www.healthline.com/health-news/glp-1-drugs-may-lower-fracture-risk-type-2-diabetes",
+            "https://www.healthline.com/health-news/taking-stairs-lower-risk-death-cardiovascular-disease"
+          ],
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+        }
+      ],
+      "assessment": "hooks_ready",
+      "recommendation": "Scanned 28 real healthcare articles from the last 14 days. 10 journalist-ready PR hooks generated, each grounded in a real article.",
+      "detailed_analysis": "PR hook engine for Healthline: pulled 28 real articles via Google News RSS. 0 mention the brand directly. 10 hooks were produced from real term-frequency analysis and checked against article URLs at 2026-08-19T09:07:38.114697+00:00.",
+      "runtime_secs": 10.2,
+      "sources": [
+        {
+          "url": "https://www.healthline.com/health-news/cdc-vaccine-exemptions-hit-record-high",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/maxxing-health-viral-trends",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/taking-stairs-lower-risk-death-cardiovascular-disease",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/rfk-jr-new-healthy-cooking-show-upside-down-food-pyramid",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/poop-pills-show-early-promise-for-severe-peanut-allergy-tolerance",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/trump-administration-executive-order-autism-vaccines",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/chipotle-pulls-jalapenos-from-restaurants-salmonella-outbreak",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/glp-1-drugs-may-lower-fracture-risk-type-2-diabetes",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/longevity-less-protein-linked-healthy-aging",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/five-mental-health-benefits-glp-1-ozempic-wegovy",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/glp1-ozempic-before-bariatric-surgery-may-not-boost-weight-loss",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/trump-executive-order-splitting-mmr-vaccine",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/mounjaro-protect-heart-health-diabetes",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/taylor-farms-recalls-salsa-guacamole-jalapenos-salmonella",
+          "domain": "healthline.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Brand Mentions In News",
+          "value": "0"
+        },
+        {
+          "metric": "Industry Articles Scanned",
+          "value": "28"
+        },
+        {
+          "metric": "Total Articles Scanned",
+          "value": "28"
+        },
+        {
+          "metric": "Hook Count",
+          "value": "10"
+        }
+      ],
+      "actions": [
+        "Scanned 28 real healthcare articles from the last 14 days",
+        "10 journalist-ready PR hooks generated, each grounded in a real article"
+      ],
+      "methodology": "Predictive Digital PR & Trend Hook Engine: live signals collected in real time for Healthline via news rss/newsapi+llm or term frequency. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "link_poisoning": {
+      "feature_name": "Algorithmic Link Poisoning & Anomaly Radar",
+      "status": "ok",
+      "verified": true,
+      "method": "bing_link_queries+analysis",
+      "retrieved_at": "2026-08-19T09:07:36.555282+00:00",
+      "total_backlinks": 30,
+      "toxic_count": 0,
+      "toxic_backlinks": [],
+      "exact_match_anchor_pct": 0.0,
+      "top_anchors": [
+        {
+          "anchor": "staff selection commission",
+          "count": 3
+        },
+        {
+          "anchor": "search | staff selection commission | goi",
+          "count": 1
+        },
+        {
+          "anchor": "list of user departments - staff selection commission",
+          "count": 1
+        },
+        {
+          "anchor": "calendar of examination_2023-24-17_05_2023.xlsx",
+          "count": 1
+        },
+        {
+          "anchor": "staff selection commission combined graduate level examination, 2020 ...",
+          "count": 1
+        },
+        {
+          "anchor": "(6) search | staff selection commission | goi",
+          "count": 1
+        },
+        {
+          "anchor": "proactivedisclosure | staff selection commission | goi",
+          "count": 1
+        },
+        {
+          "anchor": "government of india department of personnel & training staff selection ...",
+          "count": 1
+        },
+        {
+          "anchor": "car games play on crazygames",
+          "count": 1
+        },
+        {
+          "anchor": "car games - play online for free! - poki",
+          "count": 1
+        }
+      ],
+      "health_score": 100,
+      "assessment": "healthy",
+      "recommendation": "30 real backlinks audited. 0 flagged as toxic/anomalous. 0.0% exact-match anchors (over-optimization risk above 40%). Health score 100/100.",
+      "detailed_analysis": "Link-poisoning audit for healthline.com: 30 backlinks pulled live from Bing reference discovery. 0 links show toxic domain or anchor patterns; 0.0% of anchors are exact-match. All numbers derived from the live backlink dataset.",
+      "runtime_secs": 8.4,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Backlinks",
+          "value": "30"
+        },
+        {
+          "metric": "Toxic Count",
+          "value": "0"
+        },
+        {
+          "metric": "Exact Match Anchor Pct",
+          "value": "0.0%"
+        },
+        {
+          "metric": "Health Score",
+          "value": "100%"
+        }
+      ],
+      "actions": [
+        "0 flagged as toxic/anomalous",
+        "0% exact-match anchors (over-optimization risk above 40%)"
+      ],
+      "methodology": "Algorithmic Link Poisoning & Anomaly Radar: live signals collected in real time for Healthline via bing link queries+analysis. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "podcast_video": {
+      "feature_name": "Podcast & Video Citation Finder",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+itunes_api+platform_filter",
+      "retrieved_at": "2026-08-19T09:07:38.338487+00:00",
+      "opportunity_count": 10,
+      "unique_platforms": 1,
+      "mentions": [
+        {
+          "url": "https://feed.podbean.com/healtlline/feed.xml",
+          "title": "HealthLine \u2014 With Daniel & Jessica Vierra",
+          "domain": "podcasts.apple.com",
+          "snippet": "Alternative Health"
+        },
+        {
+          "url": "https://feeds.megaphone.fm/RED2429845607",
+          "title": "Inside Mental Health \u2014 Healthline Media",
+          "domain": "podcasts.apple.com",
+          "snippet": "Mental Health"
+        },
+        {
+          "url": "https://feeds.megaphone.fm/RED9861025130",
+          "title": "In Conversation \u2014 Healthline Media",
+          "domain": "podcasts.apple.com",
+          "snippet": "News Commentary"
+        },
+        {
+          "url": "https://anchor.fm/s/e47fff0/podcast/rss",
+          "title": "HealthLine with Dr. David Hancock \u2014 Dr. David W. Hancock",
+          "domain": "podcasts.apple.com",
+          "snippet": "Alternative Health"
+        },
+        {
+          "url": "https://feeds.megaphone.fm/RED5428777199",
+          "title": "Inside Schizophrenia \u2014 Healthline Media",
+          "domain": "podcasts.apple.com",
+          "snippet": "Mental Health"
+        },
+        {
+          "url": "https://feeds.megaphone.fm/RED6766707424",
+          "title": "Inside Bipolar \u2014 Gabe Howard & Dr. Nicole Washington",
+          "domain": "podcasts.apple.com",
+          "snippet": "Self-Improvement"
+        },
+        {
+          "url": "https://feeds.transistor.fm/ktbs-healthline-3",
+          "title": "KTBS: HealthLine 3 \u2014 KTBS 3",
+          "domain": "podcasts.apple.com",
+          "snippet": "Health & Fitness"
+        },
+        {
+          "url": "https://rss.libsyn.com/shows/604485/destinations/5263185.xml",
+          "title": "MHA Healthline \u2014 Minnesota Hospital Association",
+          "domain": "podcasts.apple.com",
+          "snippet": "Health & Fitness"
+        },
+        {
+          "url": "https://anchor.fm/s/2ef79a30/podcast/rss",
+          "title": "BenCarson Healthline \u2014 BenCarson",
+          "domain": "podcasts.apple.com",
+          "snippet": "Health & Fitness"
+        },
+        {
+          "url": "https://feed.podbean.com/thebusinesshealthline/feed.xml",
+          "title": "The Business Healthline Podcast \u2014 thebusinesshealthline",
+          "domain": "podcasts.apple.com",
+          "snippet": "Business"
+        }
+      ],
+      "platforms": [
+        "podcasts.apple.com"
+      ],
+      "assessment": "opportunities_found",
+      "recommendation": "Found 10 real podcast/video pages mentioning \"Healthline\" across 1 platforms (Bing web search + public iTunes podcast API). Pitch guest appearances or cite each episode.",
+      "detailed_analysis": "Podcast & video audit for Healthline: searched 4 audio/video queries and the public iTunes podcast catalog. 10 genuine pages were collected; no URLs were synthesized.",
+      "runtime_secs": 9.9,
+      "sources": [
+        {
+          "url": "https://feeds.transistor.fm/ktbs-healthline-3",
+          "domain": "feeds.transistor.fm"
+        },
+        {
+          "url": "https://feed.podbean.com/thebusinesshealthline/feed.xml",
+          "domain": "feed.podbean.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Opportunity Count",
+          "value": "10"
+        },
+        {
+          "metric": "Unique Platforms",
+          "value": "1"
+        }
+      ],
+      "actions": [
+        "Found 10 real podcast/video pages mentioning \"Healthline\" across 1 platforms (Bing web search + public iTunes podcast API)",
+        "Pitch guest appearances or cite each episode"
+      ],
+      "methodology": "Podcast & Video Citation Finder: live signals collected in real time for Healthline via live search+itunes api+platform filter. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "aeo": {
+      "feature_name": "Agentic Commerce Protocol Placement (GEO/AEO)",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_probe",
+      "retrieved_at": "2026-08-19T09:07:44.033030+00:00",
+      "aeo_score": 100,
+      "llms_txt": true,
+      "robots_txt": true,
+      "sitemap": true,
+      "ai_plugin_json": true,
+      "ai_bot_directives": [
+        "User-agent: GPTBot",
+        "User-agent: anthropic-ai",
+        "User-agent: Bytespider",
+        "User-agent: CCBot",
+        "User-agent: ClaudeBot"
+      ],
+      "schema_types": [
+        "WebPage"
+      ],
+      "probes": [
+        {
+          "path": "/llms.txt",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157766,
+          "final_url": "https://www.healthline.com/llms.txt"
+        },
+        {
+          "path": "/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "size": 8862,
+          "final_url": "https://www.healthline.com/robots.txt"
+        },
+        {
+          "path": "/sitemap.xml",
+          "status": 200,
+          "content_type": "application/xml",
+          "size": 487,
+          "final_url": "https://www.healthline.com/sitemap.xml"
+        },
+        {
+          "path": "/.well-known/ai-plugin.json",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8",
+          "size": 38,
+          "final_url": "https://www.healthline.com/.well-known/ai-plugin.json"
+        },
+        {
+          "path": "/.well-known/llms.txt",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8",
+          "size": 38,
+          "final_url": "https://www.healthline.com/.well-known/llms.txt"
+        },
+        {
+          "path": "/ai.txt",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/ai.txt"
+        },
+        {
+          "path": "/.well-known/appspecific/com.chatgpt.android.platform.json",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8",
+          "size": 38,
+          "final_url": "https://www.healthline.com/.well-known/appspecific/com.chatgpt.android.platform.json"
+        }
+      ],
+      "assessment": "optimized",
+      "recommendation": "AEO readiness for healthline.com: 100/100. llms.txt: present, AI bot directives: 5, schema types: 1.",
+      "detailed_analysis": "AEO audit for Healthline: live-probed 7 agentic-discovery endpoints on healthline.com and parsed robots.txt and structured data. Every finding above reflects the real response received at 2026-08-19T09:07:44.033005+00:00.",
+      "runtime_secs": 15.3,
+      "sources": [
+        {
+          "url": "https://www.healthline.com/llms.txt",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/robots.txt",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/sitemap.xml",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/.well-known/ai-plugin.json",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/.well-known/llms.txt",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/ai.txt",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/.well-known/appspecific/com.chatgpt.android.platform.json",
+          "domain": "healthline.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Aeo Score",
+          "value": "100%"
+        }
+      ],
+      "actions": [
+        "AEO readiness for healthline",
+        "txt: present, AI bot directives: 5, schema types: 1"
+      ],
+      "methodology": "Agentic Commerce Protocol Placement (GEO/AEO): live signals collected in real time for Healthline via live site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "pbn_detector": {
+      "feature_name": "Synthetic Network & Footprint De-Anonymizer",
+      "status": "ok",
+      "verified": true,
+      "method": "rdap_footprint_analysis",
+      "retrieved_at": "2026-08-19T09:07:36.783047+00:00",
+      "total_backlinks": 0,
+      "repeated_source_domains": [],
+      "suspicious_count": 0,
+      "sponsored_count": 0,
+      "ugc_count": 0,
+      "generic_anchor_count": 0,
+      "registration_footprint": {
+        "domain": "healthline.com",
+        "registrar": "GoDaddy Corporate Domains, LLC",
+        "registered": "2004-08-25T18:41:17Z",
+        "domain_age_years": 22.0,
+        "expiration": "2027-08-25T18:41:17Z"
+      },
+      "methodology_note": "PBN footprint signals: backlink repetition/anchor patterns (when a backlink provider is configured) plus public RDAP domain-registration data. If no paid backlink provider is configured, only the public registration signals are reported.",
+      "assessment": "registration_only",
+      "recommendation": "No paid backlink provider is configured, so backlink footprint data is unavailable. Only the real public RDAP registration record for healthline.com (created 2004-08-25T18:41:17Z) was examined. Configure AHREFS_API_KEY to analyze actual backlink repetition, anchor and sponsored/UGC patterns.",
+      "detailed_analysis": "PBN footprint audit for healthline.com: no backlink data available (no provider key). Public RDAP registration record verified in real time: registrar GoDaddy Corporate Domains, LLC, registered 2004-08-25T18:41:17Z, expiration 2027-08-25T18:41:17Z, domain age 22.0 years. No backlink-based PBN signal was claimed because none was observed.",
+      "runtime_secs": 8.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Backlinks",
+          "value": "0"
+        },
+        {
+          "metric": "Suspicious Count",
+          "value": "0"
+        },
+        {
+          "metric": "Sponsored Count",
+          "value": "0"
+        },
+        {
+          "metric": "Ugc Count",
+          "value": "0"
+        },
+        {
+          "metric": "Generic Anchor Count",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "No paid backlink provider is configured, so backlink footprint data is unavailable",
+        "Only the real public RDAP registration record for healthline",
+        "com (created 2004-08-25T18:41:17Z) was examined",
+        "Configure AHREFS_API_KEY to analyze actual backlink repetition, anchor and sponsored/UGC patterns"
+      ],
+      "methodology": "Synthetic Network & Footprint De-Anonymizer: live signals collected in real time for Healthline via rdap footprint analysis. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "revenue_sim": {
+      "feature_name": "Share-of-Search Revenue Simulator",
+      "status": "ok",
+      "verified": true,
+      "method": "bing_rss_serp_analysis",
+      "retrieved_at": "2026-08-19T09:07:33.195927+00:00",
+      "share_of_search_branded_query": 0.0,
+      "share_of_search_category_query": 0.0,
+      "branded_results": [
+        {
+          "title": "NAVER",
+          "url": "https://www.naver.com/",
+          "snippet": "\ub124\uc774\ubc84 \uba54\uc778\uc5d0\uc11c \ub2e4\uc591\ud55c \uc815\ubcf4\uc640 \uc720\uc6a9\ud55c \ucee8\ud150\uce20\ub97c \ub9cc\ub098 \ubcf4\uc138\uc694"
+        },
+        {
+          "title": "www.naver.co.kr",
+          "url": "https://www.naver.co.kr/index.html",
+          "snippet": "\ubc29\ubb38 \uc911\uc778 \uc0ac\uc774\ud2b8\uc5d0\uc11c \uc124\uba85\uc744 \uc81c\uacf5\ud558\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4."
+        },
+        {
+          "title": "\ub124\uc774\ubc84\uc9c0\ub3c4",
+          "url": "https://map.naver.com/p/",
+          "snippet": "\ub124\uc774\ubc84 \uc9c0\ub3c4\ub294 \ub2e4\uc591\ud55c \uc704\uce58 \uac80\uc0c9\uacfc \uae38\ucc3e\uae30 \uc11c\ube44\uc2a4\ub97c \uc81c\uacf5\ud569\ub2c8\ub2e4."
+        },
+        {
+          "title": "\ub124\uc774\ubc84\ud398\uc774 \ubd80\ub3d9\uc0b0",
+          "url": "https://land.naver.com/",
+          "snippet": "\ub9e4\ubb3c\uc2e0\uace0\uc6b4\uc601 \ubd80\ub3d9\uc0b0 \uace0\uac1d\uc13c\ud130 \ub124\uc774\ubc84\ud30c\uc774\ub0b8\uc15c (\uc8fc)\uac00 \uc81c\uacf5\ud558\ub294 \ubd80\ub3d9\uc0b0 \uc815\ubcf4\ub294 \uac01 \ucf58\ud150\uce20 \uc81c\uacf5\uc5c5\uccb4\ub85c\ubd80\ud130 \ubc1b\ub294 \uc815\ubcf4\ub85c \ucc38\uace0\uc6a9\uc785\ub2c8\ub2e4. \uc815\ubcf4\uc758 \uc815\ud655\uc131\uc774\ub098 \uc2e0\ub8b0\uc131\uc744 \ubcf4\uc99d\ud558\uc9c0 \uc54a\uc73c\uba70, \uc11c\ube44\uc2a4 \uc774\uc6a9\uc758 \uacb0\uacfc\uc5d0 \ub300\ud574\uc11c \uc5b4\ub5a0\ud55c \ubc95\uc801\uc778 \ucc45\uc784\uc744 \uc9c0\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4."
+        },
+        {
+          "title": "\ub124\uc774\ubc84 \uc0ac\uc804 (NAVER dictionary)",
+          "url": "https://dict.naver.com/",
+          "snippet": "\uc601\uc5b4, \uad6d\uc5b4, \ud55c\uc790, \uc77c\ubcf8\uc5b4, \uc911\uad6d\uc5b4\ub97c \ud3ec\ud568\ud55c 67\uc885 \uc5b8\uc5b4\ub85c \ucd1d 3000\ub9cc \ud45c\uc81c\uc5b4\ub97c \uc81c\uacf5\ud558\ub294 \ub124\uc774\ubc84\uc0ac\uc804"
+        },
+        {
+          "title": "NAVER Whale browser - \ub124\uc774\ubc84 \uc6e8\uc77c",
+          "url": "https://whale.naver.com/ko/",
+          "snippet": "\ub124\uc774\ubc84 \uba54\uc77c\ubd80\ud130 \uc99d\uad8c\uae4c\uc9c0 \uc6e8\uc77c\uc5d0\uc11c \ub354 \ube60\ub974\uac8c \ub9e4\uc77c \ub9cc\ub098\ub294 \ub124\uc774\ubc84 \uc11c\ube44\uc2a4, \uc6e8\uc77c\uc5d0\uc11c \ub04a\uae40 \uc5c6\uc774 \uc5f0\uacb0 \uc790\uc8fc \uc4f0\ub294 \ub3c4\uad6c\ub294 \ubaa8\ub450 \uc190 \ub2ff\ub294 \uacf3\uc5d0, \uc0ac\uc774\ub4dc\ubc14 \uc0c8 \ud0ed \uc774\ub3d9 \uc5c6\uc774 \ud544\uc694\ud55c \uae30\ub2a5\uc744 \ud55c\ub208\uc5d0 \ud655\uc778"
+        },
+        {
+          "title": "\ub124\uc774\ubc84 \uc6f9\ud230",
+          "url": "https://comic.naver.com/",
+          "snippet": "\ub9e4\uc77c\ub9e4\uc77c \uc0c8\ub85c\uc6b4 \uc7ac\ubbf8, \ub124\uc774\ubc84 \uc6f9\ud230."
+        },
+        {
+          "title": "Naver - \ub124\uc774\ubc84",
+          "url": "https://naverapp.m.naver.com/",
+          "snippet": "\ucd5c\uc2e0\ubc84\uc804 \ub124\uc774\ubc84\uc571\uc744 \uc124\uce58\ud55c \ud6c4 \uc0ac\uc6a9\ud574\uc8fc\uc138\uc694 \ub124\uc774\ubc84\uc571 \uc124\uce58\ud558\uae30 \ubaa8\ubc14\uc77c\uc6f9\uc73c\ub85c \uc5f4\uae30"
+        },
+        {
+          "title": "\ub124\uc774\ubc84 \ud56d\uacf5\uad8c",
+          "url": "https://flight.naver.com/",
+          "snippet": "\ub124\uc774\ubc84 \ud56d\uacf5\uad8c\uc740 \uc81c\ud734\uc0ac\uc5d0\uc11c \uc81c\uacf5\ud558\ub294 \ud56d\uacf5\uad8c \uc2a4\ucf00\uc904 \ubc0f \uac00\uaca9\uc815\ubcf4\ub97c \ube44\uad50, \uc911\uac1c\ud558\ub294 \uc11c\ube44\uc2a4\ub85c\uc11c \ub124\uc774\ubc84\u321c\ub294 \ud1b5\uc2e0\ud310\ub9e4\uc758 \ub2f9\uc0ac\uc790\uac00 \uc544\ub2c8\uba70, \ud56d\uacf5\uad8c \uac80\uc0c9 \uacb0\uacfc, \uad6c\ub9e4 \ubc0f \ud658\ubd88 \ub4f1\uacfc \uad00\ub828\ud55c \uc758\ubb34\uc640 \ucc45\uc784\uc740 \uac01 \ud310\ub9e4\uc790\uc5d0\uac8c \uc788\uc2b5\ub2c8\ub2e4."
+        },
+        {
+          "title": "\ub124\uc774\ubc84 - NAVER - Google Play \uc571",
+          "url": "https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko",
+          "snippet": "Wear OS \uae30\uae30\uc5d0\uc11c \ub124\uc774\ubc84\uc571\uc744 \uc774\uc6a9\ud574\ubcf4\uc138\uc694. \uc190\ubaa9 \uc704\uc5d0\uc11c \ub9e4\uc2dc\uac04 \ubcc0\ud654\ud558\ub294 \ub0a0\uc528\uc640 \uc99d\uad8c \uc815\ubcf4\ub97c \ud655\uc778\ud558\uace0, \uba64\ubc84\uc2ed\uacfc \ucfe0\ud3f0, \ud604\uc7a5 \uacb0\uc81c \uae30\ub2a5\uc744 \uc0ac\uc6a9\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4. \ub610\ud55c \ub0a0\uc528, PAY \ud0c0\uc77c\uacfc \uac01\uc885 \ucef4\ud50c\ub9ac\ucf00\uc774\uc158\uc744 \ud1b5\ud574 \uc790\uc8fc \uc4f0\ub294 \ub3c4\uad6c\uc5d0 \ubc14\ub85c \uc811\uadfc\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."
+        }
+      ],
+      "category_results": [
+        {
+          "title": "Health care - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Health_care",
+          "snippet": "Health care, or healthcare, is the improvement or maintenance of health via the prevention, diagnosis, treatment, amelioration or cure of disease, illness, injury, and other physical and mental impairments in people. Health care is delivered by health professionals and allied health fields."
+        },
+        {
+          "title": "Healthcare in India - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Healthcare_in_India",
+          "snippet": "The National Health Policy was endorsed by the Parliament of India in 1983 and updated in 2002, and then again updated in 2017. The recent four main updates in 2017 mention the need to focus on the growing burden of non-communicable diseases, the emergence of the robust healthcare industry, growing incidences of unsustainable expenditure due to healthcare costs, and rising economic growth enabling enhanced fiscal capacity. [4] Furthermore, in the long-term, the policy aims to set up India's ..."
+        },
+        {
+          "title": "Healthcare System in India, Healthcare India - IBEF",
+          "url": "https://www.ibef.org/industry/healthcare-india",
+          "snippet": "Healthcare has become one of India\u2019s largest sectors, both in terms of revenue and employment. Healthcare comprises hospitals, medical devices, clinical trials, outsourcing, telemedicine, medical tourism, health insurance and medical equipment."
+        },
+        {
+          "title": "Home | Ministry of Health & Family Welfare",
+          "url": "https://www.mohfw.gov.in/",
+          "snippet": "We reaffirm our commitment to building a healthier society. Let us all keep working together to strengthen healthcare systems and prioritise the well-being of every individual. Your website description goes here."
+        },
+        {
+          "title": "Home :: National Health Mission",
+          "url": "https://nhm.gov.in/",
+          "snippet": "The National Health Policy, 2017 envisages- \"the attainment of the highest possible level of health and wellbeing for all at all ages, through a preventive and promotive health care orientation in all developmental policies, and universal access to good quality health care services without anyone having to face financial hardship as a consequence\". The aim of NHM is to ensure progress towards the goals and targets set out in the National Health Policy, 2017 for ensuring \"universal access to ..."
+        },
+        {
+          "title": "World Health Organization (WHO)",
+          "url": "https://www.who.int/",
+          "snippet": "The United Nations agency working to promote health, keep the world safe and serve the vulnerable."
+        },
+        {
+          "title": "Primary health care - India",
+          "url": "https://www.who.int/india/health-topics/primary-health-care",
+          "snippet": "Primary health care (PHC) is a holistic approach to health that includes promotive, preventive, curative, rehabilitative, and palliative services. It is the first level of contact between individuals and the healthcare system. PHC is not limited to treating illnesses."
+        },
+        {
+          "title": "Healthcare | An Open Access Journal from MDPI",
+          "url": "https://www.mdpi.com/journal/healthcare",
+          "snippet": "Healthcare is an international, scientific, peer-reviewed, open access journal on health care systems, industry, technology, policy, and regulation, and is published semimonthly online by MDPI."
+        },
+        {
+          "title": "Best Hospital in India for Healthcare Services - Fortis Healthcare",
+          "url": "https://www.fortishealthcare.com/",
+          "snippet": "We experienced warm welcomes and outstanding care during our two robotic surgeries with Dr. Neeraj Chaudhary and his team. Thanks to their expertise, our recovery was swift, and our healing process was greatly enhanced. We are immensely grateful for their dedication and support throughout this journey. Absolutely one of the best GI doctors!"
+        },
+        {
+          "title": "Balraj Medical Agencies - Medical store in Balachaur | HealthDial",
+          "url": "https://healthdial.com/balachaur/balraj-medical-agencies-gahoon-rd-near-old-hospital",
+          "snippet": "0 (0 reviews) Address Gahoon Rd, near old hospital, Balachaur, Punjab 144521, India , Balachaur, Punjab, India Hours 8:00 AM - 9:30 PM Closed now"
+        }
+      ],
+      "revenue_projection": null,
+      "revenue_projection_note": "Revenue projection is intentionally NOT fabricated. It requires a real baseline (annual revenue or deal size) supplied by the user.",
+      "assessment": "measured",
+      "recommendation": "Brand appears in 0.0% of the top 10 results for the branded query and 0.0% for the category query. These are real measurement of live search results.",
+      "detailed_analysis": "Share-of-search for Healthline: real Google SERPs fetched via SerpAPI at 2026-08-19T09:07:33.195921+00:00. Branded-query presence 0.0%, category-query presence 0.0%. No revenue figure is simulated.",
+      "runtime_secs": 4.2,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Share Of Search Branded Query",
+          "value": "0.0%"
+        },
+        {
+          "metric": "Share Of Search Category Query",
+          "value": "0.0%"
+        }
+      ],
+      "actions": [
+        "0% of the top 10 results for the branded query and 0",
+        "These are real measurement of live search results"
+      ],
+      "methodology": "Share-of-Search Revenue Simulator: live signals collected in real time for Healthline via bing rss serp analysis. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "dead_equity": {
+      "feature_name": "Edge-Redirect & Dead-Equity Salvage",
+      "status": "ok",
+      "verified": true,
+      "method": "live_outbound_link_check",
+      "retrieved_at": "2026-08-19T09:08:15.745400+00:00",
+      "outbound_links_checked": 18,
+      "broken_count": 2,
+      "redirect_count": 2,
+      "healthy_count": 14,
+      "broken_links": [
+        {
+          "url": "https://care.healthline.com/find-care",
+          "text": "FindCare",
+          "status": 403
+        },
+        {
+          "url": "https://care.healthline.com/find-care",
+          "text": "FindCare",
+          "status": 403
+        }
+      ],
+      "redirected_links": [
+        {
+          "url": "https://rvohealth.com/careers",
+          "text": "Careers",
+          "status": 200,
+          "final_url": "https://www.rvohealth.com/careers"
+        },
+        {
+          "url": "https://bezzy.com/",
+          "text": "Bezzy",
+          "status": 200,
+          "final_url": "https://www.bezzy.com/"
+        }
+      ],
+      "assessment": "broken_found",
+      "recommendation": "Checked 18 real outbound links on healthline.com: 2 broken, 2 redirected, 14 healthy. Recover the broken ones first (lost link equity).",
+      "detailed_analysis": "Dead-equity audit for healthline.com: crawled 5 pages and followed 18 external links live. Each broken/redirect verdict is a real HTTP response captured at 2026-08-19T09:08:15.745378+00:00.",
+      "runtime_secs": 46.4,
+      "sources": [
+        {
+          "url": "https://care.healthline.com/find-care",
+          "domain": "care.healthline.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Outbound Links Checked",
+          "value": "18"
+        },
+        {
+          "metric": "Broken Count",
+          "value": "2"
+        },
+        {
+          "metric": "Redirect Count",
+          "value": "2"
+        },
+        {
+          "metric": "Healthy Count",
+          "value": "14%"
+        }
+      ],
+      "actions": [
+        "Checked 18 real outbound links on healthline",
+        "com: 2 broken, 2 redirected, 14 healthy",
+        "Recover the broken ones first (lost link equity)"
+      ],
+      "methodology": "Edge-Redirect & Dead-Equity Salvage: live signals collected in real time for Healthline via live outbound link check. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "negative_seo": {
+      "feature_name": "Negative SEO Counter-Measure Deployment",
+      "status": "ok",
+      "verified": true,
+      "method": "live_reputation_search",
+      "retrieved_at": "2026-08-19T09:07:40.037730+00:00",
+      "negative_mention_count": 0,
+      "negative_mentions": [],
+      "risk_terms": [],
+      "assessment": "clear",
+      "recommendation": "Found 0 real pages surfaced for brand + risk-term queries. None found \u2014 no action needed.",
+      "detailed_analysis": "Negative-SEO monitor for Healthline: ran 6 risk queries and collected 0 real results. Verdicts are based on the actual search results returned at 2026-08-19T09:07:40.037724+00:00.",
+      "runtime_secs": 10.7,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Negative Mention Count",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 0 real pages surfaced for brand + risk-term queries",
+        "None found \u2014 no action needed"
+      ],
+      "methodology": "Negative SEO Counter-Measure Deployment: live signals collected in real time for Healthline via live reputation search. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "github_citations": {
+      "feature_name": "GitHub Citation Harvester",
+      "status": "ok",
+      "verified": true,
+      "method": "live_github_search+github_api+stackexchange+hn_api",
+      "retrieved_at": "2026-08-19T09:07:36.566798+00:00",
+      "github_references": 16,
+      "references": [
+        {
+          "url": "https://github.com/Adyasha8105/SPARK-Frontend",
+          "title": "Adyasha8105/SPARK-Frontend \u2014 Spark Healthline's is a multi-functional app developed to give in-person patients the freedom to wait for their turn privately\u2014or wherever they choose\u2014rather than confining them to a stuffy, crowded waiting room alongside new germs and infections and facilitating a smoot",
+          "domain": "github.com",
+          "snippet": "Spark Healthline's is a multi-functional app developed to give in-person patients the freedom to wait for their turn privately\u2014or wherever they choose\u2014rather than confining them to a stuffy, crowded waiting room alongside new germs and infections and"
+        },
+        {
+          "url": "https://github.com/rohithvutnoor/HealthLine",
+          "title": "rohithvutnoor/HealthLine \u2014 A Web Application of Health System and Symptoms Checker",
+          "domain": "github.com",
+          "snippet": "A Web Application of Health System and Symptoms Checker"
+        },
+        {
+          "url": "https://github.com/harithamohan1/HealthLineApp",
+          "title": "harithamohan1/HealthLineApp \u2014 Mobile application that provides a hub of resources for frontline workers during the COVID-19 pandemic. Built using React Native, Google Cloud, Big Query, and Firebase. Won Best Global Health Hack at Technica.",
+          "domain": "github.com",
+          "snippet": "Mobile application that provides a hub of resources for frontline workers during the COVID-19 pandemic. Built using React Native, Google Cloud, Big Query, and Firebase. Won Best Global Health Hack at Technica."
+        },
+        {
+          "url": "https://github.com/ali1sba/ESI-HEALTHLINE",
+          "title": "ali1sba/ESI-HEALTHLINE \u2014 ",
+          "domain": "github.com",
+          "snippet": ""
+        },
+        {
+          "url": "https://github.com/lets-hackathon/HealthLine",
+          "title": "lets-hackathon/HealthLine \u2014 a healthcare management system",
+          "domain": "github.com",
+          "snippet": "a healthcare management system"
+        },
+        {
+          "url": "https://github.com/Adyasha8105/SPARK-Backend",
+          "title": "Adyasha8105/SPARK-Backend \u2014 Spark Healthline's is a multi-functional app developed to give in-person patients the freedom to wait for their turn privately\u2014or wherever they choose\u2014rather than confining them to a stuffy, crowded waiting room alongside new germs and infections and facilitating a smooth",
+          "domain": "github.com",
+          "snippet": "Spark Healthline's is a multi-functional app developed to give in-person patients the freedom to wait for their turn privately\u2014or wherever they choose\u2014rather than confining them to a stuffy, crowded waiting room alongside new germs and infections and"
+        },
+        {
+          "url": "https://github.com/healthline-hackathon-project/healthline",
+          "title": "healthline-hackathon-project/healthline \u2014 The HealthLine project is an innovative healthcare platform designed to provide users with personalized health insights and easy access to medical facilities.",
+          "domain": "github.com",
+          "snippet": "The HealthLine project is an innovative healthcare platform designed to provide users with personalized health insights and easy access to medical facilities."
+        },
+        {
+          "url": "https://github.com/Dhruvjain2000/Healthline",
+          "title": "Dhruvjain2000/Healthline \u2014 ",
+          "domain": "github.com",
+          "snippet": ""
+        },
+        {
+          "url": "https://stackoverflow.com/questions/69878209/unable-to-get-healthline-search-results-with-php",
+          "title": "Unable to get Healthline search results with PHP",
+          "domain": "stackoverflow.com",
+          "snippet": "Unable to get Healthline search results with PHP"
+        },
+        {
+          "url": "https://stackoverflow.com/questions/58127310/how-to-update-url-hash-on-scroll-with-table-of-contents",
+          "title": "How To Update URL Hash On Scroll (With Table Of Contents)",
+          "domain": "stackoverflow.com",
+          "snippet": "How To Update URL Hash On Scroll (With Table Of Contents)"
+        },
+        {
+          "url": "https://stackoverflow.com/questions/57394974/django-boto3-error-during-collectstatic-command",
+          "title": "Django boto3 error during collectstatic command",
+          "domain": "stackoverflow.com",
+          "snippet": "Django boto3 error during collectstatic command"
+        },
+        {
+          "url": "https://stackoverflow.com/questions/31078335/remove-a-query-string-added-to-wordpress-urls",
+          "title": "Remove a query string added to Wordpress URLs",
+          "domain": "stackoverflow.com",
+          "snippet": "Remove a query string added to Wordpress URLs"
+        },
+        {
+          "url": "https://stackoverflow.com/questions/21378136/automapper-array-to-object-mapping",
+          "title": "Automapper: Array to Object mapping",
+          "domain": "stackoverflow.com",
+          "snippet": "Automapper: Array to Object mapping"
+        },
+        {
+          "url": "https://stackoverflow.com/questions/67348206/mongodb-query-on-the-last-n-documentssome-portion-of-a-collection-only",
+          "title": "Mongodb: Query on the last N documents(some portion) of a collection only",
+          "domain": "stackoverflow.com",
+          "snippet": "Mongodb: Query on the last N documents(some portion) of a collection only"
+        },
+        {
+          "url": "https://stackoverflow.com/questions/57753002/how-to-add-pdf-file-to-django-response",
+          "title": "How to add pdf file to django response",
+          "domain": "stackoverflow.com",
+          "snippet": "How to add pdf file to django response"
+        },
+        {
+          "url": "https://stackoverflow.com/questions/52886370/why-does-it-keep-reprinting-the-menu-prompt-followed-by-monitor-statement-i-ne",
+          "title": "Why does it keep reprinting the menu prompt followed by, monitor statement. I need it to restart and run through again until the use enters exit.",
+          "domain": "stackoverflow.com",
+          "snippet": "Why does it keep reprinting the menu prompt followed by, monitor statement. I need it to restart and run through again until the use enters exit."
+        }
+      ],
+      "assessment": "references_found",
+      "recommendation": "Found 16 real GitHub/developer pages referencing \"Healthline\" (web search + GitHub API + Stack Overflow + Hacker News). Contribute to or link these repositories.",
+      "detailed_analysis": "GitHub citation harvest for Healthline: collected 16 repository/file pages from live searches and free developer APIs (GitHub, Stack Overflow, Hacker News). All URLs are real results returned at 2026-08-19T09:07:36.566789+00:00.",
+      "runtime_secs": 7.0,
+      "sources": [
+        {
+          "url": "https://github.com/rohithvutnoor/HealthLine",
+          "domain": "github.com"
+        },
+        {
+          "url": "https://github.com/harithamohan1/HealthLineApp",
+          "domain": "github.com"
+        },
+        {
+          "url": "https://github.com/ali1sba/ESI-HEALTHLINE",
+          "domain": "github.com"
+        },
+        {
+          "url": "https://github.com/lets-hackathon/HealthLine",
+          "domain": "github.com"
+        },
+        {
+          "url": "https://github.com/healthline-hackathon-project/healthline",
+          "domain": "github.com"
+        },
+        {
+          "url": "https://github.com/Dhruvjain2000/Healthline",
+          "domain": "github.com"
+        },
+        {
+          "url": "https://stackoverflow.com/questions/69878209/unable-to-get-healthline-search-results-with-php",
+          "domain": "stackoverflow.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Github References",
+          "value": "16"
+        }
+      ],
+      "actions": [
+        "Found 16 real GitHub/developer pages referencing \"Healthline\" (web search + GitHub API + Stack Overflow + Hacker News)",
+        "Contribute to or link these repositories"
+      ],
+      "methodology": "GitHub Citation Harvester: live signals collected in real time for Healthline via live github search+github api+stackexchange+hn api. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "transcription": {
+      "feature_name": "Audio & Video Semantic Transcription Monitor",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search",
+      "retrieved_at": "2026-08-19T09:08:27.299028+00:00",
+      "transcript_mentions": 0,
+      "mentions": [],
+      "transcription_available": false,
+      "transcription_note": "Full audio transcription requires an audio file or episode URL; the search results above are the real transcript/interview pages found. No transcription is synthesized.",
+      "assessment": "none_found",
+      "recommendation": "Found 0 real transcript/interview pages for \"Healthline\". Upload an episode URL to this module to run an actual transcription.",
+      "detailed_analysis": "Transcription monitor for Healthline: 0 audio/video transcript pages collected from real searches. Transcription itself is not fabricated; provide media to transcribe.",
+      "runtime_secs": 11.4,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Transcript Mentions",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 0 real transcript/interview pages for \"Healthline\"",
+        "Upload an episode URL to this module to run an actual transcription"
+      ],
+      "methodology": "Audio & Video Semantic Transcription Monitor: live signals collected in real time for Healthline via live search. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "kg_arbitrage": {
+      "feature_name": "Knowledge Graph & Wikidata Triple Arbitrage",
+      "status": "ok",
+      "verified": true,
+      "method": "wikidata+wikipedia_api",
+      "retrieved_at": "2026-08-19T09:08:37.345251+00:00",
+      "wikidata_id": "Q16983671",
+      "wikidata_label": "Healthline",
+      "wikidata_description": "American health information company",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Healthline",
+      "wikipedia_extract": "Healthline Media, Inc. is an American website and provider of health information headquartered in San Francisco, California. It was founded in 1999, and purchased by Red Ventures in 2019. Healthline claimed to be using AI to generate content from 2023\u20132026, although that claim has now been reversed.",
+      "present_triples": {
+        "P31": {
+          "label": "instance_of",
+          "values": [
+            "business",
+            "website",
+            "e-health",
+            "health care"
+          ]
+        },
+        "P159": {
+          "label": "headquarters",
+          "values": "San Francisco"
+        },
+        "P856": {
+          "label": "website",
+          "values": "https://www.healthline.com/"
+        },
+        "P2002": {
+          "label": "twitter",
+          "values": [
+            "healthline",
+            "Healthline"
+          ]
+        },
+        "P2013": {
+          "label": "facebook",
+          "values": "healthline"
+        }
+      },
+      "missing_triples": [
+        {
+          "property": "P17",
+          "label": "country"
+        },
+        {
+          "property": "P112",
+          "label": "founders"
+        },
+        {
+          "property": "P452",
+          "label": "industry"
+        }
+      ],
+      "triple_coverage_pct": 62.5,
+      "sitelinks": {
+        "count": 4,
+        "languages": [
+          "en",
+          "he",
+          "id",
+          "ja"
+        ]
+      },
+      "competitor_monitor": [
+        {
+          "name": "Epic Systems",
+          "domain": "epic.com",
+          "wikidata_id": "Q5382468",
+          "present_triples": {
+            "P31": {
+              "label": "instance_of",
+              "values": "business"
+            },
+            "P17": {
+              "label": "country",
+              "values": "United States"
+            },
+            "P159": {
+              "label": "headquarters",
+              "values": "Verona"
+            },
+            "P112": {
+              "label": "founders",
+              "values": "Judith R. Faulkner"
+            },
+            "P452": {
+              "label": "industry",
+              "values": [
+                "information technology",
+                "health information technology"
+              ]
+            },
+            "P856": {
+              "label": "website",
+              "values": "http://www.epic.com/"
+            }
+          },
+          "triple_coverage_pct": 75.0,
+          "missing_triples": [
+            {
+              "property": "P2002",
+              "label": "twitter"
+            },
+            {
+              "property": "P2013",
+              "label": "facebook"
+            }
+          ]
+        },
+        {
+          "name": "Cerner",
+          "domain": "oracle.com",
+          "wikidata_id": "Q107287992",
+          "present_triples": {
+            "P31": {
+              "label": "instance_of",
+              "values": "family name"
+            }
+          },
+          "triple_coverage_pct": 12.5,
+          "missing_triples": [
+            {
+              "property": "P17",
+              "label": "country"
+            },
+            {
+              "property": "P159",
+              "label": "headquarters"
+            },
+            {
+              "property": "P112",
+              "label": "founders"
+            },
+            {
+              "property": "P452",
+              "label": "industry"
+            },
+            {
+              "property": "P856",
+              "label": "website"
+            },
+            {
+              "property": "P2002",
+              "label": "twitter"
+            },
+            {
+              "property": "P2013",
+              "label": "facebook"
+            }
+          ]
+        },
+        {
+          "name": "Teladoc",
+          "domain": "teladoc.com",
+          "wikidata_id": "Q20715093",
+          "present_triples": {
+            "P31": {
+              "label": "instance_of",
+              "values": [
+                "public company",
+                "business",
+                "website"
+              ]
+            },
+            "P17": {
+              "label": "country",
+              "values": "United States"
+            },
+            "P159": {
+              "label": "headquarters",
+              "values": [
+                "Lewisville",
+                "Purchase"
+              ]
+            },
+            "P452": {
+              "label": "industry",
+              "values": [
+                "health care",
+                "medicine"
+              ]
+            },
+            "P856": {
+              "label": "website",
+              "values": "http://www.teladoc.com/"
+            },
+            "P2002": {
+              "label": "twitter",
+              "values": [
+                "teladochealth",
+                "Teladoc"
+              ]
+            },
+            "P2013": {
+              "label": "facebook",
+              "values": "TeladocHealth"
+            }
+          },
+          "triple_coverage_pct": 87.5,
+          "missing_triples": [
+            {
+              "property": "P112",
+              "label": "founders"
+            }
+          ]
+        },
+        {
+          "name": "Veracyte",
+          "domain": "veracyte.com",
+          "wikidata_id": "Q61933493",
+          "present_triples": {
+            "P31": {
+              "label": "instance_of",
+              "values": "business"
+            },
+            "P17": {
+              "label": "country",
+              "values": "United States"
+            },
+            "P159": {
+              "label": "headquarters",
+              "values": "South San Francisco"
+            },
+            "P856": {
+              "label": "website",
+              "values": "https://www.veracyte.com/"
+            }
+          },
+          "triple_coverage_pct": 50.0,
+          "missing_triples": [
+            {
+              "property": "P112",
+              "label": "founders"
+            },
+            {
+              "property": "P452",
+              "label": "industry"
+            },
+            {
+              "property": "P2002",
+              "label": "twitter"
+            },
+            {
+              "property": "P2013",
+              "label": "facebook"
+            }
+          ]
+        }
+      ],
+      "assessment": "incomplete",
+      "recommendation": "Wikidata entity Q16983671: 62.5% triple coverage. 3 required triples missing. Monitored 4 competitor entity nodes for relationship changes.",
+      "detailed_analysis": "KG arbitrage for Healthline: live Wikidata (wbsearchentities/wbgetentities) and Wikipedia REST lookups. All triples shown are read directly from Wikidata claims; nothing is synthesized. Competitor entity nodes (Reuters, AP, etc.) are tracked for triple-delta monitoring.",
+      "runtime_secs": 21.2,
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Healthline",
+          "domain": "en.wikipedia.org"
+        },
+        {
+          "url": "https://www.healthline.com/",
+          "domain": "healthline.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Triple Coverage Pct",
+          "value": "62.5%"
+        }
+      ],
+      "actions": [
+        "Wikidata entity Q16983671: 62",
+        "3 required triples missing",
+        "Monitored 4 competitor entity nodes for relationship changes"
+      ],
+      "methodology": "Knowledge Graph & Wikidata Triple Arbitrage: live signals collected in real time for Healthline via wikidata+wikipedia api. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "data_pr": {
+      "feature_name": "Anonymized Telemetry Data-PR Engine",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export",
+      "detail": "This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+      "assessment": "unavailable",
+      "recommendation": "Requires GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export to produce verified data. This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+      "detailed_analysis": "No data was fabricated for \"Anonymized Telemetry Data-PR Engine\". Configure GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export and re-run the analysis to get real, verified output. Reason: This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export to produce verified data",
+        "This module builds press assets from a brand's OWN anonymized usage data",
+        "No telemetry source is configured and no synthetic metrics are generated",
+        "Connect Search Console/GA4 or supply a data export"
+      ],
+      "methodology": "Anonymized Telemetry Data-PR Engine: live signals collected in real time for Healthline via live signal collection. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "simulation": {
+      "feature_name": "Multi-Agent Off-Page Simulation Sandbox",
+      "status": "ok",
+      "verified": true,
+      "method": "baseline_measurement+linear_projection",
+      "retrieved_at": "2026-08-19T09:08:23.208938+00:00",
+      "baseline_metrics": {
+        "share_of_search": 0.0,
+        "backlinks": 10
+      },
+      "scenarios_tested": 0,
+      "scenarios": [],
+      "projection_note": "Scenario projections were deliberately not generated. They require an agreed response model (e.g. revenue per share point, conversion baseline) supplied by the user.",
+      "assessment": "baseline_measured",
+      "recommendation": "Real baseline captured: {\"share_of_search\": 0.0, \"backlinks\": 10}. Add a conversion/revenue model to enable scenario projections without fabricating outcomes.",
+      "detailed_analysis": "Simulation sandbox for Healthline: measured a real baseline of {\"share_of_search\": 0.0, \"backlinks\": 10} from live providers at 2026-08-19T09:08:23.208933+00:00. No campaign outcomes were simulated because doing so without a user-supplied response model would produce fabricated numbers.",
+      "runtime_secs": 7.1,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Scenarios Tested",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Real baseline captured: {\"share_of_search\": 0",
+        "Add a conversion/revenue model to enable scenario projections without fabricating outcomes"
+      ],
+      "methodology": "Multi-Agent Off-Page Simulation Sandbox: live signals collected in real time for Healthline via baseline measurement+linear projection. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "satellite": {
+      "feature_name": "Satellite Entity M&A & Partnership Radar",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+authority",
+      "retrieved_at": "2026-08-19T09:08:27.572841+00:00",
+      "satellites_found": 0,
+      "satellites": [],
+      "assessment": "none_found",
+      "recommendation": "Found 0 real satellite/partner/acquisition pages mentioning \"Healthline\". Authority values shown are live DA where a provider is configured.",
+      "detailed_analysis": "Satellite radar for Healthline: collected 0 candidate entities from real searches. DA is fetched live where configured, otherwise reported as unavailable.",
+      "runtime_secs": 11.2,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Satellites Found",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 0 real satellite/partner/acquisition pages mentioning \"Healthline\"",
+        "Authority values shown are live DA where a provider is configured"
+      ],
+      "methodology": "Satellite Entity M&A & Partnership Radar: live signals collected in real time for Healthline via live search+authority. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "rag_defense": {
+      "feature_name": "Reverse RAG-Cache Poisoning Defense",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+stale_indicator",
+      "retrieved_at": "2026-08-19T09:08:29.143256+00:00",
+      "cache_tests_run": 5,
+      "stale_caches_detected": 0,
+      "total_results_checked": 7,
+      "freshness_rate": 100.0,
+      "cache_tests": [
+        {
+          "query": "what is Healthline",
+          "result_count": 7,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "Healthline company information",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "Healthline pricing",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "Healthline competitors",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "Healthline features review",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        }
+      ],
+      "stale_indicators_used": [
+        "was founded",
+        "previously known",
+        "used to be",
+        "discontinued",
+        "shut down",
+        "no longer",
+        "old version",
+        "deprecated",
+        "legacy",
+        "obsolete",
+        "end of life",
+        "sunset"
+      ],
+      "assessment": "clean",
+      "recommendation": "0 results across 7 checked contained stale-data indicators (100.0% freshness rate). Refresh content these pages describe.",
+      "detailed_analysis": "RAG-cache defense for Healthline: ran 5 queries and scanned 7 real results for the documented stale indicators. Every flagged entry is a real snippet matched at 2026-08-19T09:08:29.143249+00:00.",
+      "runtime_secs": 12.5,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Cache Tests Run",
+          "value": "5"
+        },
+        {
+          "metric": "Stale Caches Detected",
+          "value": "0"
+        },
+        {
+          "metric": "Total Results Checked",
+          "value": "7"
+        },
+        {
+          "metric": "Freshness Rate",
+          "value": "100.0%"
+        }
+      ],
+      "actions": [
+        "0 results across 7 checked contained stale-data indicators (100",
+        "Refresh content these pages describe"
+      ],
+      "methodology": "Reverse RAG-Cache Poisoning Defense: live signals collected in real time for Healthline via live search+stale indicator. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "visual_audit": {
+      "feature_name": "Multi-Modal Schema & Visual Graph Alignment",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_fetch+search",
+      "retrieved_at": "2026-08-19T09:08:29.118183+00:00",
+      "schema_visual_checks": [
+        {
+          "type": "OG-Image",
+          "present": true,
+          "urls": [
+            "https://assets.healthline.com/content/hl_sharing_v2.jpg"
+          ]
+        },
+        {
+          "type": "Favicon",
+          "present": true
+        }
+      ],
+      "visual_mentions_found": 0,
+      "visual_mentions": [],
+      "assessment": "optimized",
+      "recommendation": "2 real visual-schema checks on healthline.com; 0 visual mentions found.",
+      "detailed_analysis": "Visual audit for Healthline: fetched healthline.com live and inspected og:image, Image/VideoObject schema and favicon; then ran visual queries. All findings reflect real responses.",
+      "runtime_secs": 12.2,
+      "sources": [
+        {
+          "url": "https://assets.healthline.com/content/hl_sharing_v2.jpg",
+          "domain": "assets.healthline.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Visual Mentions Found",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "2 real visual-schema checks on healthline",
+        "com; 0 visual mentions found"
+      ],
+      "methodology": "Multi-Modal Schema & Visual Graph Alignment: live signals collected in real time for Healthline via live site fetch+search. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "apn_proxy": {
+      "feature_name": "Agentic Protocol Negotiation (APN) Proxy",
+      "status": "ok",
+      "verified": true,
+      "method": "live_endpoint_probe",
+      "retrieved_at": "2026-08-19T09:08:37.396821+00:00",
+      "apn_score": 44,
+      "total_endpoints": 16,
+      "active_endpoints": 4,
+      "json_endpoints": 2,
+      "xml_endpoints": 1,
+      "endpoint_probes": [
+        {
+          "path": "/api",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/api"
+        },
+        {
+          "path": "/api/v1",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/api/v1"
+        },
+        {
+          "path": "/api/v2",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/api/v2"
+        },
+        {
+          "path": "/graphql",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/graphql"
+        },
+        {
+          "path": "/openapi.json",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/openapi.json"
+        },
+        {
+          "path": "/swagger.json",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/swagger.json"
+        },
+        {
+          "path": "/.well-known/openid-configuration",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8",
+          "size": 38,
+          "final_url": "https://www.healthline.com/.well-known/openid-configuration"
+        },
+        {
+          "path": "/feed.xml",
+          "status": 403,
+          "content_type": "application/xml",
+          "size": 111,
+          "final_url": "https://www.healthline.com/feed.xml"
+        },
+        {
+          "path": "/rss.xml",
+          "status": 403,
+          "content_type": "application/xml",
+          "size": 111,
+          "final_url": "https://www.healthline.com/rss.xml"
+        },
+        {
+          "path": "/atom.xml",
+          "status": 403,
+          "content_type": "application/xml",
+          "size": 111,
+          "final_url": "https://www.healthline.com/atom.xml"
+        },
+        {
+          "path": "/sitemap.xml",
+          "status": 200,
+          "content_type": "application/xml",
+          "size": 487,
+          "final_url": "https://www.healthline.com/sitemap.xml"
+        },
+        {
+          "path": "/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "size": 8862,
+          "final_url": "https://www.healthline.com/robots.txt"
+        },
+        {
+          "path": "/manifest.json",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/manifest.json"
+        },
+        {
+          "path": "/webmanifest.json",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/webmanifest.json"
+        },
+        {
+          "path": "/.well-known/ai-plugin.json",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8",
+          "size": 38,
+          "final_url": "https://www.healthline.com/.well-known/ai-plugin.json"
+        },
+        {
+          "path": "/llms.txt",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 157777,
+          "final_url": "https://www.healthline.com/llms.txt"
+        }
+      ],
+      "assessment": "good",
+      "recommendation": "APN readiness 44/100: 4 of 16 agentic/API endpoints respond on healthline.com.",
+      "detailed_analysis": "APN audit for healthline.com: live-probed 16 endpoints at 2026-08-19T09:08:37.396800+00:00. 4 returned HTTP < 400. Every status is a real response.",
+      "runtime_secs": 20.4,
+      "sources": [
+        {
+          "url": "https://www.healthline.com/api",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/api/v1",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/api/v2",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/graphql",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/openapi.json",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/swagger.json",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/.well-known/openid-configuration",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/feed.xml",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/rss.xml",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/atom.xml",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/sitemap.xml",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/robots.txt",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/manifest.json",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/webmanifest.json",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/.well-known/ai-plugin.json",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/llms.txt",
+          "domain": "healthline.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Apn Score",
+          "value": "44%"
+        },
+        {
+          "metric": "Total Endpoints",
+          "value": "16"
+        },
+        {
+          "metric": "Active Endpoints",
+          "value": "4"
+        },
+        {
+          "metric": "Json Endpoints",
+          "value": "2"
+        },
+        {
+          "metric": "Xml Endpoints",
+          "value": "1"
+        }
+      ],
+      "actions": [
+        "APN readiness 44/100: 4 of 16 agentic/API endpoints respond on healthline"
+      ],
+      "methodology": "Agentic Protocol Negotiation (APN) Proxy: live signals collected in real time for Healthline via live endpoint probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "graph_decay": {
+      "feature_name": "Co-Citation Graph Decay & Entity Anchor Leasing",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+temporal",
+      "retrieved_at": "2026-08-19T09:08:29.104277+00:00",
+      "total_co_citations": 0,
+      "unique_domains": 0,
+      "fresh_sources": 0,
+      "stale_sources": 0,
+      "freshness_score": null,
+      "co_citations": [],
+      "assessment": "unknown",
+      "recommendation": "0 real co-citations across 0 domains. Freshness score: None%.",
+      "detailed_analysis": "Co-citation graph for Healthline: 5 queries, 0 real pages. Temporal freshness is read from years actually present in the snippets. No dates are assumed.",
+      "runtime_secs": 12.1,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Co Citations",
+          "value": "0"
+        },
+        {
+          "metric": "Unique Domains",
+          "value": "0"
+        },
+        {
+          "metric": "Fresh Sources",
+          "value": "0"
+        },
+        {
+          "metric": "Stale Sources",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "0 real co-citations across 0 domains"
+      ],
+      "methodology": "Co-Citation Graph Decay & Entity Anchor Leasing: live signals collected in real time for Healthline via live search+temporal. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "c2pa": {
+      "feature_name": "Cryptographic Entity-Origin Proof Signing (C2PA)",
+      "status": "ok",
+      "verified": true,
+      "method": "live_header+markup_scan",
+      "retrieved_at": "2026-08-19T09:08:24.078080+00:00",
+      "c2pa_score": 0,
+      "c2pa_signals": [],
+      "sri_scripts": [],
+      "dnssec_check": null,
+      "dnssec_note": "DNSSEC is a DNS-layer property and cannot be verified via HTTP; check with dig +dnssec or your DNS provider.",
+      "assessment": "needs_improvement",
+      "recommendation": "C2PA readiness 0/100 on healthline.com. 0 authenticity signals, 0 SRI-protected scripts.",
+      "detailed_analysis": "C2PA audit for Healthline: scanned live HTTP headers and markup on healthline.com. All signals are real observations captured at 2026-08-19T09:08:24.078066+00:00. DNSSEC intentionally reported as unverified via HTTP.",
+      "runtime_secs": 6.8,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "C2Pa Score",
+          "value": "0%"
+        }
+      ],
+      "actions": [
+        "C2PA readiness 0/100 on healthline",
+        "0 authenticity signals, 0 SRI-protected scripts"
+      ],
+      "methodology": "Cryptographic Entity-Origin Proof Signing (C2PA): live signals collected in real time for Healthline via live header+markup scan. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "compliance_guard": {
+      "feature_name": "Legal / SEC Disclosure Risk Profiling",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+site_probe",
+      "retrieved_at": "2026-08-19T09:08:33.873970+00:00",
+      "compliance_score": 15,
+      "compliance_pages_found": [
+        {
+          "path": "/privacy-policy",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "size": 192877,
+          "final_url": "https://www.healthline.com/about/privacy-notice"
+        }
+      ],
+      "legal_mentions": [],
+      "assessment": "non_compliant",
+      "recommendation": "Compliance readiness 15/100: 1 standard compliance pages present, 0 legal/SEC mentions found.",
+      "detailed_analysis": "Compliance guard for Healthline: probed 7 compliance paths on healthline.com and ran 5 legal queries. All counts are real observations from 2026-08-19T09:08:33.873944+00:00.",
+      "runtime_secs": 16.6,
+      "sources": [
+        {
+          "url": "https://www.healthline.com/about/privacy-notice",
+          "domain": "healthline.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Compliance Score",
+          "value": "15%"
+        }
+      ],
+      "actions": [
+        "Compliance readiness 15/100: 1 standard compliance pages present, 0 legal/SEC mentions found"
+      ],
+      "methodology": "Legal / SEC Disclosure Risk Profiling: live signals collected in real time for Healthline via live search+site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "geo_crawl": {
+      "feature_name": "Geo-IP Citation Localization",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+hreflang_scan",
+      "retrieved_at": "2026-08-19T09:08:31.006394+00:00",
+      "regions_analyzed": 5,
+      "regions_with_citations": 1,
+      "geo_coverage_score": 20.0,
+      "geo_citations_by_region": {
+        "Global": [
+          {
+            "url": "https://www.facebook.com/marketplace/brisbane/",
+            "title": "Buy and Sell in Brisbane, Queensland, Australia - Facebook",
+            "domain": "facebook.com",
+            "snippet": "Shop electronics, cars, furniture, clothing, and more for sale in Brisbane on Facebook Marketplace. Find great deals from local sellers or list your items for free."
+          }
+        ]
+      },
+      "hreflang_tags": [],
+      "assessment": "weak",
+      "recommendation": "Geo coverage 20.0% (1/5 regions have brand citations). 0 hreflang tags on the site.",
+      "detailed_analysis": "Geo localization for Healthline: 5 region queries, 1 with real citations, plus a live hreflang scan of healthline.com. All results are real.",
+      "runtime_secs": 13.5,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Regions Analyzed",
+          "value": "5"
+        },
+        {
+          "metric": "Regions With Citations",
+          "value": "1"
+        },
+        {
+          "metric": "Geo Coverage Score",
+          "value": "20.0%"
+        }
+      ],
+      "actions": [
+        "0% (1/5 regions have brand citations)",
+        "0 hreflang tags on the site"
+      ],
+      "methodology": "Geo-IP Citation Localization: live signals collected in real time for Healthline via live search+hreflang scan. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "zero_party": {
+      "feature_name": "Zero-Party Data Exchange",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+site_probe",
+      "retrieved_at": "2026-08-19T09:08:33.166606+00:00",
+      "total_data_assets": 0,
+      "data_assets": [],
+      "data_endpoints_found": 0,
+      "data_endpoints": [],
+      "assessment": "inactive",
+      "recommendation": "Found 0 real zero-party-data references and 0 site data endpoints. No asset templates are fabricated.",
+      "detailed_analysis": "Zero-party data audit for Healthline: 4 queries and 7 site probes. Every asset listed is a real page found at 2026-08-19T09:08:33.166569+00:00.",
+      "runtime_secs": 15.4,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Data Assets",
+          "value": "0"
+        },
+        {
+          "metric": "Data Endpoints Found",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 0 real zero-party-data references and 0 site data endpoints",
+        "No asset templates are fabricated"
+      ],
+      "methodology": "Zero-Party Data Exchange: live signals collected in real time for Healthline via live search+site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "passage_scoring": {
+      "feature_name": "Passage-Level BERT Evaluator",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+content_metrics",
+      "retrieved_at": "2026-08-19T09:08:28.077085+00:00",
+      "total_passages_scored": 2,
+      "high_attention_passages": 0,
+      "avg_word_count": 43.0,
+      "passages": [
+        {
+          "url": "https://stackoverflow.com/questions/5569927/change-google-translate-dropdown-programmatically",
+          "title": "Change Google Translate dropdown programmatically",
+          "domain": "stackoverflow.com",
+          "snippet": "When you select from the dropdown that the google script inserts, a Google Translate bar appears at the top of the page, and all text is translated in to the selected language. However if I try and trigger the dropdown change using JavaScript, it doesn't work:",
+          "word_count": 46,
+          "has_numbers": false,
+          "has_metrics": false
+        },
+        {
+          "url": "https://stackoverflow.com/questions/4640378/translate-a-php-string-using-google-translator-api",
+          "title": "translate a PHP $string using google translator API",
+          "domain": "stackoverflow.com",
+          "snippet": "been google'ing for a while how is the best way to translate with google translator in PHP, found very different ways converting URLS, or using Js but i want to do it only with php (or with a very ...",
+          "word_count": 40,
+          "has_numbers": false,
+          "has_metrics": false
+        }
+      ],
+      "high_attention_details": [],
+      "note": "Attention is scored from real snippet characteristics (length, numbers, metrics). No BERT model is claimed; replace this module with an embedding-backed scorer when OPENAI_API_KEY is set.",
+      "assessment": "moderate",
+      "recommendation": "Scored 2 real passages; 0 qualify as data-rich and attention-worthy.",
+      "detailed_analysis": "Passage evaluation for Healthline: 2 real search snippets analyzed for word count, numeric content and metric mentions. All scores derive from the actual snippet text.",
+      "runtime_secs": 10.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Passages Scored",
+          "value": "2%"
+        },
+        {
+          "metric": "High Attention Passages",
+          "value": "0"
+        },
+        {
+          "metric": "Avg Word Count",
+          "value": "43.0%"
+        }
+      ],
+      "actions": [
+        "Scored 2 real passages; 0 qualify as data-rich and attention-worthy"
+      ],
+      "methodology": "Passage-Level BERT Evaluator: live signals collected in real time for Healthline via live search+content metrics. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "reddit_consensus": {
+      "feature_name": "Reddit & Forum Consensus Graph",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+hn_api+llm_sentiment",
+      "retrieved_at": "2026-08-19T09:08:44.811114+00:00",
+      "total_mentions": 8,
+      "reddit_mentions": 0,
+      "forum_mentions": 8,
+      "avg_sentiment": null,
+      "sentiment_scored": 0,
+      "mentions": [
+        {
+          "url": "https://news.ycombinator.com/item?id=41861430",
+          "title": "Show HN: Automated code instrumentation for structured events",
+          "domain": "news.ycombinator.com",
+          "snippet": "21 points \u00b7 0 comments",
+          "source": "hacker_news"
+        },
+        {
+          "url": "https://news.ycombinator.com/item?id=47923382",
+          "title": "Show HN: 2 weeks of coding, 3 months of OpenAI review, my ChatGPT App is live",
+          "domain": "news.ycombinator.com",
+          "snippet": "5 points \u00b7 1 comments",
+          "source": "hacker_news"
+        },
+        {
+          "url": "https://news.ycombinator.com/item?id=18314487",
+          "title": "Ask HN: What are some blogs whose posts are reviewed by professional experts?",
+          "domain": "news.ycombinator.com",
+          "snippet": "2 points \u00b7 3 comments",
+          "source": "hacker_news"
+        },
+        {
+          "url": "https://news.ycombinator.com/item?id=1327409",
+          "title": "Ask HN: Why is WebMD so profitable?",
+          "domain": "news.ycombinator.com",
+          "snippet": "2 points \u00b7 1 comments",
+          "source": "hacker_news"
+        },
+        {
+          "url": "https://news.ycombinator.com/item?id=28376003",
+          "title": "Ask HN: State-level crowdfunding for developing generic medicines \u2013 why not?",
+          "domain": "news.ycombinator.com",
+          "snippet": "1 points \u00b7 1 comments",
+          "source": "hacker_news"
+        },
+        {
+          "url": "http://www.healthline.com/health-news/ms-patients-who-received-stem-cell-transplants-still-in-remission-010715",
+          "title": "Most MS Patients Who Got Stem Cell Transplants Still in Remission Years Later",
+          "domain": "healthline.com",
+          "snippet": "122 points \u00b7 25 comments",
+          "source": "hacker_news"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/ozempic-muscle-mass-loss",
+          "title": "Ozempic Can Cause Major Loss of Muscle Mass and Reduce Bone Density",
+          "domain": "healthline.com",
+          "snippet": "83 points \u00b7 75 comments",
+          "source": "hacker_news"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/boiling-water-may-help-remove-up-to-90-of-microplastics",
+          "title": "Boiling Water May Help Remove Up to 90% of Microplastics",
+          "domain": "healthline.com",
+          "snippet": "45 points \u00b7 26 comments",
+          "source": "hacker_news"
+        }
+      ],
+      "assessment": "no_sentiment_data",
+      "recommendation": "Found 8 real community mentions (web search + Hacker News API). Sentiment needs an LLM key; mention data is real.",
+      "detailed_analysis": "Community consensus for Healthline: 4 queries filtered to real forum domains plus live Hacker News data. Sentiment scores are live LLM output when configured.",
+      "runtime_secs": 7.3,
+      "sources": [
+        {
+          "url": "http://www.healthline.com/health-news/ms-patients-who-received-stem-cell-transplants-still-in-remission-010715",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/ozempic-muscle-mass-loss",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/health-news/boiling-water-may-help-remove-up-to-90-of-microplastics",
+          "domain": "healthline.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Total Mentions",
+          "value": "8"
+        },
+        {
+          "metric": "Reddit Mentions",
+          "value": "0"
+        },
+        {
+          "metric": "Forum Mentions",
+          "value": "8"
+        },
+        {
+          "metric": "Sentiment Scored",
+          "value": "0%"
+        }
+      ],
+      "actions": [
+        "Found 8 real community mentions (web search + Hacker News API)",
+        "Sentiment needs an LLM key; mention data is real"
+      ],
+      "methodology": "Reddit & Forum Consensus Graph: live signals collected in real time for Healthline via live search+hn api+llm sentiment. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "competitor_bert": {
+      "feature_name": "Competitor BERT-Vector Extraction",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+phrase_extraction",
+      "retrieved_at": "2026-08-19T09:08:44.277961+00:00",
+      "competitors_analyzed": 5,
+      "competitor_data": [
+        {
+          "name": "Epic Systems",
+          "phrases_extracted": 33,
+          "top_phrases": [
+            "proof of identity for voting",
+            "and other purposes",
+            "Check out all the deals",
+            "A curated digital storefront for",
+            "Epic is the leading digital",
+            "designed with both players and",
+            "of the world",
+            "platform game engine technology"
+          ]
+        },
+        {
+          "name": "Cerner",
+          "phrases_extracted": 42,
+          "top_phrases": [
+            "s acquisition of Cerner became",
+            "00 per share",
+            "an agreement for Oracle to",
+            "see your web browser",
+            "platforms and services",
+            "On June 8",
+            "and what Oracle",
+            "formerly known as Cerner Corporation"
+          ]
+        },
+        {
+          "name": "Teladoc",
+          "phrases_extracted": 0,
+          "top_phrases": []
+        },
+        {
+          "name": "Veracyte",
+          "phrases_extracted": 0,
+          "top_phrases": []
+        },
+        {
+          "name": "Car Games Play on CrazyGames",
+          "phrases_extracted": 57,
+          "top_phrases": [
+            "new car information",
+            "CarDekho brings you the latest",
+            "launched in India in 2026",
+            "V to India as their",
+            "The Suzuki Access 125 is",
+            "Buy and Sell Used Cars",
+            "road price quotation and further",
+            "check new car info with"
+          ]
+        }
+      ],
+      "total_phrases_extracted": 132,
+      "note": "Real textual phrase extraction from live search snippets. Embedding vectors require OPENAI_API_KEY and are not fabricated.",
+      "assessment": "active",
+      "recommendation": "Analyzed 5 competitors and extracted 132 real phrases.",
+      "detailed_analysis": "Competitor extraction for Healthline: phrases pulled from real snippets of each competitor. All text is genuine search output captured at 2026-08-19T09:08:44.277956+00:00.",
+      "runtime_secs": 6.5,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Competitors Analyzed",
+          "value": "5"
+        },
+        {
+          "metric": "Total Phrases Extracted",
+          "value": "132"
+        }
+      ],
+      "actions": [
+        "Analyzed 5 competitors and extracted 132 real phrases"
+      ],
+      "methodology": "Competitor BERT-Vector Extraction: live signals collected in real time for Healthline via live search+phrase extraction. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "schema_auditor": {
+      "feature_name": "Agentic API & Schema Protocol Auditor",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_scan",
+      "retrieved_at": "2026-08-19T09:08:47.784458+00:00",
+      "schema_score": 49,
+      "schema_checks": [
+        {
+          "type": "JSON-LD",
+          "schema_type": "WebPage",
+          "fields": [
+            "@context",
+            "@type",
+            "headline",
+            "url"
+          ]
+        },
+        {
+          "type": "OpenGraph",
+          "count": 6
+        },
+        {
+          "type": "TwitterCard",
+          "count": 6
+        }
+      ],
+      "machine_readable_endpoints": [
+        {
+          "path": "/sitemap.xml",
+          "status": 200,
+          "content_type": "application/xml",
+          "size": 487,
+          "final_url": "https://www.healthline.com/sitemap.xml"
+        },
+        {
+          "path": "/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "size": 8862,
+          "final_url": "https://www.healthline.com/robots.txt"
+        }
+      ],
+      "jsonld_count": 1,
+      "opengraph_count": 6,
+      "twitter_card_count": 6,
+      "assessment": "good",
+      "recommendation": "Schema readiness 49/100: 1 JSON-LD, 6 OpenGraph, 6 Twitter Card, 2 machine-readable endpoints.",
+      "detailed_analysis": "Schema auditor for healthline.com: live scan of structured data and machine-readable endpoints at 2026-08-19T09:08:47.784438+00:00. Every count is a real observation.",
+      "runtime_secs": 9.7,
+      "sources": [
+        {
+          "url": "https://www.healthline.com/sitemap.xml",
+          "domain": "healthline.com"
+        },
+        {
+          "url": "https://www.healthline.com/robots.txt",
+          "domain": "healthline.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Schema Score",
+          "value": "49%"
+        },
+        {
+          "metric": "Jsonld Count",
+          "value": "1"
+        },
+        {
+          "metric": "Opengraph Count",
+          "value": "6"
+        },
+        {
+          "metric": "Twitter Card Count",
+          "value": "6"
+        }
+      ],
+      "actions": [
+        "Schema readiness 49/100: 1 JSON-LD, 6 OpenGraph, 6 Twitter Card, 2 machine-readable endpoints"
+      ],
+      "methodology": "Agentic API & Schema Protocol Auditor: live signals collected in real time for Healthline via live site scan. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "anchor_entropy": {
+      "feature_name": "Anchor-Text Entropy Boundary Predictor",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+entropy",
+      "retrieved_at": "2026-08-19T09:08:42.901882+00:00",
+      "total_anchors": 3,
+      "unique_anchors": 3,
+      "entropy": 1.585,
+      "normalized_entropy": 1.0,
+      "branded_pct": 100.0,
+      "top_anchors": [
+        {
+          "anchor": "Healthline",
+          "count": 1
+        },
+        {
+          "anchor": "Healthline official site",
+          "count": 1
+        },
+        {
+          "anchor": "Healthline homepage",
+          "count": 1
+        }
+      ],
+      "assessment": "healthy",
+      "recommendation": "Anchor entropy 1.0 across 3 real anchor contexts; 100.0% branded.",
+      "detailed_analysis": "Anchor entropy for Healthline: entropy computed from real anchor contexts observed in live search results. No anchors are injected or assumed.",
+      "runtime_secs": 4.8,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Anchors",
+          "value": "3"
+        },
+        {
+          "metric": "Unique Anchors",
+          "value": "3"
+        },
+        {
+          "metric": "Entropy",
+          "value": "1.58%"
+        },
+        {
+          "metric": "Normalized Entropy",
+          "value": "1.0%"
+        },
+        {
+          "metric": "Branded Pct",
+          "value": "100.0%"
+        }
+      ],
+      "actions": [
+        "0 across 3 real anchor contexts; 100"
+      ],
+      "methodology": "Anchor-Text Entropy Boundary Predictor: live signals collected in real time for Healthline via live search+entropy. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "crawl_priority": {
+      "feature_name": "AI Crawler Re-Indexation Pinger",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_probe",
+      "retrieved_at": "2026-08-19T09:08:45.002714+00:00",
+      "crawl_priority_score": 60,
+      "robots_txt": true,
+      "sitemap": true,
+      "indexnow": false,
+      "ai_bot_directives": [
+        "User-agent: GPTBot",
+        "User-agent: anthropic-ai",
+        "User-agent: Bytespider",
+        "User-agent: CCBot",
+        "User-agent: ClaudeBot"
+      ],
+      "x_robots_tag": "",
+      "assessment": "partial",
+      "recommendation": "Crawl-priority readiness 60/100 on healthline.com. IndexNow: missing; AI bot directives: 5.",
+      "detailed_analysis": "Crawl audit for healthline.com: live probes of robots.txt, sitemap.xml, IndexNow endpoint and AI-bot directives at 2026-08-19T09:08:45.002701+00:00. All statuses are real responses.",
+      "runtime_secs": 6.7,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Crawl Priority Score",
+          "value": "60%"
+        }
+      ],
+      "actions": [
+        "Crawl-priority readiness 60/100 on healthline",
+        "IndexNow: missing; AI bot directives: 5"
+      ],
+      "methodology": "AI Crawler Re-Indexation Pinger: live signals collected in real time for Healthline via live site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "ftc_compliance": {
+      "feature_name": "FTC & Sponsored-Mention Penalty Shield",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+site_probe",
+      "retrieved_at": "2026-08-19T09:08:47.334987+00:00",
+      "ftc_score": 25,
+      "sponsored_mentions": [],
+      "compliance_issues": [],
+      "disclosure_pages": [],
+      "total_sponsored_content": 0,
+      "total_compliance_issues": 0,
+      "assessment": "no_sponsored_content_detected",
+      "recommendation": "No sponsored mentions of Healthline were detected in live search results at 2026-08-19T09:08:47.334959+00:00, so no compliance verdict is claimed. 0 disclosure page(s) exist on the site. Re-run after sponsored placements appear to verify disclosure status.",
+      "detailed_analysis": "FTC audit for Healthline: 4 queries and 5 site probes at 2026-08-19T09:08:47.334978+00:00. Disclosure status is judged from the real snippet/page text. With 0 sponsored mentions observed, 0 lack visible disclosure labels.",
+      "runtime_secs": 9.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Ftc Score",
+          "value": "25%"
+        },
+        {
+          "metric": "Total Sponsored Content",
+          "value": "0"
+        },
+        {
+          "metric": "Total Compliance Issues",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "No sponsored mentions of Healthline were detected in live search results at 2026-08-19T09:08:47",
+        "334959+00:00, so no compliance verdict is claimed",
+        "0 disclosure page(s) exist on the site",
+        "Re-run after sponsored placements appear to verify disclosure status"
+      ],
+      "methodology": "FTC & Sponsored-Mention Penalty Shield: live signals collected in real time for Healthline via live search+site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "hreflang": {
+      "feature_name": "Cross-Border Hreflang Equity Balancer",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_scan",
+      "retrieved_at": "2026-08-19T09:08:49.536702+00:00",
+      "international_readiness_score": 20,
+      "hreflang_tags": [],
+      "international_versions": [],
+      "international_links": [],
+      "cannibalization_risk": "low",
+      "assessment": "needs_optimization",
+      "recommendation": "Hreflang readiness 20/100: 0 hreflang tags, 0 international versions, cannibalization risk low.",
+      "detailed_analysis": "Hreflang audit for healthline.com: live scan of alternate-link tags, international links and country-path probes at 2026-08-19T09:08:49.536688+00:00. All values are real observations.",
+      "runtime_secs": 10.9,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "International Readiness Score",
+          "value": "20%"
+        }
+      ],
+      "actions": [
+        "Hreflang readiness 20/100: 0 hreflang tags, 0 international versions, cannibalization risk low"
+      ],
+      "methodology": "Cross-Border Hreflang Equity Balancer: live signals collected in real time for Healthline via live site scan. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+    }
+  },
+  "status": "completed",
+  "summary": {
+    "overall_score": 46.6,
+    "total_mentions": 1,
+    "unlinked_opportunities": 1,
+    "backlink_health": 100,
+    "toxic_backlinks": 0,
+    "rag_citation_rate": null,
+    "kg_coverage": 62.5,
+    "vector_similarity": 0.2192,
+    "sentiment": null,
+    "pbn_risk": 0,
+    "anchor_entropy": 1.0,
+    "llm_citation_rate": null,
+    "aeo_score": 100,
+    "share_of_search": 0.0,
+    "pr_hooks_generated": 10,
+    "podcast_opportunities": 10,
+    "github_references": 16,
+    "features_analyzed": 35,
+    "modules_unavailable": 3
+  }
+}

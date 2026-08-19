@@ -1,0 +1,189 @@
+{
+  "status": "completed",
+  "started_at": "2026-08-18T07:26:20.762723+00:00",
+  "module_index": 35,
+  "total_modules": 35,
+  "current_module": "",
+  "current_module_label": "",
+  "elapsed_secs": 55.3,
+  "eta_secs": 0,
+  "modules": {
+    "llm_perception": {
+      "status": "done",
+      "runtime_secs": 0.0,
+      "label": "LLM Co-Mention & Perception Auditing"
+    },
+    "unlinked_citations": {
+      "status": "done",
+      "runtime_secs": 12.4,
+      "label": "Unlinked Citation & Co-Occurrence Converter"
+    },
+    "consensus": {
+      "status": "done",
+      "runtime_secs": 6.6,
+      "label": "Third-Party Consensus Engine"
+    },
+    "rag_repair": {
+      "status": "done",
+      "runtime_secs": 0.0,
+      "label": "RAG Hallucination & Citation Repair"
+    },
+    "vector_mapping": {
+      "status": "done",
+      "runtime_secs": 0.0,
+      "label": "Vector Co-Location & Embedding Mapping"
+    },
+    "pr_hooks": {
+      "status": "done",
+      "runtime_secs": 0.0,
+      "label": "Predictive Digital PR & Trend Hook Engine"
+    },
+    "link_poisoning": {
+      "status": "done",
+      "runtime_secs": 0.0,
+      "label": "Algorithmic Link Poisoning & Anomaly Radar"
+    },
+    "podcast_video": {
+      "status": "done",
+      "runtime_secs": 5.1,
+      "label": "Podcast & Video Citation Finder"
+    },
+    "aeo": {
+      "status": "done",
+      "runtime_secs": 15.3,
+      "label": "Agentic Commerce Protocol Placement (GEO/AEO)"
+    },
+    "pbn_detector": {
+      "status": "done",
+      "runtime_secs": 0.0,
+      "label": "Synthetic Network & Footprint De-Anonymizer"
+    },
+    "revenue_sim": {
+      "status": "done",
+      "runtime_secs": 0.0,
+      "label": "Share-of-Search Revenue Simulator"
+    },
+    "dead_equity": {
+      "status": "error",
+      "runtime_secs": 0.0,
+      "label": "Edge-Redirect & Dead-Equity Salvage"
+    },
+    "negative_seo": {
+      "status": "done",
+      "runtime_secs": 6.3,
+      "label": "Negative SEO Counter-Measure Deployment"
+    },
+    "github_citations": {
+      "status": "done",
+      "runtime_secs": 2.3,
+      "label": "GitHub Citation Harvester"
+    },
+    "transcription": {
+      "status": "done",
+      "runtime_secs": 9.7,
+      "label": "Audio & Video Semantic Transcription Monitor"
+    },
+    "kg_arbitrage": {
+      "status": "done",
+      "runtime_secs": 9.5,
+      "label": "Knowledge Graph & Wikidata Triple Arbitrage"
+    },
+    "data_pr": {
+      "status": "done",
+      "runtime_secs": 0.0,
+      "label": "Anonymized Telemetry Data-PR Engine"
+    },
+    "simulation": {
+      "status": "done",
+      "runtime_secs": 0.0,
+      "label": "Multi-Agent Off-Page Simulation Sandbox"
+    },
+    "satellite": {
+      "status": "done",
+      "runtime_secs": 9.5,
+      "label": "Satellite Entity M&A & Partnership Radar"
+    },
+    "rag_defense": {
+      "status": "done",
+      "runtime_secs": 10.9,
+      "label": "Reverse RAG-Cache Poisoning Defense"
+    },
+    "visual_audit": {
+      "status": "done",
+      "runtime_secs": 10.6,
+      "label": "Multi-Modal Schema & Visual Graph Alignment"
+    },
+    "apn_proxy": {
+      "status": "done",
+      "runtime_secs": 25.5,
+      "label": "Agentic Protocol Negotiation (APN) Proxy"
+    },
+    "graph_decay": {
+      "status": "done",
+      "runtime_secs": 10.6,
+      "label": "Co-Citation Graph Decay & Anchor Leasing"
+    },
+    "c2pa": {
+      "status": "done",
+      "runtime_secs": 6.0,
+      "label": "Cryptographic Entity-Origin Proof Signing"
+    },
+    "compliance_guard": {
+      "status": "done",
+      "runtime_secs": 23.5,
+      "label": "Legal / SEC Disclosure Risk Profiling"
+    },
+    "geo_crawl": {
+      "status": "done",
+      "runtime_secs": 11.5,
+      "label": "Geo-IP Citation Localization"
+    },
+    "zero_party": {
+      "status": "done",
+      "runtime_secs": 23.2,
+      "label": "Zero-Party Data Exchange"
+    },
+    "passage_scoring": {
+      "status": "done",
+      "runtime_secs": 9.1,
+      "label": "Passage-Level BERT Evaluator"
+    },
+    "reddit_consensus": {
+      "status": "done",
+      "runtime_secs": 6.5,
+      "label": "Reddit & Forum Consensus Graph"
+    },
+    "competitor_bert": {
+      "status": "done",
+      "runtime_secs": 5.2,
+      "label": "Competitor BERT-Vector Extraction"
+    },
+    "schema_auditor": {
+      "status": "done",
+      "runtime_secs": 9.6,
+      "label": "Agentic API & Schema Protocol Auditor"
+    },
+    "anchor_entropy": {
+      "status": "done",
+      "runtime_secs": 4.7,
+      "label": "Anchor-Text Entropy Boundary Predictor"
+    },
+    "crawl_priority": {
+      "status": "done",
+      "runtime_secs": 6.7,
+      "label": "AI Crawler Re-Indexation Pinger"
+    },
+    "ftc_compliance": {
+      "status": "done",
+      "runtime_secs": 10.4,
+      "label": "FTC & Sponsored-Mention Penalty Shield"
+    },
+    "hreflang": {
+      "status": "done",
+      "runtime_secs": 11.5,
+      "label": "Cross-Border Hreflang Equity Balancer"
+    }
+  },
+  "updated_at": "2026-08-18T07:27:16.066691+00:00",
+  "avg_per_module_secs": 1.6
+}

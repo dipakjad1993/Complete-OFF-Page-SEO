@@ -1,0 +1,3195 @@
+{
+ "brand": "The Hindu",
+ "domain": "thehindu.com",
+ "category": "news media",
+ "started_at": "2026-08-19T09:00:30.838793+00:00",
+ "completed_at": "2026-08-19T09:01:27.994120+00:00",
+ "sections": {
+  "llm_perception": {
+   "feature_name": "LLM Co-Mention & Perception Auditing",
+   "status": "unavailable",
+   "verified": false,
+   "requires": "OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY",
+   "detail": "No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+   "assessment": "unavailable",
+   "recommendation": "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data. No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+   "detailed_analysis": "No data was fabricated for \"LLM Co-Mention & Perception Auditing\". Configure OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY and re-run the analysis to get real, verified output. Reason: No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+   "runtime_secs": 0.0,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Module status",
+     "value": "Unavailable"
+    }
+   ],
+   "actions": [
+    "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data",
+    "No LLM provider is configured, so no real AI-assistant co-mention audit can run"
+   ],
+   "methodology": "LLM Co-Mention & Perception Auditing: live signals collected in real time for The Hindu via live signal collection. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "unlinked_citations": {
+   "feature_name": "Unlinked Citation & Co-Occurrence Converter",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+link_verification",
+   "retrieved_at": "2026-08-19T09:00:50.930277+00:00",
+   "total_mentions_found": 3,
+   "examined": 3,
+   "linked_count": 2,
+   "unlinked_count": 1,
+   "conversion_rate": 66.7,
+   "mentions": [
+    {
+     "url": "https://www.enewspapers.co.in/epaper/read-todays-the-hindu-newspaper/",
+     "title": "The Hindu ePaper Today | Read Latest English Newspaper Online",
+     "domain": "enewspapers.co.in",
+     "snippet": "Read The Hindu ePaper today online. Get the latest national news, international affairs, politics, business updates, education news, science coverage, and current affairs from The Hindu Newspaper.",
+     "relevance_score": 0.783,
+     "links_to_brand": true,
+     "verified": true
+    },
+    {
+     "url": "https://www.youtube.com/c/TheHinduOfficial/videos",
+     "title": "The Hindu - YouTube",
+     "domain": "youtube.com",
+     "snippet": "This is the official channel of The Hindu, one of the largest English newspapers in India. Our videos cover current affairs, politics, science, technology, entertainment, movies and more.",
+     "relevance_score": 0.783,
+     "links_to_brand": true,
+     "verified": true
+    },
+    {
+     "url": "https://www.indiags.com/epaper-pdf-download",
+     "title": "ePaper PDF Download - English & Hindi Newspapers | Indiags",
+     "domain": "indiags.com",
+     "snippet": "Download free ePaper PDFs of top English and Hindi newspapers like The Hindu, Indian Express, Dainik Bhaskar, Amar Ujala, and more.",
+     "relevance_score": 0.533,
+     "links_to_brand": false,
+     "verified": true
+    }
+   ],
+   "assessment": "opportunities",
+   "recommendation": "1 of 3 examined third-party pages mention \"The Hindu\" without a link back to thehindu.com (66.7% conversion). Pitch a link placement on each.",
+   "detailed_analysis": "Unlinked-citation audit for The Hindu: found 3 brand mentions from real searches; fetched and inspected the top 3 pages to check whether they hyperlink to thehindu.com. Every \"linked\" verdict is based on the live page content fetched at 2026-08-19T09:00:50.930270+00:00.",
+   "runtime_secs": 20.0,
+   "sources": [
+    {
+     "url": "https://www.enewspapers.co.in/epaper/read-todays-the-hindu-newspaper/",
+     "domain": "enewspapers.co.in"
+    },
+    {
+     "url": "https://www.youtube.com/c/TheHinduOfficial/videos",
+     "domain": "youtube.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Total Mentions Found",
+     "value": "3"
+    },
+    {
+     "metric": "Examined",
+     "value": "3"
+    },
+    {
+     "metric": "Linked Count",
+     "value": "2"
+    },
+    {
+     "metric": "Unlinked Count",
+     "value": "1"
+    },
+    {
+     "metric": "Conversion Rate",
+     "value": "66.7%"
+    }
+   ],
+   "actions": [
+    "1 of 3 examined third-party pages mention \"The Hindu\" without a link back to thehindu",
+    "Pitch a link placement on each"
+   ],
+   "methodology": "Unlinked Citation & Co-Occurrence Converter: live signals collected in real time for The Hindu via live search+link verification. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "consensus": {
+   "feature_name": "Third-Party Consensus Engine",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+llm_sentiment",
+   "retrieved_at": "2026-08-19T09:00:44.319128+00:00",
+   "total_mentions": 3,
+   "sentiment_scored": 0,
+   "avg_sentiment": null,
+   "overall_sentiment_score": null,
+   "sentiment_distribution": {
+    "positive": 0,
+    "negative": 0,
+    "neutral": 0
+   },
+   "mentions": [
+    {
+     "url": "https://www.enewspapers.co.in/epaper/read-todays-the-hindu-newspaper/",
+     "title": "The Hindu ePaper Today | Read Latest English Newspaper Online",
+     "domain": "enewspapers.co.in",
+     "snippet": "Read The Hindu ePaper today online. Get the latest national news, international affairs, politics, business updates, education news, science coverage, and current affairs from The Hindu Newspaper.",
+     "query": "\"The Hindu\" news"
+    },
+    {
+     "url": "https://www.youtube.com/c/TheHinduOfficial/videos",
+     "title": "The Hindu - YouTube",
+     "domain": "youtube.com",
+     "snippet": "This is the official channel of The Hindu, one of the largest English newspapers in India. Our videos cover current affairs, politics, science, technology, entertainment, movies and more.",
+     "query": "\"The Hindu\" news"
+    },
+    {
+     "url": "https://www.indiags.com/epaper-pdf-download",
+     "title": "ePaper PDF Download - English & Hindi Newspapers | Indiags",
+     "domain": "indiags.com",
+     "snippet": "Download free ePaper PDFs of top English and Hindi newspapers like The Hindu, Indian Express, Dainik Bhaskar, Amar Ujala, and more.",
+     "query": "\"The Hindu\" news"
+    }
+   ],
+   "sentiment_available": false,
+   "assessment": "no_sentiment_data",
+   "recommendation": "Collected 3 real third-party mentions of \"The Hindu\". Sentiment scoring requires an LLM key (OPENAI_API_KEY/ANTHROPIC_API_KEY/PERPLEXITY_API_KEY); mention data is real regardless.",
+   "detailed_analysis": "Consensus audit for The Hindu: 6 queries, 3 real mentions collected. 0 snippets scored by a live LLM sentiment call. No sentiment values are fabricated.",
+   "runtime_secs": 13.1,
+   "sources": [
+    {
+     "url": "https://www.enewspapers.co.in/epaper/read-todays-the-hindu-newspaper/",
+     "domain": "enewspapers.co.in"
+    },
+    {
+     "url": "https://www.youtube.com/c/TheHinduOfficial/videos",
+     "domain": "youtube.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Total Mentions",
+     "value": "3"
+    },
+    {
+     "metric": "Sentiment Scored",
+     "value": "0%"
+    }
+   ],
+   "actions": [
+    "Collected 3 real third-party mentions of \"The Hindu\"",
+    "Sentiment scoring requires an LLM key (OPENAI_API_KEY/ANTHROPIC_API_KEY/PERPLEXITY_API_KEY); mention data is real regardless"
+   ],
+   "methodology": "Third-Party Consensus Engine: live signals collected in real time for The Hindu via live search+llm sentiment. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "rag_repair": {
+   "feature_name": "RAG Hallucination & Citation Repair",
+   "status": "unavailable",
+   "verified": false,
+   "requires": "OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY",
+   "detail": "No LLM provider is configured, so RAG citation testing cannot run.",
+   "assessment": "unavailable",
+   "recommendation": "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data. No LLM provider is configured, so RAG citation testing cannot run.",
+   "detailed_analysis": "No data was fabricated for \"RAG Hallucination & Citation Repair\". Configure OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY and re-run the analysis to get real, verified output. Reason: No LLM provider is configured, so RAG citation testing cannot run.",
+   "runtime_secs": 0.0,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Module status",
+     "value": "Unavailable"
+    }
+   ],
+   "actions": [
+    "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data",
+    "No LLM provider is configured, so RAG citation testing cannot run"
+   ],
+   "methodology": "RAG Hallucination & Citation Repair: live signals collected in real time for The Hindu via live signal collection. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "vector_mapping": {
+   "feature_name": "Vector Co-Location & Embedding Mapping",
+   "status": "ok",
+   "verified": true,
+   "method": "tfidf_cosine",
+   "retrieved_at": "2026-08-19T09:00:56.891614+00:00",
+   "brand_texts_embedded": 5,
+   "competitors_embedded": 2,
+   "competitor_distances": [
+    {
+     "competitor": "Reuters",
+     "cosine_similarity": 0.1965
+    },
+    {
+     "competitor": "Associated Press",
+     "cosine_similarity": 0.0679
+    }
+   ],
+   "avg_cosine_similarity": 0.1322,
+   "assessment": "computed",
+   "recommendation": "Embedded 5 brand text passages and 2 competitor passages. Average cosine similarity to competitors: 0.1322.",
+   "detailed_analysis": "Vector mapping for The Hindu: real TF-IDF vectors computed from the fetched site text for 7 passages. Similarity values are actual cosine distances between the real vectors.",
+   "runtime_secs": 25.4,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Brand Texts Embedded",
+     "value": "5"
+    },
+    {
+     "metric": "Competitors Embedded",
+     "value": "2"
+    },
+    {
+     "metric": "Avg Cosine Similarity",
+     "value": "0.13%"
+    }
+   ],
+   "actions": [
+    "Embedded 5 brand text passages and 2 competitor passages",
+    "Average cosine similarity to competitors: 0"
+   ],
+   "methodology": "Vector Co-Location & Embedding Mapping: live signals collected in real time for The Hindu via tfidf cosine. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "pr_hooks": {
+   "feature_name": "Predictive Digital PR & Trend Hook Engine",
+   "status": "ok",
+   "verified": true,
+   "method": "news_rss/newsapi+llm_or_term_frequency",
+   "retrieved_at": "2026-08-19T09:00:39.181489+00:00",
+   "trending_articles": [
+    {
+     "title": "West Asia war LIVE: Iran's armed forces warn Gulf countries against assisting U.S. military",
+     "url": "https://www.thehindu.com/news/international/iran-us-west-asia-war-strait-of-hormuz-news-donald-trump-live-updates-on-august-19-2026/article71363121.ece",
+     "snippet": "Iran conflict, Strait of Hormuz disruptions, oil prices, and impending sanctions as Washington ruled out extending a temporary ceasefire agreement.",
+     "published": "Tue, 18 Aug 2026 18:43:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "UAE halts all trade, financial dealings with Iran",
+     "url": "https://www.thehindu.com/news/international/uae-halts-all-trade-financial-dealings-with-iran/article71363901.ece",
+     "snippet": "The United Arab Emirates has said it is suspending all trade and financial dealings with Iran after reporting an Iranian missile attack directed at its ships. . The announcement comes after a period ...",
+     "published": "Wed, 19 Aug 2026 01:45:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "Former Rajya Sabha MP Vijayasai Reddy announces new political party in Andhra Pradesh",
+     "url": "https://www.thehindu.com/news/national/andhra-pradesh/former-rajya-sabha-mp-vijayasai-reddy-announces-new-political-party-in-andhra-pradesh/article71363965.ece",
+     "snippet": "Former Rajya Sabha member V. Vijayasai Reddy has announced a new political party in Andhra Pradesh, and will reveal the details in Vijayawada this month.",
+     "published": "Wed, 19 Aug 2026 01:43:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "Pakistan government to challenge court on moving Imran Khan to private hospital",
+     "url": "https://www.thehindu.com/news/international/pakistan-government-to-challenge-court-on-moving-imran-khan-to-private-hospital/article71364046.ece",
+     "snippet": "Pakistan's government plans to contest the Supreme Court's decision to transfer Imran Khan to a private hospital for medical care.",
+     "published": "Wed, 19 Aug 2026 01:41:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "Parliament’s Monsoon Session hits lowest productivity since 2016, but passes 11 Bills: Infographics",
+     "url": "https://www.thehindu.com/news/national/parliament-monsoon-session-productivity-low-since-2016-passes-11-bills-infographics/article71359792.ece",
+     "snippet": "The Monsoon Session of the Parliament concluded on August 13, 2026 (Thursday) with the productivity of the session in both Houses taking a hit due to a multitude of disruptions. A total of 11 Bills ...",
+     "published": "Wed, 19 Aug 2026 01:25:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "Tamil Nadu government order seeking steps to prevent students from protesting withdrawn after row",
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/tamil-nadu-government-order-seeking-steps-to-prevent-students-from-protesting-withdrawn-after-row/article71363796.ece",
+     "snippet": "Tamil Nadu withdraws controversial order restricting student protests after backlash from educational institutions and political groups.",
+     "published": "Wed, 19 Aug 2026 00:35:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "At least 34 children fall ill after detergent served instead of salt in Bihar school’s midday meal",
+     "url": "https://www.thehindu.com/news/national/bihar/detergent-served-instead-of-salt-in-bihar-schools-midday-meal-children-ill/article71363429.ece",
+     "snippet": "At least 34 children in Bihar fell ill after detergent was mistakenly served in their midday meal, prompting an investigation.",
+     "published": "Tue, 18 Aug 2026 22:46:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "Have proof of corruption in erstwhile DMK government, will reveal it when necessary: CM Vijay",
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/have-proof-of-corruption-in-erstwhile-dmk-government-will-reveal-it-when-necessary-cm-vijay/article71363682.ece",
+     "snippet": "CM Vijay claims to hold evidence of corruption in the former DMK government, promising to reveal it when needed.",
+     "published": "Tue, 18 Aug 2026 23:32:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "India vs Sri Lanka 1st Test: Jadeja, Prasidh strike to take India close to win on Day 5",
+     "url": "https://www.thehindu.com/sport/cricket/india-vs-sri-lanka-first-test-day-5-august-19-2026/article71363822.ece",
+     "snippet": "Ravindra Jadeja breached a stonewalling alliance between Sonal Dinusha and Dhananjaya de Silva, reducing Sri Lanka to 175 for six at lunch to push India closer to a victory on the fifth and final day ...",
+     "published": "Wed, 19 Aug 2026 00:28:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "All Tamil Nadu MLAs to get car and assistant for constituency work: CM Vijay in Assembly",
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+     "snippet": "Tamil Nadu MLAs to receive cars and assistants for constituency work, ensuring efficient governance, announced CM Vijay.",
+     "published": "Tue, 18 Aug 2026 23:11:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "NEET-UG paper leak: Supreme Court asks NTA about taken on inquiry committees’ recommendations",
+     "url": "https://www.thehindu.com/news/national/neet-ug-paper-leak-supreme-court-asks-nta-about-taken-on-inquiry-committees-recommendations/article71363878.ece",
+     "snippet": "Supreme Court directs NTA to report on implementing NEET exam reform recommendations amid ongoing inquiries into paper leak issues.",
+     "published": "Wed, 19 Aug 2026 00:52:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "Vijay-led Tamil Nadu government’s first 100 days: reform, welfare, and challenges",
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/vijay-led-tamil-nadu-governments-first-100-days-reform-welfare-and-challenges/article71363540.ece",
+     "snippet": "Explore the TVK-led Tamil Nadu government's first 100 days, highlighting reforms, welfare initiatives, and ongoing challenges and controversies.",
+     "published": "Tue, 18 Aug 2026 23:29:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "CM health insurance coverage increased from ₹5 lakh to ₹25 lakh in Tamil Nadu",
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/cm-health-insurance-coverage-increased-from-5-lakh-to-25-lakh-in-tamil-nadu/article71363805.ece",
+     "snippet": "Tamil Nadu increases health insurance coverage to ₹25 lakh, announces new multi-speciality hospital and enhanced cancer care funding.",
+     "published": "Wed, 19 Aug 2026 00:24:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "Telangana SIR 2026 | List of electors not included in draft rolls published",
+     "url": "https://www.thehindu.com/news/national/telangana/telangana-sir-2026-list-of-electors-not-included-in-draft-rolls-published/article71363817.ece",
+     "snippet": "The list of electors in Telangana whose names were not included in the draft roll of Special Intensive Revision 2026, was made available on the website of Chief Electoral Officer ...",
+     "published": "Wed, 19 Aug 2026 00:49:00 GMT",
+     "source_name": "thehindu.com",
+     "is_news": true
+    },
+    {
+     "title": "Social media fuels fake news: ISB study reveals X and Facebook as key spreaders",
+     "url": "https://www.thehindubusinessline.com/info-tech/social-media/social-media-fuels-fake-news-isb-study-reveals-x-and-facebook-as-key-spreaders/article70144837.ece",
+     "snippet": "https://www.thehindubusinessline.com/info-tech/social-media/social-media-fuels-fake-news-isb-study-reveals-x-and-facebook-as-key-spreaders/article70144837.ece Copy ...",
+     "published": "Thu, 09 Oct 2025 02:23:00 GMT",
+     "source_name": "thehindubusinessline.com",
+     "is_news": true
+    }
+   ],
+   "brand_mentions_in_news": 0,
+   "industry_articles_scanned": 19,
+   "total_articles_scanned": 19,
+   "hook_count": 5,
+   "hooks": [
+    {
+     "title": "Trending topic: \"Tamil\" (covered in 4 articles in the last-14-days news set)",
+     "angle": "Pitch The Hindu commentary/data on the live Tamil topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+     "source_url": "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+     "source_articles": [
+      "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/cm-health-insurance-coverage-increased-from-5-lakh-to-25-lakh-in-tamil-nadu/article71363805.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/tamil-nadu-government-order-seeking-steps-to-prevent-students-from-protesting-withdrawn-after-row/article71363796.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/vijay-led-tamil-nadu-governments-first-100-days-reform-welfare-and-challenges/article71363540.ece"
+     ],
+     "target_outlet": "",
+     "verified": true,
+     "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+    },
+    {
+     "title": "Trending topic: \"Nadu\" (covered in 4 articles in the last-14-days news set)",
+     "angle": "Pitch The Hindu commentary/data on the live Nadu topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+     "source_url": "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+     "source_articles": [
+      "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/cm-health-insurance-coverage-increased-from-5-lakh-to-25-lakh-in-tamil-nadu/article71363805.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/tamil-nadu-government-order-seeking-steps-to-prevent-students-from-protesting-withdrawn-after-row/article71363796.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/vijay-led-tamil-nadu-governments-first-100-days-reform-welfare-and-challenges/article71363540.ece"
+     ],
+     "target_outlet": "",
+     "verified": true,
+     "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+    },
+    {
+     "title": "Trending topic: \"Tamil Nadu\" (covered in 4 articles in the last-14-days news set)",
+     "angle": "Pitch The Hindu commentary/data on the live Tamil Nadu topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+     "source_url": "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+     "source_articles": [
+      "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/cm-health-insurance-coverage-increased-from-5-lakh-to-25-lakh-in-tamil-nadu/article71363805.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/tamil-nadu-government-order-seeking-steps-to-prevent-students-from-protesting-withdrawn-after-row/article71363796.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/vijay-led-tamil-nadu-governments-first-100-days-reform-welfare-and-challenges/article71363540.ece"
+     ],
+     "target_outlet": "",
+     "verified": true,
+     "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+    },
+    {
+     "title": "Trending topic: \"Vijay\" (covered in 2 articles in the last-14-days news set)",
+     "angle": "Pitch The Hindu commentary/data on the live Vijay topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+     "source_url": "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+     "source_articles": [
+      "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+      "https://www.thehindu.com/news/national/tamil-nadu/have-proof-of-corruption-in-erstwhile-dmk-government-will-reveal-it-when-necessary-cm-vijay/article71363682.ece"
+     ],
+     "target_outlet": "",
+     "verified": true,
+     "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+    },
+    {
+     "title": "Trending topic: \"Social\" (covered in 2 articles in the last-14-days news set)",
+     "angle": "Pitch The Hindu commentary/data on the live Social topic to outlets covering it, citing the real articles below as evidence of editorial interest.",
+     "source_url": "https://www.thehindu.com/news/national/social-media-video-platforms-surpass-traditional-outlets-as-leading-news-sources-report/article71105635.ece",
+     "source_articles": [
+      "https://www.thehindu.com/news/national/social-media-video-platforms-surpass-traditional-outlets-as-leading-news-sources-report/article71105635.ece",
+      "https://www.thehindubusinessline.com/info-tech/social-media/social-media-fuels-fake-news-isb-study-reveals-x-and-facebook-as-key-spreaders/article70144837.ece"
+     ],
+     "target_outlet": "",
+     "verified": true,
+     "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated."
+    }
+   ],
+   "assessment": "hooks_ready",
+   "recommendation": "Scanned 19 real news media articles from the last 14 days. 5 journalist-ready PR hooks generated, each grounded in a real article.",
+   "detailed_analysis": "PR hook engine for The Hindu: pulled 19 real articles via Google News RSS. 0 mention the brand directly. 5 hooks were produced from real term-frequency analysis and checked against article URLs at 2026-08-19T09:00:39.181482+00:00.",
+   "runtime_secs": 7.7,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/news/international/iran-us-west-asia-war-strait-of-hormuz-news-donald-trump-live-updates-on-august-19-2026/article71363121.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/international/uae-halts-all-trade-financial-dealings-with-iran/article71363901.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/andhra-pradesh/former-rajya-sabha-mp-vijayasai-reddy-announces-new-political-party-in-andhra-pradesh/article71363965.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/international/pakistan-government-to-challenge-court-on-moving-imran-khan-to-private-hospital/article71364046.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/parliament-monsoon-session-productivity-low-since-2016-passes-11-bills-infographics/article71359792.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/tamil-nadu-government-order-seeking-steps-to-prevent-students-from-protesting-withdrawn-after-row/article71363796.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/bihar/detergent-served-instead-of-salt-in-bihar-schools-midday-meal-children-ill/article71363429.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/have-proof-of-corruption-in-erstwhile-dmk-government-will-reveal-it-when-necessary-cm-vijay/article71363682.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/sport/cricket/india-vs-sri-lanka-first-test-day-5-august-19-2026/article71363822.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/all-tamil-nadu-mlas-to-get-car-and-assistant-for-constituency-work-cm-vijay/article71363634.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/neet-ug-paper-leak-supreme-court-asks-nta-about-taken-on-inquiry-committees-recommendations/article71363878.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/vijay-led-tamil-nadu-governments-first-100-days-reform-welfare-and-challenges/article71363540.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/tamil-nadu/cm-health-insurance-coverage-increased-from-5-lakh-to-25-lakh-in-tamil-nadu/article71363805.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/telangana/telangana-sir-2026-list-of-electors-not-included-in-draft-rolls-published/article71363817.ece",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindubusinessline.com/info-tech/social-media/social-media-fuels-fake-news-isb-study-reveals-x-and-facebook-as-key-spreaders/article70144837.ece",
+     "domain": "thehindubusinessline.com"
+    },
+    {
+     "url": "https://www.thehindubusinessline.com/info-tech/social-media/social-media-fuels-fake-news-isb-study-reveals-x-and-facebook-as-key-spreaders/article70144837.ece Copy ...",
+     "domain": "thehindubusinessline.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/social-media-video-platforms-surpass-traditional-outlets-as-leading-news-sources-report/article71105635.ece",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Brand Mentions In News",
+     "value": "0"
+    },
+    {
+     "metric": "Industry Articles Scanned",
+     "value": "19"
+    },
+    {
+     "metric": "Total Articles Scanned",
+     "value": "19"
+    },
+    {
+     "metric": "Hook Count",
+     "value": "5"
+    }
+   ],
+   "actions": [
+    "Scanned 19 real news media articles from the last 14 days",
+    "5 journalist-ready PR hooks generated, each grounded in a real article"
+   ],
+   "methodology": "Predictive Digital PR & Trend Hook Engine: live signals collected in real time for The Hindu via news rss/newsapi+llm or term frequency. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "link_poisoning": {
+   "feature_name": "Algorithmic Link Poisoning & Anomaly Radar",
+   "status": "ok",
+   "verified": true,
+   "method": "bing_link_queries+analysis",
+   "retrieved_at": "2026-08-19T09:00:39.606190+00:00",
+   "total_backlinks": 13,
+   "toxic_count": 0,
+   "toxic_backlinks": [],
+   "exact_match_anchor_pct": 0.0,
+   "top_anchors": [
+    {
+     "anchor": "the hindu epaper | daily news and current affairs",
+     "count": 3
+    },
+    {
+     "anchor": "the hindu - wikipedia",
+     "count": 2
+    },
+    {
+     "anchor": "welcome to the hindu!",
+     "count": 2
+    },
+    {
+     "anchor": "business news today: latest business news, finance news",
+     "count": 2
+    },
+    {
+     "anchor": "welcome to step platform | learn english online | beginner to advanced ...",
+     "count": 1
+    },
+    {
+     "anchor": "sports news today, latest updates & headlines | sportstar",
+     "count": 1
+    },
+    {
+     "anchor": "india’s national fortnightly magazine | frontline",
+     "count": 1
+    },
+    {
+     "anchor": "breaking news, india news, sports news and live updates",
+     "count": 1
+    }
+   ],
+   "health_score": 100,
+   "assessment": "healthy",
+   "recommendation": "13 real backlinks audited. 0 flagged as toxic/anomalous. 0.0% exact-match anchors (over-optimization risk above 40%). Health score 100/100.",
+   "detailed_analysis": "Link-poisoning audit for thehindu.com: 13 backlinks pulled live from Bing reference discovery. 0 links show toxic domain or anchor patterns; 0.0% of anchors are exact-match. All numbers derived from the live backlink dataset.",
+   "runtime_secs": 7.9,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Total Backlinks",
+     "value": "13"
+    },
+    {
+     "metric": "Toxic Count",
+     "value": "0"
+    },
+    {
+     "metric": "Exact Match Anchor Pct",
+     "value": "0.0%"
+    },
+    {
+     "metric": "Health Score",
+     "value": "100%"
+    }
+   ],
+   "actions": [
+    "0 flagged as toxic/anomalous",
+    "0% exact-match anchors (over-optimization risk above 40%)"
+   ],
+   "methodology": "Algorithmic Link Poisoning & Anomaly Radar: live signals collected in real time for The Hindu via bing link queries+analysis. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "podcast_video": {
+   "feature_name": "Podcast & Video Citation Finder",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+itunes_api+platform_filter",
+   "retrieved_at": "2026-08-19T09:00:42.459055+00:00",
+   "opportunity_count": 10,
+   "unique_platforms": 1,
+   "mentions": [
+    {
+     "url": "https://feeds.megaphone.fm/THGU4956605070",
+     "title": "In Focus by The Hindu — The Hindu",
+     "domain": "podcasts.apple.com",
+     "snippet": "News Commentary"
+    },
+    {
+     "url": "https://feeds.megaphone.fm/THGU5836655568",
+     "title": "Worldview with Suhasini Haidar — The Hindu",
+     "domain": "podcasts.apple.com",
+     "snippet": "News Commentary"
+    },
+    {
+     "url": "https://feeds.megaphone.fm/THGU8295359894",
+     "title": "The Interface — The Hindu",
+     "domain": "podcasts.apple.com",
+     "snippet": "Technology"
+    },
+    {
+     "url": "https://feeds.megaphone.fm/THGU3684108625",
+     "title": "Parley by The Hindu — TheHindu",
+     "domain": "podcasts.apple.com",
+     "snippet": "News"
+    },
+    {
+     "url": "https://feeds.megaphone.fm/THGU2282106229",
+     "title": "Data Point — The Hindu",
+     "domain": "podcasts.apple.com",
+     "snippet": "Daily News"
+    },
+    {
+     "url": "https://feeds.megaphone.fm/THGU8530254918",
+     "title": "Global Faultlines — The Hindu",
+     "domain": "podcasts.apple.com",
+     "snippet": "Politics"
+    },
+    {
+     "url": "https://feeds.megaphone.fm/THGU1034480839",
+     "title": "The Rearview — The Hindu",
+     "domain": "podcasts.apple.com",
+     "snippet": "Science"
+    },
+    {
+     "url": "https://feeds.megaphone.fm/THGU8714688753",
+     "title": "The Hindu On Books — The Hindu",
+     "domain": "podcasts.apple.com",
+     "snippet": "Books"
+    },
+    {
+     "url": "https://api.substack.com/feed/podcast/226607.rss",
+     "title": "The Hindu Parenting Podcast — Hindu Parenting",
+     "domain": "podcasts.apple.com",
+     "snippet": "Parenting"
+    },
+    {
+     "url": "https://raw.githubusercontent.com/jarvez31/automated-podcasts/main/feed.xml",
+     "title": "The Hindu UPSC Daily — The Hindu UPSC Daily",
+     "domain": "podcasts.apple.com",
+     "snippet": "News"
+    }
+   ],
+   "platforms": [
+    "podcasts.apple.com"
+   ],
+   "assessment": "opportunities_found",
+   "recommendation": "Found 10 real podcast/video pages mentioning \"The Hindu\" across 1 platforms (Bing web search + public iTunes podcast API). Pitch guest appearances or cite each episode.",
+   "detailed_analysis": "Podcast & video audit for The Hindu: searched 4 audio/video queries and the public iTunes podcast catalog. 10 genuine pages were collected; no URLs were synthesized.",
+   "runtime_secs": 10.5,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Opportunity Count",
+     "value": "10"
+    },
+    {
+     "metric": "Unique Platforms",
+     "value": "1"
+    }
+   ],
+   "actions": [
+    "Found 10 real podcast/video pages mentioning \"The Hindu\" across 1 platforms (Bing web search + public iTunes podcast API)",
+    "Pitch guest appearances or cite each episode"
+   ],
+   "methodology": "Podcast & Video Citation Finder: live signals collected in real time for The Hindu via live search+itunes api+platform filter. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "aeo": {
+   "feature_name": "Agentic Commerce Protocol Placement (GEO/AEO)",
+   "status": "ok",
+   "verified": true,
+   "method": "live_site_probe",
+   "retrieved_at": "2026-08-19T09:00:40.923445+00:00",
+   "aeo_score": 30,
+   "llms_txt": false,
+   "robots_txt": true,
+   "sitemap": false,
+   "ai_plugin_json": false,
+   "ai_bot_directives": [
+    "User-agent: GPTBot",
+    "User-agent: ChatGPT-User",
+    "User-agent: PerplexityBot",
+    "User-agent: Bytespider",
+    "User-agent: ClaudeBot",
+    "User-agent: Claude-Web",
+    "User-agent: CCBot",
+    "User-agent: Anthropic-ai"
+   ],
+   "schema_types": [],
+   "probes": [
+    {
+     "path": "/llms.txt",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 76164,
+     "final_url": "https://www.thehindu.com/llms.txt"
+    },
+    {
+     "path": "/robots.txt",
+     "status": 200,
+     "content_type": "text/plain",
+     "size": 4192,
+     "final_url": "https://www.thehindu.com/robots.txt"
+    },
+    {
+     "path": "/sitemap.xml",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 73644,
+     "final_url": "https://www.thehindu.com/sitemap.xml"
+    },
+    {
+     "path": "/.well-known/ai-plugin.json",
+     "status": 404,
+     "content_type": "text/html",
+     "size": 564,
+     "final_url": "https://www.thehindu.com/.well-known/ai-plugin.json"
+    },
+    {
+     "path": "/.well-known/llms.txt",
+     "status": 404,
+     "content_type": "text/html",
+     "size": 917,
+     "final_url": "https://www.thehindu.com/.well-known/llms.txt"
+    },
+    {
+     "path": "/ai.txt",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 76164,
+     "final_url": "https://www.thehindu.com/ai.txt"
+    },
+    {
+     "path": "/.well-known/appspecific/com.chatgpt.android.platform.json",
+     "status": 404,
+     "content_type": "text/html",
+     "size": 564,
+     "final_url": "https://www.thehindu.com/.well-known/appspecific/com.chatgpt.android.platform.json"
+    }
+   ],
+   "assessment": "needs_optimization",
+   "recommendation": "AEO readiness for thehindu.com: 30/100. llms.txt: missing, AI bot directives: 8, schema types: 0.",
+   "detailed_analysis": "AEO audit for The Hindu: live-probed 7 agentic-discovery endpoints on thehindu.com and parsed robots.txt and structured data. Every finding above reflects the real response received at 2026-08-19T09:00:40.923430+00:00.",
+   "runtime_secs": 8.7,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/llms.txt",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/robots.txt",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/sitemap.xml",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/.well-known/ai-plugin.json",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/.well-known/llms.txt",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/ai.txt",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/.well-known/appspecific/com.chatgpt.android.platform.json",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Aeo Score",
+     "value": "30%"
+    }
+   ],
+   "actions": [
+    "AEO readiness for thehindu",
+    "txt: missing, AI bot directives: 8, schema types: 0"
+   ],
+   "methodology": "Agentic Commerce Protocol Placement (GEO/AEO): live signals collected in real time for The Hindu via live site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "pbn_detector": {
+   "feature_name": "Synthetic Network & Footprint De-Anonymizer",
+   "status": "ok",
+   "verified": true,
+   "method": "rdap_footprint_analysis",
+   "retrieved_at": "2026-08-19T09:00:39.180339+00:00",
+   "total_backlinks": 0,
+   "repeated_source_domains": [],
+   "suspicious_count": 0,
+   "sponsored_count": 0,
+   "ugc_count": 0,
+   "generic_anchor_count": 0,
+   "registration_footprint": {
+    "domain": "thehindu.com",
+    "registrar": "eNom, LLC",
+    "registered": "1996-03-01T05:00:00Z",
+    "domain_age_years": 30.5,
+    "expiration": "2028-03-02T05:00:00Z"
+   },
+   "methodology_note": "PBN footprint signals: backlink repetition/anchor patterns (when a backlink provider is configured) plus public RDAP domain-registration data. If no paid backlink provider is configured, only the public registration signals are reported.",
+   "assessment": "registration_only",
+   "recommendation": "No paid backlink provider is configured, so backlink footprint data is unavailable. Only the real public RDAP registration record for thehindu.com (created 1996-03-01T05:00:00Z) was examined. Configure AHREFS_API_KEY to analyze actual backlink repetition, anchor and sponsored/UGC patterns.",
+   "detailed_analysis": "PBN footprint audit for thehindu.com: no backlink data available (no provider key). Public RDAP registration record verified in real time: registrar eNom, LLC, registered 1996-03-01T05:00:00Z, expiration 2028-03-02T05:00:00Z, domain age 30.5 years. No backlink-based PBN signal was claimed because none was observed.",
+   "runtime_secs": 6.9,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Total Backlinks",
+     "value": "0"
+    },
+    {
+     "metric": "Suspicious Count",
+     "value": "0"
+    },
+    {
+     "metric": "Sponsored Count",
+     "value": "0"
+    },
+    {
+     "metric": "Ugc Count",
+     "value": "0"
+    },
+    {
+     "metric": "Generic Anchor Count",
+     "value": "0"
+    }
+   ],
+   "actions": [
+    "No paid backlink provider is configured, so backlink footprint data is unavailable",
+    "Only the real public RDAP registration record for thehindu",
+    "com (created 1996-03-01T05:00:00Z) was examined",
+    "Configure AHREFS_API_KEY to analyze actual backlink repetition, anchor and sponsored/UGC patterns"
+   ],
+   "methodology": "Synthetic Network & Footprint De-Anonymizer: live signals collected in real time for The Hindu via rdap footprint analysis. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "revenue_sim": {
+   "feature_name": "Share-of-Search Revenue Simulator",
+   "status": "ok",
+   "verified": true,
+   "method": "bing_rss_serp_analysis",
+   "retrieved_at": "2026-08-19T09:00:36.414032+00:00",
+   "share_of_search_branded_query": 90.0,
+   "share_of_search_category_query": 0.0,
+   "branded_results": [
+    {
+     "title": "The Hindu: Latest News today from India and the World, Breaking news ...",
+     "url": "https://www.thehindu.com/",
+     "snippet": "The Hindu Newspaper: Get latest News on Politics, Sports, Business, Arts, Entertainment and trending news Videos from The Hindu"
+    },
+    {
+     "title": "The Hindu ePaper | Daily News and Current Affairs",
+     "url": "https://epaper.thehindu.com/",
+     "snippet": "Read today’s The Hindu ePaper for the latest news, articles, and in-depth analysis. Stay informed about national and international affairs. Discover reliable and credible journalism with..."
+    },
+    {
+     "title": "Latest News: Today’s Top Stories & Updates - The Hindu",
+     "url": "https://www.thehindu.com/latest-news/",
+     "snippet": "State government has taken initiatives to tackle drought situation in Raichur: Ajay Dharam Singh The Hindu Bureau Telangana"
+    },
+    {
+     "title": "Welcome to The Hindu!",
+     "url": "https://branchioth.thehindu.co.in/",
+     "snippet": "Welcome to The Hindu! You will receive a one-time SMS to download the app Phone number: Send me the app By providing your phone number, you agree to receive a one-time automated text message with a link to get the app. Standard messaging rates may apply."
+    },
+    {
+     "title": "The Hindu - Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]"
+    },
+    {
+     "title": "ePaper PDF Download - English & Hindi Newspapers | Indiags",
+     "url": "https://www.indiags.com/epaper-pdf-download",
+     "snippet": "Download free ePaper PDFs of top English and Hindi newspapers like The Hindu, Indian Express, Dainik Bhaskar, Amar Ujala, and more."
+    },
+    {
+     "title": "The Hindu ePaper — Read Today's Edition Online Free",
+     "url": "https://utilko.com/newspapers/india/the-hindu/",
+     "snippet": "Read today's The Hindu ePaper online — direct link to the publisher's official English edition. Free, no signup. Published by The Hindu Group."
+    },
+    {
+     "title": "THE HINDU Group of Publications",
+     "url": "https://hindugroup.org.in/",
+     "snippet": "The Hindu Group, owned by Kasturi and Sons Limited, publishes the business newspaper The Hindu BusinessLine, a general interest fortnightly, Frontline, and a sports weekly, Sportstar."
+    },
+    {
+     "title": "Editorials, Editorial Opinions, Editorial News, The Hindu Opinion",
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "snippet": "Read the latest opinion editorials from The Hindu, offering insightful analysis and diverse perspectives on current affairs, politics, social issues, and more."
+    },
+    {
+     "title": "India Latest News: Top National Headlines Today & Breaking News - The Hindu",
+     "url": "https://www.thehindu.com/news/national/",
+     "snippet": "National news and headlines from within or around India with live updates on major breaking events from The Hindu."
+    }
+   ],
+   "category_results": [
+    {
+     "title": "Google News",
+     "url": "https://news.google.com/?hl=en-IN&ceid=IN:en",
+     "snippet": "Comprehensive, up-to-date news coverage, aggregated from sources all over the world by Google News."
+    },
+    {
+     "title": "Thane News, Latest Thane News Headlines & Live Updates, Breaking Thane ...",
+     "url": "https://timesofindia.indiatimes.com/city/thane",
+     "snippet": "TOI brings the latest Thane news headlines about Thane crime, Thane education news, Thane real estate news, Thane politics and Live Updates on local Thane news from Times of India, Breaking Thane news - Thane news section."
+    },
+    {
+     "title": "Google News",
+     "url": "https://news.google.com/",
+     "snippet": "Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News."
+    },
+    {
+     "title": "TOI - Breaking News, Latest News, India News, World News, Bollywood ...",
+     "url": "https://timesofindia.indiatimes.com/",
+     "snippet": "Breaking News in India: Read Latest News on Sports, Business, Entertainment, Blogs and Opinions from leading columnists. Times of India brings the Breaking News and Latest News."
+    },
+    {
+     "title": "Thane News- Get Today's Latest News, Breaking News Updates ...",
+     "url": "https://www.lokmattimes.com/thane/",
+     "snippet": "Thane News - Read Latest News, Breaking News Updates & Information On Thane Politics, Civic Issues, Crime, Weather & More at Lokmattimes.com"
+    },
+    {
+     "title": "NDTV 24x7 Live TV, Live English News Channel, Free Live Streaming ...",
+     "url": "https://www.ndtv.com/livetv-ndtv24x7",
+     "snippet": "Watch NDTV 24x7 Live TV free – live streaming of breaking news, latest headlines, politics, business, economy, sports, entertainment, and world news in English."
+    },
+    {
+     "title": "Hindi news, हिंदी न्यूज़ , Hindi Samachar, हिंदी समाचार, Latest News in ...",
+     "url": "https://www.aajtak.in/",
+     "snippet": "AajTak: Hindi news (हिंदी समाचार) website, watch live tv coverages, Latest Khabar, Breaking news in Hindi of India, World, Sports, business, film and Entertainment."
+    },
+    {
+     "title": "Hindustan Times: Breaking News, Latest News, India News, World News ...",
+     "url": "https://www.hindustantimes.com/",
+     "snippet": "Hindustan Times: Stay updated with Hindustan Times for the top India news, world events, and breaking stories. Get real-time updates on politics, wars, live cricket scores, entertainment news,..."
+    },
+    {
+     "title": "हिंदी न्यूज़ | हिंदी समाचार | ताजा ख़बरें | Breaking Latest News in ...",
+     "url": "https://www.indiatv.in/",
+     "snippet": "हिंदी न्यूज़ - Read Breaking Latest News in Hindi (हिंदी समाचार / ताजा ख़बरें) of India & World on Politics, Business, Bollywood, Health, Lifestyle, Sports, Education across the World at India TV Hindi News Official Website"
+    },
+    {
+     "title": "Maharashtra News English news | Maharashtra News, Latest News & Live ...",
+     "url": "https://www.lokmattimes.com/topics/maharashtra-news/",
+     "snippet": "Maharashtra News, English news. Find Latest Maharashtra News News in English: Lokmattimes.com Covers all trending, current, breaking lines around Maharashtra News and Live Updates in English."
+    }
+   ],
+   "revenue_projection": null,
+   "revenue_projection_note": "Revenue projection is intentionally NOT fabricated. It requires a real baseline (annual revenue or deal size) supplied by the user.",
+   "assessment": "measured",
+   "recommendation": "Brand appears in 90.0% of the top 10 results for the branded query and 0.0% for the category query. These are real measurement of live search results.",
+   "detailed_analysis": "Share-of-search for The Hindu: real Google SERPs fetched via SerpAPI at 2026-08-19T09:00:36.414003+00:00. Branded-query presence 90.0%, category-query presence 0.0%. No revenue figure is simulated.",
+   "runtime_secs": 3.9,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "domain": "epaper.thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://branchioth.thehindu.co.in/",
+     "domain": "branchioth.thehindu.co.in"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "domain": "en.wikipedia.org"
+    },
+    {
+     "url": "https://utilko.com/newspapers/india/the-hindu/",
+     "domain": "utilko.com"
+    },
+    {
+     "url": "https://hindugroup.org.in/",
+     "domain": "hindugroup.org.in"
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.hindustantimes.com/",
+     "domain": "hindustantimes.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Share Of Search Branded Query",
+     "value": "90.0%"
+    },
+    {
+     "metric": "Share Of Search Category Query",
+     "value": "0.0%"
+    }
+   ],
+   "actions": [
+    "0% of the top 10 results for the branded query and 0",
+    "These are real measurement of live search results"
+   ],
+   "methodology": "Share-of-Search Revenue Simulator: live signals collected in real time for The Hindu via bing rss serp analysis. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "dead_equity": {
+   "feature_name": "Edge-Redirect & Dead-Equity Salvage",
+   "status": "ok",
+   "verified": true,
+   "method": "live_outbound_link_check",
+   "retrieved_at": "2026-08-19T09:00:39.518824+00:00",
+   "outbound_links_checked": 2,
+   "broken_count": 0,
+   "redirect_count": 0,
+   "healthy_count": 2,
+   "broken_links": [],
+   "redirected_links": [],
+   "assessment": "clean",
+   "recommendation": "Checked 2 real outbound links on thehindu.com: 0 broken, 0 redirected, 2 healthy. Recover the broken ones first (lost link equity).",
+   "detailed_analysis": "Dead-equity audit for thehindu.com: crawled 4 pages and followed 2 external links live. Each broken/redirect verdict is a real HTTP response captured at 2026-08-19T09:00:39.518813+00:00.",
+   "runtime_secs": 6.7,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Outbound Links Checked",
+     "value": "2"
+    },
+    {
+     "metric": "Broken Count",
+     "value": "0"
+    },
+    {
+     "metric": "Redirect Count",
+     "value": "0"
+    },
+    {
+     "metric": "Healthy Count",
+     "value": "2%"
+    }
+   ],
+   "actions": [
+    "Checked 2 real outbound links on thehindu",
+    "com: 0 broken, 0 redirected, 2 healthy",
+    "Recover the broken ones first (lost link equity)"
+   ],
+   "methodology": "Edge-Redirect & Dead-Equity Salvage: live signals collected in real time for The Hindu via live outbound link check. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "negative_seo": {
+   "feature_name": "Negative SEO Counter-Measure Deployment",
+   "status": "ok",
+   "verified": true,
+   "method": "live_reputation_search",
+   "retrieved_at": "2026-08-19T09:00:44.066892+00:00",
+   "negative_mention_count": 8,
+   "negative_mentions": [
+    {
+     "url": "https://www.thehindu.com/",
+     "title": "The Hindu: Latest News today from India and the World, Breaking news ...",
+     "domain": "thehindu.com",
+     "snippet": "The Hindu Newspaper: Get latest News on Politics, Sports, Business, Arts, Entertainment and trending news Videos from The Hindu",
+     "risk_term": []
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "title": "The Hindu ePaper | Daily News and Current Affairs",
+     "domain": "epaper.thehindu.com",
+     "snippet": "Read today’s The Hindu ePaper for the latest news, articles, and in-depth analysis. Stay informed about national and international affairs. Discover reliable and credible journalism with thought...",
+     "risk_term": []
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "title": "Latest News: Today’s Top Stories & Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "Latest News Today: Follow today’s news updates and recent stories from India and across the globe, covering politics, business, technology, and sports.",
+     "risk_term": []
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "title": "The Hindu - Wikipedia",
+     "domain": "en.wikipedia.org",
+     "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]",
+     "risk_term": []
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "title": "Editorials, Editorial Opinions, Editorial News, The Hindu Opinion",
+     "domain": "thehindu.com",
+     "snippet": "Read the latest opinion editorials from The Hindu, offering insightful analysis and diverse perspectives on current affairs, politics, social issues, and more.",
+     "risk_term": []
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "title": "News Today: Breaking News, Top Headlines & Live Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Today: Get breaking news, top headlines, and live updates from India and around the world across politics, business, technology, and sports.",
+     "risk_term": []
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "title": "India Latest News: Top National Headlines Today & Breaking News - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "National news and headlines from within or around India with live updates on major breaking events from The Hindu.",
+     "risk_term": []
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "title": "Latest News & Headlines | The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Updates - Get latest news, headlines, photos, videos, opinion, special reports on The Hindu",
+     "risk_term": []
+    }
+   ],
+   "risk_terms": [],
+   "assessment": "attention_needed",
+   "recommendation": "Found 8 real pages surfaced for brand + risk-term queries. Prioritize responses on the flagged domains.",
+   "detailed_analysis": "Negative-SEO monitor for The Hindu: ran 6 risk queries and collected 8 real results. Verdicts are based on the actual search results returned at 2026-08-19T09:00:44.066887+00:00.",
+   "runtime_secs": 11.3,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "domain": "epaper.thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "domain": "en.wikipedia.org"
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Negative Mention Count",
+     "value": "8"
+    }
+   ],
+   "actions": [
+    "Found 8 real pages surfaced for brand + risk-term queries",
+    "Prioritize responses on the flagged domains"
+   ],
+   "methodology": "Negative SEO Counter-Measure Deployment: live signals collected in real time for The Hindu via live reputation search. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "github_citations": {
+   "feature_name": "GitHub Citation Harvester",
+   "status": "ok",
+   "verified": true,
+   "method": "live_github_search+github_api+stackexchange+hn_api",
+   "retrieved_at": "2026-08-19T09:00:40.711773+00:00",
+   "github_references": 10,
+   "references": [
+    {
+     "url": "https://www.thehindu.com/",
+     "title": "The Hindu: Latest News today from India and the World, Breaking news ...",
+     "domain": "thehindu.com",
+     "snippet": "The Hindu Newspaper: Get latest News on Politics, Sports, Business, Arts, Entertainment and trending news Videos from The Hindu"
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "title": "The Hindu ePaper | Daily News and Current Affairs",
+     "domain": "epaper.thehindu.com",
+     "snippet": "Read today’s The Hindu ePaper for the latest news, articles, and in-depth analysis. Stay informed about national and international affairs. Discover reliable and credible journalism with thought..."
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "title": "Latest News: Today’s Top Stories & Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "Latest News Today: Follow today’s news updates and recent stories from India and across the globe, covering politics, business, technology, and sports."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "title": "The Hindu - Wikipedia",
+     "domain": "en.wikipedia.org",
+     "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]"
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "title": "Editorials, Editorial Opinions, Editorial News, The Hindu Opinion",
+     "domain": "thehindu.com",
+     "snippet": "Read the latest opinion editorials from The Hindu, offering insightful analysis and diverse perspectives on current affairs, politics, social issues, and more."
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "title": "News Today: Breaking News, Top Headlines & Live Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Today: Get breaking news, top headlines, and live updates from India and around the world across politics, business, technology, and sports."
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "title": "India Latest News: Top National Headlines Today & Breaking News - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "National news and headlines from within or around India with live updates on major breaking events from The Hindu."
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "title": "Latest News & Headlines | The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Updates - Get latest news, headlines, photos, videos, opinion, special reports on The Hindu"
+    },
+    {
+     "url": "https://github.com/imsoumya18/upsc_bot",
+     "title": "imsoumya18/upsc_bot — A bot that sends daily The Hindu newspaper, Vision IAS, Next IAS & Insights IAS PDF download link.",
+     "domain": "github.com",
+     "snippet": "A bot that sends daily The Hindu newspaper, Vision IAS, Next IAS & Insights IAS PDF download link."
+    },
+    {
+     "url": "https://stackoverflow.com/questions/74706738/extract-urls-from-a-website-the-hindu-which-uses-google-search-console-using",
+     "title": "Extract URLs from a website ( The Hindu) which uses google search console using python",
+     "domain": "stackoverflow.com",
+     "snippet": "Extract URLs from a website ( The Hindu) which uses google search console using python"
+    }
+   ],
+   "assessment": "references_found",
+   "recommendation": "Found 10 real GitHub/developer pages referencing \"The Hindu\" (web search + GitHub API + Stack Overflow + Hacker News). Contribute to or link these repositories.",
+   "detailed_analysis": "GitHub citation harvest for The Hindu: collected 10 repository/file pages from live searches and free developer APIs (GitHub, Stack Overflow, Hacker News). All URLs are real results returned at 2026-08-19T09:00:40.711761+00:00.",
+   "runtime_secs": 7.7,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "domain": "epaper.thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "domain": "en.wikipedia.org"
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://stackoverflow.com/questions/74706738/extract-urls-from-a-website-the-hindu-which-uses-google-search-console-using",
+     "domain": "stackoverflow.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Github References",
+     "value": "10"
+    }
+   ],
+   "actions": [
+    "Found 10 real GitHub/developer pages referencing \"The Hindu\" (web search + GitHub API + Stack Overflow + Hacker News)",
+    "Contribute to or link these repositories"
+   ],
+   "methodology": "GitHub Citation Harvester: live signals collected in real time for The Hindu via live github search+github api+stackexchange+hn api. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "transcription": {
+   "feature_name": "Audio & Video Semantic Transcription Monitor",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search",
+   "retrieved_at": "2026-08-19T09:01:08.977378+00:00",
+   "transcript_mentions": 2,
+   "mentions": [
+    {
+     "url": "https://www.thehindu.com/",
+     "title": "The Hindu: Latest News today from India and the World, Breaking news ...",
+     "domain": "thehindu.com",
+     "snippet": "The Hindu Newspaper: Get latest News on Politics, Sports, Business, Arts, Entertainment and trending news Videos from The Hindu"
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "title": "Latest News & Headlines | The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Updates - Get latest news, headlines, photos, videos, opinion, special reports on The Hindu"
+    }
+   ],
+   "transcription_available": false,
+   "transcription_note": "Full audio transcription requires an audio file or episode URL; the search results above are the real transcript/interview pages found. No transcription is synthesized.",
+   "assessment": "mentions_found",
+   "recommendation": "Found 2 real transcript/interview pages for \"The Hindu\". Upload an episode URL to this module to run an actual transcription.",
+   "detailed_analysis": "Transcription monitor for The Hindu: 2 audio/video transcript pages collected from real searches. Transcription itself is not fabricated; provide media to transcribe.",
+   "runtime_secs": 11.9,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Transcript Mentions",
+     "value": "2"
+    }
+   ],
+   "actions": [
+    "Found 2 real transcript/interview pages for \"The Hindu\"",
+    "Upload an episode URL to this module to run an actual transcription"
+   ],
+   "methodology": "Audio & Video Semantic Transcription Monitor: live signals collected in real time for The Hindu via live search. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "kg_arbitrage": {
+   "feature_name": "Knowledge Graph & Wikidata Triple Arbitrage",
+   "status": "ok",
+   "verified": true,
+   "method": "wikidata+wikipedia_api",
+   "retrieved_at": "2026-08-19T09:01:19.668767+00:00",
+   "wikidata_id": "Q926175",
+   "wikidata_label": "The Hindu",
+   "wikidata_description": "English-language daily newspaper in India",
+   "wikipedia_url": "https://en.wikipedia.org/wiki/The_Hindu",
+   "wikipedia_extract": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. It is one of the Indian newspapers of record. As of March 2018, The Hindu is published from 21 locations across 11 states of India.",
+   "present_triples": {
+    "P31": {
+     "label": "instance_of",
+     "values": "newspaper"
+    },
+    "P17": {
+     "label": "country",
+     "values": "India"
+    },
+    "P159": {
+     "label": "headquarters",
+     "values": "Chennai"
+    },
+    "P112": {
+     "label": "founders",
+     "values": "G. Subramania Iyer"
+    },
+    "P856": {
+     "label": "website",
+     "values": [
+      "https://www.thehindu.com/",
+      "http://thehindu.com"
+     ]
+    },
+    "P2002": {
+     "label": "twitter",
+     "values": "the_hindu"
+    },
+    "P2013": {
+     "label": "facebook",
+     "values": "thehindu"
+    }
+   },
+   "missing_triples": [
+    {
+     "property": "P452",
+     "label": "industry"
+    }
+   ],
+   "triple_coverage_pct": 87.5,
+   "sitelinks": {
+    "count": 44,
+    "languages": [
+     "ar",
+     "as",
+     "bh",
+     "bn",
+     "commons",
+     "cy",
+     "de",
+     "en",
+     "eo",
+     "es",
+     "fa",
+     "fi",
+     "fr",
+     "gu",
+     "he",
+     "hi",
+     "hy",
+     "id",
+     "it",
+     "kn",
+     "ml",
+     "mni",
+     "mr",
+     "ms",
+     "nl",
+     "nn",
+     "no",
+     "or",
+     "pa",
+     "pl",
+     "pnb",
+     "ps",
+     "pt",
+     "ru",
+     "sa",
+     "si",
+     "simple",
+     "sv",
+     "ta",
+     "te",
+     "uk",
+     "ur",
+     "zh"
+    ]
+   },
+   "competitor_monitor": [
+    {
+     "name": "Reuters",
+     "domain": "reuters.com",
+     "wikidata_id": "Q130879",
+     "present_triples": {
+      "P31": {
+       "label": "instance_of",
+       "values": [
+        "news agency",
+        "business"
+       ]
+      },
+      "P17": {
+       "label": "country",
+       "values": "United Kingdom"
+      },
+      "P159": {
+       "label": "headquarters",
+       "values": "London"
+      },
+      "P112": {
+       "label": "founders",
+       "values": "Paul Reuter"
+      },
+      "P452": {
+       "label": "industry",
+       "values": "telecommunications"
+      },
+      "P856": {
+       "label": "website",
+       "values": [
+        "https://www.reuters.com/",
+        "https://jp.reuters.com/",
+        "https://uk.reuters.com/",
+        "https://fr.reuters.com/",
+        "https://ru.reuters.com/",
+        "https://in.reuters.com/",
+        "https://cn.reuters.com/"
+       ]
+      },
+      "P2002": {
+       "label": "twitter",
+       "values": [
+        "Reuters",
+        "ReutersUK",
+        "ReutersVzla",
+        "ReutersJpWorld",
+        "Reuters_co_jp",
+        "ReutersIran",
+        "reutersbiz",
+        "ReutersLegal",
+        "reuterspictures",
+        "ReutersWorld",
+        "ReutersScience",
+        "ReutersIndia",
+        "reuters_russia",
+        "ReutersJapan",
+        "ReutersJapanBiz",
+        "ReutersJpTech"
+       ]
+      },
+      "P2013": {
+       "label": "facebook",
+       "values": "Reuters"
+      }
+     },
+     "triple_coverage_pct": 100.0,
+     "missing_triples": []
+    },
+    {
+     "name": "Associated Press",
+     "domain": "apnews.com",
+     "wikidata_id": "Q40469",
+     "present_triples": {
+      "P31": {
+       "label": "instance_of",
+       "values": [
+        "news agency",
+        "photo agency",
+        "nonprofit organization"
+       ]
+      },
+      "P17": {
+       "label": "country",
+       "values": "United States"
+      },
+      "P159": {
+       "label": "headquarters",
+       "values": "New York City"
+      },
+      "P452": {
+       "label": "industry",
+       "values": [
+        "news media",
+        "media industry"
+       ]
+      },
+      "P856": {
+       "label": "website",
+       "values": [
+        "https://ap.org/",
+        "https://apnews.com"
+       ]
+      },
+      "P2002": {
+       "label": "twitter",
+       "values": "AP"
+      },
+      "P2013": {
+       "label": "facebook",
+       "values": "APNews"
+      }
+     },
+     "triple_coverage_pct": 87.5,
+     "missing_triples": [
+      {
+       "property": "P112",
+       "label": "founders"
+      }
+     ]
+    },
+    {
+     "name": "Bloomberg",
+     "domain": "bloomberg.com",
+     "wikidata_id": "Q13977",
+     "present_triples": {
+      "P31": {
+       "label": "instance_of",
+       "values": [
+        "business",
+        "enterprise"
+       ]
+      },
+      "P17": {
+       "label": "country",
+       "values": "United States"
+      },
+      "P159": {
+       "label": "headquarters",
+       "values": [
+        "731 Lexington Avenue",
+        "New York City"
+       ]
+      },
+      "P112": {
+       "label": "founders",
+       "values": [
+        "Michael Bloomberg",
+        "Thomas Secunda",
+        "Duncan MacMillan",
+        "Charles Zegar"
+       ]
+      },
+      "P452": {
+       "label": "industry",
+       "values": "media industry"
+      },
+      "P856": {
+       "label": "website",
+       "values": "https://www.bloomberg.com/"
+      },
+      "P2002": {
+       "label": "twitter",
+       "values": [
+        "business",
+        "BloombergJapan"
+       ]
+      },
+      "P2013": {
+       "label": "facebook",
+       "values": "BloombergNews"
+      }
+     },
+     "triple_coverage_pct": 100.0,
+     "missing_triples": []
+    },
+    {
+     "name": "The New York Times",
+     "domain": "nytimes.com",
+     "wikidata_id": "Q9684",
+     "present_triples": {
+      "P31": {
+       "label": "instance_of",
+       "values": [
+        "daily newspaper",
+        "media company",
+        "website"
+       ]
+      },
+      "P17": {
+       "label": "country",
+       "values": "United States"
+      },
+      "P159": {
+       "label": "headquarters",
+       "values": [
+        "One Times Square",
+        "The Times Square Building",
+        "New York Times Building"
+       ]
+      },
+      "P112": {
+       "label": "founders",
+       "values": [
+        "George Jones",
+        "Henry Jarvis Raymond"
+       ]
+      },
+      "P452": {
+       "label": "industry",
+       "values": "publishing"
+      },
+      "P856": {
+       "label": "website",
+       "values": [
+        "https://nytimes.com",
+        "https://cn.nytimes.com",
+        "https://nytimes.com/es",
+        "https://cn.nytimes.com/zh-hant",
+        "https://nytimes.com/ca",
+        "http://query.nytimes.com/search/advanced/",
+        "https://hdl.loc.gov/loc.sgp/npe.sn00061556",
+        "https://www.nytimesn7cgmftshazwhfgzm37qxb44r64ytbb2dj3x62d2lljsciiyd.onion/",
+        "https://www.nytimes3xbfgragh.onion",
+        "http://www.nytimes.com/",
+        "https://hdl.loc.gov/loc.sgp/roto.sn78004456"
+       ]
+      },
+      "P2002": {
+       "label": "twitter",
+       "values": [
+        "nytimes",
+        "nytimesmusic",
+        "nytopinion",
+        "nytimesworld",
+        "nytvideo",
+        "nytimesarts",
+        "nytimestravel",
+        "TimesTalks",
+        "NYTObits",
+        "nytpolitics",
+        "nytgraphics",
+        "nytchinese",
+        "NYTScience"
+       ]
+      },
+      "P2013": {
+       "label": "facebook",
+       "values": "nytimes"
+      }
+     },
+     "triple_coverage_pct": 100.0,
+     "missing_triples": []
+    }
+   ],
+   "assessment": "incomplete",
+   "recommendation": "Wikidata entity Q926175: 87.5% triple coverage. 1 required triples missing. Monitored 4 competitor entity nodes for relationship changes.",
+   "detailed_analysis": "KG arbitrage for The Hindu: live Wikidata (wbsearchentities/wbgetentities) and Wikipedia REST lookups. All triples shown are read directly from Wikidata claims; nothing is synthesized. Competitor entity nodes (Reuters, AP, etc.) are tracked for triple-delta monitoring.",
+   "runtime_secs": 22.4,
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "domain": "en.wikipedia.org"
+    },
+    {
+     "url": "https://www.thehindu.com/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "http://thehindu.com",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Triple Coverage Pct",
+     "value": "87.5%"
+    }
+   ],
+   "actions": [
+    "Wikidata entity Q926175: 87",
+    "1 required triples missing",
+    "Monitored 4 competitor entity nodes for relationship changes"
+   ],
+   "methodology": "Knowledge Graph & Wikidata Triple Arbitrage: live signals collected in real time for The Hindu via wikidata+wikipedia api. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "data_pr": {
+   "feature_name": "Anonymized Telemetry Data-PR Engine",
+   "status": "unavailable",
+   "verified": false,
+   "requires": "GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export",
+   "detail": "This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+   "assessment": "unavailable",
+   "recommendation": "Requires GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export to produce verified data. This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+   "detailed_analysis": "No data was fabricated for \"Anonymized Telemetry Data-PR Engine\". Configure GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export and re-run the analysis to get real, verified output. Reason: This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+   "runtime_secs": 0.0,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Module status",
+     "value": "Unavailable"
+    }
+   ],
+   "actions": [
+    "Requires GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export to produce verified data",
+    "This module builds press assets from a brand's OWN anonymized usage data",
+    "No telemetry source is configured and no synthetic metrics are generated",
+    "Connect Search Console/GA4 or supply a data export"
+   ],
+   "methodology": "Anonymized Telemetry Data-PR Engine: live signals collected in real time for The Hindu via live signal collection. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "simulation": {
+   "feature_name": "Multi-Agent Off-Page Simulation Sandbox",
+   "status": "ok",
+   "verified": true,
+   "method": "baseline_measurement+linear_projection",
+   "retrieved_at": "2026-08-19T09:01:03.556913+00:00",
+   "baseline_metrics": {
+    "share_of_search": 90.0,
+    "backlinks": 4
+   },
+   "scenarios_tested": 0,
+   "scenarios": [],
+   "projection_note": "Scenario projections were deliberately not generated. They require an agreed response model (e.g. revenue per share point, conversion baseline) supplied by the user.",
+   "assessment": "baseline_measured",
+   "recommendation": "Real baseline captured: {\"share_of_search\": 90.0, \"backlinks\": 4}. Add a conversion/revenue model to enable scenario projections without fabricating outcomes.",
+   "detailed_analysis": "Simulation sandbox for The Hindu: measured a real baseline of {\"share_of_search\": 90.0, \"backlinks\": 4} from live providers at 2026-08-19T09:01:03.556906+00:00. No campaign outcomes were simulated because doing so without a user-supplied response model would produce fabricated numbers.",
+   "runtime_secs": 6.3,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Scenarios Tested",
+     "value": "0"
+    }
+   ],
+   "actions": [
+    "Real baseline captured: {\"share_of_search\": 90",
+    "Add a conversion/revenue model to enable scenario projections without fabricating outcomes"
+   ],
+   "methodology": "Multi-Agent Off-Page Simulation Sandbox: live signals collected in real time for The Hindu via baseline measurement+linear projection. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "satellite": {
+   "feature_name": "Satellite Entity M&A & Partnership Radar",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+authority",
+   "retrieved_at": "2026-08-19T09:01:08.978434+00:00",
+   "satellites_found": 2,
+   "satellites": [
+    {
+     "domain": "epaper.thehindu.com",
+     "title": "The Hindu ePaper | Daily News and Current Affairs",
+     "url": "https://epaper.thehindu.com/",
+     "snippet": "Read today’s The Hindu ePaper for the latest news, articles, and in-depth analysis. Stay informed about national and international affairs. Discover reliable and credible journalism with thought...",
+     "type": "partner",
+     "da": null,
+     "da_unavailable": "MOZ_ACCESS_KEY+MOZ_SECRET_KEY or AHREFS_API_KEY or MAJESTIC_API_KEY"
+    },
+    {
+     "domain": "en.wikipedia.org",
+     "title": "The Hindu - Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]",
+     "type": "partner",
+     "da": null,
+     "da_unavailable": "MOZ_ACCESS_KEY+MOZ_SECRET_KEY or AHREFS_API_KEY or MAJESTIC_API_KEY"
+    }
+   ],
+   "assessment": "opportunities_found",
+   "recommendation": "Found 2 real satellite/partner/acquisition pages mentioning \"The Hindu\". Authority values shown are live DA where a provider is configured.",
+   "detailed_analysis": "Satellite radar for The Hindu: collected 2 candidate entities from real searches. DA is fetched live where configured, otherwise reported as unavailable.",
+   "runtime_secs": 11.4,
+   "sources": [
+    {
+     "url": "https://epaper.thehindu.com/",
+     "domain": "epaper.thehindu.com"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "domain": "en.wikipedia.org"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Satellites Found",
+     "value": "2"
+    }
+   ],
+   "actions": [
+    "Found 2 real satellite/partner/acquisition pages mentioning \"The Hindu\"",
+    "Authority values shown are live DA where a provider is configured"
+   ],
+   "methodology": "Satellite Entity M&A & Partnership Radar: live signals collected in real time for The Hindu via live search+authority. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "rag_defense": {
+   "feature_name": "Reverse RAG-Cache Poisoning Defense",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+stale_indicator",
+   "retrieved_at": "2026-08-19T09:01:09.904382+00:00",
+   "cache_tests_run": 5,
+   "stale_caches_detected": 5,
+   "total_results_checked": 36,
+   "freshness_rate": 86.1,
+   "cache_tests": [
+    {
+     "query": "what is The Hindu",
+     "result_count": 4,
+     "stale_count": 1,
+     "stale_details": [
+      {
+       "url": "https://en.wikipedia.org/wiki/The_Hindu",
+       "title": "The Hindu - Wikipedia",
+       "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]"
+      }
+     ]
+    },
+    {
+     "query": "The Hindu company information",
+     "result_count": 8,
+     "stale_count": 1,
+     "stale_details": [
+      {
+       "url": "https://en.wikipedia.org/wiki/The_Hindu",
+       "title": "The Hindu - Wikipedia",
+       "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]"
+      }
+     ]
+    },
+    {
+     "query": "The Hindu pricing",
+     "result_count": 8,
+     "stale_count": 1,
+     "stale_details": [
+      {
+       "url": "https://en.wikipedia.org/wiki/The_Hindu",
+       "title": "The Hindu - Wikipedia",
+       "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]"
+      }
+     ]
+    },
+    {
+     "query": "The Hindu competitors",
+     "result_count": 8,
+     "stale_count": 1,
+     "stale_details": [
+      {
+       "url": "https://en.wikipedia.org/wiki/The_Hindu",
+       "title": "The Hindu - Wikipedia",
+       "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]"
+      }
+     ]
+    },
+    {
+     "query": "The Hindu features review",
+     "result_count": 8,
+     "stale_count": 1,
+     "stale_details": [
+      {
+       "url": "https://en.wikipedia.org/wiki/The_Hindu",
+       "title": "The Hindu - Wikipedia",
+       "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]"
+      }
+     ]
+    }
+   ],
+   "stale_indicators_used": [
+    "was founded",
+    "previously known",
+    "used to be",
+    "discontinued",
+    "shut down",
+    "no longer",
+    "old version",
+    "deprecated",
+    "legacy",
+    "obsolete",
+    "end of life",
+    "sunset"
+   ],
+   "assessment": "critical",
+   "recommendation": "5 results across 36 checked contained stale-data indicators (86.1% freshness rate). Refresh content these pages describe.",
+   "detailed_analysis": "RAG-cache defense for The Hindu: ran 5 queries and scanned 36 real results for the documented stale indicators. Every flagged entry is a real snippet matched at 2026-08-19T09:01:09.904378+00:00.",
+   "runtime_secs": 12.0,
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "domain": "en.wikipedia.org"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Cache Tests Run",
+     "value": "5"
+    },
+    {
+     "metric": "Stale Caches Detected",
+     "value": "5"
+    },
+    {
+     "metric": "Total Results Checked",
+     "value": "36"
+    },
+    {
+     "metric": "Freshness Rate",
+     "value": "86.1%"
+    }
+   ],
+   "actions": [
+    "5 results across 36 checked contained stale-data indicators (86",
+    "Refresh content these pages describe"
+   ],
+   "methodology": "Reverse RAG-Cache Poisoning Defense: live signals collected in real time for The Hindu via live search+stale indicator. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "visual_audit": {
+   "feature_name": "Multi-Modal Schema & Visual Graph Alignment",
+   "status": "ok",
+   "verified": true,
+   "method": "live_site_fetch+search",
+   "retrieved_at": "2026-08-19T09:01:08.721324+00:00",
+   "schema_visual_checks": [
+    {
+     "type": "OG-Image",
+     "present": true,
+     "urls": [
+      "https://www.thehindu.com/theme/images/th-online/OG-sections.png"
+     ]
+    },
+    {
+     "type": "Favicon",
+     "present": true
+    }
+   ],
+   "visual_mentions_found": 8,
+   "visual_mentions": [
+    {
+     "url": "https://www.thehindu.com/",
+     "title": "The Hindu: Latest News today from India and the World, Breaking news ...",
+     "domain": "thehindu.com",
+     "snippet": "The Hindu Newspaper: Get latest News on Politics, Sports, Business, Arts, Entertainment and trending news Videos from The Hindu"
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "title": "The Hindu ePaper | Daily News and Current Affairs",
+     "domain": "epaper.thehindu.com",
+     "snippet": "Read today’s The Hindu ePaper for the latest news, articles, and in-depth analysis. Stay informed about national and international affairs. Discover reliable and credible journalism with thought..."
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "title": "Latest News: Today’s Top Stories & Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "Latest News Today: Follow today’s news updates and recent stories from India and across the globe, covering politics, business, technology, and sports."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "title": "The Hindu - Wikipedia",
+     "domain": "en.wikipedia.org",
+     "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]"
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "title": "Editorials, Editorial Opinions, Editorial News, The Hindu Opinion",
+     "domain": "thehindu.com",
+     "snippet": "Read the latest opinion editorials from The Hindu, offering insightful analysis and diverse perspectives on current affairs, politics, social issues, and more."
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "title": "News Today: Breaking News, Top Headlines & Live Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Today: Get breaking news, top headlines, and live updates from India and around the world across politics, business, technology, and sports."
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "title": "India Latest News: Top National Headlines Today & Breaking News - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "National news and headlines from within or around India with live updates on major breaking events from The Hindu."
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "title": "Latest News & Headlines | The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Updates - Get latest news, headlines, photos, videos, opinion, special reports on The Hindu"
+    }
+   ],
+   "assessment": "optimized",
+   "recommendation": "2 real visual-schema checks on thehindu.com; 8 visual mentions found.",
+   "detailed_analysis": "Visual audit for The Hindu: fetched thehindu.com live and inspected og:image, Image/VideoObject schema and favicon; then ran visual queries. All findings reflect real responses.",
+   "runtime_secs": 10.5,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/theme/images/th-online/OG-sections.png",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "domain": "epaper.thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "domain": "en.wikipedia.org"
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Visual Mentions Found",
+     "value": "8"
+    }
+   ],
+   "actions": [
+    "2 real visual-schema checks on thehindu",
+    "com; 8 visual mentions found"
+   ],
+   "methodology": "Multi-Modal Schema & Visual Graph Alignment: live signals collected in real time for The Hindu via live site fetch+search. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "apn_proxy": {
+   "feature_name": "Agentic Protocol Negotiation (APN) Proxy",
+   "status": "ok",
+   "verified": true,
+   "method": "live_endpoint_probe",
+   "retrieved_at": "2026-08-19T09:01:11.208467+00:00",
+   "apn_score": 20,
+   "total_endpoints": 16,
+   "active_endpoints": 2,
+   "json_endpoints": 1,
+   "xml_endpoints": 0,
+   "endpoint_probes": [
+    {
+     "path": "/api",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 76164,
+     "final_url": "https://www.thehindu.com/api"
+    },
+    {
+     "path": "/api/v1",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 76164,
+     "final_url": "https://www.thehindu.com/api/v1"
+    },
+    {
+     "path": "/api/v2",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 76164,
+     "final_url": "https://www.thehindu.com/api/v2"
+    },
+    {
+     "path": "/graphql",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 76164,
+     "final_url": "https://www.thehindu.com/graphql"
+    },
+    {
+     "path": "/openapi.json",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 73644,
+     "final_url": "https://www.thehindu.com/openapi.json"
+    },
+    {
+     "path": "/swagger.json",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 73644,
+     "final_url": "https://www.thehindu.com/swagger.json"
+    },
+    {
+     "path": "/.well-known/openid-configuration",
+     "status": 404,
+     "content_type": "text/html",
+     "size": 917,
+     "final_url": "https://www.thehindu.com/.well-known/openid-configuration"
+    },
+    {
+     "path": "/feed.xml",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 73644,
+     "final_url": "https://www.thehindu.com/feed.xml"
+    },
+    {
+     "path": "/rss.xml",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 73644,
+     "final_url": "https://www.thehindu.com/rss.xml"
+    },
+    {
+     "path": "/atom.xml",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 73644,
+     "final_url": "https://www.thehindu.com/atom.xml"
+    },
+    {
+     "path": "/sitemap.xml",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 73644,
+     "final_url": "https://www.thehindu.com/sitemap.xml"
+    },
+    {
+     "path": "/robots.txt",
+     "status": 200,
+     "content_type": "text/plain",
+     "size": 4192,
+     "final_url": "https://www.thehindu.com/robots.txt"
+    },
+    {
+     "path": "/manifest.json",
+     "status": 200,
+     "content_type": "application/json",
+     "size": 549,
+     "final_url": "https://www.thehindu.com/manifest.json"
+    },
+    {
+     "path": "/webmanifest.json",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 73644,
+     "final_url": "https://www.thehindu.com/webmanifest.json"
+    },
+    {
+     "path": "/.well-known/ai-plugin.json",
+     "status": 404,
+     "content_type": "text/html",
+     "size": 564,
+     "final_url": "https://www.thehindu.com/.well-known/ai-plugin.json"
+    },
+    {
+     "path": "/llms.txt",
+     "status": 404,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 76164,
+     "final_url": "https://www.thehindu.com/llms.txt"
+    }
+   ],
+   "assessment": "needs_improvement",
+   "recommendation": "APN readiness 20/100: 2 of 16 agentic/API endpoints respond on thehindu.com.",
+   "detailed_analysis": "APN audit for thehindu.com: live-probed 16 endpoints at 2026-08-19T09:01:11.208455+00:00. 2 returned HTTP < 400. Every status is a real response.",
+   "runtime_secs": 13.0,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/api",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/api/v1",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/api/v2",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/graphql",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/openapi.json",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/swagger.json",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/.well-known/openid-configuration",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/feed.xml",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/rss.xml",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/atom.xml",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/sitemap.xml",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/robots.txt",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/manifest.json",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/webmanifest.json",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/.well-known/ai-plugin.json",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/llms.txt",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Apn Score",
+     "value": "20%"
+    },
+    {
+     "metric": "Total Endpoints",
+     "value": "16"
+    },
+    {
+     "metric": "Active Endpoints",
+     "value": "2"
+    },
+    {
+     "metric": "Json Endpoints",
+     "value": "1"
+    },
+    {
+     "metric": "Xml Endpoints",
+     "value": "0"
+    }
+   ],
+   "actions": [
+    "APN readiness 20/100: 2 of 16 agentic/API endpoints respond on thehindu"
+   ],
+   "methodology": "Agentic Protocol Negotiation (APN) Proxy: live signals collected in real time for The Hindu via live endpoint probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "graph_decay": {
+   "feature_name": "Co-Citation Graph Decay & Entity Anchor Leasing",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+temporal",
+   "retrieved_at": "2026-08-19T09:01:09.977549+00:00",
+   "total_co_citations": 0,
+   "unique_domains": 0,
+   "fresh_sources": 0,
+   "stale_sources": 0,
+   "freshness_score": null,
+   "co_citations": [],
+   "assessment": "unknown",
+   "recommendation": "0 real co-citations across 0 domains. Freshness score: None%.",
+   "detailed_analysis": "Co-citation graph for The Hindu: 5 queries, 0 real pages. Temporal freshness is read from years actually present in the snippets. No dates are assumed.",
+   "runtime_secs": 11.8,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Total Co Citations",
+     "value": "0"
+    },
+    {
+     "metric": "Unique Domains",
+     "value": "0"
+    },
+    {
+     "metric": "Fresh Sources",
+     "value": "0"
+    },
+    {
+     "metric": "Stale Sources",
+     "value": "0"
+    }
+   ],
+   "actions": [
+    "0 real co-citations across 0 domains"
+   ],
+   "methodology": "Co-Citation Graph Decay & Entity Anchor Leasing: live signals collected in real time for The Hindu via live search+temporal. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "c2pa": {
+   "feature_name": "Cryptographic Entity-Origin Proof Signing (C2PA)",
+   "status": "ok",
+   "verified": true,
+   "method": "live_header+markup_scan",
+   "retrieved_at": "2026-08-19T09:01:00.270256+00:00",
+   "c2pa_score": 40,
+   "c2pa_signals": [
+    {
+     "type": "CSP",
+     "value_length": 186
+    }
+   ],
+   "sri_scripts": [
+    {
+     "src": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
+    }
+   ],
+   "dnssec_check": null,
+   "dnssec_note": "DNSSEC is a DNS-layer property and cannot be verified via HTTP; check with dig +dnssec or your DNS provider.",
+   "assessment": "needs_improvement",
+   "recommendation": "C2PA readiness 40/100 on thehindu.com. 1 authenticity signals, 1 SRI-protected scripts.",
+   "detailed_analysis": "C2PA audit for The Hindu: scanned live HTTP headers and markup on thehindu.com. All signals are real observations captured at 2026-08-19T09:01:00.270241+00:00. DNSSEC intentionally reported as unverified via HTTP.",
+   "runtime_secs": 1.8,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "C2Pa Score",
+     "value": "40%"
+    }
+   ],
+   "actions": [
+    "C2PA readiness 40/100 on thehindu",
+    "1 authenticity signals, 1 SRI-protected scripts"
+   ],
+   "methodology": "Cryptographic Entity-Origin Proof Signing (C2PA): live signals collected in real time for The Hindu via live header+markup scan. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "compliance_guard": {
+   "feature_name": "Legal / SEC Disclosure Risk Profiling",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+site_probe",
+   "retrieved_at": "2026-08-19T09:01:13.071381+00:00",
+   "compliance_score": 8,
+   "compliance_pages_found": [],
+   "legal_mentions": [
+    {
+     "url": "https://www.thehindu.com/",
+     "title": "The Hindu: Latest News today from India and the World, Breaking news ...",
+     "domain": "thehindu.com",
+     "snippet": "The Hindu Newspaper: Get latest News on Politics, Sports, Business, Arts, Entertainment and trending news Videos from The Hindu",
+     "query": "The Hindu SEC filing"
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "title": "The Hindu ePaper | Daily News and Current Affairs",
+     "domain": "epaper.thehindu.com",
+     "snippet": "Read today’s The Hindu ePaper for the latest news, articles, and in-depth analysis. Stay informed about national and international affairs. Discover reliable and credible journalism with thought...",
+     "query": "The Hindu SEC filing"
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "title": "Latest News: Today’s Top Stories & Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "Latest News Today: Follow today’s news updates and recent stories from India and across the globe, covering politics, business, technology, and sports.",
+     "query": "The Hindu SEC filing"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "title": "The Hindu - Wikipedia",
+     "domain": "en.wikipedia.org",
+     "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]",
+     "query": "The Hindu SEC filing"
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "title": "Editorials, Editorial Opinions, Editorial News, The Hindu Opinion",
+     "domain": "thehindu.com",
+     "snippet": "Read the latest opinion editorials from The Hindu, offering insightful analysis and diverse perspectives on current affairs, politics, social issues, and more.",
+     "query": "The Hindu SEC filing"
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "title": "News Today: Breaking News, Top Headlines & Live Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Today: Get breaking news, top headlines, and live updates from India and around the world across politics, business, technology, and sports.",
+     "query": "The Hindu SEC filing"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "title": "India Latest News: Top National Headlines Today & Breaking News - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "National news and headlines from within or around India with live updates on major breaking events from The Hindu.",
+     "query": "The Hindu SEC filing"
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "title": "Latest News & Headlines | The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Updates - Get latest news, headlines, photos, videos, opinion, special reports on The Hindu",
+     "query": "The Hindu SEC filing"
+    }
+   ],
+   "assessment": "non_compliant",
+   "recommendation": "Compliance readiness 8/100: 0 standard compliance pages present, 8 legal/SEC mentions found.",
+   "detailed_analysis": "Compliance guard for The Hindu: probed 7 compliance paths on thehindu.com and ran 5 legal queries. All counts are real observations from 2026-08-19T09:01:13.071370+00:00.",
+   "runtime_secs": 14.6,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "domain": "epaper.thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "domain": "en.wikipedia.org"
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Compliance Score",
+     "value": "8%"
+    }
+   ],
+   "actions": [
+    "Compliance readiness 8/100: 0 standard compliance pages present, 8 legal/SEC mentions found"
+   ],
+   "methodology": "Legal / SEC Disclosure Risk Profiling: live signals collected in real time for The Hindu via live search+site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "geo_crawl": {
+   "feature_name": "Geo-IP Citation Localization",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+hreflang_scan",
+   "retrieved_at": "2026-08-19T09:01:10.226497+00:00",
+   "regions_analyzed": 5,
+   "regions_with_citations": 0,
+   "geo_coverage_score": 0.0,
+   "geo_citations_by_region": {},
+   "hreflang_tags": [],
+   "assessment": "weak",
+   "recommendation": "Geo coverage 0.0% (0/5 regions have brand citations). 0 hreflang tags on the site.",
+   "detailed_analysis": "Geo localization for The Hindu: 5 region queries, 0 with real citations, plus a live hreflang scan of thehindu.com. All results are real.",
+   "runtime_secs": 11.5,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Regions Analyzed",
+     "value": "5"
+    },
+    {
+     "metric": "Regions With Citations",
+     "value": "0"
+    },
+    {
+     "metric": "Geo Coverage Score",
+     "value": "0.0%"
+    }
+   ],
+   "actions": [
+    "0% (0/5 regions have brand citations)",
+    "0 hreflang tags on the site"
+   ],
+   "methodology": "Geo-IP Citation Localization: live signals collected in real time for The Hindu via live search+hreflang scan. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "zero_party": {
+   "feature_name": "Zero-Party Data Exchange",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+site_probe",
+   "retrieved_at": "2026-08-19T09:01:15.655012+00:00",
+   "total_data_assets": 0,
+   "data_assets": [],
+   "data_endpoints_found": 1,
+   "data_endpoints": [
+    {
+     "path": "/data",
+     "status": 200,
+     "content_type": "text/html; charset=UTF-8",
+     "size": 202426,
+     "final_url": "https://www.thehindu.com/data/"
+    }
+   ],
+   "assessment": "inactive",
+   "recommendation": "Found 0 real zero-party-data references and 1 site data endpoints. No asset templates are fabricated.",
+   "detailed_analysis": "Zero-party data audit for The Hindu: 4 queries and 7 site probes. Every asset listed is a real page found at 2026-08-19T09:01:15.654995+00:00.",
+   "runtime_secs": 16.7,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/data/",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Total Data Assets",
+     "value": "0"
+    },
+    {
+     "metric": "Data Endpoints Found",
+     "value": "1"
+    }
+   ],
+   "actions": [
+    "Found 0 real zero-party-data references and 1 site data endpoints",
+    "No asset templates are fabricated"
+   ],
+   "methodology": "Zero-Party Data Exchange: live signals collected in real time for The Hindu via live search+site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "passage_scoring": {
+   "feature_name": "Passage-Level BERT Evaluator",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+content_metrics",
+   "retrieved_at": "2026-08-19T09:01:08.719258+00:00",
+   "total_passages_scored": 8,
+   "high_attention_passages": 0,
+   "avg_word_count": 22.9,
+   "passages": [
+    {
+     "url": "https://www.thehindu.com/",
+     "title": "The Hindu: Latest News today from India and the World, Breaking news ...",
+     "domain": "thehindu.com",
+     "snippet": "The Hindu Newspaper: Get latest News on Politics, Sports, Business, Arts, Entertainment and trending news Videos from The Hindu",
+     "word_count": 19,
+     "has_numbers": false,
+     "has_metrics": false
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "title": "The Hindu ePaper | Daily News and Current Affairs",
+     "domain": "epaper.thehindu.com",
+     "snippet": "Read today’s The Hindu ePaper for the latest news, articles, and in-depth analysis. Stay informed about national and international affairs. Discover reliable and credible journalism with thought...",
+     "word_count": 27,
+     "has_numbers": false,
+     "has_metrics": false
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "title": "Latest News: Today’s Top Stories & Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "Latest News Today: Follow today’s news updates and recent stories from India and across the globe, covering politics, business, technology, and sports.",
+     "word_count": 22,
+     "has_numbers": false,
+     "has_metrics": false
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "title": "The Hindu - Wikipedia",
+     "domain": "en.wikipedia.org",
+     "snippet": "The Hindu is an Indian English-language daily newspaper owned by The Hindu Group, headquartered in Chennai, Tamil Nadu. It was founded as a weekly publication in 1878 by the Triplicane Six, becoming a daily in 1889. [3]",
+     "word_count": 37,
+     "has_numbers": true,
+     "has_metrics": false
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "title": "Editorials, Editorial Opinions, Editorial News, The Hindu Opinion",
+     "domain": "thehindu.com",
+     "snippet": "Read the latest opinion editorials from The Hindu, offering insightful analysis and diverse perspectives on current affairs, politics, social issues, and more.",
+     "word_count": 22,
+     "has_numbers": false,
+     "has_metrics": false
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "title": "News Today: Breaking News, Top Headlines & Live Updates - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Today: Get breaking news, top headlines, and live updates from India and around the world across politics, business, technology, and sports.",
+     "word_count": 22,
+     "has_numbers": false,
+     "has_metrics": false
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "title": "India Latest News: Top National Headlines Today & Breaking News - The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "National news and headlines from within or around India with live updates on major breaking events from The Hindu.",
+     "word_count": 19,
+     "has_numbers": false,
+     "has_metrics": false
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "title": "Latest News & Headlines | The Hindu",
+     "domain": "thehindu.com",
+     "snippet": "News Updates - Get latest news, headlines, photos, videos, opinion, special reports on The Hindu",
+     "word_count": 15,
+     "has_numbers": false,
+     "has_metrics": false
+    }
+   ],
+   "high_attention_details": [],
+   "note": "Attention is scored from real snippet characteristics (length, numbers, metrics). No BERT model is claimed; replace this module with an embedding-backed scorer when OPENAI_API_KEY is set.",
+   "assessment": "moderate",
+   "recommendation": "Scored 8 real passages; 0 qualify as data-rich and attention-worthy.",
+   "detailed_analysis": "Passage evaluation for The Hindu: 8 real search snippets analyzed for word count, numeric content and metric mentions. All scores derive from the actual snippet text.",
+   "runtime_secs": 9.5,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://epaper.thehindu.com/",
+     "domain": "epaper.thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/latest-news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/The_Hindu",
+     "domain": "en.wikipedia.org"
+    },
+    {
+     "url": "https://www.thehindu.com/opinion/editorial/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/",
+     "domain": "thehindu.com"
+    },
+    {
+     "url": "https://www.thehindu.com/about/",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Total Passages Scored",
+     "value": "8%"
+    },
+    {
+     "metric": "High Attention Passages",
+     "value": "0"
+    },
+    {
+     "metric": "Avg Word Count",
+     "value": "22.9%"
+    }
+   ],
+   "actions": [
+    "Scored 8 real passages; 0 qualify as data-rich and attention-worthy"
+   ],
+   "methodology": "Passage-Level BERT Evaluator: live signals collected in real time for The Hindu via live search+content metrics. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "reddit_consensus": {
+   "feature_name": "Reddit & Forum Consensus Graph",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+hn_api+llm_sentiment",
+   "retrieved_at": "2026-08-19T09:01:26.799057+00:00",
+   "total_mentions": 2,
+   "reddit_mentions": 0,
+   "forum_mentions": 2,
+   "avg_sentiment": null,
+   "sentiment_scored": 0,
+   "mentions": [
+    {
+     "url": "http://www.bbc.com/news/world-asia-india-34981328",
+     "title": "Chennai floods: The Hindu not published for first time since 1878",
+     "domain": "bbc.com",
+     "snippet": "156 points · 25 comments",
+     "source": "hacker_news"
+    },
+    {
+     "url": "http://www.thehindu.com/features/education/issues/microsoft-responds-to-the-hindus-story-on-aicte-deal/article4644897.ece",
+     "title": "Microsoft responds to The Hindu’s story on AICTE deal",
+     "domain": "thehindu.com",
+     "snippet": "2 points · 0 comments",
+     "source": "hacker_news"
+    }
+   ],
+   "assessment": "no_sentiment_data",
+   "recommendation": "Found 2 real community mentions (web search + Hacker News API). Sentiment needs an LLM key; mention data is real.",
+   "detailed_analysis": "Community consensus for The Hindu: 4 queries filtered to real forum domains plus live Hacker News data. Sentiment scores are live LLM output when configured.",
+   "runtime_secs": 7.0,
+   "sources": [
+    {
+     "url": "http://www.thehindu.com/features/education/issues/microsoft-responds-to-the-hindus-story-on-aicte-deal/article4644897.ece",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Total Mentions",
+     "value": "2"
+    },
+    {
+     "metric": "Reddit Mentions",
+     "value": "0"
+    },
+    {
+     "metric": "Forum Mentions",
+     "value": "2"
+    },
+    {
+     "metric": "Sentiment Scored",
+     "value": "0%"
+    }
+   ],
+   "actions": [
+    "Found 2 real community mentions (web search + Hacker News API)",
+    "Sentiment needs an LLM key; mention data is real"
+   ],
+   "methodology": "Reddit & Forum Consensus Graph: live signals collected in real time for The Hindu via live search+hn api+llm sentiment. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "competitor_bert": {
+   "feature_name": "Competitor BERT-Vector Extraction",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+phrase_extraction",
+   "retrieved_at": "2026-08-19T09:01:26.676603+00:00",
+   "competitors_analyzed": 5,
+   "competitor_data": [
+    {
+     "name": "Reuters",
+     "phrases_extracted": 38,
+     "top_phrases": [
+      "public company in 1984",
+      "on stock exchanges",
+      "Find latest news from every",
+      "international news coverage",
+      "more on the",
+      "tackle the greatest challenges and",
+      "breaking news and multimedia content",
+      "afterwards developed a number of"
+     ]
+    },
+    {
+     "name": "Associated Press",
+     "phrases_extracted": 31,
+     "top_phrases": [
+      "to factual reporting",
+      "trusted source of fast",
+      "to the news business",
+      "Think of it as a",
+      "Online bill pay",
+      "365 customer care",
+      "or loan at Associated Bank",
+      "Our online and mobile banking"
+     ]
+    },
+    {
+     "name": "Bloomberg",
+     "phrases_extracted": 23,
+     "top_phrases": [
+      "Building a Bloomberg Finance Lab",
+      "data and analytics",
+      "Get the latest news today",
+      "helps students build the skills",
+      "Bloomberg keeps you connected from",
+      "featuring stories from Businessweek and",
+      "from any type of device",
+      "positions a university as a"
+     ]
+    },
+    {
+     "name": "The New York Times",
+     "phrases_extracted": 47,
+     "top_phrases": [
+      "One of the world",
+      "live cricket scores",
+      "more than 17 years",
+      "and expert perspectives on various",
+      "Latest News on Politics",
+      "more on the",
+      "time updates on politics",
+      "can they create an original"
+     ]
+    },
+    {
+     "name": "CNN",
+     "phrases_extracted": 61,
+     "top_phrases": [
+      "s Decision Desk projects",
+      "matter told CNN",
+      "image of dimension 32 x",
+      "Staffed 24 hours",
+      "the latest headlines from around",
+      "s redrawn 20th District",
+      "s take an example by",
+      "Scale Visual Recognition Challenge"
+     ]
+    }
+   ],
+   "total_phrases_extracted": 194,
+   "note": "Real textual phrase extraction from live search snippets. Embedding vectors require OPENAI_API_KEY and are not fabricated.",
+   "assessment": "active",
+   "recommendation": "Analyzed 5 competitors and extracted 194 real phrases.",
+   "detailed_analysis": "Competitor extraction for The Hindu: phrases pulled from real snippets of each competitor. All text is genuine search output captured at 2026-08-19T09:01:26.676597+00:00.",
+   "runtime_secs": 6.6,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Competitors Analyzed",
+     "value": "5"
+    },
+    {
+     "metric": "Total Phrases Extracted",
+     "value": "194"
+    }
+   ],
+   "actions": [
+    "Analyzed 5 competitors and extracted 194 real phrases"
+   ],
+   "methodology": "Competitor BERT-Vector Extraction: live signals collected in real time for The Hindu via live search+phrase extraction. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "schema_auditor": {
+   "feature_name": "Agentic API & Schema Protocol Auditor",
+   "status": "ok",
+   "verified": true,
+   "method": "live_site_scan",
+   "retrieved_at": "2026-08-19T09:01:25.431243+00:00",
+   "schema_score": 37,
+   "schema_checks": [
+    {
+     "type": "OpenGraph",
+     "count": 6
+    },
+    {
+     "type": "TwitterCard",
+     "count": 13
+    },
+    {
+     "type": "Microdata",
+     "present": true
+    }
+   ],
+   "machine_readable_endpoints": [
+    {
+     "path": "/robots.txt",
+     "status": 200,
+     "content_type": "text/plain",
+     "size": 4192,
+     "final_url": "https://www.thehindu.com/robots.txt"
+    }
+   ],
+   "jsonld_count": 0,
+   "opengraph_count": 6,
+   "twitter_card_count": 13,
+   "assessment": "needs_improvement",
+   "recommendation": "Schema readiness 37/100: 0 JSON-LD, 6 OpenGraph, 13 Twitter Card, 1 machine-readable endpoints.",
+   "detailed_analysis": "Schema auditor for thehindu.com: live scan of structured data and machine-readable endpoints at 2026-08-19T09:01:25.431233+00:00. Every count is a real observation.",
+   "runtime_secs": 5.1,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/robots.txt",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "Schema Score",
+     "value": "37%"
+    },
+    {
+     "metric": "Jsonld Count",
+     "value": "0"
+    },
+    {
+     "metric": "Opengraph Count",
+     "value": "6"
+    },
+    {
+     "metric": "Twitter Card Count",
+     "value": "13"
+    }
+   ],
+   "actions": [
+    "Schema readiness 37/100: 0 JSON-LD, 6 OpenGraph, 13 Twitter Card, 1 machine-readable endpoints"
+   ],
+   "methodology": "Agentic API & Schema Protocol Auditor: live signals collected in real time for The Hindu via live site scan. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "anchor_entropy": {
+   "feature_name": "Anchor-Text Entropy Boundary Predictor",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+entropy",
+   "retrieved_at": "2026-08-19T09:01:24.365301+00:00",
+   "total_anchors": 4,
+   "unique_anchors": 4,
+   "entropy": 2.0,
+   "normalized_entropy": 1.0,
+   "branded_pct": 100.0,
+   "top_anchors": [
+    {
+     "anchor": "The Hindu ePaper — Read Today's Edition Online Free",
+     "count": 1
+    },
+    {
+     "anchor": "Read today's The Hindu ePaper online — direct link t",
+     "count": 1
+    },
+    {
+     "anchor": "The Hindu - Facebook",
+     "count": 1
+    },
+    {
+     "anchor": "The Hindu 360 is here! This is the offi",
+     "count": 1
+    }
+   ],
+   "assessment": "healthy",
+   "recommendation": "Anchor entropy 1.0 across 4 real anchor contexts; 100.0% branded.",
+   "detailed_analysis": "Anchor entropy for The Hindu: entropy computed from real anchor contexts observed in live search results. No anchors are injected or assumed.",
+   "runtime_secs": 4.0,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Total Anchors",
+     "value": "4"
+    },
+    {
+     "metric": "Unique Anchors",
+     "value": "4"
+    },
+    {
+     "metric": "Entropy",
+     "value": "2.0%"
+    },
+    {
+     "metric": "Normalized Entropy",
+     "value": "1.0%"
+    },
+    {
+     "metric": "Branded Pct",
+     "value": "100.0%"
+    }
+   ],
+   "actions": [
+    "0 across 4 real anchor contexts; 100"
+   ],
+   "methodology": "Anchor-Text Entropy Boundary Predictor: live signals collected in real time for The Hindu via live search+entropy. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "crawl_priority": {
+   "feature_name": "AI Crawler Re-Indexation Pinger",
+   "status": "ok",
+   "verified": true,
+   "method": "live_site_probe",
+   "retrieved_at": "2026-08-19T09:01:24.074988+00:00",
+   "crawl_priority_score": 35,
+   "robots_txt": true,
+   "sitemap": false,
+   "indexnow": false,
+   "ai_bot_directives": [
+    "User-agent: GPTBot",
+    "User-agent: ChatGPT-User",
+    "User-agent: PerplexityBot",
+    "User-agent: Bytespider",
+    "User-agent: ClaudeBot",
+    "User-agent: Claude-Web",
+    "User-agent: CCBot",
+    "User-agent: Anthropic-ai"
+   ],
+   "x_robots_tag": "",
+   "assessment": "needs_optimization",
+   "recommendation": "Crawl-priority readiness 35/100 on thehindu.com. IndexNow: missing; AI bot directives: 8.",
+   "detailed_analysis": "Crawl audit for thehindu.com: live probes of robots.txt, sitemap.xml, IndexNow endpoint and AI-bot directives at 2026-08-19T09:01:24.074971+00:00. All statuses are real responses.",
+   "runtime_secs": 3.5,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Crawl Priority Score",
+     "value": "35%"
+    }
+   ],
+   "actions": [
+    "Crawl-priority readiness 35/100 on thehindu",
+    "IndexNow: missing; AI bot directives: 8"
+   ],
+   "methodology": "AI Crawler Re-Indexation Pinger: live signals collected in real time for The Hindu via live site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "ftc_compliance": {
+   "feature_name": "FTC & Sponsored-Mention Penalty Shield",
+   "status": "ok",
+   "verified": true,
+   "method": "live_search+site_probe",
+   "retrieved_at": "2026-08-19T09:01:27.980590+00:00",
+   "ftc_score": 25,
+   "sponsored_mentions": [],
+   "compliance_issues": [],
+   "disclosure_pages": [],
+   "total_sponsored_content": 0,
+   "total_compliance_issues": 0,
+   "assessment": "no_sponsored_content_detected",
+   "recommendation": "No sponsored mentions of The Hindu were detected in live search results at 2026-08-19T09:01:27.980570+00:00, so no compliance verdict is claimed. 0 disclosure page(s) exist on the site. Re-run after sponsored placements appear to verify disclosure status.",
+   "detailed_analysis": "FTC audit for The Hindu: 4 queries and 5 site probes at 2026-08-19T09:01:27.980586+00:00. Disclosure status is judged from the real snippet/page text. With 0 sponsored mentions observed, 0 lack visible disclosure labels.",
+   "runtime_secs": 7.4,
+   "sources": [],
+   "findings": [
+    {
+     "metric": "Ftc Score",
+     "value": "25%"
+    },
+    {
+     "metric": "Total Sponsored Content",
+     "value": "0"
+    },
+    {
+     "metric": "Total Compliance Issues",
+     "value": "0"
+    }
+   ],
+   "actions": [
+    "No sponsored mentions of The Hindu were detected in live search results at 2026-08-19T09:01:27",
+    "980570+00:00, so no compliance verdict is claimed",
+    "0 disclosure page(s) exist on the site",
+    "Re-run after sponsored placements appear to verify disclosure status"
+   ],
+   "methodology": "FTC & Sponsored-Mention Penalty Shield: live signals collected in real time for The Hindu via live search+site probe. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  },
+  "hreflang": {
+   "feature_name": "Cross-Border Hreflang Equity Balancer",
+   "status": "ok",
+   "verified": true,
+   "method": "live_site_scan",
+   "retrieved_at": "2026-08-19T09:01:27.144984+00:00",
+   "international_readiness_score": 35,
+   "hreflang_tags": [],
+   "international_versions": [],
+   "international_links": [
+    {
+     "href": "https://www.thehindu.com/static/content/newsletter/gender_agenda_card.jpeg",
+     "text": "Gender AgendaStories from beyond the bin"
+    }
+   ],
+   "cannibalization_risk": "low",
+   "assessment": "needs_optimization",
+   "recommendation": "Hreflang readiness 35/100: 0 hreflang tags, 0 international versions, cannibalization risk low.",
+   "detailed_analysis": "Hreflang audit for thehindu.com: live scan of alternate-link tags, international links and country-path probes at 2026-08-19T09:01:27.144953+00:00. All values are real observations.",
+   "runtime_secs": 6.3,
+   "sources": [
+    {
+     "url": "https://www.thehindu.com/static/content/newsletter/gender_agenda_card.jpeg",
+     "domain": "thehindu.com"
+    }
+   ],
+   "findings": [
+    {
+     "metric": "International Readiness Score",
+     "value": "35%"
+    }
+   ],
+   "actions": [
+    "Hreflang readiness 35/100: 0 hreflang tags, 0 international versions, cannibalization risk low"
+   ],
+   "methodology": "Cross-Border Hreflang Equity Balancer: live signals collected in real time for The Hindu via live site scan. Every source is a real URL surfaced during this run (measured: no numeric metric measured). Modules needing an API key report an honest 'unavailable' state instead of fabricating numbers."
+  }
+ },
+ "status": "completed",
+ "summary": {
+  "overall_score": 55.9,
+  "total_mentions": 3,
+  "unlinked_opportunities": 1,
+  "backlink_health": 100,
+  "toxic_backlinks": 0,
+  "rag_citation_rate": null,
+  "kg_coverage": 87.5,
+  "vector_similarity": 0.1322,
+  "sentiment": null,
+  "pbn_risk": 0,
+  "anchor_entropy": 1.0,
+  "llm_citation_rate": null,
+  "aeo_score": 30,
+  "share_of_search": 90.0,
+  "pr_hooks_generated": 5,
+  "podcast_opportunities": 10,
+  "github_references": 10,
+  "features_analyzed": 35,
+  "modules_unavailable": 3
+ }
+}

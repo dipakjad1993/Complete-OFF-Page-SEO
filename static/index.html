@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete Off-Page SEO Engine</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;min-height:100vh}
+input,select,textarea{width:100%;padding:.55rem .75rem;background:#0a0f1a;border:1px solid #1f2937;border-radius:6px;color:#e2e8f0;font-size:.85rem;font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#3b82f6}
+label{display:block;font-size:.75rem;font-weight:600;color:#94a3b8;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.04em}
+.fg{margin-bottom:.75rem}
+.btn{padding:.5rem 1rem;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer;border:none}
+.btn-b{background:#3b82f6;color:#fff}.btn-b:hover{background:#2563eb}
+.btn-g{background:#22c55e;color:#fff}.btn-g:hover{background:#16a34a}
+.btn-r{background:#ef4444;color:#fff}.btn-r:hover{background:#dc2626}
+.btn-p{background:#8b5cf6;color:#fff}.btn-p:hover{background:#7c3aed}
+.btn-big{padding:.8rem 2.5rem;font-size:1.1rem;border-radius:8px}
+.card{background:#111827;border:1px solid #1f2937;border-radius:10px;padding:1.25rem;margin-bottom:1rem}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:.5rem .6rem;font-size:.7rem;font-weight:600;color:#6b7280;text-transform:uppercase;border-bottom:1px solid #1f2937}
+td{padding:.5rem .6rem;font-size:.8rem;border-bottom:1px solid #1f2937}
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:99px;font-size:.65rem;font-weight:600}
+.bg{background:rgba(34,197,94,.12);color:#4ade80}
+.br{background:rgba(239,68,68,.12);color:#f87171}
+.by{background:rgba(234,179,8,.12);color:#facc15}
+.bb{background:rgba(59,130,246,.12);color:#60a5fa}
+.bp{background:rgba(139,92,246,.12);color:#a78bfa}
+.mv{font-size:1.5rem;font-weight:700}
+.ml{font-size:.75rem;color:#6b7280;margin-top:.2rem}
+.toast{position:fixed;top:1rem;right:1rem;padding:.75rem 1.25rem;border-radius:8px;font-size:.85rem;z-index:999}
+.toast-ok{background:#166534;color:#4ade80;border:1px solid #22c55e}
+.toast-err{background:#7f1d1d;color:#fca5a5;border:1px solid #ef4444}
+.toast-warn{background:#713f12;color:#facc15;border:1px solid #eab308}
+hr{border:none;border-top:1px solid #1f2937;margin:1rem 0}
+.tag{display:inline-block;padding:.1rem .4rem;border-radius:4px;font-size:.65rem;background:#1f2937;color:#94a3b8;margin-right:.3rem}
+.header{background:#111827;border-bottom:1px solid #1f2937;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50}
+.header h1{font-size:1.1rem;font-weight:700}
+.header-actions{display:flex;gap:.5rem;align-items:center}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.spinner{display:inline-block;border:3px solid #1f2937;border-top-color:#3b82f6;border-radius:50%;width:20px;height:20px;animation:spin 1s linear infinite;vertical-align:middle;margin-right:.5rem}
+.meter{height:8px;background:#1f2937;border-radius:4px;overflow:hidden;margin-top:.3rem}
+.meter-fill{height:100%;border-radius:4px;transition:width .5s}
+.section{display:none}
+.section.active{display:block}
+.section-title{font-size:1rem;font-weight:700;color:#60a5fa;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid #1f2937}
+.checklist label{display:flex;align-items:center;gap:.5rem;padding:.3rem;cursor:pointer;font-size:.82rem}
+.checklist input[type=checkbox]{width:auto}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Complete Off-Page SEO Engine</h1>
+  <div class="header-actions">
+    <span id="brand-label" style="font-size:.8rem;color:#6b7280"></span>
+    <button class="btn btn-p" onclick="fillAllSampleData()" title="No demo data is pre-filled. Put real API keys in .env first.">No Demo Data</button>
+    <button class="btn btn-b" onclick="saveAll()">Save All</button>
+    <button class="btn btn-g btn-big" onclick="runAnalysis()" id="runBtn">Run Analysis</button>
+  </div>
+</div>
+
+<div style="padding:1.5rem;max-width:1400px;margin:0 auto">
+
+<!-- ==================== INPUT SECTION ==================== -->
+<div id="input-section" class="section active">
+
+  <!-- Website Scraper -->
+  <div class="card" style="border-color:#3b82f6;background:linear-gradient(135deg,#0f1a2e,#111827)">
+    <div class="section-title" style="color:#60a5fa">Auto-Scrape Website Data</div>
+    <p style="color:#94a3b8;margin-bottom:1rem;font-size:.85rem">Enter any brand website URL. The tool will scrape it and auto-fill all fields below with extracted data.</p>
+    <div style="display:flex;gap:.5rem;align-items:end">
+      <div class="fg" style="flex:1;margin-bottom:0">
+        <label>Website URL</label>
+        <input id="f_scrape_url" placeholder="https://crowdstrike.com" onkeydown="if(event.key==='Enter')scrapeWebsite()">
+      </div>
+      <button class="btn btn-b" onclick="scrapeWebsite()" id="scrape-btn" style="height:38px;white-space:nowrap">Scrape & Fill</button>
+    </div>
+    <div id="scrape-status" style="margin-top:.75rem;font-size:.8rem;color:#6b7280"></div>
+  </div>
+
+  <!-- Brand Setup -->
+  <div class="card">
+    <div class="section-title">Brand Setup</div>
+    <div class="g2">
+      <div class="fg"><label>Brand Name</label><input id="f_name" placeholder="Acme Corp"></div>
+      <div class="fg"><label>Domain</label><input id="f_domain" placeholder="acme.com"></div>
+      <div class="fg"><label>Primary Category</label><input id="f_category" placeholder="Enterprise Cloud Security"></div>
+      <div class="fg"><label>Seed Keywords (comma sep)</label><input id="f_keywords" placeholder="zero trust, cloud security, endpoint protection"></div>
+    </div>
+    <div class="fg"><label>Description</label><textarea id="f_desc" rows="2" placeholder="What does your brand do?"></textarea></div>
+    <div class="g4">
+      <div class="fg"><label>Google KG MID</label><input id="f_kgmid" placeholder="/m/0abc123"></div>
+      <div class="fg"><label>Wikidata ID</label><input id="f_wikidata" placeholder="Q12345678"></div>
+      <div class="fg"><label>Crunchbase ID</label><input id="f_crunchbase" placeholder="acme-corp"></div>
+      <div class="fg"><label>Wikipedia URL</label><input id="f_wiki" placeholder="https://en.wikipedia.org/wiki/Acme"></div>
+    </div>
+  </div>
+
+  <!-- Competitors -->
+  <div class="card">
+    <div class="section-title">Competitors</div>
+    <div class="g3">
+      <div class="fg"><label>Competitor 1</label><input id="f_comp1" placeholder="CrowdStrike"></div>
+      <div class="fg"><label>Domain 1</label><input id="f_comp1d" placeholder="crowdstrike.com"></div>
+      <div class="fg"><label>Wikidata ID 1</label><input id="f_comp1w" placeholder="Q28091265"></div>
+      <div class="fg"><label>Competitor 2</label><input id="f_comp2" placeholder="Palo Alto Networks"></div>
+      <div class="fg"><label>Domain 2</label><input id="f_comp2d" placeholder="paloaltonetworks.com"></div>
+      <div class="fg"><label>Wikidata ID 2</label><input id="f_comp2w" placeholder="Q1711550"></div>
+      <div class="fg"><label>Competitor 3</label><input id="f_comp3" placeholder="SentinelOne"></div>
+      <div class="fg"><label>Domain 3</label><input id="f_comp3d" placeholder="sentinelone.com"></div>
+      <div class="fg"><label>Wikidata ID 3</label><input id="f_comp3w" placeholder="Q60612504"></div>
+    </div>
+  </div>
+
+  <!-- Spokespersons -->
+  <div class="card">
+    <div class="section-title">Spokespersons / Executives</div>
+    <div class="g3">
+      <div class="fg"><label>Full Name</label><input id="f_exec_name" placeholder="Full name of a real spokesperson"></div>
+      <div class="fg"><label>Title</label><input id="f_exec_title" placeholder="Chief Technology Officer"></div>
+      <div class="fg"><label>LinkedIn</label><input id="f_exec_linkedin" placeholder="https://linkedin.com/in/..."></div>
+      <div class="fg"><label>Twitter</label><input id="f_exec_twitter" placeholder="@username"></div>
+      <div class="fg"><label>Credentials (comma sep)</label><input id="f_exec_creds" placeholder="PhD, CISSP, CISM"></div>
+      <div class="fg"><label>Expertise (comma sep)</label><input id="f_exec_exp" placeholder="zero trust, cloud security"></div>
+    </div>
+    <div class="fg"><label>Bio</label><textarea id="f_exec_bio" rows="2" placeholder="Short bio..."></textarea></div>
+    <div class="fg"><label>Key Quotes (comma sep)</label><input id="f_exec_quotes" placeholder="Quote 1, Quote 2, Quote 3"></div>
+    <div id="all_executives_list" style="margin-top:1rem;display:none">
+      <div style="font-size:.85rem;color:#94a3b8;margin-bottom:.5rem;font-weight:600">All Scraped Executives (auto-saved on Save All)</div>
+      <div id="all_executives_table"></div>
+    </div>
+  </div>
+
+  <!-- API Keys -->
+  <div class="card">
+    <div class="section-title">API Keys</div>
+    <div class="g3">
+      <div class="fg"><label>GSC Credentials JSON Path</label><input id="f_api_gsc" placeholder="/path/to/service-account.json"></div>
+      <div class="fg"><label>GA4 Property ID</label><input id="f_api_ga4" placeholder="123456789"></div>
+      <div class="fg"><label>Ahrefs API Key</label><input id="f_api_ahrefs" type="password" placeholder="xxx"></div>
+      <div class="fg"><label>Majestic API Key</label><input id="f_api_majestic" type="password" placeholder="xxx"></div>
+      <div class="fg"><label>Moz Access Key</label><input id="f_api_moz_key" type="password" placeholder="xxx"></div>
+      <div class="fg"><label>Moz Secret Key</label><input id="f_api_moz_secret" type="password" placeholder="xxx"></div>
+      <div class="fg"><label>OpenAI API Key</label><input id="f_api_openai" type="password" placeholder="sk-xxx"></div>
+      <div class="fg"><label>Anthropic API Key</label><input id="f_api_anthropic" type="password" placeholder="sk-ant-xxx"></div>
+      <div class="fg"><label>Perplexity API Key</label><input id="f_api_perplexity" type="password" placeholder="pplx-xxx"></div>
+      <div class="fg"><label>SerpAPI Key</label><input id="f_api_serpapi" type="password" placeholder="xxx"></div>
+      <div class="fg"><label>Cloudflare API Token</label><input id="f_api_cf_token" type="password" placeholder="xxx"></div>
+      <div class="fg"><label>Cloudflare Zone ID</label><input id="f_api_cf_zone" placeholder="xxx"></div>
+      <div class="fg"><label>Fastly API Token</label><input id="f_api_fastly" type="password" placeholder="xxx"></div>
+      <div class="fg"><label>News API Key</label><input id="f_api_news" type="password" placeholder="xxx"></div>
+      <div class="fg"><label>Twitter Bearer Token</label><input id="f_api_twitter" type="password" placeholder="xxx"></div>
+    </div>
+  </div>
+
+  <!-- Scrapers & Risk -->
+  <div class="card">
+    <div class="section-title">Scraping Sources</div>
+    <div class="g3 checklist">
+      <label><input type="checkbox" id="src_news"> News Sites</label>
+      <label><input type="checkbox" id="src_indpub"> Industry Publications</label>
+      <label><input type="checkbox" id="src_medium"> Medium</label>
+      <label><input type="checkbox" id="src_substack"> Substack</label>
+      <label><input type="checkbox" id="src_reddit"> Reddit</label>
+      <label><input type="checkbox" id="src_twitter"> X/Twitter</label>
+      <label><input type="checkbox" id="src_youtube"> YouTube</label>
+      <label><input type="checkbox" id="src_podcasts"> Podcasts</label>
+      <label><input type="checkbox" id="src_stackoverflow"> Stack Overflow</label>
+      <label><input type="checkbox" id="src_github"> GitHub</label>
+      <label><input type="checkbox" id="src_quora"> Quora</label>
+      <label><input type="checkbox" id="src_trustpilot"> Trustpilot</label>
+      <label><input type="checkbox" id="src_g2"> G2/Capterra</label>
+      <label><input type="checkbox" id="src_linkedin"> LinkedIn</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Risk & Governance</div>
+    <div class="g2">
+      <div class="fg"><label>Risk Level</label><select id="f_risk_level"><option value="enterprise_safe">Enterprise Safe (White-Hat Only)</option><option value="conservative">Conservative</option><option value="moderate">Moderate</option><option value="aggressive">Aggressive</option></select></div>
+      <div class="fg"><label>Max Outreach/Day</label><input id="f_max_outreach" type="number" value="20"></div>
+    </div>
+    <div class="g3 checklist">
+      <label><input type="checkbox" id="tac_digital_pr"> Digital PR</label>
+      <label><input type="checkbox" id="tac_guest_posts"> Guest Posts</label>
+      <label><input type="checkbox" id="tac_podcasts"> Podcast Appearances</label>
+      <label><input type="checkbox" id="tac_data_studies"> Data Studies</label>
+      <label><input type="checkbox" id="tac_expert_quotes"> Expert Quotes</label>
+      <label><input type="checkbox" id="tac_expired"> Expired Domains</label>
+      <label><input type="checkbox" id="tac_sponsorship"> Sponsorship Links</label>
+      <label><input type="checkbox" id="tac_forum"> Forum Engagement</label>
+      <label><input type="checkbox" id="tac_reddit"> Reddit AMA</label>
+      <label><input type="checkbox" id="tac_conference"> Conference Speaking</label>
+    </div>
+    <div class="g2">
+      <div class="fg"><label>Blocked Domains (one/line)</label><textarea id="f_blocked_domains" rows="3" placeholder="example-spam-domain.com"></textarea></div>
+      <div class="fg"><label>Blocked Topics (comma sep)</label><input id="f_blocked_topics" placeholder="gambling, adult content"></div>
+    </div>
+    <div class="g2">
+      <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.85rem;padding-top:1.5rem"><input type="checkbox" id="f_ftc" checked style="width:auto"> FTC Compliance</label>
+      <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.85rem;padding-top:1.5rem"><input type="checkbox" id="f_sec" checked style="width:auto"> SEC Compliance</label>
+    </div>
+  </div>
+
+  <!-- Compliance Rules -->
+  <div class="card">
+    <div class="section-title">Compliance Rules</div>
+    <div class="g3">
+      <div class="fg"><label>Rule Name</label><input id="f_comp_rule_name" placeholder="Competitor Name Blacklist"></div>
+      <div class="fg"><label>Rule Type</label><select id="f_comp_rule_type"><option value="restricted_keywords">Restricted Keywords</option><option value="sec_restrictions">SEC Statements</option><option value="ftc_disclosure">FTC Disclosure</option><option value="brand_guidelines">Brand Guidelines</option></select></div>
+      <div class="fg"><label>Keywords/Patterns</label><input id="f_comp_rule_content" placeholder="CrowdStrike, Palo Alto, SentinelOne"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:2rem 0">
+    <button class="btn btn-b btn-big" onclick="saveAll()">Save All Configuration</button>
+  </div>
+
+</div>
+
+<!-- ==================== ANALYSIS RUNNING ==================== -->
+<div id="analysis-section" class="section">
+  <div class="card" style="text-align:center;padding:3rem">
+    <div class="spinner" style="width:40px;height:40px;border-width:4px"></div>
+    <h2 style="margin:1rem 0">Analysis Running...</h2>
+    <p style="color:#94a3b8" id="analysis-status-text">Scanning mentions, backlinks, vectors, RAG citations, knowledge graph...</p>
+    <div class="meter" style="max-width:400px;margin:1rem auto"><div class="meter-fill" id="analysis-progress" style="width:0%;background:#3b82f6"></div></div>
+  </div>
+</div>
+
+<!-- ==================== RESULTS / DASHBOARD ==================== -->
+<div id="results-section" class="section">
+  <div class="g4" id="summary-cards"></div>
+  <div id="results-content"></div>
+  <div style="text-align:center;margin:2rem 0">
+    <button class="btn btn-b" onclick="B=null;showInput()">Analyze Another Website</button>
+    <button class="btn btn-p" onclick="showInput()">Edit Configuration</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+var A='/api/v1', B=null;
+
+function $(i){return document.getElementById(i)}
+function V(i){var e=$(i);return e?e.value.trim():''}
+function S(i,v){var e=$(i);if(e)e.value=v}
+function toast(m,type){
+  var d=document.createElement('div');
+  d.className='toast toast-'+(type||'ok');
+  d.textContent=m;
+  document.body.appendChild(d);
+  setTimeout(function(){d.remove()},3500);
+}
+function api(p,o){
+  o=o||{};
+  o.headers=o.headers||{'Content-Type':'application/json'};
+  return fetch(A+p,o).then(function(r){
+    if(!r.ok) return r.json().then(function(e){throw new Error(e.detail||'Request failed ('+r.status+')')});
+    return r.json();
+  });
+}
+function showSection(id){
+  ['input-section','analysis-section','results-section'].forEach(function(s){
+    $(s).classList.remove('active');
+  });
+  $(id).classList.add('active');
+}
+function showInput(){showSection('input-section')}
+
+// ==================== SCRAPE WEBSITE ====================
+function scrapeWebsite(){
+  var url=V('f_scrape_url');
+  if(!url){toast('Enter a website URL first','err');return}
+
+  var btn=$('scrape-btn');
+  var status=$('scrape-status');
+  btn.disabled=true;
+  btn.textContent='Scraping...';
+  status.innerHTML='<span class="spinner"></span> Deep crawling website (this may take 30-60 seconds)...';
+
+  var controller=new AbortController();
+  var timeoutId=setTimeout(function(){controller.abort()},120000);
+
+  fetch(A+'/scraper/scrape-website',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({url:url}),
+    signal:controller.signal
+  }).then(function(r){
+    clearTimeout(timeoutId);
+    if(!r.ok){
+      return r.json().then(function(err){throw new Error(err.detail||'Failed to scrape')}).catch(function(e){throw e});
+    }
+    return r.json();
+  }).then(function(d){
+    btn.disabled=false;
+    btn.textContent='Scrape & Fill';
+
+    // Fill brand setup
+    if(d.name)S('f_name',d.name);
+    if(d.domain)S('f_domain',d.domain);
+    if(d.description)S('f_desc',d.description);
+    if(d.category)S('f_category',d.category);
+    if(d.keywords)S('f_keywords',d.keywords);
+
+    // Knowledge graph IDs
+    if(d.wikipedia_url)S('f_wiki',d.wikipedia_url);
+    if(d.wikidata_id)S('f_wikidata',d.wikidata_id);
+    if(d.kg_mid)S('f_kgmid',d.kg_mid);
+    if(d.crunchbase_id)S('f_crunchbase',d.crunchbase_id);
+
+    // Competitors (up to 3)
+    if(d.competitors&&d.competitors.length){
+      var c1=d.competitors[0],c2=d.competitors[1],c3=d.competitors[2];
+      if(c1){S('f_comp1',c1.name);S('f_comp1d',c1.domain);S('f_comp1w',c1.wikidata_id||'')}
+      if(c2){S('f_comp2',c2.name);S('f_comp2d',c2.domain);S('f_comp2w',c2.wikidata_id||'')}
+      if(c3){S('f_comp3',c3.name);S('f_comp3d',c3.domain);S('f_comp3w',c3.wikidata_id||'')}
+    }
+
+    // Spokesperson / Executive (FULL DETAILS)
+    var sp=d.spokesperson||{};
+    if(sp.name)S('f_exec_name',sp.name);
+    if(sp.title)S('f_exec_title',sp.title);
+    if(sp.bio)S('f_exec_bio',sp.bio);
+    if(sp.credentials)S('f_exec_creds',sp.credentials);
+    if(sp.expertise)S('f_exec_exp',sp.expertise);
+    if(sp.quotes)S('f_exec_quotes',sp.quotes);
+    // Social links for spokesperson
+    if(d.social_links){
+      if(d.social_links.linkedin)S('f_exec_linkedin',d.social_links.linkedin);
+      if(d.social_links.twitter){
+        var tw=d.social_links.twitter;
+        var match=tw.match(/(?:twitter\.com|x\.com)\/@?([a-zA-Z0-9_]+)/);
+        if(match)S('f_exec_twitter','@'+match[1]);
+        else S('f_exec_twitter',tw);
+      }
+    }
+
+    // Auto-configure ALL settings from scraper
+    window._scrapedExecs = d.all_executives || [];
+    // Show all scraped executives list
+    if(d.all_executives && d.all_executives.length > 1){
+      var el = document.getElementById('all_executives_list');
+      var tbl = document.getElementById('all_executives_table');
+      if(el && tbl){
+        el.style.display='block';
+        var html='<table style="width:100%;font-size:.8rem"><tr><th style="text-align:left;padding:4px;color:#60a5fa">Name</th><th style="text-align:left;padding:4px;color:#60a5fa">Title</th><th style="text-align:left;padding:4px;color:#60a5fa">Source</th></tr>';
+        d.all_executives.forEach(function(ex){
+          html+='<tr><td style="padding:4px;color:#e2e8f0">'+esc(ex.name)+'</td><td style="padding:4px;color:#94a3b8">'+esc(ex.title||'')+'</td><td style="padding:4px;color:#64748b">'+esc(ex.source||'page')+'</td></tr>';
+        });
+        html+='</table>';
+        tbl.innerHTML=html;
+      }
+    }
+    if(d.auto_config){
+      var ac=d.auto_config;
+
+      // Scraping Sources - select all
+      if(ac.scraping_sources){
+        ac.scraping_sources.forEach(function(src){
+          var el=$('src_'+src);
+          if(el)el.checked=true;
+        });
+      }
+      if(ac.scraping_frequency)S('scr_freq',ac.scraping_frequency);
+
+      // Risk & Governance
+      if(ac.risk_level)S('f_risk_level',ac.risk_level);
+      if(ac.max_outreach_per_day)S('f_max_outreach',ac.max_outreach_per_day);
+
+      // Tactics - select all
+      if(ac.allowed_tactics){
+        ac.allowed_tactics.forEach(function(tac){
+          var el=$('tac_'+tac);
+          if(el)el.checked=true;
+        });
+      }
+
+      // Blocked domains
+      if(ac.blocked_domains){
+        S('f_blocked_domains',ac.blocked_domains.join('\n'));
+      }
+
+      // Blocked topics
+      if(ac.blocked_topics){
+        S('f_blocked_topics',ac.blocked_topics.join(', '));
+      }
+
+      // FTC/SEC
+      if(ac.ftc_compliance!==undefined)$('f_ftc').checked=ac.ftc_compliance;
+      if(ac.sec_compliance!==undefined)$('f_sec').checked=ac.sec_compliance;
+
+      // Compliance Rules
+      if(ac.compliance_rules&&ac.compliance_rules.length){
+        var rule=ac.compliance_rules[0];
+        S('f_comp_rule_name',rule.name);
+        S('f_comp_rule_type',rule.type);
+        S('f_comp_rule_content',rule.content);
+      }
+
+      // API Keys (placeholder values)
+      if(ac.api_keys){
+        var ak=ac.api_keys;
+        if(ak.gsc_property_url)S('f_api_gsc',ak.gsc_property_url);
+        if(ak.ga4_measurement_id)S('f_api_ga4',ak.ga4_measurement_id);
+        if(ak.ahrefs_api_key)S('f_api_ahrefs',ak.ahrefs_api_key);
+        if(ak.majestic_api_key)S('f_api_majestic',ak.majestic_api_key);
+        if(ak.moz_access_id)S('f_api_moz_key',ak.moz_access_id);
+        if(ak.moz_secret_key)S('f_api_moz_secret',ak.moz_secret_key);
+        if(ak.openai_api_key)S('f_api_openai',ak.openai_api_key);
+        if(ak.anthropic_api_key)S('f_api_anthropic',ak.anthropic_api_key);
+        if(ak.perplexity_api_key)S('f_api_perplexity',ak.perplexity_api_key);
+        if(ak.serpapi_key)S('f_api_serpapi',ak.serpapi_key);
+        if(ak.cf_zone_id)S('f_api_cf_zone',ak.cf_zone_id);
+        if(ak.cf_api_token)S('f_api_cf_token',ak.cf_api_token);
+        if(ak.fastly_api_token)S('f_api_fastly',ak.fastly_api_token);
+        if(ak.news_api_key)S('f_api_news',ak.news_api_key);
+        if(ak.twitter_bearer_token)S('f_api_twitter',ak.twitter_bearer_token);
+      }
+    }
+
+    // Auto-scroll to brand setup
+    $('f_name').scrollIntoView({behavior:'smooth',block:'center'});
+
+    // Count filled fields
+    var fields=0;
+    if(d.name)fields++;
+    if(d.domain)fields++;
+    if(d.description)fields++;
+    if(d.category)fields++;
+    if(d.keywords)fields++;
+    if(d.wikipedia_url)fields++;
+    if(d.wikidata_id)fields++;
+    if(d.crunchbase_id)fields++;
+    if(d.competitors)fields+=d.competitors.length*2;
+    if(sp.name)fields++;
+    if(sp.title)fields++;
+    if(sp.bio)fields++;
+    if(d.social_links)fields+=Object.keys(d.social_links).length;
+    if(d.auto_config)fields+=15;
+
+    status.innerHTML='<span style="color:#4ade80">Scraping complete! '+fields+' fields auto-filled. Auto-saving brand...</span>';
+    toast('Website scraped! '+fields+' fields filled. Auto-saving...');
+
+    // Auto-save brand so B is set correctly for analysis
+    var cats=V('f_category')?V('f_category').split(',').map(function(s){return s.trim()}).filter(Boolean):[];
+    var keys=V('f_keywords')?V('f_keywords').split(',').map(function(s){return s.trim()}).filter(Boolean):[];
+    api('/brands/',{method:'POST',body:JSON.stringify({
+      name:d.name||'',domain:d.domain||'',description:V('f_desc'),primary_categories:cats,seed_keywords:keys
+    })}).then(function(brand){
+      B=brand;
+      $('brand-label').textContent='Brand: '+brand.name;
+
+      // Save brand schema
+      api('/intake/brand-schema',{method:'POST',body:JSON.stringify({
+        brand_id:B.id,kg_mid:V('f_kgmid'),wikidata_id:V('f_wikidata'),
+        crunchbase_id:V('f_crunchbase'),wikipedia_url:V('f_wiki'),
+        primary_categories:cats,seed_keywords:keys
+      })});
+
+      // Save competitors
+      [[V('f_comp1'),V('f_comp1d'),V('f_comp1w')],[V('f_comp2'),V('f_comp2d'),V('f_comp2w')],[V('f_comp3'),V('f_comp3d'),V('f_comp3w')]].forEach(function(c){
+        if(c[0]&&c[1])api('/intake/competitors',{method:'POST',body:JSON.stringify({brand_id:B.id,name:c[0],domain:c[1],wikidata_id:c[2]})});
+      });
+
+      // Save spokesperson + ALL executives from scraper
+      if(V('f_exec_name')){
+        api('/intake/executives',{method:'POST',body:JSON.stringify({
+          brand_id:B.id,name:V('f_exec_name'),title:V('f_exec_title'),
+          bio:V('f_exec_bio'),credentials:V('f_exec_creds').split(',').map(function(s){return s.trim()}).filter(Boolean),
+          expertise_areas:V('f_exec_exp').split(',').map(function(s){return s.trim()}).filter(Boolean),
+          social_profiles:{linkedin:V('f_exec_linkedin'),twitter:V('f_exec_twitter')},
+          quotes:V('f_exec_quotes').split(',').map(function(s){return s.trim()}).filter(Boolean)
+        })});
+      }
+      // Save all additional executives from scraper
+      if(d.all_executives&&d.all_executives.length){
+        d.all_executives.forEach(function(ex){
+          if(ex.name&&ex.name!==V('f_exec_name')){
+            api('/intake/executives',{method:'POST',body:JSON.stringify({
+              brand_id:B.id,name:ex.name,title:ex.title||'',bio:ex.bio||'',
+              credentials:[],expertise_areas:[],social_profiles:{linkedin:ex.linkedin||''},quotes:[]
+            })});
+          }
+        });
+      }
+
+      // Save API keys
+      var creds=[
+        ['google_search_console',{gsc_file:V('f_api_gsc')}],
+        ['ga4',{ga4_prop:V('f_api_ga4')}],
+        ['ahrefs',{ahrefs_key:V('f_api_ahrefs')}],
+        ['majestic',{maj_key:V('f_api_majestic')}],
+        ['moz',{moz_key:V('f_api_moz_key'),moz_secret:V('f_api_moz_secret')}],
+        ['openai',{oai_key:V('f_api_openai')}],
+        ['anthropic',{ant_key:V('f_api_anthropic')}],
+        ['perplexity',{plx_key:V('f_api_perplexity')}],
+        ['serpapi',{serp_key:V('f_api_serpapi')}],
+        ['cloudflare',{cf_token:V('f_api_cf_token'),cf_zone:V('f_api_cf_zone')}],
+        ['fastly',{fsl_key:V('f_api_fastly')}],
+        ['newsapi',{news_key:V('f_api_news')}],
+        ['twitter',{tw_token:V('f_api_twitter')}]
+      ];
+      creds.forEach(function(c){
+        var hasVal=Object.values(c[1]).some(function(v){return v});
+        if(hasVal)api('/intake/credentials',{method:'POST',body:JSON.stringify({brand_id:B.id,provider:c[0],credentials:c[1]})});
+      });
+
+      // Save scraper config
+      var srcs=[];
+      document.querySelectorAll('[id^=src_]').forEach(function(el){if(el.checked)srcs.push(el.id.replace('src_',''))});
+      api('/intake/scraper-config',{method:'POST',body:JSON.stringify({brand_id:B.id,sources:srcs,frequency:'daily',enabled:true})});
+
+      // Save risk config
+      var tacs=[];
+      document.querySelectorAll('[id^=tac_]').forEach(function(el){if(el.checked)tacs.push(el.id.replace('tac_',''))});
+      var blockedDomains=V('f_blocked_domains').split('\n').map(function(s){return s.trim()}).filter(Boolean);
+      var blockedTopics=V('f_blocked_topics').split(',').map(function(s){return s.trim()}).filter(Boolean);
+      api('/intake/risk-config',{method:'POST',body:JSON.stringify({brand_id:B.id,risk_level:V('f_risk_level'),allowed_tactics:tacs,blocked_domains:blockedDomains,blocked_topics:blockedTopics,ftc_compliance:document.getElementById('f_ftc').checked,sec_compliance:document.getElementById('f_sec').checked,max_outreach_per_day:parseInt(V('f_max_outreach'))||20})});
+
+      status.innerHTML='<span style="color:#4ade80">Scraping complete! '+fields+' fields auto-filled. Brand saved as: '+esc(brand.name)+' (ID: '+brand.id+'). You can now run analysis.</span>';
+      toast('Brand auto-saved! Ready to run analysis.');
+    }).catch(function(e){
+      status.innerHTML='<span style="color:#facc15">Scraping complete! '+fields+' fields filled. Auto-save failed: '+e.message+'. Click Save All manually.</span>';
+    });
+  }).catch(function(e){
+    clearTimeout(timeoutId);
+    btn.disabled=false;
+    btn.textContent='Scrape & Fill';
+    var msg=e.message||'Unknown error';
+    if(msg==='The user aborted a request.')msg='Scraping timed out - the website may be too complex. Try a simpler URL.';
+    else if(msg.includes('Failed to fetch')||msg.includes('NetworkError'))msg='Network error - check your connection and try again';
+    status.innerHTML='<span style="color:#f87171">Error: '+msg+'</span>';
+    toast('Scrape failed: '+msg,'err');
+  });
+}
+
+// ==================== FILL ALL SAMPLE DATA (DISABLED - NO DEMO DATA) ====================
+function fillAllSampleData(){
+  toast('Demo data has been removed. This tool only works with real brands and real API keys.');
+  var st = $('scrape-status');
+  if(st) st.innerHTML = '<span style="color:#facc15">No demo/sample data is provided. Configure your real API keys in <code>.env</code> (see <code>config/.env.example</code>), then scrape a real website or enter a brand manually.</span>';
+}
+
+// ==================== SAVE ALL ====================
+function saveAll(){
+  var n=V('f_name'),d=V('f_domain');
+  if(!n||!d){toast('Brand name and domain are required','err');return}
+
+  var cats=V('f_category')?[V('f_category')]:[];
+  var keys=V('f_keywords')?V('f_keywords').split(',').map(function(s){return s.trim()}).filter(Boolean):[];
+
+  // 1. Create brand
+  api('/brands/',{method:'POST',body:JSON.stringify({
+    name:n,domain:d,description:V('f_desc'),primary_categories:cats,seed_keywords:keys
+  })}).then(function(brand){
+    B=brand;
+    $('brand-label').textContent='Brand: '+brand.name;
+
+    // 2. Save brand schema
+    api('/intake/brand-schema',{method:'POST',body:JSON.stringify({
+      brand_id:B.id,kg_mid:V('f_kgmid'),wikidata_id:V('f_wikidata'),
+      crunchbase_id:V('f_crunchbase'),wikipedia_url:V('f_wiki'),
+      primary_categories:cats,seed_keywords:keys
+    })});
+
+    // 3. Save competitors
+    [[V('f_comp1'),V('f_comp1d'),V('f_comp1w')],[V('f_comp2'),V('f_comp2d'),V('f_comp2w')],[V('f_comp3'),V('f_comp3d'),V('f_comp3w')]].forEach(function(c){
+      if(c[0]&&c[1])api('/intake/competitors',{method:'POST',body:JSON.stringify({brand_id:B.id,name:c[0],domain:c[1],wikidata_id:c[2]})});
+    });
+
+    // 4. Save spokesperson + ALL executives
+    if(V('f_exec_name')){
+      api('/intake/executives',{method:'POST',body:JSON.stringify({
+        brand_id:B.id,name:V('f_exec_name'),title:V('f_exec_title'),
+        bio:V('f_exec_bio'),credentials:V('f_exec_creds').split(',').map(function(s){return s.trim()}).filter(Boolean),
+        expertise_areas:V('f_exec_exp').split(',').map(function(s){return s.trim()}).filter(Boolean),
+        social_profiles:{linkedin:V('f_exec_linkedin'),twitter:V('f_exec_twitter')},
+        quotes:V('f_exec_quotes').split(',').map(function(s){return s.trim()}).filter(Boolean)
+      })});
+    }
+    // Save all additional executives from scraper
+    if(window._scrapedExecs&&window._scrapedExecs.length){
+      window._scrapedExecs.forEach(function(ex){
+        if(ex.name&&ex.name!==V('f_exec_name')){
+          api('/intake/executives',{method:'POST',body:JSON.stringify({
+            brand_id:B.id,name:ex.name,title:ex.title||'',bio:ex.bio||'',
+            credentials:[],expertise_areas:[],social_profiles:{linkedin:ex.linkedin||''},quotes:[]
+          })});
+        }
+      });
+    }
+
+    // 5. Save API keys
+    var apiMap={
+      google_search_console:{gsc_file:V('f_api_gsc')},
+      ga4:{ga4_prop:V('f_api_ga4')},
+      ahrefs:{ahrefs_key:V('f_api_ahrefs')},
+      majestic:{maj_key:V('f_api_majestic')},
+      moz:{moz_key:V('f_api_moz_key'),moz_secret:V('f_api_moz_secret')},
+      openai:{oai_key:V('f_api_openai')},
+      anthropic:{ant_key:V('f_api_anthropic')},
+      perplexity:{plx_key:V('f_api_perplexity')},
+      serpapi:{serp_key:V('f_api_serpapi')},
+      cloudflare:{cf_token:V('f_api_cf_token'),cf_zone:V('f_api_cf_zone')},
+      fastly:{fsl_key:V('f_api_fastly')},
+      newsapi:{news_key:V('f_api_news')},
+      twitter:{tw_token:V('f_api_twitter')}
+    };
+    Object.keys(apiMap).forEach(function(provider){
+      var creds=apiMap[provider];
+      var hasKey=Object.values(creds).some(function(v){return v});
+      if(hasKey)api('/intake/credentials',{method:'POST',body:JSON.stringify({brand_id:B.id,provider:provider,credentials:creds})});
+    });
+
+    // 6. Save scraper config
+    var srcs=['news','indpub','medium','substack','reddit','twitter','youtube','podcasts','stackoverflow','github','quora','trustpilot','g2','linkedin'].filter(function(k){var e=$('src_'+k);return e&&e.checked});
+    api('/intake/scraper-config',{method:'POST',body:JSON.stringify({brand_id:B.id,sources:srcs,frequency:'daily',enabled:srcs.length>0})});
+
+    // 7. Save risk config
+    var tactics=['digital_pr','guest_posts','podcasts','data_studies','expert_quotes','expired','sponsorship','forum','reddit','conference'].filter(function(k){var e=$('tac_'+k);return e&&e.checked});
+    api('/intake/risk-config',{method:'POST',body:JSON.stringify({
+      brand_id:B.id,risk_level:V('f_risk_level'),allowed_tactics:tactics,
+      blocked_domains:V('f_blocked_domains').split('\n').map(function(s){return s.trim()}).filter(Boolean),
+      blocked_topics:V('f_blocked_topics').split(',').map(function(s){return s.trim()}).filter(Boolean),
+      ftc_compliance:$('f_ftc').checked,sec_compliance:$('f_sec').checked,
+      max_outreach_per_day:parseInt(V('f_max_outreach'))||20
+    })});
+
+    // 8. Save compliance rule
+    if(V('f_comp_rule_name')){
+      var rc={};
+      var rt=V('f_comp_rule_type');
+      var rv=V('f_comp_rule_content');
+      if(rt==='restricted_keywords')rc={keywords:rv.split(',').map(function(s){return s.trim()}).filter(Boolean)};
+      else if(rt==='sec_restrictions')rc={phrases:rv.split('\n').map(function(s){return s.trim()}).filter(Boolean)};
+      else rc={raw:rv};
+      api('/compliance/rules',{method:'POST',body:JSON.stringify({brand_id:B.id,rule_type:rt,rule_name:V('f_comp_rule_name'),rule_content:rc})});
+    }
+
+    toast('All configuration saved!');
+  }).catch(function(e){toast('Error: '+e.message,'err')});
+}
+
+// ==================== RUN ANALYSIS ====================
+function runAnalysis(){
+  var scrapeUrl=V('f_scrape_url');
+  var formDomain=V('f_domain');
+  var formName=V('f_name');
+  var targetDomain=(scrapeUrl||formDomain||'').replace(/^https?:\/\//,'').replace(/\/.*$/,'');
+
+  if(!targetDomain){toast('Enter a website URL or domain first','err');showInput();return}
+
+  var brandName=formName||targetDomain.split('.')[0];
+  var cats=V('f_category')?[V('f_category')]:[];
+  var keys=V('f_keywords')?V('f_keywords').split(',').map(function(s){return s.trim()}).filter(Boolean):[];
+
+  api('/brands/').then(function(brands){
+    var existing=brands.find(function(b){return b.domain&&b.domain.toLowerCase()===targetDomain.toLowerCase()});
+    if(existing){
+      B=existing;
+      $('brand-label').textContent='Brand: '+existing.name;
+      _doAnalysis(targetDomain);
+    }else{
+      api('/brands/',{method:'POST',body:JSON.stringify({
+        name:brandName,domain:targetDomain,description:V('f_desc'),primary_categories:cats,seed_keywords:keys
+      })}).then(function(brand){
+        B=brand;
+        $('brand-label').textContent='Brand: '+brand.name;
+        _doAnalysis(targetDomain);
+      }).catch(function(e){
+        toast('Error creating brand: '+e.message,'err');
+      });
+    }
+  });
+}
+
+function _doAnalysis(targetDomain){
+  showSection('analysis-section');
+  var progress=$('analysis-progress');
+  var statusText=$('analysis-status-text');
+  progress.style.width='0%';
+
+  var stages=[
+    {pct:5, text:'Scraping website data & schema...'},
+    {pct:10, text:'Fetching Wikipedia & Wikidata...'},
+    {pct:15, text:'Feature 1: LLM Perception Auditing...'},
+    {pct:18, text:'Feature 2: PR & Trend Hook Engine...'},
+    {pct:21, text:'Feature 3: Unlinked Citation Converter...'},
+    {pct:24, text:'Feature 4: Link Poisoning Radar...'},
+    {pct:27, text:'Feature 5: Podcast & Video Finder...'},
+    {pct:30, text:'Feature 6: Vector Co-Location Mapping...'},
+    {pct:33, text:'Feature 7: RAG Hallucination Repair...'},
+    {pct:36, text:'Feature 8: Third-Party Consensus...'},
+    {pct:39, text:'Feature 9: Agentic Commerce Protocol...'},
+    {pct:42, text:'Feature 10: PBN Forensic Detector...'},
+    {pct:45, text:'Feature 11: Revenue Simulator...'},
+    {pct:48, text:'Feature 12: Dead-Equity Salvage...'},
+    {pct:51, text:'Feature 13: Negative SEO Counter-Measure...'},
+    {pct:54, text:'Feature 14: GitHub Citation Harvester...'},
+    {pct:57, text:'Feature 15: Transcription Monitor...'},
+    {pct:60, text:'Feature 16: Knowledge Graph Arbitrage...'},
+    {pct:63, text:'Feature 17: Data-PR Engine...'},
+    {pct:66, text:'Feature 18: Campaign Simulation Sandbox...'},
+    {pct:69, text:'Feature 19: Satellite Entity Radar...'},
+    {pct:72, text:'Feature 20: RAG-Cache Defense...'},
+    {pct:75, text:'Feature 21-25: Advanced Features...'},
+    {pct:78, text:'Feature 26-30: Protocol & Schema Audit...'},
+    {pct:81, text:'Feature 31-35: Entropy & Compliance...'},
+    {pct:85, text:'Computing composite scores...'},
+    {pct:90, text:'Generating recommendations...'},
+    {pct:95, text:'Finalizing analysis report...'},
+  ];
+  var si=0;
+  var stageInterval=setInterval(function(){
+    if(si<stages.length){
+      progress.style.width=stages[si].pct+'%';
+      statusText.textContent=stages[si].text;
+      si++;
+    }
+  },10000);
+
+  statusText.textContent='Starting fresh 35-feature analysis for '+targetDomain+'...';
+
+  var controller = new AbortController();
+  var timeoutId = setTimeout(function(){ controller.abort(); }, 600000);
+
+  api('/analysis/run',{method:'POST',body:JSON.stringify({brand_id:B.id,analysis_type:'full'}),signal:controller.signal}).then(function(r){
+    clearTimeout(timeoutId);
+    clearInterval(stageInterval);
+    progress.style.width='100%';
+    statusText.textContent='Analysis complete! Rendering results...';
+
+    if(r.error){
+      statusText.textContent='Error: '+r.error;
+      toast('Analysis failed: '+r.error,'err');
+      setTimeout(function(){showInput()},2000);
+      return;
+    }
+
+    setTimeout(function(){
+      showSection('results-section');
+      renderDashboard(r);
+      toast('Fresh 35-feature analysis complete for '+targetDomain+'!');
+    },500);
+  }).catch(function(e){
+    clearTimeout(timeoutId);
+    clearInterval(stageInterval);
+    progress.style.width='0%';
+    statusText.textContent='Error: '+e.message;
+    toast('Analysis error: '+e.message,'err');
+    setTimeout(function(){showInput()},3000);
+  });
+}
+
+// ==================== LOAD RESULTS ====================
+function loadResults(){
+  api('/analysis/results/'+B.id).then(function(r){
+    showSection('results-section');
+    renderDashboard(r);
+  });
+}
+
+function esc(s){return(String(s||'')).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+function renderDashboard(r){
+  var sec=r.sections||{};
+  var s=r.summary||{};
+  var llm=sec.llm_perception||{};
+  var pr=sec.pr_hooks||{};
+  var unc=sec.unlinked_citations||{};
+  var lp=sec.link_poisoning||{};
+  var pv=sec.podcast_video||{};
+  var vm=sec.vector_mapping||{};
+  var rag=sec.rag_repair||{};
+  var con=sec.consensus||{};
+  var aeo=sec.aeo||{};
+  var pbn=sec.pbn_detector||{};
+  var rev=sec.revenue_sim||{};
+  var de=sec.dead_equity||{};
+  var nseo=sec.negative_seo||{};
+  var gh=sec.github_citations||{};
+  var tr=sec.transcription||{};
+  var kg=sec.kg_arbitrage||{};
+  var dp=sec.data_pr||{};
+  var sim=sec.simulation||{};
+  var sat=sec.satellite||{};
+  var rd=sec.rag_defense||{};
+  var ae=sec.anchor_entropy||{};
+  var va=sec.visual_audit||{};
+  var ap=sec.apn_proxy||{};
+  var gd=sec.graph_decay||{};
+  var c2=sec.c2pa||{};
+  var cg=sec.compliance_guard||{};
+  var gc=sec.geo_crawl||{};
+  var zp=sec.zero_party||{};
+  var ps=sec.passage_scoring||{};
+  var rc=sec.reddit_consensus||{};
+  var cb=sec.competitor_bert||{};
+  var sa=sec.schema_auditor||{};
+  var cp=sec.crawl_priority||{};
+  var fc=sec.ftc_compliance||{};
+  var hl=sec.hreflang||{};
+  var sc='';
+  sc+='<div class="card" style="grid-column:span 4;text-align:center;padding:1.5rem">';
+  sc+='<div style="font-size:.85rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em">Overall SEO Health Score - '+esc(r.brand)+' ('+esc(r.domain)+')</div>';
+  sc+='<div style="font-size:3rem;font-weight:700;color:'+(s.overall_score>70?'#4ade80':s.overall_score>40?'#facc15':'#f87171')+';margin:.3rem 0">'+(s.overall_score||0)+'/100</div>';
+  sc+='<div style="font-size:.85rem;color:#94a3b8">'+(s.features_analyzed||35)+' features analyzed | Analysis completed: '+esc(r.completed_at||'N/A')+'</div>';
+  sc+='</div>';
+  sc+='<div class="card"><div class="ml">Total Mentions</div><div class="mv">'+(s.total_mentions||0)+'</div><div class="ml">'+(s.unlinked_opportunities||0)+' unlinked opps</div></div>';
+  sc+='<div class="card"><div class="ml">Backlink Health</div><div class="mv" style="color:'+(s.backlink_health>80?'#4ade80':'#f87171')+'">'+(s.backlink_health||0)+'%</div><div class="ml">'+(s.toxic_backlinks||0)+' toxic</div></div>';
+  sc+='<div class="card"><div class="ml">LLM Citation Rate</div><div class="mv">'+(s.llm_citation_rate||0)+'%</div><div class="ml">'+(llm.brand_cited_in||0)+'/'+(llm.total_queries_tested||0)+' queries</div></div>';
+  sc+='<div class="card"><div class="ml">Share of Search</div><div class="mv">'+(s.share_of_search||0)+'%</div><div class="ml">Brand visibility vs competitors</div></div>';
+  sc+='<div class="card"><div class="ml">AEO Score</div><div class="mv">'+(s.aeo_score||0)+'/100</div><div class="ml">Agentic commerce readiness</div></div>';
+  sc+='<div class="card"><div class="ml">Sentiment</div><div class="mv">'+(s.sentiment?(s.sentiment*100).toFixed(1)+'%':'N/A')+'</div><div class="ml">'+(con.positive||0)+'+ / '+(con.negative||0)+'-</div></div>';
+  sc+='<div class="card"><div class="ml">PBN Risk</div><div class="mv" style="color:'+(s.pbn_risk>0?'#f87171':'#4ade80')+'">'+(s.pbn_risk||0)+'</div><div class="ml">Suspicious domains</div></div>';
+  sc+='<div class="card"><div class="ml">PR Hooks</div><div class="mv">'+(s.pr_hooks_generated||0)+'</div><div class="ml">Data-driven pitch angles</div></div>';
+  $('summary-cards').innerHTML=sc;
+
+  var h='';
+  h+='<div class="card" style="grid-column:span 4;background:linear-gradient(135deg,#1e3a5f,#0f172a);padding:1.5rem"><div style="font-size:1.2rem;font-weight:700;color:#60a5fa;margin-bottom:.5rem">OUTPUT 1: C-Suite Executive Dashboard ("The Boardroom View")</div><div style="color:#94a3b8;font-size:.85rem">Business impact metrics for CEO/CFO. Zero SEO jargon. '+esc(r.brand)+' - '+esc(r.domain)+'</div></div>';
+
+  h+='<div class="card"><div class="ml">LLM Citation Share-of-Voice</div><div class="mv" style="font-size:1.1rem">'+(llm.citation_rate||0)+'%</div><div class="ml">'+(llm.brand_cited_in||0)+' of '+(llm.total_queries_tested||0)+' queries cite brand</div></div>';
+  h+='<div class="card"><div class="ml">Topical Authority Distance</div><div class="mv" style="font-size:1.1rem">'+(llm.topical_authority_distance||0)+'</div><div class="ml">Distance from primary entity node</div></div>';
+  h+='<div class="card"><div class="ml">Share of Search (SoS)</div><div class="mv" style="font-size:1.1rem">'+(rev.share_of_search||0)+'%</div><div class="ml">Brand visibility vs competitors</div></div>';
+  h+='<div class="card"><div class="ml">Revenue Projection</div><div class="mv" style="font-size:1.1rem">$'+((rev.projected_pipeline_impact||0)/1000).toFixed(0)+'K</div><div class="ml">Projected annual pipeline impact</div></div>';
+
+  if(llm.competitor_citations&&Object.keys(llm.competitor_citations).length){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Competitor Citation Matrix</div>';
+    Object.entries(llm.competitor_citations).forEach(function(kv){
+      var maxC=Math.max.apply(null,Object.values(llm.competitor_citations));
+      var bar=maxC>0?Math.round((kv[1]/maxC)*100):0;
+      h+='<div style="display:flex;align-items:center;gap:.5rem;margin:.3rem 0"><span style="width:150px;font-size:.8rem;color:#e2e8f0">'+esc(kv[0])+'</span><div style="background:#1e293b;border-radius:4px;height:16px;width:150px"><div style="background:#60a5fa;height:100%;width:'+bar+'%;border-radius:4px"></div></div><span style="font-size:.8rem;color:#94a3b8">'+kv[1]+'</span></div>';
+    });
+    h+='</div>';
+  }
+
+  if(llm.brand_contexts&&llm.brand_contexts.length){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Brand Context Windows</div><div style="max-height:200px;overflow-y:auto">';
+    llm.brand_contexts.slice(0,5).forEach(function(c){
+      h+='<div style="border-bottom:1px solid #1e293b;padding:.4rem 0"><b style="font-size:.85rem;color:#60a5fa">'+esc(c.domain)+'</b> <span class="badge bg">DA:'+c.da+'</span>';
+      h+='<div style="font-size:.8rem;color:#94a3b8">'+esc(c.title)+'</div>';
+      h+='<div style="font-size:.75rem;color:#64748b">'+esc(c.snippet)+'</div></div>';
+    });
+    h+='</div></div>';
+  }
+
+  if(llm.content_gaps&&llm.content_gaps.length){
+    h+='<div class="card" style="grid-column:span 4"><div class="ml" style="color:#f87171">Content Gaps - Competitors Cited Where '+esc(r.brand)+' Is Missing</div>';
+    h+='<table><tr><th>Query</th><th>Competitor Found</th><th>Domain</th></tr>';
+    llm.content_gaps.slice(0,8).forEach(function(g){
+      h+='<tr><td style="font-size:.8rem">'+esc(g.query)+'</td><td style="font-size:.8rem">'+esc(g.competitor_found)+'</td><td style="font-size:.8rem;color:#60a5fa">'+esc(g.domain)+'</td></tr>';
+    });
+    h+='</table></div>';
+  }
+
+  h+='<div class="card" style="grid-column:span 4;background:linear-gradient(135deg,#1a3a2f,#0f172a);padding:1.5rem"><div style="font-size:1.2rem;font-weight:700;color:#4ade80;margin-bottom:.5rem">OUTPUT 2: Human-in-the-Loop Action & Outreach Queues</div><div style="color:#94a3b8;font-size:.85rem">Pre-validated actions for human execution. No auto-blast spam.</div></div>';
+
+  if(unc.top_unlinked&&unc.top_unlinked.length){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Unlinked Mention Conversion Deck</div><div style="color:#94a3b8;font-size:.85rem;margin-bottom:.3rem">'+(unc.unlinked_count||0)+' unlinked mentions worth ~'+(unc.estimated_link_value||0)+' DA points</div>';
+    h+='<table><tr><th>Domain</th><th>DA</th><th>Title</th><th>Priority</th></tr>';
+    unc.top_unlinked.slice(0,8).forEach(function(x){
+      h+='<tr><td><b>'+esc(x.domain)+'</b></td><td>'+x.da+'</td><td style="font-size:.8rem">'+esc(x.title)+'</td><td><span class="badge '+(x.outreach_priority==='high'?'bg':x.outreach_priority==='medium'?'by':'br')+'">'+x.outreach_priority+'</span></td></tr>';
+    });
+    h+='</table></div>';
+  }
+
+  if(unc.outreach_templates&&unc.outreach_templates.length){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Outreach Templates</div>';
+    unc.outreach_templates.slice(0,3).forEach(function(t){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px;margin-bottom:.5rem"><b style="font-size:.85rem;color:#4ade80">'+esc(t.target_domain)+'</b> <span class="badge bg">DA:'+t.target_da+'</span>';
+      h+='<div style="font-size:.8rem;color:#e2e8f0;margin-top:.2rem">Subject: '+esc(t.subject)+'</div>';
+      h+='<div style="font-size:.75rem;color:#94a3b8;margin-top:.2rem">'+esc(t.body)+'</div></div>';
+    });
+    h+='</div>';
+  }
+
+  if(pr.generated_hooks&&pr.generated_hooks.length){
+    h+='<div class="card" style="grid-column:span 4"><div class="ml">Predictive PR & Data-Hook Pitches</div>';
+    h+='<div class="g2" style="margin-top:.5rem">';
+    pr.generated_hooks.slice(0,4).forEach(function(p){
+      h+='<div style="background:#1e293b;padding:.8rem;border-radius:8px"><div style="font-weight:600;color:#4ade80;font-size:.85rem">'+esc(p.headline_angle)+'</div>';
+      h+='<div style="font-size:.8rem;color:#facc15;margin-top:.2rem">Data: '+esc(p.data_point)+'</div>';
+      h+='<div style="font-size:.75rem;color:#94a3b8;margin-top:.2rem">Target: '+esc(p.target_publication)+' (DA:'+p.target_da+') | Relevance: '+p.relevance_score+'</div></div>';
+    });
+    h+='</div></div>';
+  }
+
+  if(pv.podcasts&&pv.podcasts.length){
+    h+='<div class="card" style="grid-column:span 4"><div class="ml">Podcast & Video Citation Opportunities</div><div style="color:#94a3b8;font-size:.85rem">'+(pv.podcasts_found||0)+' podcast + '+(pv.videos_found||0)+' video opportunities found</div>';
+    h+='<div class="g2" style="margin-top:.5rem">';
+    pv.podcasts.slice(0,3).forEach(function(p){
+      h+='<div style="background:#1e293b;padding:.8rem;border-radius:8px"><b style="font-size:.85rem;color:#facc15">'+esc(p.title)+'</b>';
+      h+='<div style="font-size:.75rem;color:#94a3b8">DA: '+p.da+' | '+esc(p.domain)+'</div></div>';
+    });
+    h+='</div></div>';
+  }
+
+  h+='<div class="card" style="grid-column:span 4;background:linear-gradient(135deg,#2d1f3d,#0f172a);padding:1.5rem"><div style="font-size:1.2rem;font-weight:700;color:#a78bfa;margin-bottom:.5rem">OUTPUT 3: Edge-Network & Technical Execution Rules</div><div style="color:#94a3b8;font-size:.85rem">Copy-paste (or auto-deployed) infrastructure payloads for dev/DevOps teams.</div></div>';
+
+  if(de.cloudflare_worker){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Serverless Edge Redirect Payloads</div><div style="color:#94a3b8;font-size:.85rem;margin-bottom:.3rem">'+(de.broken_links_found||0)+' broken links detected</div>';
+    h+='<pre style="background:#0f172a;padding:.8rem;border-radius:8px;font-size:.75rem;color:#4ade80;overflow-x:auto;max-height:200px">'+esc(de.cloudflare_worker)+'</pre></div>';
+  }
+
+  if(nseo.counter_measure_headers){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Anti-Scrape & Canonical Shield Headers</div>';
+    h+='<pre style="background:#0f172a;padding:.8rem;border-radius:8px;font-size:.75rem;color:#facc15;overflow-x:auto;max-height:200px">'+esc(nseo.counter_measure_headers)+'</pre></div>';
+  }
+
+  if(gh.pr_template){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">GitHub Attribution PR Template</div><div style="color:#94a3b8;font-size:.85rem">'+(gh.github_references||0)+' GitHub references found</div>';
+    h+='<pre style="background:#0f172a;padding:.8rem;border-radius:8px;font-size:.75rem;color:#60a5fa;overflow-x:auto;max-height:200px">'+esc(gh.pr_template)+'</pre></div>';
+  }
+
+  if(kg.wiki_citation_template){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Wikipedia Citation Template</div>';
+    h+='<pre style="background:#0f172a;padding:.8rem;border-radius:8px;font-size:.75rem;color:#4ade80;overflow-x:auto;max-height:200px">'+esc(kg.wiki_citation_template)+'</pre></div>';
+  }
+
+  h+='<div class="card" style="grid-column:span 4;background:linear-gradient(135deg,#3d1f1f,#0f172a);padding:1.5rem"><div style="font-size:1.2rem;font-weight:700;color:#f87171;margin-bottom:.5rem">OUTPUT 4: Algorithmic Defense & Compliance Risk Register</div><div style="color:#94a3b8;font-size:.85rem">Safety barrier for enterprise legal teams. Keeps search engine penalties at bay.</div></div>';
+
+  h+='<div class="card"><div class="ml">Neural Anchor Entropy</div><div class="mv"><span class="badge '+(ae.risk==='low'?'bg':ae.risk==='medium'?'by':'br')+'">'+(ae.risk||'N/A').toUpperCase()+'</span></div><div class="ml">Entropy: '+(ae.normalized_entropy||0)+' | Branded: '+(ae.branded_pct||0)+'%</div></div>';
+  h+='<div class="card"><div class="ml">FTC/SEC Compliance</div><div class="mv" style="color:#4ade80">ACTIVE</div><div class="ml">Sponsored link audit enabled</div></div>';
+  h+='<div class="card"><div class="ml">PBN Forensic Flags</div><div class="mv" style="color:'+(pbn.suspicious_count>0?'#f87171':'#4ade80')+'">'+(pbn.suspicious_count||0)+'</div><div class="ml">'+(pbn.assessment||'')+'</div></div>';
+  h+='<div class="card"><div class="ml">RAG Hallucination Rate</div><div class="mv">'+(rag.hallucination_rate||0)+'%</div><div class="ml">'+(rag.potential_hallucinations||0)+' of '+(rag.total_citations||0)+' flagged</div></div>';
+
+  if(lp.toxic_domains&&lp.toxic_domains.length){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml" style="color:#f87171">Toxic Backlinks - Disavow Recommended</div>';
+    h+='<table><tr><th>Domain</th><th>DA</th><th>Toxic Score</th><th>Reasons</th></tr>';
+    lp.toxic_domains.slice(0,8).forEach(function(t){
+      h+='<tr><td><b>'+esc(t.domain)+'</b></td><td>'+t.da+'</td><td style="color:#f87171">'+t.toxic_score+'</td><td style="font-size:.75rem">'+t.reasons.join(', ')+'</td></tr>';
+    });
+    h+='</table></div>';
+  }
+
+  if(lp.disavow_file&&lp.disavow_file!=='No disavow needed'){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Generated Disavow File</div>';
+    h+='<pre style="background:#0f172a;padding:.8rem;border-radius:8px;font-size:.75rem;color:#f87171;overflow-x:auto;max-height:200px">'+esc(lp.disavow_file)+'</pre></div>';
+  }
+
+  if(ae.top_anchors&&ae.top_anchors.length){
+    h+='<div class="card" style="grid-column:span 4"><div class="ml">Anchor Text Distribution</div><table><tr><th>Anchor</th><th>Count</th><th>Type</th></tr>';
+    ae.top_anchors.slice(0,10).forEach(function(x){
+      var type=x.anchor.toLowerCase().includes(r.brand.toLowerCase())?'<span class="badge bg">Branded</span>':r.domain.toLowerCase().includes(x.anchor.toLowerCase().replace('https://','').split('/')[0])?'<span class="badge" style="background:#3b82f6">Naked</span>':'<span class="badge by">Generic</span>';
+      h+='<tr><td style="font-size:.8rem">'+esc(x.anchor)+'</td><td>'+x.count+'</td><td>'+type+'</td></tr>';
+    });
+    h+='</table></div>';
+  }
+
+  h+='<div class="card" style="grid-column:span 4;background:linear-gradient(135deg,#1f2d3d,#0f172a);padding:1.5rem"><div style="font-size:1.2rem;font-weight:700;color:#38bdf8;margin-bottom:.5rem">OUTPUT 5: Global Entity & Knowledge Graph Blueprint</div><div style="color:#94a3b8;font-size:.85rem">Structural view for enterprise SEO directors managing global brand authority.</div></div>';
+
+  if(kg.wikidata_id){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Wikidata & Triple Gap Report</div>';
+    h+='<p>Wikidata: <a href="https://www.wikidata.org/wiki/'+esc(kg.wikidata_id)+'" target="_blank" style="color:#60a5fa">'+esc(kg.wikidata_id)+'</a> ('+esc(kg.wikidata_label)+')</p>';
+    if(kg.wikipedia_url){h+='<p>Wikipedia: <a href="'+esc(kg.wikipedia_url)+'" target="_blank" style="color:#60a5fa">'+esc(kg.wikipedia_url)+'</a></p>';}
+    h+='<p>Coverage: <b style="color:'+(kg.triple_coverage_pct>70?'#4ade80':kg.triple_coverage_pct>40?'#facc15':'#f87171')+'">'+kg.triple_coverage_pct+'%</b> ('+Object.keys(kg.present_triples||{}).length+'/'+kg.total_required_triples+' triples)</p>';
+    if(kg.missing_triples&&kg.missing_triples.length){
+      h+='<b style="font-size:.85rem;color:#facc15;margin-top:.3rem;display:block">Missing Triples:</b>';
+      h+='<table style="margin-top:.3rem"><tr><th>Property</th><th>Recommendation</th></tr>';
+      kg.missing_triples.forEach(function(g){h+='<tr><td><span class="badge br">'+esc(g.label)+'</span></td><td style="font-size:.8rem">'+esc(g.recommendation)+'</td></tr>';});
+      h+='</table>';
+    }
+    h+='</div>';
+  }
+
+  if(aeo.schema_checks&&aeo.schema_checks.length){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">AEO Protocol & Schema Audit</div><div class="mv">'+(aeo.aeo_score||0)+'/100</div>';
+    h+='<div style="margin-top:.3rem">';
+    aeo.schema_checks.forEach(function(s){
+      h+='<div style="display:flex;align-items:center;gap:.5rem;padding:.2rem 0"><span class="badge bg">'+esc(s.type)+'</span><span style="font-size:.8rem;color:#e2e8f0">'+esc(s.schema_type||s.value||'')+'</span></div>';
+    });
+    h+='</div></div>';
+  }
+
+  if(sim.scenarios&&sim.scenarios.length){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Campaign Simulation Results</div>';
+    sim.scenarios.forEach(function(sc){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px;margin-bottom:.5rem"><b style="font-size:.85rem;color:#38bdf8">'+esc(sc.campaign)+'</b>';
+      h+='<div style="font-size:.8rem;color:#94a3b8">Investment: $'+sc.investment.toLocaleString()+' | Predicted SoS: +'+sc.predicted_sos_increase+'% | Pipeline: $'+sc.predicted_pipeline.toLocaleString()+'</div></div>';
+    });
+    h+='</div>';
+  }
+
+  if(sat.satellites&&sat.satellites.length){
+    h+='<div class="card" style="grid-column:span 2"><div class="ml">Satellite Entity Radar</div><div style="color:#94a3b8;font-size:.85rem">'+(sat.satellites_found||0)+' entities found</div>';
+    sat.satellites.slice(0,5).forEach(function(s){
+      h+='<div style="display:flex;align-items:center;gap:.5rem;padding:.2rem 0;border-bottom:1px solid #1e293b"><b style="font-size:.85rem;color:#38bdf8">'+esc(s.domain)+'</b><span class="badge bg">DA:'+s.da+'</span><span style="font-size:.75rem;color:#94a3b8">'+esc(s.type)+'</span></div>';
+    });
+    h+='</div>';
+  }
+
+  if(llm.detailed_analysis||con.detailed_analysis||unc.detailed_analysis){
+    h+='<div class="card" style="grid-column:span 4;background:#0f172a;padding:1rem"><div class="ml" style="font-size:1rem;font-weight:700;color:#60a5fa">Advanced Feature Analysis - Additional Modules</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.5rem">';
+    
+    // Visual Audit
+    if(va.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(va.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Visual Score: '+(va.visual_health_score||0)+'% | Mentions: '+(va.brand_visuals_found||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((va.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // APN Proxy
+    if(ap.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(ap.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">APN Score: '+(ap.apn_score||0)+'/100 | Endpoints: '+(ap.total_endpoints||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((ap.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Graph Decay
+    if(gd.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(gd.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Freshness: '+(gd.freshness_score||0)+'% | Co-citations: '+(gd.total_co_citations||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((gd.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // C2PA
+    if(c2.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(c2.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">C2PA Score: '+(c2.c2pa_score||0)+'/100 | Signals: '+(c2.total_signals||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((c2.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Compliance Guard
+    if(cg.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(cg.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Compliance: '+(cg.compliance_score||0)+'/100 | Pages: '+(cg.compliance_pages_found?cg.compliance_pages_found.length:0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((cg.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Geo Crawl
+    if(gc.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(gc.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Geo Coverage: '+(gc.geo_coverage_score||0)+'% | Regions: '+(gc.regions_with_citations||0)+'/'+(gc.regions_analyzed||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((gc.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Schema Auditor
+    if(sa.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(sa.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Schema: '+(sa.schema_score||0)+'/100 | JSON-LD: '+(sa.jsonld_count||0)+' | OG: '+(sa.opengraph_count||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((sa.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Crawl Priority
+    if(cp.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(cp.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Crawl Score: '+(cp.crawl_priority_score||0)+'/100 | Sitemap: '+(cp.sitemap_analysis?cp.sitemap_analysis.urls:0)+' URLs</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((cp.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // FTC Compliance
+    if(fc.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(fc.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">FTC Score: '+(fc.ftc_score||0)+'/100 | Sponsored: '+(fc.total_sponsored_content||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((fc.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Hreflang
+    if(hl.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(hl.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Intl Score: '+(hl.international_readiness_score||0)+'/100 | Hreflang: '+(hl.total_hreflang_tags||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((hl.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Passage Scoring
+    if(ps.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(ps.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Passages: '+(ps.total_passages_scored||0)+' | High-Attention: '+(ps.high_attention_passages||0)+' | Avg: '+(ps.avg_attention_weight||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((ps.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Reddit Consensus
+    if(rc.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(rc.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Mentions: '+(rc.total_mentions||0)+' | Sentiment: '+(rc.avg_sentiment||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((rc.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Competitor BERT
+    if(cb.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(cb.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Competitors: '+(cb.competitors_analyzed||0)+' | Entities: '+(cb.total_entities_extracted||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((cb.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    // Zero Party
+    if(zp.feature_name){
+      h+='<div style="background:#1e293b;padding:.6rem;border-radius:6px"><b style="color:#38bdf8;font-size:.82rem">'+esc(zp.feature_name)+'</b>';
+      h+='<div style="font-size:.78rem;color:#94a3b8;margin-top:.2rem">Data Assets: '+(zp.total_data_assets||0)+' | Endpoints: '+(zp.data_endpoints_found||0)+'</div>';
+      h+='<div style="font-size:.72rem;color:#64748b">'+esc((zp.recommendation||'').substring(0,150))+'</div></div>';
+    }
+    
+    h+='</div></div>';
+  }
+    h+='<div class="card" style="grid-column:span 4;background:#0f172a;padding:1rem"><div class="ml" style="font-size:1rem;font-weight:700;color:#60a5fa">Detailed Feature Analysis</div>';
+    var features=[llm,pr,unc,lp,pv,vm,rag,con,aeo,pbn,rev,de,nseo,gh,tr,kg,dp,sim,sat,rd,ae];
+    features.forEach(function(f){
+      if(f&&f.feature_name&&f.detailed_analysis){
+        h+='<div style="border-bottom:1px solid #1e293b;padding:.5rem 0"><b style="color:#4ade80;font-size:.85rem">'+esc(f.feature_name)+'</b>';
+        h+='<div style="font-size:.8rem;color:#94a3b8;margin-top:.2rem">'+esc(f.detailed_analysis)+'</div></div>';
+      }
+    });
+    h+='</div>';
+
+  h+='<div class="card" style="grid-column:span 4;text-align:center;padding:1rem;border-top:1px solid #1e293b"><div style="font-size:.8rem;color:#64748b">Analysis completed: '+esc(r.completed_at||'N/A')+' | Brand: '+esc(r.brand)+' | Domain: '+esc(r.domain)+' | '+esc(s.features_analyzed||35)+' features analyzed</div></div>';
+  $('results-content').innerHTML=h;
+}
+function min100(v){return Math.min(100,v||0)}
+function max1(arr){var m=1;arr.forEach(function(x){var v=(x.found_in||[]).length;if(v>m)m=v});return m}
+function esc(s){return(String(s||'')).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+// ==================== INIT ====================
+function init(){
+  B=null;
+  $('brand-label').textContent='';
+  showSection('input-section');
+}
+init();
+</script>
+</body>
+</html>

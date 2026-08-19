@@ -1,0 +1,3052 @@
+{
+  "brand": "Filmibeat",
+  "domain": "filmibeat.com",
+  "category": "news media",
+  "started_at": "2026-08-18T09:19:43.112212+00:00",
+  "completed_at": "2026-08-18T09:21:04.129991+00:00",
+  "sections": {
+    "llm_perception": {
+      "feature_name": "LLM Co-Mention & Perception Auditing",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY",
+      "detail": "No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+      "assessment": "unavailable",
+      "recommendation": "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data. No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+      "detailed_analysis": "No data was fabricated for \"LLM Co-Mention & Perception Auditing\". Configure OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY and re-run the analysis to get real, verified output. Reason: No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data",
+        "No LLM provider is configured, so no real AI-assistant co-mention audit can run"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "unlinked_citations": {
+      "feature_name": "Unlinked Citation & Co-Occurrence Converter",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+link_verification",
+      "retrieved_at": "2026-08-18T09:19:56.190368+00:00",
+      "total_mentions_found": 9,
+      "examined": 8,
+      "linked_count": 8,
+      "unlinked_count": 0,
+      "conversion_rate": 100.0,
+      "mentions": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of...",
+          "relevance_score": 1.0,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "title": "New Bollywood Movies 2026: Latest Bollywood Films Release ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Bollywood Movies 2026: Stay updated on Bollywood films release dates, trailers, teasers, reviews, and all the latest news on FilmiBeat",
+          "relevance_score": 1.0,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "title": "New Movies 2026 \u2013 Bollywood, Hollywood, Tamil, Telugu ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Stay updated about the latest Bollywood, Hollywood, Tamil, Telugu, Kannada, Hindi & Malayalam movies, their ratings, reviews & much more from Filmibeat.",
+          "relevance_score": 1.0,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "title": "FilmiBeat - Latest Bollywood Movie News & Updates in Hindi",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "FilmiBeat provides latest Bollywood Movie News & updates in Hindi, bollywood movie and celebrity news, hindi movie reviews, movie trailers & promos in Hindi.",
+          "relevance_score": 1.0,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news...",
+          "relevance_score": 1.0,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://www.filmibeat.com/",
+          "title": "FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest...",
+          "relevance_score": 1.0,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "title": "Movie News - Bollywood (Hindi), Tamil, Telugu, Kannada ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest...",
+          "relevance_score": 1.0,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "title": "Entertainment News: OTT, Celeb Updates, Box Office, Gossips ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Entertainment News: Ott, Celeb Updates, Box Office, Gossips, and Movie Updates from Bollywood, Tamil, Telugu, Malayalam & Kannada Cinema World.",
+          "relevance_score": 1.0,
+          "links_to_brand": true,
+          "verified": true
+        }
+      ],
+      "assessment": "linked",
+      "recommendation": "0 of 8 examined third-party pages mention \"Filmibeat\" without a link back to filmibeat.com (100.0% conversion). Pitch a link placement on each.",
+      "detailed_analysis": "Unlinked-citation audit for Filmibeat: found 9 brand mentions from real searches; fetched and inspected the top 8 pages to check whether they hyperlink to filmibeat.com. Every \"linked\" verdict is based on the live page content fetched at 2026-08-18T09:19:56.190349+00:00.",
+      "runtime_secs": 12.9,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "domain": "filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Total Mentions Found",
+          "value": "9"
+        },
+        {
+          "metric": "Examined",
+          "value": "8"
+        },
+        {
+          "metric": "Linked Count",
+          "value": "8"
+        },
+        {
+          "metric": "Unlinked Count",
+          "value": "0"
+        },
+        {
+          "metric": "Conversion Rate",
+          "value": "100.0%"
+        }
+      ],
+      "actions": [
+        "0 of 8 examined third-party pages mention \"Filmibeat\" without a link back to filmibeat",
+        "Pitch a link placement on each"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "consensus": {
+      "feature_name": "Third-Party Consensus Engine",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+llm_sentiment",
+      "retrieved_at": "2026-08-18T09:19:56.860630+00:00",
+      "total_mentions": 5,
+      "sentiment_scored": 0,
+      "avg_sentiment": null,
+      "overall_sentiment_score": null,
+      "sentiment_distribution": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0
+      },
+      "mentions": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of...",
+          "query": "\"Filmibeat\" review"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "title": "New Bollywood Movies 2026: Latest Bollywood Films Release ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Bollywood Movies 2026: Stay updated on Bollywood films release dates, trailers, teasers, reviews, and all the latest news on FilmiBeat",
+          "query": "\"Filmibeat\" review"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "title": "New Movies 2026 \u2013 Bollywood, Hollywood, Tamil, Telugu ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Stay updated about the latest Bollywood, Hollywood, Tamil, Telugu, Kannada, Hindi & Malayalam movies, their ratings, reviews & much more from Filmibeat.",
+          "query": "\"Filmibeat\" review"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "title": "FilmiBeat - Latest Bollywood Movie News & Updates in Hindi",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "FilmiBeat provides latest Bollywood Movie News & updates in Hindi, bollywood movie and celebrity news, hindi movie reviews, movie trailers & promos in Hindi.",
+          "query": "\"Filmibeat\" review"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news...",
+          "query": "\"Filmibeat\" review"
+        }
+      ],
+      "sentiment_available": false,
+      "assessment": "no_sentiment_data",
+      "recommendation": "Collected 5 real third-party mentions of \"Filmibeat\". Sentiment scoring requires an LLM key (OPENAI_API_KEY/ANTHROPIC_API_KEY/PERPLEXITY_API_KEY); mention data is real regardless.",
+      "detailed_analysis": "Consensus audit for Filmibeat: 5 queries, 5 real mentions collected. 0 snippets scored by a live LLM sentiment call. No sentiment values are fabricated.",
+      "runtime_secs": 13.3,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Total Mentions",
+          "value": "5"
+        },
+        {
+          "metric": "Sentiment Scored",
+          "value": "0%"
+        }
+      ],
+      "actions": [
+        "Collected 5 real third-party mentions of \"Filmibeat\"",
+        "Sentiment scoring requires an LLM key (OPENAI_API_KEY/ANTHROPIC_API_KEY/PERPLEXITY_API_KEY); mention data is real regardless"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "rag_repair": {
+      "feature_name": "RAG Hallucination & Citation Repair",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY",
+      "detail": "No LLM provider is configured, so RAG citation testing cannot run.",
+      "assessment": "unavailable",
+      "recommendation": "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data. No LLM provider is configured, so RAG citation testing cannot run.",
+      "detailed_analysis": "No data was fabricated for \"RAG Hallucination & Citation Repair\". Configure OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY and re-run the analysis to get real, verified output. Reason: No LLM provider is configured, so RAG citation testing cannot run.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data",
+        "No LLM provider is configured, so RAG citation testing cannot run"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "vector_mapping": {
+      "feature_name": "Vector Co-Location & Embedding Mapping",
+      "status": "ok",
+      "verified": true,
+      "method": "tfidf_cosine",
+      "retrieved_at": "2026-08-18T09:20:08.547532+00:00",
+      "brand_texts_embedded": 5,
+      "competitors_embedded": 1,
+      "competitor_distances": [
+        {
+          "competitor": "Reuters",
+          "cosine_similarity": 0.0571
+        }
+      ],
+      "avg_cosine_similarity": 0.0571,
+      "assessment": "computed",
+      "recommendation": "Embedded 5 brand text passages and 1 competitor passages. Average cosine similarity to competitors: 0.0571.",
+      "detailed_analysis": "Vector mapping for Filmibeat: real TF-IDF vectors computed from the fetched site text for 6 passages. Similarity values are actual cosine distances between the real vectors.",
+      "runtime_secs": 24.7,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Brand Texts Embedded",
+          "value": "5"
+        },
+        {
+          "metric": "Competitors Embedded",
+          "value": "1"
+        },
+        {
+          "metric": "Avg Cosine Similarity",
+          "value": "0.06%"
+        }
+      ],
+      "actions": [
+        "Embedded 5 brand text passages and 1 competitor passages",
+        "Average cosine similarity to competitors: 0"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "pr_hooks": {
+      "feature_name": "Predictive Digital PR & Trend Hook Engine",
+      "status": "ok",
+      "verified": true,
+      "method": "news_rss/newsapi+llm_or_term_frequency",
+      "retrieved_at": "2026-08-18T09:19:46.270509+00:00",
+      "trending_articles": [
+        {
+          "title": "Reuters | Act before the notice arrives \u2014 Managing regulatory and litigation risk under the Bulk Data Transfer Rule - White & Case LLP",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5\" target=\"_blank\">Reuters | Act before the notice arrives \u2014 Managing regulatory and litigation risk under the Bulk Data Transfer Rule</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">White & Case LLP</font>",
+          "published": "Mon, 17 Aug 2026 12:00:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "Maryland Tax Court Strikes Down State\u2019s Digital Ad Tax - News/Media Alliance",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBrcnoxWTlZNUlaOHRGT1NTUndnOTAxcUlyTHRYRkhPd1MyOXJIZ0Y4M1FiU29qbmNLQmpsQzBQMXZSSUVPNlJQbm9CR0JfMWx5eHBRTDZDSnFZS3ktX2FmRDE3UDB6azBrbkZueE50WGVINzhFV0VjTnVsZw?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMie0FVX3lxTFBrcnoxWTlZNUlaOHRGT1NTUndnOTAxcUlyTHRYRkhPd1MyOXJIZ0Y4M1FiU29qbmNLQmpsQzBQMXZSSUVPNlJQbm9CR0JfMWx5eHBRTDZDSnFZS3ktX2FmRDE3UDB6azBrbkZueE50WGVINzhFV0VjTnVsZw?oc=5\" target=\"_blank\">Maryland Tax Court Strikes Down State\u2019s Digital Ad Tax</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">News/Media Alliance</font>",
+          "published": "Fri, 14 Aug 2026 20:34:41 GMT",
+          "is_news": true
+        },
+        {
+          "title": "Indonesian posts tar news media with false claim of ignoring protests - Yahoo",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPc1ZKNm9WQ0gtY3lUT2NUQTBiWldFM2pjUVpUeFFBTXdBNTl2Ukk0YnRXUTBNUnpIZTd3SWVHbDNfeGJxUXNJOFM5SE9LV0NjRnQteXc3cmt5dUJ5N25KNnZUQ0FnSTVVRlFsSVN6a0dRN29mSzFsTEo2RTk2QjNMV3lEVHZSRXpoUC1nQU92Rmd3QQ?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMikgFBVV95cUxPc1ZKNm9WQ0gtY3lUT2NUQTBiWldFM2pjUVpUeFFBTXdBNTl2Ukk0YnRXUTBNUnpIZTd3SWVHbDNfeGJxUXNJOFM5SE9LV0NjRnQteXc3cmt5dUJ5N25KNnZUQ0FnSTVVRlFsSVN6a0dRN29mSzFsTEo2RTk2QjNMV3lEVHZSRXpoUC1nQU92Rmd3QQ?oc=5\" target=\"_blank\">Indonesian posts tar news media with false claim of ignoring protests</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Yahoo</font>",
+          "published": "Fri, 14 Aug 2026 04:50:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "KU lands grant funding to boost Indigenous representation in news media using character-based approach - KU News",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNTl9VdTRZdHdham5PS2E5Y1BMWnc0cC01UU9SU0tYYTdDVkNFYTVldXo5T3Rhc0hnRnlzNG11bl80OTgxcUlVeHkwOTR1dkhKQUI2M1JXQlBjTWpSVEJ5eGtLa0ExV2lIUmJILTdzVjRkRkRBejFlME5XZlBFYjM0MU5RRFUwcW9valNSWWtLeXRpTUJHQUJUOEVKcWtHeUZhTkFDQklwc2RUUEZCbDNkR3hidzRETlFwbkZ2VmxPS0drdld0XzlGS0lyTXVDNi03?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMi0AFBVV95cUxNTl9VdTRZdHdham5PS2E5Y1BMWnc0cC01UU9SU0tYYTdDVkNFYTVldXo5T3Rhc0hnRnlzNG11bl80OTgxcUlVeHkwOTR1dkhKQUI2M1JXQlBjTWpSVEJ5eGtLa0ExV2lIUmJILTdzVjRkRkRBejFlME5XZlBFYjM0MU5RRFUwcW9valNSWWtLeXRpTUJHQUJUOEVKcWtHeUZhTkFDQklwc2RUUEZCbDNkR3hidzRETlFwbkZ2VmxPS0drdld0XzlGS0lyTXVDNi03?oc=5\" target=\"_blank\">KU lands grant funding to boost Indigenous representation in news media using character-based approach</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">KU News</font>",
+          "published": "Tue, 11 Aug 2026 13:17:23 GMT",
+          "is_news": true
+        },
+        {
+          "title": "Grain bin entrapments, fatalities shaping up to be \u2018worst in years\u2019 - Michigan Farm News",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQeDQ0ZXRJNUpiM09FV1g3QjVvUmVQdmdPZjRCWTNmUG5lY3cyeFRfTGhQamRVb2pvTVlabWZ1dHBaZHJnMjgwOUhkOXpNbE1XMWlsTnpPcjVuZ09VYXlVVlBaYU41VU9XUUhQUVFmaFlzT09tUk16R1d6UHZ2OTRaTTdWV2FmTzNPcHZvM3hmRnFPMzZCeF9wcmVmNU1hVmpjYUJwWldfU2o?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMiqAFBVV95cUxQeDQ0ZXRJNUpiM09FV1g3QjVvUmVQdmdPZjRCWTNmUG5lY3cyeFRfTGhQamRVb2pvTVlabWZ1dHBaZHJnMjgwOUhkOXpNbE1XMWlsTnpPcjVuZ09VYXlVVlBaYU41VU9XUUhQUVFmaFlzT09tUk16R1d6UHZ2OTRaTTdWV2FmTzNPcHZvM3hmRnFPMzZCeF9wcmVmNU1hVmpjYUJwWldfU2o?oc=5\" target=\"_blank\">Grain bin entrapments, fatalities shaping up to be \u2018worst in years\u2019</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Michigan Farm News</font>",
+          "published": "Fri, 14 Aug 2026 03:53:55 GMT",
+          "is_news": true
+        },
+        {
+          "title": "No immediate decision from judge on releasing probe of controversial UNC program - Carolina Public Press",
+          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPWXZ6YmtOeTl0cmw0RGtrbWJHRnFhamlfdUprZHp6bzA1dUM0Zk1nRUpsRkNYeTFUTURmV1F6TW5ZUGxVSWlfbTVSMk54Vm1lZTI2MjQ3TTNtMU5TNTI3eXNYUnhvT2JERUZ0eGFIb3BRdFdzM2VtQ3lCSFM2MGhJUUlWX0JDemQ1ak85eTNQWHlVSEdqZHd6SzZnVVNNQTZDMW0xMHA0aWZncGg5RWNzcnRMc0hNWC0zREo5d1YtSHhhODJOLTVDYmdXM0hzTi1kWTJSSUlVVk55QQ?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMi2gFBVV95cUxPWXZ6YmtOeTl0cmw0RGtrbWJHRnFhamlfdUprZHp6bzA1dUM0Zk1nRUpsRkNYeTFUTURmV1F6TW5ZUGxVSWlfbTVSMk54Vm1lZTI2MjQ3TTNtMU5TNTI3eXNYUnhvT2JERUZ0eGFIb3BRdFdzM2VtQ3lCSFM2MGhJUUlWX0JDemQ1ak85eTNQWHlVSEdqZHd6SzZnVVNNQTZDMW0xMHA0aWZncGg5RWNzcnRMc0hNWC0zREo5d1YtSHhhODJOLTVDYmdXM0hzTi1kWTJSSUlVVk55QQ?oc=5\" target=\"_blank\">No immediate decision from judge on releasing probe of controversial UNC program</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Carolina Public Press</font>",
+          "published": "Tue, 04 Aug 2026 07:00:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "Talking about local news, media habits and AI on the Mass. Municipal Association\u2019s podcast, \u2018The 351\u2019 - Media Nation",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxONk1SRWh0dFNicmZnWXdiOHpkTHFmM0N5V3YyVVNtdWduQ0FhLV9jODZTa0g4OTRnaXZCVDBSUjYtWnNjTURHdzhkdGNJSGdtck5GVVdXbHRIbDd0Z0cxYlVIVkxLYmhQMWw0QXNhaXBlWWo1eG9mNTU0dmFmNUVMYXNmZUpqQzhRUEtxNVZCN2pybDZrVTZQM3FXY3hTNGN5bVN1WEk5NnhfYmFsT0lhWVBWQTc2aC12TlI5X1lJakZrY2tKWE4wMXV3?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMiygFBVV95cUxONk1SRWh0dFNicmZnWXdiOHpkTHFmM0N5V3YyVVNtdWduQ0FhLV9jODZTa0g4OTRnaXZCVDBSUjYtWnNjTURHdzhkdGNJSGdtck5GVVdXbHRIbDd0Z0cxYlVIVkxLYmhQMWw0QXNhaXBlWWo1eG9mNTU0dmFmNUVMYXNmZUpqQzhRUEtxNVZCN2pybDZrVTZQM3FXY3hTNGN5bVN1WEk5NnhfYmFsT0lhWVBWQTc2aC12TlI5X1lJakZrY2tKWE4wMXV3?oc=5\" target=\"_blank\">Talking about local news, media habits and AI on the Mass. Municipal Association\u2019s podcast, \u2018The 351\u2019</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Media Nation</font>",
+          "published": "Tue, 04 Aug 2026 07:00:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "News Media Executives on Journalism and Democracy - C-SPAN",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNTzV5Z19Gc3FxU296eXZKREN6VWlRMmhsUmpCbFlqM09LYVdmZFpZT1RLZHBZTXhOMGdjaUZON2NTdWo4TnZfZnRLM24yc0ttaldYQXpzTFZmYnFRMDNhaXVNOVVmUFkxUHk2LXNsRi1jY1RnQ01uZ1BjeEw4VU5Hc3g3UWRpY09PNXZ4TnhZcTdmZThfd0VVUng0aF91WTh2ajROQlFPQkVGdkhD?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMirAFBVV95cUxNTzV5Z19Gc3FxU296eXZKREN6VWlRMmhsUmpCbFlqM09LYVdmZFpZT1RLZHBZTXhOMGdjaUZON2NTdWo4TnZfZnRLM24yc0ttaldYQXpzTFZmYnFRMDNhaXVNOVVmUFkxUHk2LXNsRi1jY1RnQ01uZ1BjeEw4VU5Hc3g3UWRpY09PNXZ4TnhZcTdmZThfd0VVUng0aF91WTh2ajROQlFPQkVGdkhD?oc=5\" target=\"_blank\">News Media Executives on Journalism and Democracy</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">C-SPAN</font>",
+          "published": "Tue, 28 Jul 2026 07:00:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "St. Louis News Media Owners Are Consolidating 08/05/2026 - MediaPost",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQVmJndVJBYXozQ1dCbVR6TTlpLXEwZXVRU0MzcFFYY1F2cTB5cEV3MFFZbGw2WE1hci1USUQ0eGNCWVFuTm5JOHlHdFVHZ0FLYnB2Z1hqT2l6SnhlYkpPLVo0WmxLVFhHMTNaMUR6bjVNa1FBYnR5QW03M1RGQTBjMmVzWHVQR3kxdk85YXJRNDJhWjhwb09ScloybDBEN1lIMkMtNzZR?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMipgFBVV95cUxQVmJndVJBYXozQ1dCbVR6TTlpLXEwZXVRU0MzcFFYY1F2cTB5cEV3MFFZbGw2WE1hci1USUQ0eGNCWVFuTm5JOHlHdFVHZ0FLYnB2Z1hqT2l6SnhlYkpPLVo0WmxLVFhHMTNaMUR6bjVNa1FBYnR5QW03M1RGQTBjMmVzWHVQR3kxdk85YXJRNDJhWjhwb09ScloybDBEN1lIMkMtNzZR?oc=5\" target=\"_blank\">St. Louis News Media Owners Are Consolidating 08/05/2026</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">MediaPost</font>",
+          "published": "Tue, 04 Aug 2026 07:00:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "Japan\u2019s News Media Leads on Climate - Covering Climate Now",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQRms1UDN1ZU1hTG1ET1NLX2ktSUtGNHJFNkg4WHJtNXRjZE1nNkd4NE1WUkhYQTBncnJtdnpvWFhxUWM0VW9WWTVMVUxIU2NLSHFqYTZ6OEdZenNpaTBUMGhJR3FFekpHTWNkbTR2MER6UjZsb3RYaUsyRDZiM3pEVi1UZjN2ajg?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMihwFBVV95cUxQRms1UDN1ZU1hTG1ET1NLX2ktSUtGNHJFNkg4WHJtNXRjZE1nNkd4NE1WUkhYQTBncnJtdnpvWFhxUWM0VW9WWTVMVUxIU2NLSHFqYTZ6OEdZenNpaTBUMGhJR3FFekpHTWNkbTR2MER6UjZsb3RYaUsyRDZiM3pEVi1UZjN2ajg?oc=5\" target=\"_blank\">Japan\u2019s News Media Leads on Climate</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Covering Climate Now</font>",
+          "published": "Thu, 09 Jul 2026 07:00:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "The US news media is failing the public in its coverage of a possible war against Iran - Press Watch",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQT19tcWxnVlpPVklFQVpGUlBWY1JYRGhkLU1NQ0tPSk5BWGtFNG9aMWJ5U2ZETGVNbWpGMjRHZ1J0QkJ3aUVXeVBoXzBTejk3MUZjS3VBSXBxSmUwbXV1OFNsTV80djVHSzlJVHJ6WFpqMHNuU3oxbzZYbWx6MjNWc3c1NzNWcHJycU5TUURiZWRvMElQZ0E1V3ZZVzJNVEl6Q1NuQS1rbFR1NEJyaDBzOEhNVEFJbnhFTXc?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMiugFBVV95cUxQT19tcWxnVlpPVklFQVpGUlBWY1JYRGhkLU1NQ0tPSk5BWGtFNG9aMWJ5U2ZETGVNbWpGMjRHZ1J0QkJ3aUVXeVBoXzBTejk3MUZjS3VBSXBxSmUwbXV1OFNsTV80djVHSzlJVHJ6WFpqMHNuU3oxbzZYbWx6MjNWc3c1NzNWcHJycU5TUURiZWRvMElQZ0E1V3ZZVzJNVEl6Q1NuQS1rbFR1NEJyaDBzOEhNVEFJbnhFTXc?oc=5\" target=\"_blank\">The US news media is failing the public in its coverage of a possible war against Iran</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Press Watch</font>",
+          "published": "Thu, 19 Feb 2026 08:00:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "What happens when the news media gets it wrong? - Poynter",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPZWdaUkRxMndQUVRMQTZRbW5RQWV0elUwdW8zVGtjNzNDLWppZ052UW1pSWkzTTNMQnNMLVI4NUNza19pbTRqd0hlMjliU25sb2tLWGhBTmY0VlhRbHUxZlNLR1dJQ0F4amRxcGdZbmR1TFlROFlPcF9ZaXhkVlozTmtn?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMiggFBVV95cUxPZWdaUkRxMndQUVRMQTZRbW5RQWV0elUwdW8zVGtjNzNDLWppZ052UW1pSWkzTTNMQnNMLVI4NUNza19pbTRqd0hlMjliU25sb2tLWGhBTmY0VlhRbHUxZlNLR1dJQ0F4amRxcGdZbmR1TFlROFlPcF9ZaXhkVlozTmtn?oc=5\" target=\"_blank\">What happens when the news media gets it wrong?</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Poynter</font>",
+          "published": "Wed, 27 May 2026 07:00:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "Australia Strengthens News Media Bargaining Code - Content + Technology",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxORTZSNTVJM2k2WG9vNnJGMjIyS1VIRklXNTVndXNjTkJzdnQzTHZpOGpabUM0Nnh3OGRLR1pXMVZTT0pjOFlUd2lKUXZGUE5fd0xTLVF3ZUVrUldRRzhoNHZ3OU9wZnRQbFRZZmhlcVFjbDh3T0pIUHBaZ3FVYUdSbUk2cUtYUmhQVWNqd1o1bTlmLUM5eU5EalNiUTRHOHM?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMinwFBVV95cUxORTZSNTVJM2k2WG9vNnJGMjIyS1VIRklXNTVndXNjTkJzdnQzTHZpOGpabUM0Nnh3OGRLR1pXMVZTT0pjOFlUd2lKUXZGUE5fd0xTLVF3ZUVrUldRRzhoNHZ3OU9wZnRQbFRZZmhlcVFjbDh3T0pIUHBaZ3FVYUdSbUk2cUtYUmhQVWNqd1o1bTlmLUM5eU5EalNiUTRHOHM?oc=5\" target=\"_blank\">Australia Strengthens News Media Bargaining Code</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Content + Technology</font>",
+          "published": "Fri, 14 Aug 2026 01:59:14 GMT",
+          "is_news": true
+        },
+        {
+          "title": "Old-school lessons still apply: Reflections on news media past, present and future - Editor and Publisher",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOblZNaWh0QUp6V2E5NENaRUhCTExsOGRPamxQSzRkb3dzWXRXbnlZVUZReDZKTHg0OW1Pd0oydzVfeTZLUE9KNk9LLUdvdThVRUc1c000TVJwLUtTMkFibE9KZHhwcXhCZmxPLXUzdjU3S2x2YnpaazRWU3RpbDgzcmszazk0Zi1wUHRGTm9iS0VYNHVkWTdGQTVad2VFaVl3UEE4dnFncEd6MUloLVkwblJfbUp0SHZnUU9DMWdsMGpCYl9rN1owWkJ3?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMiygFBVV95cUxOblZNaWh0QUp6V2E5NENaRUhCTExsOGRPamxQSzRkb3dzWXRXbnlZVUZReDZKTHg0OW1Pd0oydzVfeTZLUE9KNk9LLUdvdThVRUc1c000TVJwLUtTMkFibE9KZHhwcXhCZmxPLXUzdjU3S2x2YnpaazRWU3RpbDgzcmszazk0Zi1wUHRGTm9iS0VYNHVkWTdGQTVad2VFaVl3UEE4dnFncEd6MUloLVkwblJfbUp0SHZnUU9DMWdsMGpCYl9rN1owWkJ3?oc=5\" target=\"_blank\">Old-school lessons still apply: Reflections on news media past, present and future</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Editor and Publisher</font>",
+          "published": "Thu, 04 Jun 2026 07:00:00 GMT",
+          "is_news": true
+        },
+        {
+          "title": "Digital Lifestyle Expert Mario Armstrong and News Media Group, Inc. Showcase the Ultimate \"Cool for School\" Tech and Learning Essentials on a Nationwide Satellite Media Tour - TMX Newsfile",
+          "url": "https://news.google.com/rss/articles/CBMiugJBVV95cUxQVFJGLWFPUHRQTEZyQk1CNjFxYVRCVWhUYlhQY0ZiWTJ1Wm13dlFEMkJzUFVHSllpb2d3NmM2a3JxTGdnbENpTnViZ1dzeGZhOVVRcm4xLU5MaV9VU3MwVW54UDR2MzAxMzlCV3pyTnBNcjA4OHJZV2JTTDFzdVVUUU9nUy1Ud3l6MEk0SFE2X0VsempIYmZIaksyUUMtTmF3RDFfR3N0OHZhMDRFbktodC1HcDhPaE5JVUR1YUpTUGdVa0VheGVEZE85RWYtUjBvT2wteE1QWXB2OHY5ajhMT0N0TEJlQnYzS3gtdnFjcFRiVFlkdFloc3h6bktRQXl5UTZnU3gzOEpYY0dQU3JKNXRJVDhiNmhDVEVvX2dwc1M0cFZaMmtuc0o3T3ZuZTlPelJZbEo4bm5xdw?oc=5",
+          "snippet": "<a href=\"https://news.google.com/rss/articles/CBMiugJBVV95cUxQVFJGLWFPUHRQTEZyQk1CNjFxYVRCVWhUYlhQY0ZiWTJ1Wm13dlFEMkJzUFVHSllpb2d3NmM2a3JxTGdnbENpTnViZ1dzeGZhOVVRcm4xLU5MaV9VU3MwVW54UDR2MzAxMzlCV3pyTnBNcjA4OHJZV2JTTDFzdVVUUU9nUy1Ud3l6MEk0SFE2X0VsempIYmZIaksyUUMtTmF3RDFfR3N0OHZhMDRFbktodC1HcDhPaE5JVUR1YUpTUGdVa0VheGVEZE85RWYtUjBvT2wteE1QWXB2OHY5ajhMT0N0TEJlQnYzS3gtdnFjcFRiVFlkdFloc3h6bktRQXl5UTZnU3gzOEpYY0dQU3JKNXRJVDhiNmhDVEVvX2dwc1M0cFZaMmtuc0o3T3ZuZTlPelJZbEo4bm5xdw?oc=5\" target=\"_blank\">Digital Lifestyle Expert Mario Armstrong and News Media Group, Inc. Showcase the Ultimate \"Cool for Schoo",
+          "published": "Thu, 30 Jul 2026 21:09:22 GMT",
+          "is_news": true
+        }
+      ],
+      "brand_mentions_in_news": 0,
+      "industry_articles_scanned": 30,
+      "total_articles_scanned": 30,
+      "hook_count": 8,
+      "hooks": [
+        {
+          "title": "Trending: \"News\" (41 mentions in the last-14-days news set)",
+          "angle": "Position Filmibeat as an authoritative voice on the live News topic using verified data.",
+          "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5",
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from real article term-frequency; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending: \"Media\" (36 mentions in the last-14-days news set)",
+          "angle": "Position Filmibeat as an authoritative voice on the live Media topic using verified data.",
+          "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5",
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from real article term-frequency; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending: \"Alliance\" (21 mentions in the last-14-days news set)",
+          "angle": "Position Filmibeat as an authoritative voice on the live Alliance topic using verified data.",
+          "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5",
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from real article term-frequency; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending: \"Applauds\" (6 mentions in the last-14-days news set)",
+          "angle": "Position Filmibeat as an authoritative voice on the live Applauds topic using verified data.",
+          "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5",
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from real article term-frequency; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending: \"Digital\" (4 mentions in the last-14-days news set)",
+          "angle": "Position Filmibeat as an authoritative voice on the live Digital topic using verified data.",
+          "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5",
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from real article term-frequency; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending: \"Michigan\" (4 mentions in the last-14-days news set)",
+          "angle": "Position Filmibeat as an authoritative voice on the live Michigan topic using verified data.",
+          "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5",
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from real article term-frequency; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending: \"Farm\" (4 mentions in the last-14-days news set)",
+          "angle": "Position Filmibeat as an authoritative voice on the live Farm topic using verified data.",
+          "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5",
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from real article term-frequency; LLM not configured, so wording is templated."
+        },
+        {
+          "title": "Trending: \"Public\" (4 mentions in the last-14-days news set)",
+          "angle": "Position Filmibeat as an authoritative voice on the live Public topic using verified data.",
+          "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU1FuWmFQWDJpZG1CVHNSZlNKbzMzSTdDdEdtQVBzQks1WjAzRTRDbU56djVqU2I3NVRRUThVLVB1YTNkWndvSEhoNjJDemlaQWNEYXB2OFM0NG01bmpZVldMYVpDVjRQSEUwSnZLcVJaaWdqWFdmZ0ZwTklfa1UwajM1T1NzblJzVTAwMFRoanI2cEZYVHVHZEtVM2hYVGEzbkZ2LTl0amZNdGVaaXEyOGtFMVRoMXFmZDNZ?oc=5",
+          "target_outlet": "",
+          "verified": true,
+          "note": "Hook derived from real article term-frequency; LLM not configured, so wording is templated."
+        }
+      ],
+      "assessment": "hooks_ready",
+      "recommendation": "Scanned 30 real news media articles from the last 14 days. 8 journalist-ready PR hooks generated, each grounded in a real article.",
+      "detailed_analysis": "PR hook engine for Filmibeat: pulled 30 real articles via Google News RSS. 0 mention the brand directly. 8 hooks were produced from real term-frequency analysis and checked against article URLs at 2026-08-18T09:19:46.270491+00:00.",
+      "runtime_secs": 2.4,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Brand Mentions In News",
+          "value": "0"
+        },
+        {
+          "metric": "Industry Articles Scanned",
+          "value": "30"
+        },
+        {
+          "metric": "Total Articles Scanned",
+          "value": "30"
+        },
+        {
+          "metric": "Hook Count",
+          "value": "8"
+        }
+      ],
+      "actions": [
+        "Scanned 30 real news media articles from the last 14 days",
+        "8 journalist-ready PR hooks generated, each grounded in a real article"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "link_poisoning": {
+      "feature_name": "Algorithmic Link Poisoning & Anomaly Radar",
+      "status": "ok",
+      "verified": true,
+      "method": "bing_link_queries+analysis",
+      "retrieved_at": "2026-08-18T09:19:52.631533+00:00",
+      "total_backlinks": 15,
+      "toxic_count": 0,
+      "toxic_backlinks": [],
+      "exact_match_anchor_pct": 0.0,
+      "top_anchors": [
+        {
+          "anchor": "filmibeat - youtube",
+          "count": 3
+        },
+        {
+          "anchor": "filmibeat - latest bollywood movie news & updates in hindi",
+          "count": 3
+        },
+        {
+          "anchor": "bollywood movie news in hindi - filmibeat",
+          "count": 3
+        },
+        {
+          "anchor": "filmibeat.com - facebook",
+          "count": 3
+        },
+        {
+          "anchor": "filmibeat - tamil movie news | tamil cinema news in tamil",
+          "count": 3
+        }
+      ],
+      "health_score": 100,
+      "assessment": "healthy",
+      "recommendation": "15 real backlinks audited. 0 flagged as toxic/anomalous. 0.0% exact-match anchors (over-optimization risk above 40%). Health score 100/100.",
+      "detailed_analysis": "Link-poisoning audit for filmibeat.com: 15 backlinks pulled live from Bing reference discovery. 0 links show toxic domain or anchor patterns; 0.0% of anchors are exact-match. All numbers derived from the live backlink dataset.",
+      "runtime_secs": 8.5,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Backlinks",
+          "value": "15"
+        },
+        {
+          "metric": "Toxic Count",
+          "value": "0"
+        },
+        {
+          "metric": "Exact Match Anchor Pct",
+          "value": "0.0%"
+        },
+        {
+          "metric": "Health Score",
+          "value": "100%"
+        }
+      ],
+      "actions": [
+        "0 flagged as toxic/anomalous",
+        "0% exact-match anchors (over-optimization risk above 40%)"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "podcast_video": {
+      "feature_name": "Podcast & Video Citation Finder",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+itunes_api+platform_filter",
+      "retrieved_at": "2026-08-18T09:19:56.345836+00:00",
+      "opportunity_count": 2,
+      "unique_platforms": 2,
+      "mentions": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of..."
+        },
+        {
+          "url": "https://feeds.megaphone.fm/NPTNI6761679613",
+          "title": "Pedro Pascal - Biography Flash \u2014 Inception Point AI",
+          "domain": "podcasts.apple.com",
+          "snippet": "TV & Film"
+        }
+      ],
+      "platforms": [
+        "youtube.com",
+        "podcasts.apple.com"
+      ],
+      "assessment": "opportunities_found",
+      "recommendation": "Found 2 real podcast/video pages mentioning \"Filmibeat\" across 2 platforms (Bing web search + public iTunes podcast API). Pitch guest appearances or cite each episode.",
+      "detailed_analysis": "Podcast & video audit for Filmibeat: searched 4 audio/video queries and the public iTunes podcast catalog. 2 genuine pages were collected; no URLs were synthesized.",
+      "runtime_secs": 11.9,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Opportunity Count",
+          "value": "2"
+        },
+        {
+          "metric": "Unique Platforms",
+          "value": "2"
+        }
+      ],
+      "actions": [
+        "Found 2 real podcast/video pages mentioning \"Filmibeat\" across 2 platforms (Bing web search + public iTunes podcast API)",
+        "Pitch guest appearances or cite each episode"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "aeo": {
+      "feature_name": "Agentic Commerce Protocol Placement (GEO/AEO)",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_probe",
+      "retrieved_at": "2026-08-18T09:20:02.605210+00:00",
+      "aeo_score": 40,
+      "llms_txt": false,
+      "robots_txt": true,
+      "sitemap": true,
+      "ai_plugin_json": false,
+      "ai_bot_directives": [],
+      "schema_types": [
+        "Organization",
+        "WebSite"
+      ],
+      "probes": [
+        {
+          "path": "/llms.txt",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 442262,
+          "final_url": "https://filmibeat.com/llms.txt"
+        },
+        {
+          "path": "/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "size": 760,
+          "final_url": "https://filmibeat.com/robots.txt"
+        },
+        {
+          "path": "/sitemap.xml",
+          "status": 200,
+          "content_type": "application/xml",
+          "size": 5285521,
+          "final_url": "https://filmibeat.com/sitemap.xml"
+        },
+        {
+          "path": "/.well-known/ai-plugin.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 442262,
+          "final_url": "https://filmibeat.com/.well-known/ai-plugin.json"
+        },
+        {
+          "path": "/.well-known/llms.txt",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 442262,
+          "final_url": "https://filmibeat.com/.well-known/llms.txt"
+        },
+        {
+          "path": "/ai.txt",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 442262,
+          "final_url": "https://filmibeat.com/ai.txt"
+        },
+        {
+          "path": "/.well-known/appspecific/com.chatgpt.android.platform.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 442262,
+          "final_url": "https://filmibeat.com/.well-known/appspecific/com.chatgpt.android.platform.json"
+        }
+      ],
+      "assessment": "needs_optimization",
+      "recommendation": "AEO readiness for filmibeat.com: 40/100. llms.txt: missing, AI bot directives: 0, schema types: 2.",
+      "detailed_analysis": "AEO audit for Filmibeat: live-probed 7 agentic-discovery endpoints on filmibeat.com and parsed robots.txt and structured data. Every finding above reflects the real response received at 2026-08-18T09:20:02.605196+00:00.",
+      "runtime_secs": 17.9,
+      "sources": [
+        {
+          "url": "https://filmibeat.com/llms.txt",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/robots.txt",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/sitemap.xml",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/.well-known/ai-plugin.json",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/.well-known/llms.txt",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/ai.txt",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/.well-known/appspecific/com.chatgpt.android.platform.json",
+          "domain": "filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Aeo Score",
+          "value": "40%"
+        }
+      ],
+      "actions": [
+        "AEO readiness for filmibeat",
+        "txt: missing, AI bot directives: 0, schema types: 2"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "pbn_detector": {
+      "feature_name": "Synthetic Network & Footprint De-Anonymizer",
+      "status": "ok",
+      "verified": true,
+      "method": "backlinks+rdap_footprint_analysis",
+      "retrieved_at": "2026-08-18T09:19:52.642830+00:00",
+      "total_backlinks": 0,
+      "repeated_source_domains": [],
+      "suspicious_count": 0,
+      "sponsored_count": 0,
+      "ugc_count": 0,
+      "generic_anchor_count": 0,
+      "registration_footprint": {
+        "domain": "filmibeat.com",
+        "registrar": "4.0",
+        "registered": "2014-06-10T03:57:21Z",
+        "domain_age_years": null,
+        "expiration": "2029-06-10T03:57:21Z"
+      },
+      "methodology_note": "PBN footprint signals: backlink repetition/anchor patterns (when a backlink provider is configured) plus public RDAP domain-registration data. If no paid backlink provider is configured, only the public registration signals are reported.",
+      "assessment": "clean",
+      "recommendation": "Analyzed 0 real backlinks and the public RDAP registration record. 0 source domains repeat 5+ times. PBN footprint signals: backlink repetition/anchor patterns (when a backlink provider is configured) plus public RDAP domain-registration data. If no paid backlink provider is configured, only the public registration signals are reported.",
+      "detailed_analysis": "PBN footprint audit for filmibeat.com: examined 0 live backlinks and the public RDAP registration record (created 2014-06-10T03:57:21Z). 0 source domains link 3+ times. 0 sponsored, 0 UGC. All values derive from real, verifiable data.",
+      "runtime_secs": 7.9,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Backlinks",
+          "value": "0"
+        },
+        {
+          "metric": "Suspicious Count",
+          "value": "0"
+        },
+        {
+          "metric": "Sponsored Count",
+          "value": "0"
+        },
+        {
+          "metric": "Ugc Count",
+          "value": "0"
+        },
+        {
+          "metric": "Generic Anchor Count",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Analyzed 0 real backlinks and the public RDAP registration record",
+        "0 source domains repeat 5+ times",
+        "PBN footprint signals: backlink repetition/anchor patterns (when a backlink provider is configured) plus public RDAP domain-registration data",
+        "If no paid backlink provider is configured, only the public registration signals are reported"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "revenue_sim": {
+      "feature_name": "Share-of-Search Revenue Simulator",
+      "status": "ok",
+      "verified": true,
+      "method": "bing_rss_serp_analysis",
+      "retrieved_at": "2026-08-18T09:19:49.996681+00:00",
+      "share_of_search_branded_query": 100.0,
+      "share_of_search_category_query": 0.0,
+      "branded_results": [
+        {
+          "title": "FilmiBeat",
+          "url": "https://www.filmibeat.com/",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest..."
+        },
+        {
+          "title": "Movie News - Bollywood (Hindi), Tamil, Telugu, Kannada ... - FilmiBeat",
+          "url": "https://www.filmibeat.com/bollywood/",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest..."
+        },
+        {
+          "title": "FilmiBeat - YouTube",
+          "url": "https://www.youtube.com/@filmibeat",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of..."
+        },
+        {
+          "title": "New Bollywood Movies 2026: Latest Bollywood Films Release ... - FilmiBeat",
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "snippet": "Latest Bollywood Movies 2026: Stay updated on Bollywood films release dates, trailers, teasers, reviews, and all the latest news on FilmiBeat"
+        },
+        {
+          "title": "Entertainment News: OTT, Celeb Updates, Box Office, Gossips ... - FilmiBeat",
+          "url": "https://www.filmibeat.com/latest",
+          "snippet": "Latest Entertainment News: Ott, Celeb Updates, Box Office, Gossips, and Movie Updates from Bollywood, Tamil, Telugu, Malayalam & Kannada Cinema World."
+        },
+        {
+          "title": "New Movies 2026 \u2013 Bollywood, Hollywood, Tamil, Telugu ... - FilmiBeat",
+          "url": "https://www.filmibeat.com/movies.html",
+          "snippet": "Stay updated about the latest Bollywood, Hollywood, Tamil, Telugu, Kannada, Hindi & Malayalam movies, their ratings, reviews & much more from Filmibeat."
+        },
+        {
+          "title": "FilmiBeat - Latest Bollywood Movie News & Updates in Hindi",
+          "url": "https://hindi.filmibeat.com/",
+          "snippet": "FilmiBeat provides latest Bollywood Movie News & updates in Hindi, bollywood movie and celebrity news, hindi movie reviews, movie trailers & promos in Hindi."
+        },
+        {
+          "title": "Bollywood Movie News in Hindi - FilmiBeat",
+          "url": "https://hindi.filmibeat.com/news/",
+          "snippet": "\u092c\u0949\u0932\u0940\u0935\u0941\u0921 & \u092e\u0928\u094b\u0930\u0902\u091c\u0928 \u0938\u092e\u093e\u091a\u093e\u0930 \u2013 FilmiBeat provides Bollywood movie news in hindi, Bollywood news, Hindi cinema news, Bollywood celebrity news & updates in Hindi."
+        },
+        {
+          "title": "Filmibeat.com - Facebook",
+          "url": "https://www.facebook.com/Filmibeat/",
+          "snippet": "Filmibeat.com \udb86\udc8f Movies, shows & stars beyond the headlines. The story behind every story, only on FilmiBeat"
+        },
+        {
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "url": "https://tamil.filmibeat.com/",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news..."
+        }
+      ],
+      "category_results": [
+        {
+          "title": "Google News",
+          "url": "https://news.google.com/?hl=en-IN&ceid=IN:en",
+          "snippet": "Comprehensive, up-to-date news coverage, aggregated from sources all over the world by Google News."
+        },
+        {
+          "title": "Google News",
+          "url": "https://news.google.com/",
+          "snippet": "Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News."
+        },
+        {
+          "title": "TOI - Breaking News, Latest News, India News, World News, Bollywood ...",
+          "url": "https://timesofindia.indiatimes.com/",
+          "snippet": "Breaking News in India: Read Latest News on Sports, Business, Entertainment, Blogs and Opinions from leading columnists. Times of India brings the Breaking News and Latest News."
+        },
+        {
+          "title": "NDTV 24x7 Live TV, Live English News Channel, Free Live Streaming ...",
+          "url": "https://www.ndtv.com/livetv-ndtv24x7",
+          "snippet": "Watch NDTV 24x7 Live TV free \u2013 live streaming of breaking news, latest headlines, politics, business, economy, sports, entertainment, and world news in English."
+        },
+        {
+          "title": "Hindi news, \u0939\u093f\u0902\u0926\u0940 \u0928\u094d\u092f\u0942\u095b , Hindi Samachar, \u0939\u093f\u0902\u0926\u0940 \u0938\u092e\u093e\u091a\u093e\u0930, Latest News in ...",
+          "url": "https://www.aajtak.in/",
+          "snippet": "AajTak: Hindi news (\u0939\u093f\u0902\u0926\u0940 \u0938\u092e\u093e\u091a\u093e\u0930) website, watch live tv coverages, Latest Khabar, Breaking news in Hindi of India, World, Sports, business, film and Entertainment."
+        },
+        {
+          "title": "Hindustan Times: Breaking News, Latest News, India News, World News ...",
+          "url": "https://www.hindustantimes.com/",
+          "snippet": "Hindustan Times: Stay updated with Hindustan Times for the top India news, world events, and breaking stories. Get real-time updates on politics, wars, live cricket scores, entertainment news,..."
+        },
+        {
+          "title": "Latest News, Breaking News, Top News Headlines and Current Affairs ...",
+          "url": "https://timesofindia.indiatimes.com/news",
+          "snippet": "Latest News on Politics, India, Current affairs. The Times of India Covers all latest breaking news across India and world"
+        },
+        {
+          "title": "LIVE TV: TV9 Marathi Watch Marathi News Channel 24x7 Live Streaming ...",
+          "url": "https://www.tv9marathi.com/live-tv",
+          "snippet": "TV9 Marathi LIVE TV - Watch marathi news channel 24x7 live streaming online at Tv9marathi.com. Get latest and breaking news headline in marathi, \u092e\u0930\u093e\u0920\u0940 \u092c\u093e\u0924\u092e\u094d\u092f\u093e \u0932\u093e\u0907\u0935 news and exclusive news updates from the stories in Mumbai, Pune, Maharashtra, India and across the globe at \u091f\u0940\u0935\u094d\u0939\u0940 9 \u092e\u0930\u093e\u0920\u0940."
+        },
+        {
+          "title": "Latest Marathi News | Breaking News in Marathi | Live News in Marathi ...",
+          "url": "https://www.lokmat.com/latestnews/",
+          "snippet": "Latest Marathi News Headlines - Lokmat covers Latest Marathi News, \u092e\u0930\u093e\u0920\u0940 \u0932\u0947\u091f\u0947\u0938\u094d\u091f \u0928\u094d\u092f\u0942\u091c including Maharashtra, India, Mumbai, Pune & all other cities. Also, Find Marathi News on Entertainment, Business, World, Sports and Politics. Get all Live & Breaking headlines and Mumbai, Pune & other Metro Cities."
+        },
+        {
+          "title": "Marathi News: \u0924\u093e\u091c\u094d\u092f\u093e \u092c\u093e\u0924\u092e\u094d\u092f\u093e, Latest Breaking News in Marathi Online ...",
+          "url": "https://www.tv9marathi.com/",
+          "snippet": "Marathi News, \u092e\u0930\u093e\u0920\u0940 \u092c\u093e\u0924\u092e\u094d\u092f\u093e: latest Marathi news and breaking news in Marathi, Maharashtra news live updates on tv9marathi.com. Read today\u2019s \u0924\u093e\u091c\u094d\u092f\u093e \u092c\u093e\u0924\u092e\u094d\u092f\u093e, \u092e\u0941\u0902\u092c\u0908, \u092a\u0941\u0923\u0947, \u0928\u093e\u0936\u093f\u0915, \u0915\u094b\u0915\u0923, Top headline from Maharashtra, India and the world."
+        }
+      ],
+      "revenue_projection": null,
+      "revenue_projection_note": "Revenue projection is intentionally NOT fabricated. It requires a real baseline (annual revenue or deal size) supplied by the user.",
+      "assessment": "measured",
+      "recommendation": "Brand appears in 100.0% of the top 10 results for the branded query and 0.0% for the category query. These are real measurement of live search results.",
+      "detailed_analysis": "Share-of-search for Filmibeat: real Google SERPs fetched via SerpAPI at 2026-08-18T09:19:49.996676+00:00. Branded-query presence 100.0%, category-query presence 0.0%. No revenue figure is simulated.",
+      "runtime_secs": 5.0,
+      "sources": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "domain": "facebook.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Share Of Search Branded Query",
+          "value": "100.0%"
+        },
+        {
+          "metric": "Share Of Search Category Query",
+          "value": "0.0%"
+        }
+      ],
+      "actions": [
+        "0% of the top 10 results for the branded query and 0",
+        "These are real measurement of live search results"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "dead_equity": {
+      "feature_name": "Edge-Redirect & Dead-Equity Salvage",
+      "status": "ok",
+      "verified": true,
+      "method": "live_outbound_link_check",
+      "retrieved_at": "2026-08-18T09:20:13.925229+00:00",
+      "outbound_links_checked": 40,
+      "broken_count": 0,
+      "redirect_count": 0,
+      "healthy_count": 40,
+      "broken_links": [],
+      "redirected_links": [],
+      "assessment": "clean",
+      "recommendation": "Checked 40 real outbound links on filmibeat.com: 0 broken, 0 redirected, 40 healthy. Recover the broken ones first (lost link equity).",
+      "detailed_analysis": "Dead-equity audit for filmibeat.com: crawled 2 pages and followed 40 external links live. Each broken/redirect verdict is a real HTTP response captured at 2026-08-18T09:20:13.925214+00:00.",
+      "runtime_secs": 28.7,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Outbound Links Checked",
+          "value": "40"
+        },
+        {
+          "metric": "Broken Count",
+          "value": "0"
+        },
+        {
+          "metric": "Redirect Count",
+          "value": "0"
+        },
+        {
+          "metric": "Healthy Count",
+          "value": "40%"
+        }
+      ],
+      "actions": [
+        "Checked 40 real outbound links on filmibeat",
+        "com: 0 broken, 0 redirected, 40 healthy",
+        "Recover the broken ones first (lost link equity)"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "negative_seo": {
+      "feature_name": "Negative SEO Counter-Measure Deployment",
+      "status": "ok",
+      "verified": true,
+      "method": "live_reputation_search",
+      "retrieved_at": "2026-08-18T09:19:57.274538+00:00",
+      "negative_mention_count": 10,
+      "negative_mentions": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "title": "FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest...",
+          "risk_term": []
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "title": "Movie News - Bollywood (Hindi), Tamil, Telugu, Kannada ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest...",
+          "risk_term": []
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of...",
+          "risk_term": []
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "title": "New Bollywood Movies 2026: Latest Bollywood Films Release ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Bollywood Movies 2026: Stay updated on Bollywood films release dates, trailers, teasers, reviews, and all the latest news on FilmiBeat",
+          "risk_term": []
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "title": "Entertainment News: OTT, Celeb Updates, Box Office, Gossips ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Entertainment News: Ott, Celeb Updates, Box Office, Gossips, and Movie Updates from Bollywood, Tamil, Telugu, Malayalam & Kannada Cinema World.",
+          "risk_term": []
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "title": "New Movies 2026 \u2013 Bollywood, Hollywood, Tamil, Telugu ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Stay updated about the latest Bollywood, Hollywood, Tamil, Telugu, Kannada, Hindi & Malayalam movies, their ratings, reviews & much more from Filmibeat.",
+          "risk_term": []
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "title": "FilmiBeat - Latest Bollywood Movie News & Updates in Hindi",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "FilmiBeat provides latest Bollywood Movie News & updates in Hindi, bollywood movie and celebrity news, hindi movie reviews, movie trailers & promos in Hindi.",
+          "risk_term": []
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "title": "Bollywood Movie News in Hindi - FilmiBeat",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "\u092c\u0949\u0932\u0940\u0935\u0941\u0921 & \u092e\u0928\u094b\u0930\u0902\u091c\u0928 \u0938\u092e\u093e\u091a\u093e\u0930 \u2013 FilmiBeat provides Bollywood movie news in hindi, Bollywood news, Hindi cinema news, Bollywood celebrity news & updates in Hindi.",
+          "risk_term": []
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "title": "Filmibeat.com - Facebook",
+          "domain": "facebook.com",
+          "snippet": "Filmibeat.com \udb86\udc8f Movies, shows & stars beyond the headlines. The story behind every story, only on FilmiBeat",
+          "risk_term": []
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news...",
+          "risk_term": []
+        }
+      ],
+      "risk_terms": [],
+      "assessment": "attention_needed",
+      "recommendation": "Found 10 real pages surfaced for brand + risk-term queries. Prioritize responses on the flagged domains.",
+      "detailed_analysis": "Negative-SEO monitor for Filmibeat: ran 6 risk queries and collected 10 real results. Verdicts are based on the actual search results returned at 2026-08-18T09:19:57.274531+00:00.",
+      "runtime_secs": 12.0,
+      "sources": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "domain": "facebook.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Negative Mention Count",
+          "value": "10"
+        }
+      ],
+      "actions": [
+        "Found 10 real pages surfaced for brand + risk-term queries",
+        "Prioritize responses on the flagged domains"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "github_citations": {
+      "feature_name": "GitHub Citation Harvester",
+      "status": "ok",
+      "verified": true,
+      "method": "live_github_search+github_api+stackexchange+hn_api",
+      "retrieved_at": "2026-08-18T09:19:52.633813+00:00",
+      "github_references": 21,
+      "references": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "title": "FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest..."
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "title": "Movie News - Bollywood (Hindi), Tamil, Telugu, Kannada ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest..."
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of..."
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "title": "New Bollywood Movies 2026: Latest Bollywood Films Release ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Bollywood Movies 2026: Stay updated on Bollywood films release dates, trailers, teasers, reviews, and all the latest news on FilmiBeat"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "title": "Entertainment News: OTT, Celeb Updates, Box Office, Gossips ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Entertainment News: Ott, Celeb Updates, Box Office, Gossips, and Movie Updates from Bollywood, Tamil, Telugu, Malayalam & Kannada Cinema World."
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "title": "New Movies 2026 \u2013 Bollywood, Hollywood, Tamil, Telugu ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Stay updated about the latest Bollywood, Hollywood, Tamil, Telugu, Kannada, Hindi & Malayalam movies, their ratings, reviews & much more from Filmibeat."
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "title": "FilmiBeat - Latest Bollywood Movie News & Updates in Hindi",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "FilmiBeat provides latest Bollywood Movie News & updates in Hindi, bollywood movie and celebrity news, hindi movie reviews, movie trailers & promos in Hindi."
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "title": "Bollywood Movie News in Hindi - FilmiBeat",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "\u092c\u0949\u0932\u0940\u0935\u0941\u0921 & \u092e\u0928\u094b\u0930\u0902\u091c\u0928 \u0938\u092e\u093e\u091a\u093e\u0930 \u2013 FilmiBeat provides Bollywood movie news in hindi, Bollywood news, Hindi cinema news, Bollywood celebrity news & updates in Hindi."
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "title": "Filmibeat.com - Facebook",
+          "domain": "facebook.com",
+          "snippet": "Filmibeat.com \udb86\udc8f Movies, shows & stars beyond the headlines. The story behind every story, only on FilmiBeat"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news..."
+        },
+        {
+          "url": "https://github.com/Frostbyte-Inc/Filmibeat",
+          "title": "Frostbyte-Inc/Filmibeat \u2014 Filmibeat shows the Popular, Top-Rated and Now Playing Hollywood movies. You can read movie reviews, plot, trailers, cast etc. The app uses theMovieDb API to get the movies and also use many popular libraries such as Glide, Retrofit etc..",
+          "domain": "github.com",
+          "snippet": "Filmibeat shows the Popular, Top-Rated and Now Playing Hollywood movies. You can read movie reviews, plot, trailers, cast etc. The app uses theMovieDb API to get the movies and also use many popular libraries such as Glide, Retrofit etc.."
+        },
+        {
+          "url": "https://github.com/PyNAABO/FilmiBeat",
+          "title": "PyNAABO/FilmiBeat \u2014 ",
+          "domain": "github.com",
+          "snippet": ""
+        },
+        {
+          "url": "https://stackoverflow.com/questions/42526471/how-do-i-check-if-a-string-is-present-in-a-webpage-using-jsoup",
+          "title": "How do I check if a string is present in a webpage using jsoup?",
+          "domain": "stackoverflow.com",
+          "snippet": "How do I check if a string is present in a webpage using jsoup?"
+        },
+        {
+          "url": "https://www.reddit.com/r/aws/comments/nn95aq/elastic_has_broken_filebeat_as_of_713_it_no/",
+          "title": "Elastic has broken filebeat in 7.13; no longer works with AWS managed ES",
+          "domain": "news.ycombinator.com",
+          "snippet": "19 points \u00b7 2 comments"
+        },
+        {
+          "url": "https://blog.joshsoftware.com/2020/09/09/searchable-logs-with-filebeat-and-elastic-stack/",
+          "title": "Searchable Logs with Filebeat and Elastic Stack",
+          "domain": "news.ycombinator.com",
+          "snippet": "7 points \u00b7 0 comments"
+        },
+        {
+          "url": "https://www.elastic.co/blog/beats-beta4-filebeat-lightweight-log-forwarding",
+          "title": "Log Forwarding with Filebeat [Will Replace Logstash Forwarder]",
+          "domain": "news.ycombinator.com",
+          "snippet": "3 points \u00b7 1 comments"
+        },
+        {
+          "url": "https://www.elastic.co/blog/structured-logging-filebeat",
+          "title": "Structured logging with Filebeat",
+          "domain": "news.ycombinator.com",
+          "snippet": "3 points \u00b7 0 comments"
+        },
+        {
+          "url": "https://bionic.fullstory.com/writing-a-filebeat-output-plugin/",
+          "title": "Writing a Filebeat Plugin",
+          "domain": "news.ycombinator.com",
+          "snippet": "2 points \u00b7 1 comments"
+        },
+        {
+          "url": "https://alexander.holbreich.org/filebeat-kubernetes/",
+          "title": "Installing Filebeat to catch all Kubernetes logs",
+          "domain": "news.ycombinator.com",
+          "snippet": "2 points \u00b7 0 comments"
+        },
+        {
+          "url": "https://www.deepnetwork.com/blog//2020/01/27/ELK-stack-filebeat-k8s-deployment.html",
+          "title": "How to Setup an Elk Stack and Filebeat on Kubernetes",
+          "domain": "news.ycombinator.com",
+          "snippet": "2 points \u00b7 0 comments"
+        }
+      ],
+      "assessment": "references_found",
+      "recommendation": "Found 21 real GitHub/developer pages referencing \"Filmibeat\" (web search + GitHub API + Stack Overflow + Hacker News). Contribute to or link these repositories.",
+      "detailed_analysis": "GitHub citation harvest for Filmibeat: collected 21 repository/file pages from live searches and free developer APIs (GitHub, Stack Overflow, Hacker News). All URLs are real results returned at 2026-08-18T09:19:52.633800+00:00.",
+      "runtime_secs": 7.0,
+      "sources": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "domain": "facebook.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        },
+        {
+          "url": "https://github.com/Frostbyte-Inc/Filmibeat",
+          "domain": "github.com"
+        },
+        {
+          "url": "https://github.com/PyNAABO/FilmiBeat",
+          "domain": "github.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Github References",
+          "value": "21"
+        }
+      ],
+      "actions": [
+        "Found 21 real GitHub/developer pages referencing \"Filmibeat\" (web search + GitHub API + Stack Overflow + Hacker News)",
+        "Contribute to or link these repositories"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "transcription": {
+      "feature_name": "Audio & Video Semantic Transcription Monitor",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search",
+      "retrieved_at": "2026-08-18T09:20:26.750157+00:00",
+      "transcript_mentions": 2,
+      "mentions": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of..."
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news..."
+        }
+      ],
+      "transcription_available": false,
+      "transcription_note": "Full audio transcription requires an audio file or episode URL; the search results above are the real transcript/interview pages found. No transcription is synthesized.",
+      "assessment": "mentions_found",
+      "recommendation": "Found 2 real transcript/interview pages for \"Filmibeat\". Upload an episode URL to this module to run an actual transcription.",
+      "detailed_analysis": "Transcription monitor for Filmibeat: 2 audio/video transcript pages collected from real searches. Transcription itself is not fabricated; provide media to transcribe.",
+      "runtime_secs": 12.7,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Transcript Mentions",
+          "value": "2"
+        }
+      ],
+      "actions": [
+        "Found 2 real transcript/interview pages for \"Filmibeat\"",
+        "Upload an episode URL to this module to run an actual transcription"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "kg_arbitrage": {
+      "feature_name": "Knowledge Graph & Wikidata Triple Arbitrage",
+      "status": "ok",
+      "verified": true,
+      "method": "wikidata+wikipedia_api",
+      "retrieved_at": "2026-08-18T09:20:21.196011+00:00",
+      "wikidata_id": "",
+      "wikidata_label": "",
+      "wikidata_description": "",
+      "wikipedia_url": "",
+      "wikipedia_extract": "",
+      "present_triples": {},
+      "missing_triples": [
+        {
+          "property": "P31",
+          "label": "instance_of"
+        },
+        {
+          "property": "P17",
+          "label": "country"
+        },
+        {
+          "property": "P159",
+          "label": "headquarters"
+        },
+        {
+          "property": "P112",
+          "label": "founders"
+        },
+        {
+          "property": "P452",
+          "label": "industry"
+        },
+        {
+          "property": "P856",
+          "label": "website"
+        },
+        {
+          "property": "P2002",
+          "label": "twitter"
+        },
+        {
+          "property": "P2013",
+          "label": "facebook"
+        }
+      ],
+      "triple_coverage_pct": 0.0,
+      "sitelinks": 0,
+      "assessment": "incomplete",
+      "recommendation": "Wikidata entity : 0.0% triple coverage. 8 required triples missing.",
+      "detailed_analysis": "KG arbitrage for Filmibeat: live Wikidata (wbsearchentities/wbgetentities) and Wikipedia REST lookups. All triples shown are read directly from Wikidata claims; nothing is synthesized.",
+      "runtime_secs": 6.9,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Triple Coverage Pct",
+          "value": "0.0%"
+        },
+        {
+          "metric": "Sitelinks",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "8 required triples missing"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "data_pr": {
+      "feature_name": "Anonymized Telemetry Data-PR Engine",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export",
+      "detail": "This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+      "assessment": "unavailable",
+      "recommendation": "Requires GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export to produce verified data. This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+      "detailed_analysis": "No data was fabricated for \"Anonymized Telemetry Data-PR Engine\". Configure GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export and re-run the analysis to get real, verified output. Reason: This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export to produce verified data",
+        "This module builds press assets from a brand's OWN anonymized usage data",
+        "No telemetry source is configured and no synthetic metrics are generated",
+        "Connect Search Console/GA4 or supply a data export"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "simulation": {
+      "feature_name": "Multi-Agent Off-Page Simulation Sandbox",
+      "status": "ok",
+      "verified": true,
+      "method": "baseline_measurement+linear_projection",
+      "retrieved_at": "2026-08-18T09:20:20.328664+00:00",
+      "baseline_metrics": {
+        "share_of_search": 100.0,
+        "backlinks": 5
+      },
+      "scenarios_tested": 0,
+      "scenarios": [],
+      "projection_note": "Scenario projections were deliberately not generated. They require an agreed response model (e.g. revenue per share point, conversion baseline) supplied by the user.",
+      "assessment": "baseline_measured",
+      "recommendation": "Real baseline captured: {\"share_of_search\": 100.0, \"backlinks\": 5}. Add a conversion/revenue model to enable scenario projections without fabricating outcomes.",
+      "detailed_analysis": "Simulation sandbox for Filmibeat: measured a real baseline of {\"share_of_search\": 100.0, \"backlinks\": 5} from live providers at 2026-08-18T09:20:20.328659+00:00. No campaign outcomes were simulated because doing so without a user-supplied response model would produce fabricated numbers.",
+      "runtime_secs": 6.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Scenarios Tested",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Real baseline captured: {\"share_of_search\": 100",
+        "Add a conversion/revenue model to enable scenario projections without fabricating outcomes"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "satellite": {
+      "feature_name": "Satellite Entity M&A & Partnership Radar",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+authority",
+      "retrieved_at": "2026-08-18T09:20:27.286912+00:00",
+      "satellites_found": 5,
+      "satellites": [
+        {
+          "domain": "youtube.com",
+          "title": "FilmiBeat - YouTube",
+          "url": "https://www.youtube.com/@filmibeat",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of...",
+          "type": "partner",
+          "da": null,
+          "da_unavailable": "MOZ_ACCESS_KEY+MOZ_SECRET_KEY or AHREFS_API_KEY or MAJESTIC_API_KEY"
+        },
+        {
+          "domain": "hindi.filmibeat.com",
+          "title": "FilmiBeat - Latest Bollywood Movie News & Updates in Hindi",
+          "url": "https://hindi.filmibeat.com/",
+          "snippet": "FilmiBeat provides latest Bollywood Movie News & updates in Hindi, bollywood movie and celebrity news, hindi movie reviews, movie trailers & promos in Hindi.",
+          "type": "partner",
+          "da": null,
+          "da_unavailable": "MOZ_ACCESS_KEY+MOZ_SECRET_KEY or AHREFS_API_KEY or MAJESTIC_API_KEY"
+        },
+        {
+          "domain": "hindi.filmibeat.com",
+          "title": "Bollywood Movie News in Hindi - FilmiBeat",
+          "url": "https://hindi.filmibeat.com/news/",
+          "snippet": "\u092c\u0949\u0932\u0940\u0935\u0941\u0921 & \u092e\u0928\u094b\u0930\u0902\u091c\u0928 \u0938\u092e\u093e\u091a\u093e\u0930 \u2013 FilmiBeat provides Bollywood movie news in hindi, Bollywood news, Hindi cinema news, Bollywood celebrity news & updates in Hindi.",
+          "type": "partner",
+          "da": null,
+          "da_unavailable": "MOZ_ACCESS_KEY+MOZ_SECRET_KEY or AHREFS_API_KEY or MAJESTIC_API_KEY"
+        },
+        {
+          "domain": "facebook.com",
+          "title": "Filmibeat.com - Facebook",
+          "url": "https://www.facebook.com/Filmibeat/",
+          "snippet": "Filmibeat.com \udb86\udc8f Movies, shows & stars beyond the headlines. The story behind every story, only on FilmiBeat",
+          "type": "partner",
+          "da": null,
+          "da_unavailable": "MOZ_ACCESS_KEY+MOZ_SECRET_KEY or AHREFS_API_KEY or MAJESTIC_API_KEY"
+        },
+        {
+          "domain": "tamil.filmibeat.com",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "url": "https://tamil.filmibeat.com/",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news...",
+          "type": "partner",
+          "da": null,
+          "da_unavailable": "MOZ_ACCESS_KEY+MOZ_SECRET_KEY or AHREFS_API_KEY or MAJESTIC_API_KEY"
+        }
+      ],
+      "assessment": "opportunities_found",
+      "recommendation": "Found 5 real satellite/partner/acquisition pages mentioning \"Filmibeat\". Authority values shown are live DA where a provider is configured.",
+      "detailed_analysis": "Satellite radar for Filmibeat: collected 5 candidate entities from real searches. DA is fetched live where configured, otherwise reported as unavailable.",
+      "runtime_secs": 12.7,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "domain": "facebook.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Satellites Found",
+          "value": "5"
+        }
+      ],
+      "actions": [
+        "Found 5 real satellite/partner/acquisition pages mentioning \"Filmibeat\"",
+        "Authority values shown are live DA where a provider is configured"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "rag_defense": {
+      "feature_name": "Reverse RAG-Cache Poisoning Defense",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+stale_indicator",
+      "retrieved_at": "2026-08-18T09:20:27.657922+00:00",
+      "cache_tests_run": 5,
+      "stale_caches_detected": 0,
+      "total_results_checked": 40,
+      "freshness_rate": 100.0,
+      "cache_tests": [
+        {
+          "query": "what is Filmibeat",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "Filmibeat company information",
+          "result_count": 10,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "Filmibeat pricing",
+          "result_count": 10,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "Filmibeat competitors",
+          "result_count": 10,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "Filmibeat features review",
+          "result_count": 10,
+          "stale_count": 0,
+          "stale_details": []
+        }
+      ],
+      "stale_indicators_used": [
+        "was founded",
+        "previously known",
+        "used to be",
+        "discontinued",
+        "shut down",
+        "no longer",
+        "old version",
+        "deprecated",
+        "legacy",
+        "obsolete",
+        "end of life",
+        "sunset"
+      ],
+      "assessment": "clean",
+      "recommendation": "0 results across 40 checked contained stale-data indicators (100.0% freshness rate). Refresh content these pages describe.",
+      "detailed_analysis": "RAG-cache defense for Filmibeat: ran 5 queries and scanned 40 real results for the documented stale indicators. Every flagged entry is a real snippet matched at 2026-08-18T09:20:27.657916+00:00.",
+      "runtime_secs": 12.8,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Cache Tests Run",
+          "value": "5"
+        },
+        {
+          "metric": "Stale Caches Detected",
+          "value": "0"
+        },
+        {
+          "metric": "Total Results Checked",
+          "value": "40"
+        },
+        {
+          "metric": "Freshness Rate",
+          "value": "100.0%"
+        }
+      ],
+      "actions": [
+        "0 results across 40 checked contained stale-data indicators (100",
+        "Refresh content these pages describe"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "visual_audit": {
+      "feature_name": "Multi-Modal Schema & Visual Graph Alignment",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_fetch+search",
+      "retrieved_at": "2026-08-18T09:20:26.485702+00:00",
+      "schema_visual_checks": [
+        {
+          "type": "OG-Image",
+          "present": true,
+          "urls": [
+            "https://images.filmibeat.com/images/filmibeat-og-dark-mode-1752041634282.jpg"
+          ]
+        },
+        {
+          "type": "Favicon",
+          "present": true
+        }
+      ],
+      "visual_mentions_found": 10,
+      "visual_mentions": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "title": "FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest..."
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "title": "Movie News - Bollywood (Hindi), Tamil, Telugu, Kannada ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest..."
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of..."
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "title": "New Bollywood Movies 2026: Latest Bollywood Films Release ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Bollywood Movies 2026: Stay updated on Bollywood films release dates, trailers, teasers, reviews, and all the latest news on FilmiBeat"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "title": "Entertainment News: OTT, Celeb Updates, Box Office, Gossips ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Entertainment News: Ott, Celeb Updates, Box Office, Gossips, and Movie Updates from Bollywood, Tamil, Telugu, Malayalam & Kannada Cinema World."
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "title": "New Movies 2026 \u2013 Bollywood, Hollywood, Tamil, Telugu ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Stay updated about the latest Bollywood, Hollywood, Tamil, Telugu, Kannada, Hindi & Malayalam movies, their ratings, reviews & much more from Filmibeat."
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "title": "FilmiBeat - Latest Bollywood Movie News & Updates in Hindi",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "FilmiBeat provides latest Bollywood Movie News & updates in Hindi, bollywood movie and celebrity news, hindi movie reviews, movie trailers & promos in Hindi."
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "title": "Bollywood Movie News in Hindi - FilmiBeat",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "\u092c\u0949\u0932\u0940\u0935\u0941\u0921 & \u092e\u0928\u094b\u0930\u0902\u091c\u0928 \u0938\u092e\u093e\u091a\u093e\u0930 \u2013 FilmiBeat provides Bollywood movie news in hindi, Bollywood news, Hindi cinema news, Bollywood celebrity news & updates in Hindi."
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "title": "Filmibeat.com - Facebook",
+          "domain": "facebook.com",
+          "snippet": "Filmibeat.com \udb86\udc8f Movies, shows & stars beyond the headlines. The story behind every story, only on FilmiBeat"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news..."
+        }
+      ],
+      "assessment": "optimized",
+      "recommendation": "2 real visual-schema checks on filmibeat.com; 10 visual mentions found.",
+      "detailed_analysis": "Visual audit for Filmibeat: fetched filmibeat.com live and inspected og:image, Image/VideoObject schema and favicon; then ran visual queries. All findings reflect real responses.",
+      "runtime_secs": 11.4,
+      "sources": [
+        {
+          "url": "https://images.filmibeat.com/images/filmibeat-og-dark-mode-1752041634282.jpg",
+          "domain": "images.filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "domain": "facebook.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Visual Mentions Found",
+          "value": "10"
+        }
+      ],
+      "actions": [
+        "2 real visual-schema checks on filmibeat",
+        "com; 10 visual mentions found"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "apn_proxy": {
+      "feature_name": "Agentic Protocol Negotiation (APN) Proxy",
+      "status": "ok",
+      "verified": true,
+      "method": "live_endpoint_probe",
+      "retrieved_at": "2026-08-18T09:20:45.822945+00:00",
+      "apn_score": 20,
+      "total_endpoints": 16,
+      "active_endpoints": 2,
+      "json_endpoints": 0,
+      "xml_endpoints": 1,
+      "endpoint_probes": [
+        {
+          "path": "/api",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/api"
+        },
+        {
+          "path": "/api/v1",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/api/v1"
+        },
+        {
+          "path": "/api/v2",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/api/v2"
+        },
+        {
+          "path": "/graphql",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/graphql"
+        },
+        {
+          "path": "/openapi.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/openapi.json"
+        },
+        {
+          "path": "/swagger.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/swagger.json"
+        },
+        {
+          "path": "/.well-known/openid-configuration",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 442262,
+          "final_url": "https://filmibeat.com/.well-known/openid-configuration"
+        },
+        {
+          "path": "/feed.xml",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/feed.xml"
+        },
+        {
+          "path": "/rss.xml",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/rss.xml"
+        },
+        {
+          "path": "/atom.xml",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/atom.xml"
+        },
+        {
+          "path": "/sitemap.xml",
+          "status": 200,
+          "content_type": "application/xml",
+          "size": 5285521,
+          "final_url": "https://filmibeat.com/sitemap.xml"
+        },
+        {
+          "path": "/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "size": 760,
+          "final_url": "https://filmibeat.com/robots.txt"
+        },
+        {
+          "path": "/manifest.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/manifest.json"
+        },
+        {
+          "path": "/webmanifest.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 443200,
+          "final_url": "https://filmibeat.com/webmanifest.json"
+        },
+        {
+          "path": "/.well-known/ai-plugin.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 442262,
+          "final_url": "https://filmibeat.com/.well-known/ai-plugin.json"
+        },
+        {
+          "path": "/llms.txt",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 442262,
+          "final_url": "https://filmibeat.com/llms.txt"
+        }
+      ],
+      "assessment": "needs_improvement",
+      "recommendation": "APN readiness 20/100: 2 of 16 agentic/API endpoints respond on filmibeat.com.",
+      "detailed_analysis": "APN audit for filmibeat.com: live-probed 16 endpoints at 2026-08-18T09:20:45.822921+00:00. 2 returned HTTP < 400. Every status is a real response.",
+      "runtime_secs": 30.7,
+      "sources": [
+        {
+          "url": "https://filmibeat.com/api",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/api/v1",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/api/v2",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/graphql",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/openapi.json",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/swagger.json",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/.well-known/openid-configuration",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/feed.xml",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/rss.xml",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/atom.xml",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/sitemap.xml",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/robots.txt",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/manifest.json",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/webmanifest.json",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/.well-known/ai-plugin.json",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/llms.txt",
+          "domain": "filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Apn Score",
+          "value": "20%"
+        },
+        {
+          "metric": "Total Endpoints",
+          "value": "16"
+        },
+        {
+          "metric": "Active Endpoints",
+          "value": "2"
+        },
+        {
+          "metric": "Json Endpoints",
+          "value": "0"
+        },
+        {
+          "metric": "Xml Endpoints",
+          "value": "1"
+        }
+      ],
+      "actions": [
+        "APN readiness 20/100: 2 of 16 agentic/API endpoints respond on filmibeat"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "graph_decay": {
+      "feature_name": "Co-Citation Graph Decay & Entity Anchor Leasing",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+temporal",
+      "retrieved_at": "2026-08-18T09:20:26.748695+00:00",
+      "total_co_citations": 2,
+      "unique_domains": 2,
+      "fresh_sources": 0,
+      "stale_sources": 0,
+      "freshness_score": null,
+      "co_citations": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of...",
+          "years_mentioned": []
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news...",
+          "years_mentioned": []
+        }
+      ],
+      "assessment": "unknown",
+      "recommendation": "2 real co-citations across 2 domains. Freshness score: None%.",
+      "detailed_analysis": "Co-citation graph for Filmibeat: 5 queries, 2 real pages. Temporal freshness is read from years actually present in the snippets. No dates are assumed.",
+      "runtime_secs": 11.7,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Total Co Citations",
+          "value": "2"
+        },
+        {
+          "metric": "Unique Domains",
+          "value": "2"
+        },
+        {
+          "metric": "Fresh Sources",
+          "value": "0"
+        },
+        {
+          "metric": "Stale Sources",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "2 real co-citations across 2 domains"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "c2pa": {
+      "feature_name": "Cryptographic Entity-Origin Proof Signing (C2PA)",
+      "status": "ok",
+      "verified": true,
+      "method": "live_header+markup_scan",
+      "retrieved_at": "2026-08-18T09:20:17.572104+00:00",
+      "c2pa_score": 15,
+      "c2pa_signals": [],
+      "sri_scripts": [
+        {
+          "src": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
+        }
+      ],
+      "dnssec_check": null,
+      "dnssec_note": "DNSSEC is a DNS-layer property and cannot be verified via HTTP; check with dig +dnssec or your DNS provider.",
+      "assessment": "needs_improvement",
+      "recommendation": "C2PA readiness 15/100 on filmibeat.com. 0 authenticity signals, 1 SRI-protected scripts.",
+      "detailed_analysis": "C2PA audit for Filmibeat: scanned live HTTP headers and markup on filmibeat.com. All signals are real observations captured at 2026-08-18T09:20:17.572060+00:00. DNSSEC intentionally reported as unverified via HTTP.",
+      "runtime_secs": 2.2,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "C2Pa Score",
+          "value": "15%"
+        }
+      ],
+      "actions": [
+        "C2PA readiness 15/100 on filmibeat",
+        "0 authenticity signals, 1 SRI-protected scripts"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "compliance_guard": {
+      "feature_name": "Legal / SEC Disclosure Risk Profiling",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+site_probe",
+      "retrieved_at": "2026-08-18T09:20:40.768489+00:00",
+      "compliance_score": 10,
+      "compliance_pages_found": [],
+      "legal_mentions": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "title": "FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest...",
+          "query": "Filmibeat SEC filing"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "title": "Movie News - Bollywood (Hindi), Tamil, Telugu, Kannada ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest...",
+          "query": "Filmibeat SEC filing"
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of...",
+          "query": "Filmibeat SEC filing"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "title": "New Bollywood Movies 2026: Latest Bollywood Films Release ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Bollywood Movies 2026: Stay updated on Bollywood films release dates, trailers, teasers, reviews, and all the latest news on FilmiBeat",
+          "query": "Filmibeat SEC filing"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "title": "Entertainment News: OTT, Celeb Updates, Box Office, Gossips ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Entertainment News: Ott, Celeb Updates, Box Office, Gossips, and Movie Updates from Bollywood, Tamil, Telugu, Malayalam & Kannada Cinema World.",
+          "query": "Filmibeat SEC filing"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "title": "New Movies 2026 \u2013 Bollywood, Hollywood, Tamil, Telugu ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Stay updated about the latest Bollywood, Hollywood, Tamil, Telugu, Kannada, Hindi & Malayalam movies, their ratings, reviews & much more from Filmibeat.",
+          "query": "Filmibeat SEC filing"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "title": "FilmiBeat - Latest Bollywood Movie News & Updates in Hindi",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "FilmiBeat provides latest Bollywood Movie News & updates in Hindi, bollywood movie and celebrity news, hindi movie reviews, movie trailers & promos in Hindi.",
+          "query": "Filmibeat SEC filing"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "title": "Bollywood Movie News in Hindi - FilmiBeat",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "\u092c\u0949\u0932\u0940\u0935\u0941\u0921 & \u092e\u0928\u094b\u0930\u0902\u091c\u0928 \u0938\u092e\u093e\u091a\u093e\u0930 \u2013 FilmiBeat provides Bollywood movie news in hindi, Bollywood news, Hindi cinema news, Bollywood celebrity news & updates in Hindi.",
+          "query": "Filmibeat SEC filing"
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "title": "Filmibeat.com - Facebook",
+          "domain": "facebook.com",
+          "snippet": "Filmibeat.com \udb86\udc8f Movies, shows & stars beyond the headlines. The story behind every story, only on FilmiBeat",
+          "query": "Filmibeat SEC filing"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news...",
+          "query": "Filmibeat SEC filing"
+        }
+      ],
+      "assessment": "non_compliant",
+      "recommendation": "Compliance readiness 10/100: 0 standard compliance pages present, 10 legal/SEC mentions found.",
+      "detailed_analysis": "Compliance guard for Filmibeat: probed 7 compliance paths on filmibeat.com and ran 5 legal queries. All counts are real observations from 2026-08-18T09:20:40.768443+00:00.",
+      "runtime_secs": 25.4,
+      "sources": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "domain": "facebook.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Compliance Score",
+          "value": "10%"
+        }
+      ],
+      "actions": [
+        "Compliance readiness 10/100: 0 standard compliance pages present, 10 legal/SEC mentions found"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "geo_crawl": {
+      "feature_name": "Geo-IP Citation Localization",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+hreflang_scan",
+      "retrieved_at": "2026-08-18T09:20:28.195317+00:00",
+      "regions_analyzed": 5,
+      "regions_with_citations": 0,
+      "geo_coverage_score": 0.0,
+      "geo_citations_by_region": {},
+      "hreflang_tags": [],
+      "assessment": "weak",
+      "recommendation": "Geo coverage 0.0% (0/5 regions have brand citations). 0 hreflang tags on the site.",
+      "detailed_analysis": "Geo localization for Filmibeat: 5 region queries, 0 with real citations, plus a live hreflang scan of filmibeat.com. All results are real.",
+      "runtime_secs": 12.5,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Regions Analyzed",
+          "value": "5"
+        },
+        {
+          "metric": "Regions With Citations",
+          "value": "0"
+        },
+        {
+          "metric": "Geo Coverage Score",
+          "value": "0.0%"
+        }
+      ],
+      "actions": [
+        "0% (0/5 regions have brand citations)",
+        "0 hreflang tags on the site"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "zero_party": {
+      "feature_name": "Zero-Party Data Exchange",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+site_probe",
+      "retrieved_at": "2026-08-18T09:20:39.296609+00:00",
+      "total_data_assets": 2,
+      "data_assets": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of...",
+          "query": "\"Filmibeat\" benchmark report"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news...",
+          "query": "\"Filmibeat\" benchmark report"
+        }
+      ],
+      "data_endpoints_found": 0,
+      "data_endpoints": [],
+      "assessment": "active",
+      "recommendation": "Found 2 real zero-party-data references and 0 site data endpoints. No asset templates are fabricated.",
+      "detailed_analysis": "Zero-party data audit for Filmibeat: 4 queries and 7 site probes. Every asset listed is a real page found at 2026-08-18T09:20:39.296589+00:00.",
+      "runtime_secs": 23.4,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Total Data Assets",
+          "value": "2"
+        },
+        {
+          "metric": "Data Endpoints Found",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 2 real zero-party-data references and 0 site data endpoints",
+        "No asset templates are fabricated"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "passage_scoring": {
+      "feature_name": "Passage-Level BERT Evaluator",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+content_metrics",
+      "retrieved_at": "2026-08-18T09:20:27.018154+00:00",
+      "total_passages_scored": 10,
+      "high_attention_passages": 0,
+      "avg_word_count": 24.5,
+      "passages": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "title": "FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest...",
+          "word_count": 29,
+          "has_numbers": false,
+          "has_metrics": false
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "title": "Movie News - Bollywood (Hindi), Tamil, Telugu, Kannada ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Movie News - Filmibeat provides Movie News & cast crew details of Bollywood movies, Hollywood movies, Kannada movies, Telugu movies, Tamil movies and Malayalam movies. Get updated Latest...",
+          "word_count": 29,
+          "has_numbers": false,
+          "has_metrics": false
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "title": "FilmiBeat - YouTube",
+          "domain": "youtube.com",
+          "snippet": "It is one of India's most-reputed movie info portals that keeps you updated with all the daily gossip, movie review, box office report, celebrity interviews, videos, photos from glamorous world of...",
+          "word_count": 31,
+          "has_numbers": false,
+          "has_metrics": false
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "title": "New Bollywood Movies 2026: Latest Bollywood Films Release ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Bollywood Movies 2026: Stay updated on Bollywood films release dates, trailers, teasers, reviews, and all the latest news on FilmiBeat",
+          "word_count": 21,
+          "has_numbers": true,
+          "has_metrics": false
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "title": "Entertainment News: OTT, Celeb Updates, Box Office, Gossips ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Latest Entertainment News: Ott, Celeb Updates, Box Office, Gossips, and Movie Updates from Bollywood, Tamil, Telugu, Malayalam & Kannada Cinema World.",
+          "word_count": 21,
+          "has_numbers": false,
+          "has_metrics": false
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "title": "New Movies 2026 \u2013 Bollywood, Hollywood, Tamil, Telugu ... - FilmiBeat",
+          "domain": "filmibeat.com",
+          "snippet": "Stay updated about the latest Bollywood, Hollywood, Tamil, Telugu, Kannada, Hindi & Malayalam movies, their ratings, reviews & much more from Filmibeat.",
+          "word_count": 22,
+          "has_numbers": false,
+          "has_metrics": false
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "title": "FilmiBeat - Latest Bollywood Movie News & Updates in Hindi",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "FilmiBeat provides latest Bollywood Movie News & updates in Hindi, bollywood movie and celebrity news, hindi movie reviews, movie trailers & promos in Hindi.",
+          "word_count": 24,
+          "has_numbers": false,
+          "has_metrics": false
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "title": "Bollywood Movie News in Hindi - FilmiBeat",
+          "domain": "hindi.filmibeat.com",
+          "snippet": "\u092c\u0949\u0932\u0940\u0935\u0941\u0921 & \u092e\u0928\u094b\u0930\u0902\u091c\u0928 \u0938\u092e\u093e\u091a\u093e\u0930 \u2013 FilmiBeat provides Bollywood movie news in hindi, Bollywood news, Hindi cinema news, Bollywood celebrity news & updates in Hindi.",
+          "word_count": 24,
+          "has_numbers": false,
+          "has_metrics": false
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "title": "Filmibeat.com - Facebook",
+          "domain": "facebook.com",
+          "snippet": "Filmibeat.com \udb86\udc8f Movies, shows & stars beyond the headlines. The story behind every story, only on FilmiBeat",
+          "word_count": 17,
+          "has_numbers": false,
+          "has_metrics": false
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "title": "FilmiBeat - Tamil Movie News | Tamil Cinema News in Tamil",
+          "domain": "tamil.filmibeat.com",
+          "snippet": "Tamil Cinema News (\u0b9a\u0bbf\u0ba9\u0bbf\u0bae\u0bbe \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bbf\u0b95\u0bb3\u0bcd): Find the latest Tamil movie news, reviews, trailers, kollywood cinema news, celebrity gossips, box office reports, photos, videos, and other entertainment news...",
+          "word_count": 27,
+          "has_numbers": false,
+          "has_metrics": false
+        }
+      ],
+      "high_attention_details": [],
+      "note": "Attention is scored from real snippet characteristics (length, numbers, metrics). No BERT model is claimed; replace this module with an embedding-backed scorer when OPENAI_API_KEY is set.",
+      "assessment": "moderate",
+      "recommendation": "Scored 10 real passages; 0 qualify as data-rich and attention-worthy.",
+      "detailed_analysis": "Passage evaluation for Filmibeat: 10 real search snippets analyzed for word count, numeric content and metric mentions. All scores derive from the actual snippet text.",
+      "runtime_secs": 10.8,
+      "sources": [
+        {
+          "url": "https://www.filmibeat.com/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.youtube.com/@filmibeat",
+          "domain": "youtube.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/bollywood/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/latest",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://www.filmibeat.com/movies.html",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://hindi.filmibeat.com/news/",
+          "domain": "hindi.filmibeat.com"
+        },
+        {
+          "url": "https://www.facebook.com/Filmibeat/",
+          "domain": "facebook.com"
+        },
+        {
+          "url": "https://tamil.filmibeat.com/",
+          "domain": "tamil.filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Total Passages Scored",
+          "value": "10%"
+        },
+        {
+          "metric": "High Attention Passages",
+          "value": "0"
+        },
+        {
+          "metric": "Avg Word Count",
+          "value": "24.5%"
+        }
+      ],
+      "actions": [
+        "Scored 10 real passages; 0 qualify as data-rich and attention-worthy"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "reddit_consensus": {
+      "feature_name": "Reddit & Forum Consensus Graph",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+hn_api+llm_sentiment",
+      "retrieved_at": "2026-08-18T09:20:52.851151+00:00",
+      "total_mentions": 8,
+      "reddit_mentions": 0,
+      "forum_mentions": 8,
+      "avg_sentiment": null,
+      "sentiment_scored": 0,
+      "mentions": [
+        {
+          "url": "https://www.reddit.com/r/aws/comments/nn95aq/elastic_has_broken_filebeat_as_of_713_it_no/",
+          "title": "Elastic has broken filebeat in 7.13; no longer works with AWS managed ES",
+          "domain": "news.ycombinator.com",
+          "snippet": "19 points \u00b7 2 comments"
+        },
+        {
+          "url": "https://blog.joshsoftware.com/2020/09/09/searchable-logs-with-filebeat-and-elastic-stack/",
+          "title": "Searchable Logs with Filebeat and Elastic Stack",
+          "domain": "news.ycombinator.com",
+          "snippet": "7 points \u00b7 0 comments"
+        },
+        {
+          "url": "https://www.elastic.co/blog/beats-beta4-filebeat-lightweight-log-forwarding",
+          "title": "Log Forwarding with Filebeat [Will Replace Logstash Forwarder]",
+          "domain": "news.ycombinator.com",
+          "snippet": "3 points \u00b7 1 comments"
+        },
+        {
+          "url": "https://www.elastic.co/blog/structured-logging-filebeat",
+          "title": "Structured logging with Filebeat",
+          "domain": "news.ycombinator.com",
+          "snippet": "3 points \u00b7 0 comments"
+        },
+        {
+          "url": "https://bionic.fullstory.com/writing-a-filebeat-output-plugin/",
+          "title": "Writing a Filebeat Plugin",
+          "domain": "news.ycombinator.com",
+          "snippet": "2 points \u00b7 1 comments"
+        },
+        {
+          "url": "https://alexander.holbreich.org/filebeat-kubernetes/",
+          "title": "Installing Filebeat to catch all Kubernetes logs",
+          "domain": "news.ycombinator.com",
+          "snippet": "2 points \u00b7 0 comments"
+        },
+        {
+          "url": "https://www.deepnetwork.com/blog//2020/01/27/ELK-stack-filebeat-k8s-deployment.html",
+          "title": "How to Setup an Elk Stack and Filebeat on Kubernetes",
+          "domain": "news.ycombinator.com",
+          "snippet": "2 points \u00b7 0 comments"
+        },
+        {
+          "url": "https://www.elastic.co/blog/monitoring-kafka-with-elastic-stack-1-filebeat",
+          "title": "Monitoring Kafka with Elastic Stack: Filebeat",
+          "domain": "news.ycombinator.com",
+          "snippet": "2 points \u00b7 0 comments"
+        }
+      ],
+      "assessment": "no_sentiment_data",
+      "recommendation": "Found 8 real community mentions (web search + Hacker News API). Sentiment needs an LLM key; mention data is real.",
+      "detailed_analysis": "Community consensus for Filmibeat: 4 queries filtered to real forum domains plus live Hacker News data. Sentiment scores are live LLM output when configured.",
+      "runtime_secs": 6.9,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Mentions",
+          "value": "8"
+        },
+        {
+          "metric": "Reddit Mentions",
+          "value": "0"
+        },
+        {
+          "metric": "Forum Mentions",
+          "value": "8"
+        },
+        {
+          "metric": "Sentiment Scored",
+          "value": "0%"
+        }
+      ],
+      "actions": [
+        "Found 8 real community mentions (web search + Hacker News API)",
+        "Sentiment needs an LLM key; mention data is real"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "competitor_bert": {
+      "feature_name": "Competitor BERT-Vector Extraction",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+phrase_extraction",
+      "retrieved_at": "2026-08-18T09:20:52.721177+00:00",
+      "competitors_analyzed": 5,
+      "competitor_data": [
+        {
+          "name": "Reuters",
+          "phrases_extracted": 50,
+          "top_phrases": [
+            "policymakers and business leaders to",
+            "date with any breaking news",
+            "business and finance video from",
+            "600 journalists across 165 countries",
+            "breaking news and multimedia content",
+            "Reuters began supporting electronic transactions",
+            "You will receive a one",
+            "you agree to receive a"
+          ]
+        },
+        {
+          "name": "Associated Press",
+          "phrases_extracted": 25,
+          "top_phrases": [
+            "and videos at APNews",
+            "the definitive source for independent",
+            "wherever you go",
+            "or others in an act",
+            "or loan at Associated Bank",
+            "a tablet or your desktop",
+            "Get your checking account",
+            "To join in or form"
+          ]
+        },
+        {
+          "name": "Bloomberg",
+          "phrases_extracted": 26,
+          "top_phrases": [
+            "flexible tool for financial professionals",
+            "Bloomberg News on everything pertaining",
+            "also includes a news agency",
+            "positions a university as a",
+            "enhances class curricula and better",
+            "The latest financial news and",
+            "Building a Bloomberg Finance Lab",
+            "Visit our other YouTube channels"
+          ]
+        },
+        {
+          "name": "The New York Times",
+          "phrases_extracted": 46,
+          "top_phrases": [
+            "We know they",
+            "Explore the latest news",
+            "and features from New Indian",
+            "the world by Google News",
+            "and regional perspectives",
+            "audio and analysis",
+            "India and around the world",
+            "all latest breaking news"
+          ]
+        },
+        {
+          "name": "CNN",
+          "phrases_extracted": 57,
+          "top_phrases": [
+            "that was developed by Alex",
+            "top headlines and live streaming",
+            "s our job to",
+            "a dedicated team in CNN",
+            "Neural Networks architecture is also",
+            "GoThere and tell the most",
+            "It was the first CNN",
+            "Staffed 24 hours"
+          ]
+        }
+      ],
+      "total_phrases_extracted": 201,
+      "note": "Real textual phrase extraction from live search snippets. Embedding vectors require OPENAI_API_KEY and are not fabricated.",
+      "assessment": "active",
+      "recommendation": "Analyzed 5 competitors and extracted 201 real phrases.",
+      "detailed_analysis": "Competitor extraction for Filmibeat: phrases pulled from real snippets of each competitor. All text is genuine search output captured at 2026-08-18T09:20:52.721172+00:00.",
+      "runtime_secs": 6.5,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Competitors Analyzed",
+          "value": "5"
+        },
+        {
+          "metric": "Total Phrases Extracted",
+          "value": "201"
+        }
+      ],
+      "actions": [
+        "Analyzed 5 competitors and extracted 201 real phrases"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "schema_auditor": {
+      "feature_name": "Agentic API & Schema Protocol Auditor",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_scan",
+      "retrieved_at": "2026-08-18T09:20:52.015142+00:00",
+      "schema_score": 64,
+      "schema_checks": [
+        {
+          "type": "JSON-LD",
+          "schema_type": "Organization",
+          "fields": [
+            "@context",
+            "@type",
+            "potentialAction",
+            "name",
+            "url",
+            "logo",
+            "sameAs"
+          ]
+        },
+        {
+          "type": "JSON-LD",
+          "schema_type": "WebSite",
+          "fields": [
+            "@context",
+            "@type",
+            "url",
+            "name",
+            "potentialAction"
+          ]
+        },
+        {
+          "type": "OpenGraph",
+          "count": 3
+        },
+        {
+          "type": "TwitterCard",
+          "count": 2
+        }
+      ],
+      "machine_readable_endpoints": [
+        {
+          "path": "/sitemap.xml",
+          "status": 200,
+          "content_type": "application/xml",
+          "size": 5285521,
+          "final_url": "https://filmibeat.com/sitemap.xml"
+        },
+        {
+          "path": "/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "size": 760,
+          "final_url": "https://filmibeat.com/robots.txt"
+        }
+      ],
+      "jsonld_count": 2,
+      "opengraph_count": 3,
+      "twitter_card_count": 2,
+      "assessment": "good",
+      "recommendation": "Schema readiness 64/100: 2 JSON-LD, 3 OpenGraph, 2 Twitter Card, 2 machine-readable endpoints.",
+      "detailed_analysis": "Schema auditor for filmibeat.com: live scan of structured data and machine-readable endpoints at 2026-08-18T09:20:52.015133+00:00. Every count is a real observation.",
+      "runtime_secs": 5.5,
+      "sources": [
+        {
+          "url": "https://filmibeat.com/sitemap.xml",
+          "domain": "filmibeat.com"
+        },
+        {
+          "url": "https://filmibeat.com/robots.txt",
+          "domain": "filmibeat.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Schema Score",
+          "value": "64%"
+        },
+        {
+          "metric": "Jsonld Count",
+          "value": "2"
+        },
+        {
+          "metric": "Opengraph Count",
+          "value": "3"
+        },
+        {
+          "metric": "Twitter Card Count",
+          "value": "2"
+        }
+      ],
+      "actions": [
+        "Schema readiness 64/100: 2 JSON-LD, 3 OpenGraph, 2 Twitter Card, 2 machine-readable endpoints"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "anchor_entropy": {
+      "feature_name": "Anchor-Text Entropy Boundary Predictor",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+entropy",
+      "retrieved_at": "2026-08-18T09:20:51.085468+00:00",
+      "total_anchors": 3,
+      "unique_anchors": 3,
+      "entropy": 1.585,
+      "normalized_entropy": 1.0,
+      "branded_pct": 100.0,
+      "top_anchors": [
+        {
+          "anchor": "Filmibeat",
+          "count": 1
+        },
+        {
+          "anchor": "Filmibeat official site",
+          "count": 1
+        },
+        {
+          "anchor": "Filmibeat homepage",
+          "count": 1
+        }
+      ],
+      "assessment": "healthy",
+      "recommendation": "Anchor entropy 1.0 across 3 real anchor contexts; 100.0% branded.",
+      "detailed_analysis": "Anchor entropy for Filmibeat: entropy computed from real anchor contexts observed in live search results. No anchors are injected or assumed.",
+      "runtime_secs": 4.6,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Anchors",
+          "value": "3"
+        },
+        {
+          "metric": "Unique Anchors",
+          "value": "3"
+        },
+        {
+          "metric": "Entropy",
+          "value": "1.58%"
+        },
+        {
+          "metric": "Normalized Entropy",
+          "value": "1.0%"
+        },
+        {
+          "metric": "Branded Pct",
+          "value": "100.0%"
+        }
+      ],
+      "actions": [
+        "0 across 3 real anchor contexts; 100"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "crawl_priority": {
+      "feature_name": "AI Crawler Re-Indexation Pinger",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_probe",
+      "retrieved_at": "2026-08-18T09:20:51.651445+00:00",
+      "crawl_priority_score": 60,
+      "robots_txt": true,
+      "sitemap": true,
+      "indexnow": false,
+      "ai_bot_directives": [],
+      "x_robots_tag": "",
+      "assessment": "partial",
+      "recommendation": "Crawl-priority readiness 60/100 on filmibeat.com. IndexNow: missing; AI bot directives: 0.",
+      "detailed_analysis": "Crawl audit for filmibeat.com: live probes of robots.txt, sitemap.xml, IndexNow endpoint and AI-bot directives at 2026-08-18T09:20:51.651434+00:00. All statuses are real responses.",
+      "runtime_secs": 4.9,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Crawl Priority Score",
+          "value": "60%"
+        }
+      ],
+      "actions": [
+        "Crawl-priority readiness 60/100 on filmibeat",
+        "IndexNow: missing; AI bot directives: 0"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "ftc_compliance": {
+      "feature_name": "FTC & Sponsored-Mention Penalty Shield",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+site_probe",
+      "retrieved_at": "2026-08-18T09:20:59.379130+00:00",
+      "ftc_score": 25,
+      "sponsored_mentions": [],
+      "compliance_issues": [],
+      "disclosure_pages": [],
+      "total_sponsored_content": 0,
+      "total_compliance_issues": 0,
+      "assessment": "non_compliant",
+      "recommendation": "FTC readiness 25/100: 0 sponsored mentions, 0 without visible disclosure, 0 disclosure pages on site.",
+      "detailed_analysis": "FTC audit for Filmibeat: 4 queries and 5 site probes at 2026-08-18T09:20:59.379112+00:00. Disclosure status is judged from the real snippet/page text.",
+      "runtime_secs": 12.6,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Ftc Score",
+          "value": "25%"
+        },
+        {
+          "metric": "Total Sponsored Content",
+          "value": "0"
+        },
+        {
+          "metric": "Total Compliance Issues",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "FTC readiness 25/100: 0 sponsored mentions, 0 without visible disclosure, 0 disclosure pages on site"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "hreflang": {
+      "feature_name": "Cross-Border Hreflang Equity Balancer",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_scan",
+      "retrieved_at": "2026-08-18T09:21:04.119260+00:00",
+      "international_readiness_score": 20,
+      "hreflang_tags": [],
+      "international_versions": [],
+      "international_links": [],
+      "cannibalization_risk": "low",
+      "assessment": "needs_optimization",
+      "recommendation": "Hreflang readiness 20/100: 0 hreflang tags, 0 international versions, cannibalization risk low.",
+      "detailed_analysis": "Hreflang audit for filmibeat.com: live scan of alternate-link tags, international links and country-path probes at 2026-08-18T09:21:04.119248+00:00. All values are real observations.",
+      "runtime_secs": 17.1,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "International Readiness Score",
+          "value": "20%"
+        }
+      ],
+      "actions": [
+        "Hreflang readiness 20/100: 0 hreflang tags, 0 international versions, cannibalization risk low"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    }
+  },
+  "status": "completed",
+  "summary": {
+    "overall_score": 58.1,
+    "total_mentions": 9,
+    "unlinked_opportunities": 0,
+    "backlink_health": 100,
+    "toxic_backlinks": 0,
+    "rag_citation_rate": null,
+    "kg_coverage": 0.0,
+    "vector_similarity": 0.0571,
+    "sentiment": null,
+    "pbn_risk": 0,
+    "anchor_entropy": 1.0,
+    "llm_citation_rate": null,
+    "aeo_score": 40,
+    "share_of_search": 100.0,
+    "pr_hooks_generated": 8,
+    "podcast_opportunities": 2,
+    "github_references": 21,
+    "features_analyzed": 35,
+    "modules_unavailable": 3
+  }
+}

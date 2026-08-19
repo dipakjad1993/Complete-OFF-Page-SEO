@@ -1,0 +1,2193 @@
+{
+  "brand": "The New York Times",
+  "domain": "nytimes.com",
+  "category": "artificial intelligence",
+  "started_at": "2026-08-18T07:26:20.620972+00:00",
+  "completed_at": "2026-08-18T07:27:16.068757+00:00",
+  "sections": {
+    "llm_perception": {
+      "feature_name": "LLM Co-Mention & Perception Auditing",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY",
+      "detail": "No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+      "assessment": "unavailable",
+      "recommendation": "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data. No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+      "detailed_analysis": "No data was fabricated for \"LLM Co-Mention & Perception Auditing\". Configure OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY and re-run the analysis to get real, verified output. Reason: No LLM provider is configured, so no real AI-assistant co-mention audit can run.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data",
+        "No LLM provider is configured, so no real AI-assistant co-mention audit can run"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "unlinked_citations": {
+      "feature_name": "Unlinked Citation & Co-Occurrence Converter",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+link_verification",
+      "retrieved_at": "2026-08-18T07:26:33.147800+00:00",
+      "total_mentions_found": 10,
+      "examined": 8,
+      "linked_count": 3,
+      "unlinked_count": 3,
+      "conversion_rate": 37.5,
+      "mentions": [
+        {
+          "url": "https://www.nytimes.com/",
+          "title": "The New York Times - Breaking News, US News, World News and Videos",
+          "domain": "nytimes.com",
+          "snippet": "",
+          "relevance_score": 0.833,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://www.nytimes.com/section/todayspaper",
+          "title": "Today's Paper - The New York Times",
+          "domain": "nytimes.com",
+          "snippet": "",
+          "relevance_score": 0.833,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_New_York_Times",
+          "title": "The New York Times - Wikipedia",
+          "domain": "en.wikipedia.org",
+          "snippet": "",
+          "relevance_score": 0.833,
+          "links_to_brand": null,
+          "verified": false
+        },
+        {
+          "url": "https://eeditionnytimes.pressreader.com/the-new-york-times",
+          "title": "The New York Times - August 17, 2026 - PressReader",
+          "domain": "eeditionnytimes.pressreader.com",
+          "snippet": "",
+          "relevance_score": 0.833,
+          "links_to_brand": false,
+          "verified": true
+        },
+        {
+          "url": "https://www.nyt.com/account",
+          "title": "The New York Times",
+          "domain": "nyt.com",
+          "snippet": "",
+          "relevance_score": 0.833,
+          "links_to_brand": true,
+          "verified": true
+        },
+        {
+          "url": "https://nytimes.pressreader.com/the-new-york-times",
+          "title": "The New York Times Replica Edition",
+          "domain": "nytimes.pressreader.com",
+          "snippet": "",
+          "relevance_score": 0.833,
+          "links_to_brand": false,
+          "verified": true
+        },
+        {
+          "url": "https://www.facebook.com/nytimes/",
+          "title": "The New York Times - Facebook",
+          "domain": "facebook.com",
+          "snippet": "",
+          "relevance_score": 0.833,
+          "links_to_brand": null,
+          "verified": false
+        },
+        {
+          "url": "https://nytimes.pressreader.com/the-new-york-times/textview",
+          "title": "The New York Times Replica Edition",
+          "domain": "nytimes.pressreader.com",
+          "snippet": "",
+          "relevance_score": 0.833,
+          "links_to_brand": false,
+          "verified": true
+        }
+      ],
+      "assessment": "opportunities",
+      "recommendation": "3 of 8 examined third-party pages mention \"The New York Times\" without a link back to nytimes.com (37.5% conversion). Pitch a link placement on each.",
+      "detailed_analysis": "Unlinked-citation audit for The New York Times: found 10 brand mentions from real searches; fetched and inspected the top 8 pages to check whether they hyperlink to nytimes.com. Every \"linked\" verdict is based on the live page content fetched at 2026-08-18T07:26:33.147793+00:00.",
+      "runtime_secs": 12.4,
+      "sources": [
+        {
+          "url": "https://www.nytimes.com/",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/section/todayspaper",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_New_York_Times",
+          "domain": "en.wikipedia.org"
+        },
+        {
+          "url": "https://eeditionnytimes.pressreader.com/the-new-york-times",
+          "domain": "eeditionnytimes.pressreader.com"
+        },
+        {
+          "url": "https://nytimes.pressreader.com/the-new-york-times",
+          "domain": "nytimes.pressreader.com"
+        },
+        {
+          "url": "https://www.facebook.com/nytimes/",
+          "domain": "facebook.com"
+        },
+        {
+          "url": "https://nytimes.pressreader.com/the-new-york-times/textview",
+          "domain": "nytimes.pressreader.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Total Mentions Found",
+          "value": "10"
+        },
+        {
+          "metric": "Examined",
+          "value": "8"
+        },
+        {
+          "metric": "Linked Count",
+          "value": "3"
+        },
+        {
+          "metric": "Unlinked Count",
+          "value": "3"
+        },
+        {
+          "metric": "Conversion Rate",
+          "value": "37.5%"
+        }
+      ],
+      "actions": [
+        "3 of 8 examined third-party pages mention \"The New York Times\" without a link back to nytimes",
+        "Pitch a link placement on each"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "consensus": {
+      "feature_name": "Third-Party Consensus Engine",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+llm_sentiment",
+      "retrieved_at": "2026-08-18T07:26:27.662432+00:00",
+      "total_mentions": 10,
+      "sentiment_scored": 0,
+      "avg_sentiment": null,
+      "overall_sentiment_score": null,
+      "sentiment_distribution": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0
+      },
+      "mentions": [
+        {
+          "url": "https://www.nytimes.com/",
+          "title": "The New York Times - Breaking News, US News, World News and Videos",
+          "domain": "nytimes.com",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        },
+        {
+          "url": "https://www.nytimes.com/section/todayspaper",
+          "title": "Today's Paper - The New York Times",
+          "domain": "nytimes.com",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        },
+        {
+          "url": "https://www.nyt.com/account",
+          "title": "The New York Times",
+          "domain": "nyt.com",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_New_York_Times",
+          "title": "The New York Times - Wikipedia",
+          "domain": "en.wikipedia.org",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        },
+        {
+          "url": "https://www.facebook.com/nytimes/",
+          "title": "The New York Times - Facebook",
+          "domain": "facebook.com",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        },
+        {
+          "url": "https://nytimes.pressreader.com/the-new-york-times",
+          "title": "The New York Times Replica Edition",
+          "domain": "nytimes.pressreader.com",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        },
+        {
+          "url": "https://eeditionnytimes.pressreader.com/the-new-york-times",
+          "title": "The New York Times - August 17, 2026 - PressReader",
+          "domain": "eeditionnytimes.pressreader.com",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        },
+        {
+          "url": "https://www.nytco.com/",
+          "title": "The New York Times Company",
+          "domain": "nytco.com",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        },
+        {
+          "url": "https://nytimes.pressreader.com/the-new-york-times/textview",
+          "title": "The New York Times Replica Edition",
+          "domain": "nytimes.pressreader.com",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        },
+        {
+          "url": "https://www.youtube.com/@nytimes",
+          "title": "The New York Times - YouTube",
+          "domain": "youtube.com",
+          "snippet": "",
+          "query": "\"The New York Times\""
+        }
+      ],
+      "sentiment_available": false,
+      "assessment": "no_sentiment_data",
+      "recommendation": "Collected 10 real third-party mentions of \"The New York Times\". Sentiment scoring requires an LLM key (OPENAI_API_KEY/ANTHROPIC_API_KEY/PERPLEXITY_API_KEY); mention data is real regardless.",
+      "detailed_analysis": "Consensus audit for The New York Times: 5 queries, 10 real mentions collected. 0 snippets scored by a live LLM sentiment call. No sentiment values are fabricated.",
+      "runtime_secs": 6.6,
+      "sources": [
+        {
+          "url": "https://www.nytimes.com/",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/section/todayspaper",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_New_York_Times",
+          "domain": "en.wikipedia.org"
+        },
+        {
+          "url": "https://www.facebook.com/nytimes/",
+          "domain": "facebook.com"
+        },
+        {
+          "url": "https://nytimes.pressreader.com/the-new-york-times",
+          "domain": "nytimes.pressreader.com"
+        },
+        {
+          "url": "https://eeditionnytimes.pressreader.com/the-new-york-times",
+          "domain": "eeditionnytimes.pressreader.com"
+        },
+        {
+          "url": "https://nytimes.pressreader.com/the-new-york-times/textview",
+          "domain": "nytimes.pressreader.com"
+        },
+        {
+          "url": "https://www.youtube.com/@nytimes",
+          "domain": "youtube.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Total Mentions",
+          "value": "10"
+        },
+        {
+          "metric": "Sentiment Scored",
+          "value": "0%"
+        }
+      ],
+      "actions": [
+        "Collected 10 real third-party mentions of \"The New York Times\"",
+        "Sentiment scoring requires an LLM key (OPENAI_API_KEY/ANTHROPIC_API_KEY/PERPLEXITY_API_KEY); mention data is real regardless"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "rag_repair": {
+      "feature_name": "RAG Hallucination & Citation Repair",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY",
+      "detail": "No LLM provider is configured, so RAG citation testing cannot run.",
+      "assessment": "unavailable",
+      "recommendation": "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data. No LLM provider is configured, so RAG citation testing cannot run.",
+      "detailed_analysis": "No data was fabricated for \"RAG Hallucination & Citation Repair\". Configure OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY and re-run the analysis to get real, verified output. Reason: No LLM provider is configured, so RAG citation testing cannot run.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires OPENAI_API_KEY / ANTHROPIC_API_KEY / PERPLEXITY_API_KEY to produce verified data",
+        "No LLM provider is configured, so RAG citation testing cannot run"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "vector_mapping": {
+      "feature_name": "Vector Co-Location & Embedding Mapping",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "OPENAI_API_KEY",
+      "detail": "No OpenAI key is configured, so no real embedding vectors can be computed.",
+      "assessment": "unavailable",
+      "recommendation": "Requires OPENAI_API_KEY to produce verified data. No OpenAI key is configured, so no real embedding vectors can be computed.",
+      "detailed_analysis": "No data was fabricated for \"Vector Co-Location & Embedding Mapping\". Configure OPENAI_API_KEY and re-run the analysis to get real, verified output. Reason: No OpenAI key is configured, so no real embedding vectors can be computed.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires OPENAI_API_KEY to produce verified data",
+        "No OpenAI key is configured, so no real embedding vectors can be computed"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "pr_hooks": {
+      "feature_name": "Predictive Digital PR & Trend Hook Engine",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "NEWS_API_KEY",
+      "detail": "No NewsAPI key is configured, so real trending-coverage analysis cannot run.",
+      "assessment": "unavailable",
+      "recommendation": "Requires NEWS_API_KEY to produce verified data. No NewsAPI key is configured, so real trending-coverage analysis cannot run.",
+      "detailed_analysis": "No data was fabricated for \"Predictive Digital PR & Trend Hook Engine\". Configure NEWS_API_KEY and re-run the analysis to get real, verified output. Reason: No NewsAPI key is configured, so real trending-coverage analysis cannot run.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires NEWS_API_KEY to produce verified data",
+        "No NewsAPI key is configured, so real trending-coverage analysis cannot run"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "link_poisoning": {
+      "feature_name": "Algorithmic Link Poisoning & Anomaly Radar",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "AHREFS_API_KEY (or MOZ_ACCESS_KEY+MOZ_SECRET_KEY)",
+      "detail": "No backlink provider is configured, so no real backlink audit can run.",
+      "assessment": "unavailable",
+      "recommendation": "Requires AHREFS_API_KEY (or MOZ_ACCESS_KEY+MOZ_SECRET_KEY) to produce verified data. No backlink provider is configured, so no real backlink audit can run.",
+      "detailed_analysis": "No data was fabricated for \"Algorithmic Link Poisoning & Anomaly Radar\". Configure AHREFS_API_KEY (or MOZ_ACCESS_KEY+MOZ_SECRET_KEY) and re-run the analysis to get real, verified output. Reason: No backlink provider is configured, so no real backlink audit can run.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires AHREFS_API_KEY (or MOZ_ACCESS_KEY+MOZ_SECRET_KEY) to produce verified data",
+        "No backlink provider is configured, so no real backlink audit can run"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "podcast_video": {
+      "feature_name": "Podcast & Video Citation Finder",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+platform_filter",
+      "retrieved_at": "2026-08-18T07:26:26.400395+00:00",
+      "opportunity_count": 0,
+      "unique_platforms": 0,
+      "mentions": [],
+      "platforms": [],
+      "assessment": "none_found",
+      "recommendation": "Found 0 real podcast/video pages mentioning \"The New York Times\" across 0 platforms. Pitch guest appearances or cite each episode.",
+      "detailed_analysis": "Podcast & video audit for The New York Times: searched 4 audio/video queries and filtered results to real podcast and video platforms only. 0 genuine pages were collected; no URLs were synthesized.",
+      "runtime_secs": 5.1,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Opportunity Count",
+          "value": "0"
+        },
+        {
+          "metric": "Unique Platforms",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 0 real podcast/video pages mentioning \"The New York Times\" across 0 platforms",
+        "Pitch guest appearances or cite each episode"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "aeo": {
+      "feature_name": "Agentic Commerce Protocol Placement (GEO/AEO)",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_probe",
+      "retrieved_at": "2026-08-18T07:26:36.950620+00:00",
+      "aeo_score": 40,
+      "llms_txt": false,
+      "robots_txt": true,
+      "sitemap": false,
+      "ai_plugin_json": false,
+      "ai_bot_directives": [
+        "User-agent: anthropic-ai",
+        "User-agent: Bytespider",
+        "User-agent: CCBot",
+        "User-agent: ChatGPT-User",
+        "User-agent: ClaudeBot",
+        "User-agent: Claude-SearchBot",
+        "User-agent: Claude-User",
+        "User-agent: Claude-Web",
+        "User-agent: Google-Extended",
+        "User-agent: GPTBot"
+      ],
+      "schema_types": [
+        "WebSite",
+        "NewsMediaOrganization"
+      ],
+      "probes": [
+        {
+          "path": "/llms.txt",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/llms.txt"
+        },
+        {
+          "path": "/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "size": 8259,
+          "final_url": "https://www.nytimes.com/robots.txt"
+        },
+        {
+          "path": "/sitemap.xml",
+          "status": 403,
+          "content_type": "text/html; charset=iso-8859-1",
+          "size": 1,
+          "final_url": "https://www.nytimes.com/sitemap.xml"
+        },
+        {
+          "path": "/.well-known/ai-plugin.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/.well-known/ai-plugin.json"
+        },
+        {
+          "path": "/.well-known/llms.txt",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/.well-known/llms.txt"
+        },
+        {
+          "path": "/ai.txt",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/ai.txt"
+        },
+        {
+          "path": "/.well-known/appspecific/com.chatgpt.android.platform.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/.well-known/appspecific/com.chatgpt.android.platform.json"
+        }
+      ],
+      "assessment": "needs_optimization",
+      "recommendation": "AEO readiness for nytimes.com: 40/100. llms.txt: missing, AI bot directives: 12, schema types: 2.",
+      "detailed_analysis": "AEO audit for The New York Times: live-probed 7 agentic-discovery endpoints on nytimes.com and parsed robots.txt and structured data. Every finding above reflects the real response received at 2026-08-18T07:26:36.950600+00:00.",
+      "runtime_secs": 15.3,
+      "sources": [
+        {
+          "url": "https://www.nytimes.com/llms.txt",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/robots.txt",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/sitemap.xml",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/.well-known/ai-plugin.json",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/.well-known/llms.txt",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/ai.txt",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/.well-known/appspecific/com.chatgpt.android.platform.json",
+          "domain": "nytimes.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Aeo Score",
+          "value": "40%"
+        }
+      ],
+      "actions": [
+        "txt: missing, AI bot directives: 12, schema types: 2"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "pbn_detector": {
+      "feature_name": "Synthetic Network & Footprint De-Anonymizer",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "AHREFS_API_KEY (or MOZ_ACCESS_KEY+MOZ_SECRET_KEY)",
+      "detail": "No backlink provider is configured, so PBN footprint analysis cannot run.",
+      "assessment": "unavailable",
+      "recommendation": "Requires AHREFS_API_KEY (or MOZ_ACCESS_KEY+MOZ_SECRET_KEY) to produce verified data. No backlink provider is configured, so PBN footprint analysis cannot run.",
+      "detailed_analysis": "No data was fabricated for \"Synthetic Network & Footprint De-Anonymizer\". Configure AHREFS_API_KEY (or MOZ_ACCESS_KEY+MOZ_SECRET_KEY) and re-run the analysis to get real, verified output. Reason: No backlink provider is configured, so PBN footprint analysis cannot run.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires AHREFS_API_KEY (or MOZ_ACCESS_KEY+MOZ_SECRET_KEY) to produce verified data",
+        "No backlink provider is configured, so PBN footprint analysis cannot run"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "revenue_sim": {
+      "feature_name": "Share-of-Search Revenue Simulator",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "SERPAPI_KEY",
+      "detail": "No SerpAPI key is configured, so real SERP share cannot be measured.",
+      "assessment": "unavailable",
+      "recommendation": "Requires SERPAPI_KEY to produce verified data. No SerpAPI key is configured, so real SERP share cannot be measured.",
+      "detailed_analysis": "No data was fabricated for \"Share-of-Search Revenue Simulator\". Configure SERPAPI_KEY and re-run the analysis to get real, verified output. Reason: No SerpAPI key is configured, so real SERP share cannot be measured.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires SERPAPI_KEY to produce verified data",
+        "No SerpAPI key is configured, so real SERP share cannot be measured"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "dead_equity": {
+      "error": "object of type 'coroutine' has no len()",
+      "feature_name": "dead_equity",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Complete OFF Page SEO\\backend\\api\\analysis.py\", line 2454, in run_feature\n    r = await func(brand, domain, client, db)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Complete OFF Page SEO\\backend\\api\\analysis.py\", line 1298, in feature_dead_equity\n    pages = deep_fetch_website(domain, client)\n  File \"C:\\Complete OFF Page SEO\\backend\\api\\analysis.py\", line 285, in deep_fetch_website\n    if html and len(html) > 200:\n                ~~~^^^^^^\nTypeError: object of type 'coroutine' has no len()\n",
+      "assessment": "error",
+      "status": "error",
+      "verified": false,
+      "recommendation": "Feature encountered an error: object of type 'coroutine' has no len()",
+      "detailed_analysis": "Error occurred during dead_equity analysis: object of type 'coroutine' has no len().",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Error"
+        }
+      ],
+      "actions": [
+        "Feature encountered an error: object of type 'coroutine' has no len()"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "negative_seo": {
+      "feature_name": "Negative SEO Counter-Measure Deployment",
+      "status": "ok",
+      "verified": true,
+      "method": "live_reputation_search",
+      "retrieved_at": "2026-08-18T07:26:27.907949+00:00",
+      "negative_mention_count": 0,
+      "negative_mentions": [],
+      "risk_terms": [],
+      "assessment": "clear",
+      "recommendation": "Found 0 real pages surfaced for brand + risk-term queries. None found \u2014 no action needed.",
+      "detailed_analysis": "Negative-SEO monitor for The New York Times: ran 6 risk queries and collected 0 real results. Verdicts are based on the actual search results returned at 2026-08-18T07:26:27.907945+00:00.",
+      "runtime_secs": 6.3,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Negative Mention Count",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 0 real pages surfaced for brand + risk-term queries",
+        "None found \u2014 no action needed"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "github_citations": {
+      "feature_name": "GitHub Citation Harvester",
+      "status": "ok",
+      "verified": true,
+      "method": "live_github_search",
+      "retrieved_at": "2026-08-18T07:26:24.187851+00:00",
+      "github_references": 0,
+      "references": [],
+      "assessment": "none_found",
+      "recommendation": "Found 0 real GitHub pages referencing \"The New York Times\". Contribute to or link these repositories.",
+      "detailed_analysis": "GitHub citation harvest for The New York Times: collected 0 repository/file pages from live searches restricted to github.com. All URLs are real results returned at 2026-08-18T07:26:24.187847+00:00.",
+      "runtime_secs": 2.3,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Github References",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 0 real GitHub pages referencing \"The New York Times\"",
+        "Contribute to or link these repositories"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "transcription": {
+      "feature_name": "Audio & Video Semantic Transcription Monitor",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search",
+      "retrieved_at": "2026-08-18T07:26:46.820904+00:00",
+      "transcript_mentions": 0,
+      "mentions": [],
+      "transcription_available": false,
+      "transcription_note": "Full audio transcription requires an audio file or episode URL; the search results above are the real transcript/interview pages found. No transcription is synthesized.",
+      "assessment": "none_found",
+      "recommendation": "Found 0 real transcript/interview pages for \"The New York Times\". Upload an episode URL to this module to run an actual transcription.",
+      "detailed_analysis": "Transcription monitor for The New York Times: 0 audio/video transcript pages collected from real searches. Transcription itself is not fabricated; provide media to transcribe.",
+      "runtime_secs": 9.7,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Transcript Mentions",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 0 real transcript/interview pages for \"The New York Times\"",
+        "Upload an episode URL to this module to run an actual transcription"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "kg_arbitrage": {
+      "feature_name": "Knowledge Graph & Wikidata Triple Arbitrage",
+      "status": "ok",
+      "verified": true,
+      "method": "wikidata+wikipedia_api",
+      "retrieved_at": "2026-08-18T07:26:46.796690+00:00",
+      "wikidata_id": "",
+      "wikidata_label": "",
+      "wikidata_description": "",
+      "wikipedia_url": "",
+      "wikipedia_extract": "",
+      "present_triples": {},
+      "missing_triples": [
+        {
+          "property": "P31",
+          "label": "instance_of"
+        },
+        {
+          "property": "P17",
+          "label": "country"
+        },
+        {
+          "property": "P159",
+          "label": "headquarters"
+        },
+        {
+          "property": "P112",
+          "label": "founders"
+        },
+        {
+          "property": "P452",
+          "label": "industry"
+        },
+        {
+          "property": "P856",
+          "label": "website"
+        },
+        {
+          "property": "P2002",
+          "label": "twitter"
+        },
+        {
+          "property": "P2013",
+          "label": "facebook"
+        }
+      ],
+      "triple_coverage_pct": 0.0,
+      "sitelinks": 0,
+      "assessment": "incomplete",
+      "recommendation": "Wikidata entity : 0.0% triple coverage. 8 required triples missing.",
+      "detailed_analysis": "KG arbitrage for The New York Times: live Wikidata (wbsearchentities/wbgetentities) and Wikipedia REST lookups. All triples shown are read directly from Wikidata claims; nothing is synthesized.",
+      "runtime_secs": 9.5,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Triple Coverage Pct",
+          "value": "0.0%"
+        },
+        {
+          "metric": "Sitelinks",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "8 required triples missing"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "data_pr": {
+      "feature_name": "Anonymized Telemetry Data-PR Engine",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export",
+      "detail": "This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+      "assessment": "unavailable",
+      "recommendation": "Requires GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export to produce verified data. This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+      "detailed_analysis": "No data was fabricated for \"Anonymized Telemetry Data-PR Engine\". Configure GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export and re-run the analysis to get real, verified output. Reason: This module builds press assets from a brand's OWN anonymized usage data. No telemetry source is configured and no synthetic metrics are generated. Connect Search Console/GA4 or supply a data export.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires GSC_CREDENTIALS_FILE (Search Console) and/or GA4_PROPERTY_ID + a telemetry data export to produce verified data",
+        "This module builds press assets from a brand's OWN anonymized usage data",
+        "No telemetry source is configured and no synthetic metrics are generated",
+        "Connect Search Console/GA4 or supply a data export"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "simulation": {
+      "feature_name": "Multi-Agent Off-Page Simulation Sandbox",
+      "status": "unavailable",
+      "verified": false,
+      "requires": "SERPAPI_KEY and/or AHREFS_API_KEY",
+      "detail": "Simulation requires real baseline metrics (SERP share, backlink count). None are configured, so no projections are fabricated.",
+      "assessment": "unavailable",
+      "recommendation": "Requires SERPAPI_KEY and/or AHREFS_API_KEY to produce verified data. Simulation requires real baseline metrics (SERP share, backlink count). None are configured, so no projections are fabricated.",
+      "detailed_analysis": "No data was fabricated for \"Multi-Agent Off-Page Simulation Sandbox\". Configure SERPAPI_KEY and/or AHREFS_API_KEY and re-run the analysis to get real, verified output. Reason: Simulation requires real baseline metrics (SERP share, backlink count). None are configured, so no projections are fabricated.",
+      "runtime_secs": 0.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Module status",
+          "value": "Unavailable"
+        }
+      ],
+      "actions": [
+        "Requires SERPAPI_KEY and/or AHREFS_API_KEY to produce verified data",
+        "Simulation requires real baseline metrics (SERP share, backlink count)",
+        "None are configured, so no projections are fabricated"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "satellite": {
+      "feature_name": "Satellite Entity M&A & Partnership Radar",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+authority",
+      "retrieved_at": "2026-08-18T07:26:46.834767+00:00",
+      "satellites_found": 0,
+      "satellites": [],
+      "assessment": "none_found",
+      "recommendation": "Found 0 real satellite/partner/acquisition pages mentioning \"The New York Times\". Authority values shown are live DA where a provider is configured.",
+      "detailed_analysis": "Satellite radar for The New York Times: collected 0 candidate entities from real searches. DA is fetched live where configured, otherwise reported as unavailable.",
+      "runtime_secs": 9.5,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Satellites Found",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Found 0 real satellite/partner/acquisition pages mentioning \"The New York Times\"",
+        "Authority values shown are live DA where a provider is configured"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "rag_defense": {
+      "feature_name": "Reverse RAG-Cache Poisoning Defense",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+stale_indicator",
+      "retrieved_at": "2026-08-18T07:26:48.416270+00:00",
+      "cache_tests_run": 5,
+      "stale_caches_detected": 0,
+      "total_results_checked": 0,
+      "freshness_rate": 0,
+      "cache_tests": [
+        {
+          "query": "what is The New York Times",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "The New York Times company information",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "The New York Times pricing",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "The New York Times competitors",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        },
+        {
+          "query": "The New York Times features review",
+          "result_count": 0,
+          "stale_count": 0,
+          "stale_details": []
+        }
+      ],
+      "stale_indicators_used": [
+        "was founded",
+        "previously known",
+        "used to be",
+        "discontinued",
+        "shut down",
+        "no longer",
+        "old version",
+        "deprecated",
+        "legacy",
+        "obsolete",
+        "end of life",
+        "sunset"
+      ],
+      "assessment": "clean",
+      "recommendation": "0 results across 0 checked contained stale-data indicators (0% freshness rate). Refresh content these pages describe.",
+      "detailed_analysis": "RAG-cache defense for The New York Times: ran 5 queries and scanned 0 real results for the documented stale indicators. Every flagged entry is a real snippet matched at 2026-08-18T07:26:48.416266+00:00.",
+      "runtime_secs": 10.9,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Cache Tests Run",
+          "value": "5"
+        },
+        {
+          "metric": "Stale Caches Detected",
+          "value": "0"
+        },
+        {
+          "metric": "Total Results Checked",
+          "value": "0"
+        },
+        {
+          "metric": "Freshness Rate",
+          "value": "0%"
+        }
+      ],
+      "actions": [
+        "0 results across 0 checked contained stale-data indicators (0% freshness rate)",
+        "Refresh content these pages describe"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "visual_audit": {
+      "feature_name": "Multi-Modal Schema & Visual Graph Alignment",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_fetch+search",
+      "retrieved_at": "2026-08-18T07:26:48.432832+00:00",
+      "schema_visual_checks": [
+        {
+          "type": "OG-Image",
+          "present": true,
+          "urls": [
+            "https://static01.nyt.com/newsgraphics/images/icons/defaultPromoCrop.png"
+          ]
+        },
+        {
+          "type": "Favicon",
+          "present": true
+        }
+      ],
+      "visual_mentions_found": 0,
+      "visual_mentions": [],
+      "assessment": "optimized",
+      "recommendation": "2 real visual-schema checks on nytimes.com; 0 visual mentions found.",
+      "detailed_analysis": "Visual audit for The New York Times: fetched nytimes.com live and inspected og:image, Image/VideoObject schema and favicon; then ran visual queries. All findings reflect real responses.",
+      "runtime_secs": 10.6,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Visual Mentions Found",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "2 real visual-schema checks on nytimes",
+        "com; 0 visual mentions found"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "apn_proxy": {
+      "feature_name": "Agentic Protocol Negotiation (APN) Proxy",
+      "status": "ok",
+      "verified": true,
+      "method": "live_endpoint_probe",
+      "retrieved_at": "2026-08-18T07:27:03.327509+00:00",
+      "apn_score": 8,
+      "total_endpoints": 16,
+      "active_endpoints": 1,
+      "json_endpoints": 0,
+      "xml_endpoints": 0,
+      "endpoint_probes": [
+        {
+          "path": "/api",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/api"
+        },
+        {
+          "path": "/api/v1",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/api/v1"
+        },
+        {
+          "path": "/api/v2",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/api/v2"
+        },
+        {
+          "path": "/graphql",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/graphql"
+        },
+        {
+          "path": "/openapi.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/openapi.json"
+        },
+        {
+          "path": "/swagger.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/swagger.json"
+        },
+        {
+          "path": "/.well-known/openid-configuration",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/.well-known/openid-configuration"
+        },
+        {
+          "path": "/feed.xml",
+          "status": 403,
+          "content_type": "text/html; charset=iso-8859-1",
+          "size": 1,
+          "final_url": "https://www.nytimes.com/feed.xml"
+        },
+        {
+          "path": "/rss.xml",
+          "status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "size": 88413,
+          "final_url": "https://www.nytimes.com/rss.xml"
+        },
+        {
+          "path": "/atom.xml",
+          "status": 403,
+          "content_type": "text/html; charset=iso-8859-1",
+          "size": 1,
+          "final_url": "https://www.nytimes.com/atom.xml"
+        },
+        {
+          "path": "/sitemap.xml",
+          "status": 403,
+          "content_type": "text/html; charset=iso-8859-1",
+          "size": 1,
+          "final_url": "https://www.nytimes.com/sitemap.xml"
+        },
+        {
+          "path": "/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "size": 8259,
+          "final_url": "https://www.nytimes.com/robots.txt"
+        },
+        {
+          "path": "/manifest.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/manifest.json"
+        },
+        {
+          "path": "/webmanifest.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/webmanifest.json"
+        },
+        {
+          "path": "/.well-known/ai-plugin.json",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/.well-known/ai-plugin.json"
+        },
+        {
+          "path": "/llms.txt",
+          "status": 404,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 68667,
+          "final_url": "https://www.nytimes.com/llms.txt"
+        }
+      ],
+      "assessment": "needs_improvement",
+      "recommendation": "APN readiness 8/100: 1 of 16 agentic/API endpoints respond on nytimes.com.",
+      "detailed_analysis": "APN audit for nytimes.com: live-probed 16 endpoints at 2026-08-18T07:27:03.327447+00:00. 1 returned HTTP < 400. Every status is a real response.",
+      "runtime_secs": 25.5,
+      "sources": [
+        {
+          "url": "https://www.nytimes.com/api",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/api/v1",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/api/v2",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/graphql",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/openapi.json",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/swagger.json",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/.well-known/openid-configuration",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/feed.xml",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/rss.xml",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/atom.xml",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/sitemap.xml",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/robots.txt",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/manifest.json",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/webmanifest.json",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/.well-known/ai-plugin.json",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/llms.txt",
+          "domain": "nytimes.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Apn Score",
+          "value": "8%"
+        },
+        {
+          "metric": "Total Endpoints",
+          "value": "16"
+        },
+        {
+          "metric": "Active Endpoints",
+          "value": "1"
+        },
+        {
+          "metric": "Json Endpoints",
+          "value": "0"
+        },
+        {
+          "metric": "Xml Endpoints",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "APN readiness 8/100: 1 of 16 agentic/API endpoints respond on nytimes"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "graph_decay": {
+      "feature_name": "Co-Citation Graph Decay & Entity Anchor Leasing",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+temporal",
+      "retrieved_at": "2026-08-18T07:26:48.420385+00:00",
+      "total_co_citations": 0,
+      "unique_domains": 0,
+      "fresh_sources": 0,
+      "stale_sources": 0,
+      "freshness_score": null,
+      "co_citations": [],
+      "assessment": "unknown",
+      "recommendation": "0 real co-citations across 0 domains. Freshness score: None%.",
+      "detailed_analysis": "Co-citation graph for The New York Times: 5 queries, 0 real pages. Temporal freshness is read from years actually present in the snippets. No dates are assumed.",
+      "runtime_secs": 10.6,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Co Citations",
+          "value": "0"
+        },
+        {
+          "metric": "Unique Domains",
+          "value": "0"
+        },
+        {
+          "metric": "Fresh Sources",
+          "value": "0"
+        },
+        {
+          "metric": "Stale Sources",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "0 real co-citations across 0 domains"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "c2pa": {
+      "feature_name": "Cryptographic Entity-Origin Proof Signing (C2PA)",
+      "status": "ok",
+      "verified": true,
+      "method": "live_header+markup_scan",
+      "retrieved_at": "2026-08-18T07:26:44.043034+00:00",
+      "c2pa_score": 25,
+      "c2pa_signals": [
+        {
+          "type": "CSP",
+          "value_length": 576
+        }
+      ],
+      "sri_scripts": [],
+      "dnssec_check": null,
+      "dnssec_note": "DNSSEC is a DNS-layer property and cannot be verified via HTTP; check with dig +dnssec or your DNS provider.",
+      "assessment": "needs_improvement",
+      "recommendation": "C2PA readiness 25/100 on nytimes.com. 1 authenticity signals, 0 SRI-protected scripts.",
+      "detailed_analysis": "C2PA audit for The New York Times: scanned live HTTP headers and markup on nytimes.com. All signals are real observations captured at 2026-08-18T07:26:44.043012+00:00. DNSSEC intentionally reported as unverified via HTTP.",
+      "runtime_secs": 6.0,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "C2Pa Score",
+          "value": "25%"
+        }
+      ],
+      "actions": [
+        "C2PA readiness 25/100 on nytimes",
+        "1 authenticity signals, 0 SRI-protected scripts"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "compliance_guard": {
+      "feature_name": "Legal / SEC Disclosure Risk Profiling",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+site_probe",
+      "retrieved_at": "2026-08-18T07:27:01.570006+00:00",
+      "compliance_score": 55,
+      "compliance_pages_found": [
+        {
+          "path": "/privacy",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "size": 111363,
+          "final_url": "https://www.nytimes.com/privacy"
+        },
+        {
+          "path": "/legal",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "size": 177558,
+          "final_url": "https://www.nytco.com/#home=true"
+        },
+        {
+          "path": "/cookie-policy",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "size": 80232,
+          "final_url": "https://help.nytimes.com/115002797688-Policies/the-new-york-times-company-cookie-policy"
+        }
+      ],
+      "legal_mentions": [
+        {
+          "url": "https://help.nytimes.com/10940941449492-The-New-York-Times-Company-Privacy-Policy",
+          "title": "The New York Times Company Privacy Policy",
+          "domain": "help.nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        },
+        {
+          "url": "https://archive.nytimes.com/www.nytimes.com/ref/membercenter/help/privacy.html",
+          "title": "The New York Times Privacy Policy - NYTimes.com",
+          "domain": "archive.nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        },
+        {
+          "url": "https://store.nytimes.com/pages/privacy-policy",
+          "title": "Privacy Policy - The New York Times Store",
+          "domain": "store.nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        },
+        {
+          "url": "https://www.nytimes.com/privacy",
+          "title": "Privacy FAQ - The New York Times",
+          "domain": "nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        },
+        {
+          "url": "https://www.nytimes.com/privacy/your-privacy-choices",
+          "title": "Your Privacy Choices - The New York Times",
+          "domain": "nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        },
+        {
+          "url": "https://www.nytimes.com/series/new-york-times-privacy-project",
+          "title": "The Privacy Project - The New York Times",
+          "domain": "nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        },
+        {
+          "url": "https://www.nytimes.com/privacy/policy/",
+          "title": "The New York Times",
+          "domain": "nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        },
+        {
+          "url": "https://help.nytimes.com/en_US/policies",
+          "title": "Policies - The New York Times Help Center",
+          "domain": "help.nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        },
+        {
+          "url": "https://help.nytimes.com/en_US/permissions-and-policies",
+          "title": "Permissions and Policies - The New York Times Help Center",
+          "domain": "help.nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        },
+        {
+          "url": "https://help.nytimes.com/115014893428-Terms-of-Service",
+          "title": "Terms of Service - The New York Times Help Center",
+          "domain": "help.nytimes.com",
+          "snippet": "",
+          "query": "The New York Times privacy policy"
+        }
+      ],
+      "assessment": "partial",
+      "recommendation": "Compliance readiness 55/100: 3 standard compliance pages present, 10 legal/SEC mentions found.",
+      "detailed_analysis": "Compliance guard for The New York Times: probed 7 compliance paths on nytimes.com and ran 5 legal queries. All counts are real observations from 2026-08-18T07:27:01.569994+00:00.",
+      "runtime_secs": 23.5,
+      "sources": [
+        {
+          "url": "https://www.nytimes.com/privacy",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://help.nytimes.com/115002797688-Policies/the-new-york-times-company-cookie-policy",
+          "domain": "help.nytimes.com"
+        },
+        {
+          "url": "https://help.nytimes.com/10940941449492-The-New-York-Times-Company-Privacy-Policy",
+          "domain": "help.nytimes.com"
+        },
+        {
+          "url": "https://archive.nytimes.com/www.nytimes.com/ref/membercenter/help/privacy.html",
+          "domain": "archive.nytimes.com"
+        },
+        {
+          "url": "https://store.nytimes.com/pages/privacy-policy",
+          "domain": "store.nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/privacy/your-privacy-choices",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/series/new-york-times-privacy-project",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/privacy/policy/",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://help.nytimes.com/en_US/policies",
+          "domain": "help.nytimes.com"
+        },
+        {
+          "url": "https://help.nytimes.com/en_US/permissions-and-policies",
+          "domain": "help.nytimes.com"
+        },
+        {
+          "url": "https://help.nytimes.com/115014893428-Terms-of-Service",
+          "domain": "help.nytimes.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Compliance Score",
+          "value": "55%"
+        }
+      ],
+      "actions": [
+        "Compliance readiness 55/100: 3 standard compliance pages present, 10 legal/SEC mentions found"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "geo_crawl": {
+      "feature_name": "Geo-IP Citation Localization",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+hreflang_scan",
+      "retrieved_at": "2026-08-18T07:26:49.788174+00:00",
+      "regions_analyzed": 5,
+      "regions_with_citations": 0,
+      "geo_coverage_score": 0.0,
+      "geo_citations_by_region": {},
+      "hreflang_tags": [
+        {
+          "hreflang": "x-default",
+          "href": "https://www.nytimes.com"
+        },
+        {
+          "hreflang": "en-US",
+          "href": "https://www.nytimes.com"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://www.nytimes.com/international/"
+        },
+        {
+          "hreflang": "en-GB",
+          "href": "https://www.nytimes.com/international/"
+        },
+        {
+          "hreflang": "en-AU",
+          "href": "https://www.nytimes.com/international/"
+        },
+        {
+          "hreflang": "en-CA",
+          "href": "https://www.nytimes.com/ca/"
+        },
+        {
+          "hreflang": "es",
+          "href": "https://www.nytimes.com/es/"
+        },
+        {
+          "hreflang": "zh-Hans",
+          "href": "https://cn.nytimes.com"
+        },
+        {
+          "hreflang": "zh-Hant",
+          "href": "https://cn.nytimes.com/zh-hant/"
+        }
+      ],
+      "assessment": "weak",
+      "recommendation": "Geo coverage 0.0% (0/5 regions have brand citations). 9 hreflang tags on the site.",
+      "detailed_analysis": "Geo localization for The New York Times: 5 region queries, 0 with real citations, plus a live hreflang scan of nytimes.com. All results are real.",
+      "runtime_secs": 11.5,
+      "sources": [
+        {
+          "url": "https://www.nytimes.com",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/international/",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/ca/",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/es/",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://cn.nytimes.com",
+          "domain": "cn.nytimes.com"
+        },
+        {
+          "url": "https://cn.nytimes.com/zh-hant/",
+          "domain": "cn.nytimes.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Regions Analyzed",
+          "value": "5"
+        },
+        {
+          "metric": "Regions With Citations",
+          "value": "0"
+        },
+        {
+          "metric": "Geo Coverage Score",
+          "value": "0.0%"
+        }
+      ],
+      "actions": [
+        "0% (0/5 regions have brand citations)",
+        "9 hreflang tags on the site"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "zero_party": {
+      "feature_name": "Zero-Party Data Exchange",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+site_probe",
+      "retrieved_at": "2026-08-18T07:27:01.687797+00:00",
+      "total_data_assets": 10,
+      "data_assets": [
+        {
+          "url": "https://www.trustpilot.com/review/www.nytimes.com",
+          "title": "The New York Times Reviews | Read Customer Service Reviews of www ...",
+          "domain": "trustpilot.com",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        },
+        {
+          "url": "https://www.trustpilot.com/review/newyorktimes.com?page=2",
+          "title": "The New York Times Reviews | Read Customer Service Reviews of ...",
+          "domain": "trustpilot.com",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        },
+        {
+          "url": "https://www.complaintsboard.com/the-new-york-times-b125537/contacts",
+          "title": "The New York Times Customer Service Phone, Email, Address, Contacts ...",
+          "domain": "complaintsboard.com",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        },
+        {
+          "url": "https://help.nytimes.com/115015385887-Contact-The-New-York-Times",
+          "title": "Contact The New York Times - The New York Times Help Center",
+          "domain": "help.nytimes.com",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        },
+        {
+          "url": "https://help.nytimes.com/115003860627-Contact-The-New-York-Times",
+          "title": "Contact The New York Times - The New York Times Help Center",
+          "domain": "help.nytimes.com",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        },
+        {
+          "url": "https://customerchat.nytimes.com/chat-ui",
+          "title": "Chat - The New York Times",
+          "domain": "customerchat.nytimes.com",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        },
+        {
+          "url": "https://www.bbb.org/us/ny/new-york/profile/publishers-periodical/the-new-york-times-company-0121-229/customer-reviews",
+          "title": "The New York Times Company | BBB Reviews | Better Business Bureau",
+          "domain": "bbb.org",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        },
+        {
+          "url": "https://customerchat.nytimes.com/chat-ui?contact",
+          "title": "Chat - The New York Times",
+          "domain": "customerchat.nytimes.com",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        },
+        {
+          "url": "https://www.complaintsboard.com/the-new-york-times-b125537",
+          "title": "The New York Times - Complaints Board",
+          "domain": "complaintsboard.com",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        },
+        {
+          "url": "https://archive.nytimes.com/www.nytimes.com/info/help/contact.html",
+          "title": "Contacting The New York Times on the Web",
+          "domain": "archive.nytimes.com",
+          "snippet": "",
+          "query": "\"The New York Times\" customer feedback"
+        }
+      ],
+      "data_endpoints_found": 2,
+      "data_endpoints": [
+        {
+          "path": "/research",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "size": 800770,
+          "final_url": "https://www.nytimes.com/section/health"
+        },
+        {
+          "path": "/surveys",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "size": 1243503,
+          "final_url": "https://www.nytimes.com"
+        }
+      ],
+      "assessment": "active",
+      "recommendation": "Found 10 real zero-party-data references and 2 site data endpoints. No asset templates are fabricated.",
+      "detailed_analysis": "Zero-party data audit for The New York Times: 4 queries and 7 site probes. Every asset listed is a real page found at 2026-08-18T07:27:01.687771+00:00.",
+      "runtime_secs": 23.2,
+      "sources": [
+        {
+          "url": "https://www.trustpilot.com/review/www.nytimes.com",
+          "domain": "trustpilot.com"
+        },
+        {
+          "url": "https://www.trustpilot.com/review/newyorktimes.com?page=2",
+          "domain": "trustpilot.com"
+        },
+        {
+          "url": "https://www.complaintsboard.com/the-new-york-times-b125537/contacts",
+          "domain": "complaintsboard.com"
+        },
+        {
+          "url": "https://help.nytimes.com/115015385887-Contact-The-New-York-Times",
+          "domain": "help.nytimes.com"
+        },
+        {
+          "url": "https://help.nytimes.com/115003860627-Contact-The-New-York-Times",
+          "domain": "help.nytimes.com"
+        },
+        {
+          "url": "https://customerchat.nytimes.com/chat-ui",
+          "domain": "customerchat.nytimes.com"
+        },
+        {
+          "url": "https://www.bbb.org/us/ny/new-york/profile/publishers-periodical/the-new-york-times-company-0121-229/customer-reviews",
+          "domain": "bbb.org"
+        },
+        {
+          "url": "https://customerchat.nytimes.com/chat-ui?contact",
+          "domain": "customerchat.nytimes.com"
+        },
+        {
+          "url": "https://www.complaintsboard.com/the-new-york-times-b125537",
+          "domain": "complaintsboard.com"
+        },
+        {
+          "url": "https://archive.nytimes.com/www.nytimes.com/info/help/contact.html",
+          "domain": "archive.nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/section/health",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com",
+          "domain": "nytimes.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Total Data Assets",
+          "value": "10"
+        },
+        {
+          "metric": "Data Endpoints Found",
+          "value": "2"
+        }
+      ],
+      "actions": [
+        "Found 10 real zero-party-data references and 2 site data endpoints",
+        "No asset templates are fabricated"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "passage_scoring": {
+      "feature_name": "Passage-Level BERT Evaluator",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+content_metrics",
+      "retrieved_at": "2026-08-18T07:26:47.915977+00:00",
+      "total_passages_scored": 0,
+      "high_attention_passages": 0,
+      "avg_word_count": 0,
+      "passages": [],
+      "high_attention_details": [],
+      "note": "Attention is scored from real snippet characteristics (length, numbers, metrics). No BERT model is claimed; replace this module with an embedding-backed scorer when OPENAI_API_KEY is set.",
+      "assessment": "weak",
+      "recommendation": "Scored 0 real passages; 0 qualify as data-rich and attention-worthy.",
+      "detailed_analysis": "Passage evaluation for The New York Times: 0 real search snippets analyzed for word count, numeric content and metric mentions. All scores derive from the actual snippet text.",
+      "runtime_secs": 9.1,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Passages Scored",
+          "value": "0%"
+        },
+        {
+          "metric": "High Attention Passages",
+          "value": "0"
+        },
+        {
+          "metric": "Avg Word Count",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Scored 0 real passages; 0 qualify as data-rich and attention-worthy"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "reddit_consensus": {
+      "feature_name": "Reddit & Forum Consensus Graph",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+llm_sentiment",
+      "retrieved_at": "2026-08-18T07:27:09.938710+00:00",
+      "total_mentions": 0,
+      "reddit_mentions": 0,
+      "forum_mentions": 0,
+      "avg_sentiment": null,
+      "sentiment_scored": 0,
+      "mentions": [],
+      "assessment": "no_sentiment_data",
+      "recommendation": "Found 0 real community mentions. Sentiment needs an LLM key; mention data is real.",
+      "detailed_analysis": "Community consensus for The New York Times: 4 queries filtered to real forum domains. Sentiment scores are live LLM output when configured.",
+      "runtime_secs": 6.5,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Mentions",
+          "value": "0"
+        },
+        {
+          "metric": "Reddit Mentions",
+          "value": "0"
+        },
+        {
+          "metric": "Forum Mentions",
+          "value": "0"
+        },
+        {
+          "metric": "Sentiment Scored",
+          "value": "0%"
+        }
+      ],
+      "actions": [
+        "Found 0 real community mentions",
+        "Sentiment needs an LLM key; mention data is real"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "competitor_bert": {
+      "feature_name": "Competitor BERT-Vector Extraction",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+phrase_extraction",
+      "retrieved_at": "2026-08-18T07:27:08.976384+00:00",
+      "competitors_analyzed": 3,
+      "competitor_data": [
+        {
+          "name": "Forrester",
+          "phrases_extracted": 0,
+          "top_phrases": []
+        },
+        {
+          "name": "TikTok",
+          "phrases_extracted": 0,
+          "top_phrases": []
+        },
+        {
+          "name": "Facts",
+          "phrases_extracted": 0,
+          "top_phrases": []
+        }
+      ],
+      "total_phrases_extracted": 0,
+      "note": "Real textual phrase extraction from live search snippets. Embedding vectors require OPENAI_API_KEY and are not fabricated.",
+      "assessment": "active",
+      "recommendation": "Analyzed 3 competitors and extracted 0 real phrases.",
+      "detailed_analysis": "Competitor extraction for The New York Times: phrases pulled from real snippets of each competitor. All text is genuine search output captured at 2026-08-18T07:27:08.976380+00:00.",
+      "runtime_secs": 5.2,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Competitors Analyzed",
+          "value": "3"
+        },
+        {
+          "metric": "Total Phrases Extracted",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "Analyzed 3 competitors and extracted 0 real phrases"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "schema_auditor": {
+      "feature_name": "Agentic API & Schema Protocol Auditor",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_scan",
+      "retrieved_at": "2026-08-18T07:27:13.568884+00:00",
+      "schema_score": 52,
+      "schema_checks": [
+        {
+          "type": "JSON-LD",
+          "schema_type": "WebSite",
+          "fields": [
+            "@context",
+            "@type",
+            "image",
+            "url",
+            "name",
+            "alternateName",
+            "potentialAction",
+            "mainEntity",
+            "publisher"
+          ]
+        },
+        {
+          "type": "JSON-LD",
+          "schema_type": "NewsMediaOrganization",
+          "fields": [
+            "@context",
+            "@type",
+            "name",
+            "logo",
+            "url",
+            "@id",
+            "publishingPrinciples",
+            "diversityPolicy",
+            "ethicsPolicy",
+            "masthead",
+            "foundingDate",
+            "sameAs"
+          ]
+        },
+        {
+          "type": "OpenGraph",
+          "count": 5
+        },
+        {
+          "type": "TwitterCard",
+          "count": 1
+        }
+      ],
+      "machine_readable_endpoints": [
+        {
+          "path": "/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "size": 8259,
+          "final_url": "https://www.nytimes.com/robots.txt"
+        }
+      ],
+      "jsonld_count": 2,
+      "opengraph_count": 5,
+      "twitter_card_count": 1,
+      "assessment": "good",
+      "recommendation": "Schema readiness 52/100: 2 JSON-LD, 5 OpenGraph, 1 Twitter Card, 1 machine-readable endpoints.",
+      "detailed_analysis": "Schema auditor for nytimes.com: live scan of structured data and machine-readable endpoints at 2026-08-18T07:27:13.568874+00:00. Every count is a real observation.",
+      "runtime_secs": 9.6,
+      "sources": [
+        {
+          "url": "https://www.nytimes.com/robots.txt",
+          "domain": "nytimes.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Schema Score",
+          "value": "52%"
+        },
+        {
+          "metric": "Jsonld Count",
+          "value": "2"
+        },
+        {
+          "metric": "Opengraph Count",
+          "value": "5"
+        },
+        {
+          "metric": "Twitter Card Count",
+          "value": "1"
+        }
+      ],
+      "actions": [
+        "Schema readiness 52/100: 2 JSON-LD, 5 OpenGraph, 1 Twitter Card, 1 machine-readable endpoints"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "anchor_entropy": {
+      "feature_name": "Anchor-Text Entropy Boundary Predictor",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+entropy",
+      "retrieved_at": "2026-08-18T07:27:08.696906+00:00",
+      "total_anchors": 3,
+      "unique_anchors": 3,
+      "entropy": 1.585,
+      "normalized_entropy": 1.0,
+      "branded_pct": 100.0,
+      "top_anchors": [
+        {
+          "anchor": "The New York Times",
+          "count": 1
+        },
+        {
+          "anchor": "The New York Times official site",
+          "count": 1
+        },
+        {
+          "anchor": "The New York Times homepage",
+          "count": 1
+        }
+      ],
+      "assessment": "healthy",
+      "recommendation": "Anchor entropy 1.0 across 3 real anchor contexts; 100.0% branded.",
+      "detailed_analysis": "Anchor entropy for The New York Times: entropy computed from real anchor contexts observed in live search results. No anchors are injected or assumed.",
+      "runtime_secs": 4.7,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Total Anchors",
+          "value": "3"
+        },
+        {
+          "metric": "Unique Anchors",
+          "value": "3"
+        },
+        {
+          "metric": "Entropy",
+          "value": "1.58%"
+        },
+        {
+          "metric": "Normalized Entropy",
+          "value": "1.0%"
+        },
+        {
+          "metric": "Branded Pct",
+          "value": "100.0%"
+        }
+      ],
+      "actions": [
+        "0 across 3 real anchor contexts; 100"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "crawl_priority": {
+      "feature_name": "AI Crawler Re-Indexation Pinger",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_probe",
+      "retrieved_at": "2026-08-18T07:27:11.062997+00:00",
+      "crawl_priority_score": 35,
+      "robots_txt": true,
+      "sitemap": false,
+      "indexnow": false,
+      "ai_bot_directives": [
+        "User-agent: anthropic-ai",
+        "User-agent: Bytespider",
+        "User-agent: CCBot",
+        "User-agent: ChatGPT-User",
+        "User-agent: ClaudeBot",
+        "User-agent: Claude-SearchBot",
+        "User-agent: Claude-User",
+        "User-agent: Claude-Web",
+        "User-agent: Google-Extended",
+        "User-agent: GPTBot"
+      ],
+      "x_robots_tag": "",
+      "assessment": "needs_optimization",
+      "recommendation": "Crawl-priority readiness 35/100 on nytimes.com. IndexNow: missing; AI bot directives: 12.",
+      "detailed_analysis": "Crawl audit for nytimes.com: live probes of robots.txt, sitemap.xml, IndexNow endpoint and AI-bot directives at 2026-08-18T07:27:11.062945+00:00. All statuses are real responses.",
+      "runtime_secs": 6.7,
+      "sources": [],
+      "findings": [
+        {
+          "metric": "Crawl Priority Score",
+          "value": "35%"
+        }
+      ],
+      "actions": [
+        "Crawl-priority readiness 35/100 on nytimes",
+        "IndexNow: missing; AI bot directives: 12"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "ftc_compliance": {
+      "feature_name": "FTC & Sponsored-Mention Penalty Shield",
+      "status": "ok",
+      "verified": true,
+      "method": "live_search+site_probe",
+      "retrieved_at": "2026-08-18T07:27:14.685367+00:00",
+      "ftc_score": 40,
+      "sponsored_mentions": [],
+      "compliance_issues": [],
+      "disclosure_pages": [
+        {
+          "path": "/advertising",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "size": 614165,
+          "final_url": "https://www.nytimes.com/section/business/media"
+        }
+      ],
+      "total_sponsored_content": 0,
+      "total_compliance_issues": 0,
+      "assessment": "non_compliant",
+      "recommendation": "FTC readiness 40/100: 0 sponsored mentions, 0 without visible disclosure, 1 disclosure pages on site.",
+      "detailed_analysis": "FTC audit for The New York Times: 4 queries and 5 site probes at 2026-08-18T07:27:14.685350+00:00. Disclosure status is judged from the real snippet/page text.",
+      "runtime_secs": 10.4,
+      "sources": [
+        {
+          "url": "https://www.nytimes.com/section/business/media",
+          "domain": "nytimes.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "Ftc Score",
+          "value": "40%"
+        },
+        {
+          "metric": "Total Sponsored Content",
+          "value": "0"
+        },
+        {
+          "metric": "Total Compliance Issues",
+          "value": "0"
+        }
+      ],
+      "actions": [
+        "FTC readiness 40/100: 0 sponsored mentions, 0 without visible disclosure, 1 disclosure pages on site"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    },
+    "hreflang": {
+      "feature_name": "Cross-Border Hreflang Equity Balancer",
+      "status": "ok",
+      "verified": true,
+      "method": "live_site_scan",
+      "retrieved_at": "2026-08-18T07:27:16.054650+00:00",
+      "international_readiness_score": 70,
+      "hreflang_tags": [
+        {
+          "hreflang": "x-default",
+          "href": "https://www.nytimes.com"
+        },
+        {
+          "hreflang": "en-US",
+          "href": "https://www.nytimes.com"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://www.nytimes.com/international/"
+        },
+        {
+          "hreflang": "en-GB",
+          "href": "https://www.nytimes.com/international/"
+        },
+        {
+          "hreflang": "en-AU",
+          "href": "https://www.nytimes.com/international/"
+        },
+        {
+          "hreflang": "en-CA",
+          "href": "https://www.nytimes.com/ca/"
+        },
+        {
+          "hreflang": "es",
+          "href": "https://www.nytimes.com/es/"
+        },
+        {
+          "hreflang": "zh-Hans",
+          "href": "https://cn.nytimes.com"
+        },
+        {
+          "hreflang": "zh-Hant",
+          "href": "https://cn.nytimes.com/zh-hant/"
+        }
+      ],
+      "international_versions": [
+        {
+          "version": "ca",
+          "url": "https://nytimes.com/ca/"
+        }
+      ],
+      "international_links": [
+        {
+          "href": "https://www.nytimes.com/es/",
+          "text": "Espa\u00f1ol"
+        },
+        {
+          "href": "https://www.nytimes.com/es/",
+          "text": "Espa\u00f1ol"
+        }
+      ],
+      "cannibalization_risk": "low",
+      "assessment": "partial",
+      "recommendation": "Hreflang readiness 70/100: 9 hreflang tags, 1 international versions, cannibalization risk low.",
+      "detailed_analysis": "Hreflang audit for nytimes.com: live scan of alternate-link tags, international links and country-path probes at 2026-08-18T07:27:16.054591+00:00. All values are real observations.",
+      "runtime_secs": 11.5,
+      "sources": [
+        {
+          "url": "https://www.nytimes.com",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/international/",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/ca/",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://www.nytimes.com/es/",
+          "domain": "nytimes.com"
+        },
+        {
+          "url": "https://cn.nytimes.com",
+          "domain": "cn.nytimes.com"
+        },
+        {
+          "url": "https://cn.nytimes.com/zh-hant/",
+          "domain": "cn.nytimes.com"
+        },
+        {
+          "url": "https://nytimes.com/ca/",
+          "domain": "nytimes.com"
+        }
+      ],
+      "findings": [
+        {
+          "metric": "International Readiness Score",
+          "value": "70%"
+        }
+      ],
+      "actions": [
+        "Hreflang readiness 70/100: 9 hreflang tags, 1 international versions, cannibalization risk low"
+      ],
+      "methodology": "Real-time signals collected live for this brand via live web search, page fetch and public structured data (Wikipedia / Wikidata). Every linked source is a real URL surfaced during this run. Modules that need an API key report an honest 'unavailable' state instead of fabricating numbers."
+    }
+  },
+  "status": "completed",
+  "summary": {
+    "overall_score": 27.6,
+    "total_mentions": 10,
+    "unlinked_opportunities": 3,
+    "backlink_health": null,
+    "toxic_backlinks": null,
+    "rag_citation_rate": null,
+    "kg_coverage": 0.0,
+    "vector_similarity": null,
+    "sentiment": null,
+    "pbn_risk": null,
+    "anchor_entropy": 1.0,
+    "llm_citation_rate": null,
+    "aeo_score": 40,
+    "share_of_search": null,
+    "pr_hooks_generated": null,
+    "podcast_opportunities": 0,
+    "github_references": 0,
+    "features_analyzed": 35,
+    "modules_unavailable": 9
+  }
+}
