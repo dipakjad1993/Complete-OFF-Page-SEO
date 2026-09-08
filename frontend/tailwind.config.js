@@ -8,7 +8,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Google Sans', 'Roboto', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+        // On 2026 Pixel phones this resolves to the on-device Pixel typeface
+        // (Google Sans / Product Sans); everywhere else it falls through to Inter.
+        sans: ['Google Sans', 'Product Sans', 'Inter', 'Roboto', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
       },
     },
   },

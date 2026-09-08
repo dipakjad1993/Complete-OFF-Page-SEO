@@ -293,9 +293,14 @@ function SectionCard({ feature, meta }: { feature: FeatureDef; meta: Record<stri
         .filter(([k, v]) => k !== 'feature_name' && k !== 'assessment' && k !== 'recommendation' && k !== 'detailed_analysis' && typeof v === 'number')
         .slice(0, 6)
     : [];
+  const CUSTOM_TABLES = new Set(['evidence_table', 'next_steps']);
   const dataTables = meta
-    ? Object.entries(meta).filter(([, v]) => Array.isArray(v) && v.length > 0 && typeof v[0] === 'object')
+    ? Object.entries(meta).filter(([k, v]) => !CUSTOM_TABLES.has(k) && Array.isArray(v) && v.length > 0 && typeof v[0] === 'object')
     : [];
+  const evidenceRows: Array<any> = Array.isArray(meta?.evidence_table) ? meta.evidence_table : [];
+  const nextSteps: Array<any> = Array.isArray(meta?.next_steps) ? meta.next_steps : [];
+  const limitations: Array<any> = Array.isArray(meta?.limitations) ? meta.limitations : [];
+  const confidence: number | null = typeof meta?.confidence === 'number' ? meta.confidence : null;
 
   return (
     <div className={`feature-card ${expanded ? 'expanded' : ''} ${unavailable ? 'unavailable' : ''}`} id={`feature-${feature.num}`}>
@@ -328,6 +333,16 @@ function SectionCard({ feature, meta }: { feature: FeatureDef; meta: Record<stri
                 <strong>No verified data available for this module.</strong>
                 <p>This tool never fabricates results. {String(meta?.requires ?? 'This module requires an integration or live data source')} is not configured, so no numbers were produced for this brand.</p>
                 {meta?.recommendation && <p>{String(meta.recommendation)}</p>}
+                {nextSteps.length > 0 && (
+                  <ol className="actions-list">
+                    {nextSteps.map((n: any, i: number) => (
+                      <li key={i}>
+                        <span className="assessment-badge medium">{String(n.priority ?? 'P1')}</span>{' '}
+                        {String(n.step ?? '')}
+                      </li>
+                    ))}
+                  </ol>
+                )}
               </div>
             </div>
           ) : (
@@ -349,17 +364,46 @@ function SectionCard({ feature, meta }: { feature: FeatureDef; meta: Record<stri
                 )}
               </div>
 
+              {/* Executive takeaway — plain-language verdict from live numbers */}
+              {meta?.executive_takeaway && (
+                <div className="feature-recommendation">
+                  <h4 className="feature-subhead"><BadgeCheck size={14} /> Executive takeaway</h4>
+                  <p className="actions-text">{String(meta.executive_takeaway)}</p>
+                </div>
+              )}
+
               {/* Key findings */}
               {meta?.findings && meta.findings.length > 0 && (
                 <div className="feature-findings">
                   <h4 className="feature-subhead"><Sparkles size={14} /> Key findings for this brand</h4>
                   <div className="findings-grid">
-                    {meta.findings.slice(0, 8).map((f: any, i: number) => (
+                    {meta.findings.slice(0, 12).map((f: any, i: number) => (
                       <div key={i} className="finding-card">
                         <div className="finding-value">{f.value}</div>
                         <div className="finding-metric">{f.metric}</div>
                       </div>
                     ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Evidence table — every signal with its live reading */}
+              {evidenceRows.length > 0 && (
+                <div className="feature-findings">
+                  <h4 className="feature-subhead"><ListChecks size={14} /> Evidence ({evidenceRows.length} live signals)</h4>
+                  <div className="table-container">
+                    <table>
+                      <thead><tr><th>Signal</th><th>Observed</th><th>Reading</th></tr></thead>
+                      <tbody>
+                        {evidenceRows.slice(0, 12).map((r: any, i: number) => (
+                          <tr key={i}>
+                            <td><strong>{String(r.signal ?? '')}</strong></td>
+                            <td><span className="stat-strong">{String(r.observed ?? '')}</span></td>
+                            <td>{String(r.reading ?? '')}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               )}
@@ -376,20 +420,43 @@ function SectionCard({ feature, meta }: { feature: FeatureDef; meta: Record<stri
                   </div>
                 )}
 
-                {(meta?.recommendation || (Array.isArray(meta?.actions) && meta.actions.length > 0)) && (
+                {(meta?.recommendation || (Array.isArray(meta?.actions) && meta.actions.length > 0) || nextSteps.length > 0) && (
                   <div className="feature-recommendation">
-                    <h4 className="feature-subhead"><Quote size={14} /> Recommended actions</h4>
-                    {Array.isArray(meta?.actions) && meta.actions.length > 0 ? (
+                    <h4 className="feature-subhead"><Quote size={14} /> Prioritized next steps</h4>
+                    {nextSteps.length > 0 ? (
+                      <ol className="actions-list">
+                        {nextSteps.map((n: any, i: number) => (
+                          <li key={i}>
+                            <span className={`assessment-badge ${n.priority === 'P1' ? 'critical' : n.priority === 'P2' ? 'medium' : 'low'}`}>
+                              {String(n.priority ?? 'P3')}
+                            </span>{' '}
+                            {typeof n.step === 'string' ? renderInline(n.step, `n${i}`) : String(n.step ?? '')}
+                          </li>
+                        ))}
+                      </ol>
+                    ) : Array.isArray(meta?.actions) && meta.actions.length > 0 ? (
                       <ol className="actions-list">
                         {meta.actions.map((a: string, i: number) => (
                           <li key={i}>{renderInline(a, `a${i}`)}</li>
                         ))}
                       </ol>
                     ) : (
-                      <p className="actions-text">{renderInline(String(meta.recommendation), 'rec')}</p>
+                      <p className="actions-text">{renderInline(String(meta?.recommendation ?? ''), 'rec')}</p>
                     )}
                   </div>
                 )}
+
+              {/* Confidence + limitations — honest coverage disclosure */}
+              {(confidence !== null || limitations.length > 0) && (
+                <div className="feature-methodology">
+                  <Gauge size={13} />
+                  <span>
+                    {confidence !== null && <>Confidence <strong>{confidence}</strong> (coverage-based: base 0.6 + sources + provider — see methodology). </>}
+                    {limitations.length > 0 && <>Limits: {limitations.map((l: any) => String(l)).join(' ')}</>}
+                    {limitations.length === 0 && <>No blocking limitations observed in this run.</>}
+                  </span>
+                </div>
+              )}
               </div>
 
               {meta?.detailed_analysis && (
@@ -724,7 +791,7 @@ export default function ToolApp() {
 
       // 5. Report
       setStepStatus('report', 'active');
-      setBrand({ name: analysis.brand, domain: analysis.domain, started: analysis.started_at, completed: analysis.completed_at });
+      setBrand({ id: brandId, name: analysis.brand, domain: analysis.domain, started: analysis.started_at, completed: analysis.completed_at });
       setResult(analysis);
       setStepStatus('report', 'done');
       setPhase('results');
@@ -949,7 +1016,13 @@ export default function ToolApp() {
                 )}
               </>
             ) : (
-              <Deliverables summary={summary} sections={sections} />
+              <Deliverables
+                summary={summary}
+                sections={sections}
+                brandId={typeof brand?.id === 'number' ? brand.id : null}
+                brandName={String(brand?.name ?? result?.brand ?? '')}
+                brandDomain={String(brand?.domain ?? result?.domain ?? '')}
+              />
             )}
 
             {/* Footer info */}

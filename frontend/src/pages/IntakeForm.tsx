@@ -182,15 +182,39 @@ export default function IntakeForm({ value, onChange }: Props) {
       if (!res.ok) throw new Error((json.detail as string) || `Auto-fetch failed (${res.status})`);
       const d = json ?? {};
       const domain = String(d.domain || '').replace(/^www\./, '');
-      const execs: Array<{ name?: string; title?: string; bio?: string; linkedin?: string; twitter?: string; source?: string }> =
-        Array.isArray(d.all_executives) ? d.all_executives
-          : d.spokesperson ? [d.spokesperson] : [];
+      // Prefer flattened frontend-ready candidates; fall back to raw execs / spokesperson.
+      const candPool: Array<any> =
+        Array.isArray(d.spokesperson_candidates) && d.spokesperson_candidates.length ? d.spokesperson_candidates
+          : Array.isArray(d.all_executives) && d.all_executives.length ? d.all_executives
+          : d.spokesperson && d.spokesperson.name ? [d.spokesperson] : [];
+      const flatStr = (v: any): string => {
+        if (typeof v === 'string') return v;
+        if (Array.isArray(v)) return v.map((x: any) => (typeof x === 'string' ? x : String(x?.text || ''))).filter(Boolean).join('; ');
+        return '';
+      };
+      const flatLines = (v: any): string => {
+        if (typeof v === 'string') return v;
+        if (Array.isArray(v)) return v.map((x: any) => (typeof x === 'string' ? x : String(x?.text || ''))).filter(Boolean).join('\n');
+        return '';
+      };
+      const brandQuotes: string[] = Array.isArray(d.quote_repository) ? d.quote_repository.map(String).filter(Boolean)
+        : Array.isArray(d.brand_quotes) ? d.brand_quotes.map((q: any) => String(q?.text || q || '')).filter(Boolean) : [];
       const competitors = Array.isArray(d.competitors)
         ? d.competitors.map((c: any) => ({ name: String(c?.name || ''), domain: String(c?.domain || ''), wikidata_id: String(c?.wikidata_id || '') }))
         : [{ name: '', domain: '', wikidata_id: '' }];
       const keywords = Array.isArray(d.keywords) ? d.keywords.map(String) : [];
       const seedKeywords = Array.isArray(d.seed_keywords) ? d.seed_keywords.map(String) : keywords;
       const taxonomy = Array.isArray(d.topical_taxonomy) ? d.topical_taxonomy.map(String) : [];
+      const mappedSpokes = candPool.slice(0, 12).map((e: any, idx: number) => ({
+        name: String(e.name || ''),
+        title: String(e.title || ''),
+        bio: String(e.bio || ''),
+        credentials: flatStr(e.credentials),
+        expertise: flatStr(e.expertise),
+        linkedin: String(e.linkedin || e.social_links?.linkedin || ''),
+        twitter: String(e.twitter || e.social_links?.twitter || ''),
+        quotes: flatLines(e.quotes) || (idx === 0 ? brandQuotes.slice(0, 4).join('\n') : ''),
+      })).filter((s: any) => s.name);
       onChange({
         ...value,
         name: String(d.name || value.name),
@@ -204,21 +228,11 @@ export default function IntakeForm({ value, onChange }: Props) {
         taxonomy: (taxonomy.length ? taxonomy : seedKeywords).slice(0, 8).join(', ') || value.taxonomy,
         categories: String(d.category || value.categories),
         keywords: seedKeywords.join(', ') || value.keywords,
-        spokes: execs.length > 0
-          ? execs.slice(0, 12).map((e) => ({
-              name: String(e.name || ''),
-              title: String(e.title || ''),
-              bio: String(e.bio || ''),
-              credentials: (Array.isArray(e.credentials) ? e.credentials.map((c: any) => c.text) : []).join('; '),
-              expertise: (Array.isArray(e.expertise) ? e.expertise.map((x: any) => x.text) : []).join('; '),
-              linkedin: String(e.linkedin || ''),
-              twitter: String(e.twitter || ''),
-              quotes: (Array.isArray(e.quotes) ? e.quotes.map((q: any) => q.text) : []).join('\n'),
-            }))
-          : value.spokes,
+        spokes: mappedSpokes.length > 0 ? mappedSpokes : value.spokes,
         competitors: competitors.length > 0 ? competitors : value.competitors,
       });
       const v: any = d.verification ?? {};
+      const ds: any = d.data_sources ?? {};
       const filled = [
         d.name ? 'brand name' : null,
         domain ? 'domain' : null,
@@ -228,11 +242,15 @@ export default function IntakeForm({ value, onChange }: Props) {
         d.founded_year ? `founded ${d.founded_year}` : null,
         seedKeywords.length ? `${seedKeywords.length} seed keywords` : null,
         taxonomy.length ? `${taxonomy.length} topical pillars` : null,
-        execs.length ? `${execs.length} executives/spokespeople` : null,
+        mappedSpokes.length ? `${mappedSpokes.length} spokespeople (${(v.executives_sources || []).join(', ') || 'verified sources'})` : null,
+        !mappedSpokes.length ? 'spokespeople: none verified — add real people manually (never invented)' : null,
+        brandQuotes.length ? `${brandQuotes.length} verbatim brand quotes with page URLs` : null,
+        ds.bylines_found ? 'article bylines detected' : null,
         competitors.length ? `${competitors.length} competitors (${v.competitors_verified ?? 0} domain-verified)` : null,
       ].filter(Boolean);
+      const note = typeof d.spokesperson_note === 'string' && d.spokesperson_note ? ` ${d.spokesperson_note}` : '';
       setFetchInfo(
-        `Auto-researched ${String(d.pages_crawled || 0)} live pages from ${domain || url}. Pre-filled: ${filled.join(', ') || 'basic identity'}. Every field below stays fully editable.`
+        `Auto-researched ${String(d.pages_crawled || 0)} live pages from ${domain || url}. Pre-filled: ${filled.join(', ') || 'basic identity'}.${note} Every field below stays fully editable.`
       );
     } catch (err) {
       setFetchError((err as Error).message || 'Auto-fetch failed. Please fill the fields manually.');

@@ -170,10 +170,87 @@ def list_executives(brand_id: int, db: Session = Depends(get_db)):
     return [
         {
             "id": e.id, "name": e.name, "title": e.title, "bio": e.bio,
-            "credentials": e.credentials, "social_profiles": e.social_profiles,
-            "expertise_areas": e.expertise_areas
+            "credentials": e.credentials, "quotes": e.quotes,
+            "social_profiles": e.social_profiles,
+            "expertise_areas": e.expertise_areas,
+            "kg_mid": e.kg_mid, "wikidata_id": e.wikidata_id,
+            "wikipedia_url": e.wikipedia_url,
         } for e in execs
     ]
+
+
+class ExecutiveBulkItem(BaseModel):
+    name: str
+    title: Optional[str] = None
+    bio: Optional[str] = None
+    credentials: Optional[list] = None
+    quotes: Optional[list] = None
+    social_profiles: Optional[dict] = None
+    expertise_areas: Optional[list] = None
+    linkedin: Optional[str] = None
+    twitter: Optional[str] = None
+    profile_url: Optional[str] = None
+    source: Optional[str] = None
+
+
+class ExecutiveBulkInput(BaseModel):
+    brand_id: int
+    executives: List[ExecutiveBulkItem]
+
+
+@router.post("/executives/bulk")
+def bulk_upsert_executives(payload: ExecutiveBulkInput, db: Session = Depends(get_db)):
+    """Save auto-discovered spokesperson candidates in one call.
+
+    Matches on case-insensitive name per brand (update) else inserts.
+    Only stores real scraped values — never invents missing fields.
+    """
+    brand = db.query(Brand).filter(Brand.id == payload.brand_id).first()
+    if not brand:
+        raise HTTPException(status_code=404, detail="Brand not found")
+    existing = db.query(Executive).filter(Executive.brand_id == payload.brand_id).all()
+    by_name = {str(e.name or '').strip().lower(): e for e in existing}
+    saved, updated = 0, 0
+    for item in payload.executives[:24]:
+        nm = str(item.name or '').strip()
+        if not nm:
+            continue
+        social = dict(item.social_profiles or {})
+        if item.linkedin and "linkedin" not in social:
+            social["linkedin"] = item.linkedin
+        if item.twitter and "twitter" not in social:
+            social["twitter"] = item.twitter
+        if item.profile_url and "profile" not in social:
+            social["profile"] = item.profile_url
+        if item.source and "source" not in social:
+            social["source"] = item.source
+        hit = by_name.get(nm.lower())
+        if hit:
+            if item.title:
+                hit.title = item.title
+            if item.bio:
+                hit.bio = item.bio
+            if item.credentials is not None:
+                hit.credentials = item.credentials
+            if item.quotes is not None:
+                hit.quotes = item.quotes
+            if item.expertise_areas is not None:
+                hit.expertise_areas = item.expertise_areas
+            if social:
+                merged = dict(hit.social_profiles or {})
+                merged.update({k: v for k, v in social.items() if v})
+                hit.social_profiles = merged
+            updated += 1
+        else:
+            db.add(Executive(
+                brand_id=payload.brand_id, name=nm, title=item.title,
+                bio=item.bio, credentials=item.credentials, quotes=item.quotes,
+                social_profiles=social or None, expertise_areas=item.expertise_areas,
+            ))
+            saved += 1
+    db.commit()
+    return {"saved": saved, "updated": updated,
+            "total": saved + updated, "brand_id": payload.brand_id}
 
 
 @router.delete("/executives/{exec_id}")
@@ -350,7 +427,11 @@ def get_all_configs(brand_id: int, db: Session = Depends(get_db)):
         "brand": {"id": brand.id, "name": brand.name, "domain": brand.domain},
         "schema": brand_configs.get("schema", {}),
         "api_credentials": {k: {"is_active": v.get("is_active")} for k, v in creds.items()},
-        "executives": [{"id": e.id, "name": e.name, "title": e.title} for e in execs],
+        "executives": [{"id": e.id, "name": e.name, "title": e.title,
+                          "bio": e.bio, "quotes": e.quotes,
+                          "credentials": e.credentials,
+                          "expertise_areas": e.expertise_areas,
+                          "social_profiles": e.social_profiles} for e in execs],
         "competitors": [{"id": c.id, "name": c.name} for c in comps],
         "scraper": brand_configs.get("scraper", {}),
         "risk": brand_configs.get("risk", {}),

@@ -8,7 +8,7 @@ A full-stack, 35-module off-page SEO intelligence engine that measures and impro
 - **Backend:** Python / FastAPI + SQLAlchemy + SQLite (WAL mode, non-blocking background jobs)
 - **Data layer:** live web search (SerpAPI when keyed, else Bing RSS → `ddgs` library → DuckDuckGo HTML with rotating UAs), news (Bing News RSS, Google News RSS), Wikipedia/Wikidata (REST), GitHub Search API, Hacker News API, Stack Exchange API, iTunes Search API, RDAP domain registration — all free, no API key required
 - **Optional paid integrations:** NewsAPI, SerpAPI, Ahrefs, Moz, Majestic — when configured, deeper data is used; when not configured, modules report an honest **"No data"** state instead of inventing numbers
-- **Exports & ops:** background `run-async` + progress polling, CSV/PDF/JSON export, provider-status, optional APScheduler re-runs
+- **Exports & ops:** background `run-async` + progress polling, CSV/JSON export, **enterprise PDF report** (cover + KPI cards + charts + all 5 outputs + full 35-module appendix), provider-status, optional APScheduler re-runs
 
 ---
 
@@ -20,14 +20,15 @@ A full-stack, 35-module off-page SEO intelligence engine that measures and impro
 4. [Real World Audit — The Hindu](#real-world-audit--the-hindu)
 5. [Real Verified URLs Per Module](#real-verified-urls-per-module)
 6. [Screenshots](#screenshots)
-7. [Architecture](#architecture)
-8. [Quick Start](#quick-start)
-9. [Configuration & API Keys](#configuration--api-keys)
-10. [API Reference](#api-reference)
-11. [Data Integrity & Anti-Fabrication Guarantee](#data-integrity--anti-fabrication-guarantee)
-12. [Project Structure](#project-structure)
-13. [Contributing & Roadmap](#contributing--roadmap)
-14. [License](#license)
+7. [Enterprise Report — PDF + Deliverables UI](#enterprise-report--pdf--deliverables-ui)
+8. [Architecture](#architecture)
+9. [Quick Start](#quick-start)
+10. [Configuration & API Keys](#configuration--api-keys)
+11. [API Reference](#api-reference)
+12. [Data Integrity & Anti-Fabrication Guarantee](#data-integrity--anti-fabrication-guarantee)
+13. [Project Structure](#project-structure)
+14. [Contributing & Roadmap](#contributing--roadmap)
+15. [License](#license)
 
 ---
 
@@ -213,6 +214,25 @@ Captured from the live audit above (19 Aug 2026). These are genuine pages found 
 
 ---
 
+## Enterprise Report — PDF + Deliverables UI
+
+Both the downloadable PDF and the on-screen Tool Outputs are enterprise-formatted (2026-ready): KPI cards, live charts, aligned tables, verified sources — no screenshots of the UI, everything is generated from the run data.
+
+**On-screen deliverables layer** (`frontend/src/pages/Deliverables.tsx`):
+- Report header (brand, domain) + 4 KPI cards: overall authority, verified-module mix, AEO/GEO readiness, open risk flags
+- Live `recharts` visuals: module-health donut (verified / no-data / error) + key-signal bar chart (SoS, AEO score, KG coverage, anchor entropy, FTC score, vector index, PR hooks)
+- All 5 Tool Outputs with takeaway callouts, aligned metric tables, confidence bars, evidence tables, copy-paste edge payloads, link chips
+- All-module coverage matrix (status badge, assessment, finding counts per module)
+
+**PDF report** (`GET /api/v1/analysis/export/{brand_id}?format=pdf`, `backend/api/analysis.py`):
+- Cover page with KPI cards + document meta, module-health pie + per-output confidence charts (reportlab graphics)
+- Contents page, then Outputs 1–5 in full (metrics, payloads, sources, limitations)
+- **Appendix A — all 35 modules**, each with status, score/assessment, confidence, method, runtime, key findings, sub-function evidence table, recommendation, detailed analysis, next actions, limitations, verified sources
+- **Appendix B** — 2026 methodology, cross-module limitations, deduped source library
+- Layout guarantees: wrapped table text, repeating headers, brand header/footer + page numbers on every page, UTF-8 safe (no font crashes)
+
+---
+
 ## Architecture
 
 ```
@@ -340,6 +360,13 @@ GET  /api/v1/analysis/job/{job_id}   background job status
 GET  /api/v1/analysis/results/15     latest full JSON
 GET  /api/v1/analysis/status/15      idle/completed + timestamps
 GET  /api/v1/analysis/export/15?format=json|csv|pdf   deliverables download
+    - `pdf` → enterprise report: cover page with KPI cards, module-health pie +
+      per-output confidence charts, all 5 Tool Outputs (takeaways, metric tables,
+      deploy payloads, verified sources), Appendix A (all 35 modules: features,
+      functions, sub-function evidence tables, recommendations, actions,
+      limitations, sources), Appendix B (2026 methodology + source library).
+      Fully aligned reportlab layout — wrapped text, repeating table headers,
+      page numbers, brand header/footer on every page.
 GET  /api/v1/analysis/provider-status                keyed vs free-tier providers (no secrets)
 GET  /api/v1/provider-status                         alias for the above
 ```
@@ -388,8 +415,9 @@ Complete-OFF-Page-SEO/
 │       └── verification.py      # live URL → brand-mention verification
 ├── frontend/
 │   ├── src/pages/ToolApp.tsx    # intake → pipeline → results SPA
+│   ├── src/pages/Deliverables.tsx  # enterprise outputs UI (KPIs, recharts, coverage matrix)
 │   ├── src/data/features.ts     # the 35 module definitions
-│   └── dist/                    # prebuilt bundle served by FastAPI
+│   └── dist/                    # prebuilt bundle served by FastAPI (git-ignored, `npm run build`)
 ├── data/
 │   ├── brand_configs.json       # persisted brand schemas
 │   ├── api_credentials.json     # stored keys (empty until configured)
@@ -405,7 +433,7 @@ Complete-OFF-Page-SEO/
 **Open ideas:**
 - Multi-brand parallel analysis with delta reporting
 - Scheduled re-runs + alerting on module regressions
-- CSV/PDF export of the deliverables layer
+- Scheduled PDF delivery (email/webhook) + white-label report themes
 - Optional LLM provider integrations for deeper co-mention auditing
 - Ahrefs/Moz deep backlink integration with live PBN scoring
 

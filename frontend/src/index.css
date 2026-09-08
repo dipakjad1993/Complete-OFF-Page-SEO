@@ -3,13 +3,19 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Pixel-era type stack: on-device Google Sans/Product Sans wins on Pixel phones,
+     Inter (loaded via Google Fonts in index.html) everywhere else. */
+  --font-sans: 'Google Sans', 'Product Sans', 'Inter', 'Segoe UI', -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.6;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Shared warning tint (both themes) for unavailable-module surfaces. */
+  --warning-rgb: 217, 130, 12;
 }
 
 html[data-theme='light'] {
@@ -87,7 +93,7 @@ body {
   min-height: 100vh;
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.94rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -687,7 +693,7 @@ td a.table-link:hover {
 .recharts-text {
   fill: var(--chart-axis);
   font-size: 12px;
-  font-family: 'Google Sans', sans-serif;
+  font-family: var(--font-sans);
 }
 
 .recharts-default-tooltip {
@@ -695,7 +701,7 @@ td a.table-link:hover {
   border: 1px solid var(--border-color) !important;
   background: var(--bg-elevated) !important;
   color: var(--text-primary) !important;
-  font-family: 'Google Sans', sans-serif !important;
+  font-family: var(--font-sans) !important;
   box-shadow: 0 10px 26px rgba(var(--shadow-color), 0.18) !important;
 }
 
@@ -704,6 +710,30 @@ td a.table-link:hover {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ------- Global form + focus polish (one typeface + aligned controls everywhere) ------- */
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+td,
+th {
+  vertical-align: middle;
 }
 
 /* ================= SINGLE-PAGE TOOL ================= */
@@ -1179,7 +1209,7 @@ td a.table-link:hover {
 }
 
 .feature-card.unavailable {
-  border-color: rgba(var(--warning-rgb, 250, 204, 21), 0.35);
+  border-color: rgba(var(--warning-rgb), 0.4);
 }
 
 .feature-unavailable {
@@ -1189,9 +1219,9 @@ td a.table-link:hover {
   padding: 1.1rem 1.3rem;
   margin: 0.25rem 1.3rem 1.3rem;
   border-radius: 14px;
-  border: 1px dashed rgba(var(--warning-rgb, 250, 204, 21), 0.45);
-  background: rgba(var(--warning-rgb, 250, 204, 21), 0.06);
-  color: var(--text);
+  border: 1px dashed rgba(var(--warning-rgb), 0.5);
+  background: rgba(var(--warning-rgb), 0.07);
+  color: var(--text-secondary);
 }
 .feature-unavailable svg {
   flex-shrink: 0;
@@ -2527,3 +2557,44 @@ h1, h2, h3, h4, h5 {
 
 /* Scrollbar softness */
 ::-webkit-scrollbar { width: 9px; height: 9px; }
+
+/* ============================================================
+   ENTERPRISE DELIVERABLES LAYER (2026) — alignment + rhythm
+   ============================================================ */
+.deliverable-grid2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+.deliverable-group {
+  border-radius: var(--radius-lg);
+}
+.deliverable-group-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary-soft), transparent 70%), var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+.deliverable-group-title span {
+  font-size: 0.76rem;
+}
+.deliverable-block {
+  display: flex;
+  flex-direction: column;
+}
+.deliverable-block > .table-wrap { margin-top: 0.65rem; }
+.deliverable-block .deliverable-note { line-height: 1.6; }
+.deliverable-title {
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--border-color);
+  letter-spacing: -0.01em;
+}
+.exec-summary .summary-grid { margin-top: 1rem; }
+@media (max-width: 760px) {
+  .deliverable-group-title { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+}

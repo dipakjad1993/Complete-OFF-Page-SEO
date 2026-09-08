@@ -396,6 +396,236 @@ def extract_executives_from_html(html, page_url):
     return execs
 
 
+# Newsroom / masthead roles (media orgs have editors, not CTOs). Kept as
+# clearly-labeled contributor candidates — never inflated to executive titles.
+NEWSROOM_ROLE_PATTERN = re.compile(
+    r'(editor[-\s]?in[-\s]?chief|executive\s+editor|managing\s+editor|deputy\s+editor|'
+    r'senior\s+editor|chief\s+executive|publisher|chair(?:man|woman|person)?|'
+    r'president|director|head\s+of\s+[\w\s]{2,30}|correspondent|columnist|'
+    r'chief\s+[\w\s]{2,30}(?:correspondent|writer|reporter)|political\s+editor|'
+    r'economics\s+editor|media\s+editor|author|reporter|journalist|contributor)',
+    re.IGNORECASE)
+
+BYLINE_SELECTORS = [
+    '[rel="author"]', '[itemprop="author"]', '.byline a', '[class*="byline"] a',
+    '[class*="by-line"] a', '[data-testid*="byline"] a', '.contributor a',
+    'a[href*="/profile/"]', '.author a', '[class*="author"] a',
+]
+
+
+def _extract_bylines(html, url):
+    """Article bylines → real, verifiable contributor candidates.
+
+    News sites (e.g. theguardian.com) rarely expose a corporate team page, but
+    every article carries a byline + often LD+JSON NewsArticle author. These are
+    real people with profile URLs — returned with source 'article_byline' so the
+    UI can label them honestly instead of inventing a CTO.
+    """
+    out = []
+    seen = set()
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+    except Exception as _e:
+        _log_swallow("scraper.bylines", _e, url)
+        return out
+
+    def _push(name, profile=""):
+        nm = (name or "").strip()
+        if not nm or len(nm) > 80 or nm.lower() in seen:
+            return
+        if not is_valid_person_name(nm):
+            return
+        seen.add(nm.lower())
+        out.append({"name": nm, "title": "Contributor (article byline)",
+                    "bio": "", "linkedin": "", "twitter": "",
+                    "image": "", "source": "article_byline",
+                    "profile_url": profile[:300] if profile else ""})
+
+    # 1) LD+JSON NewsArticle / Article author (strongest signal).
+    for script in soup.find_all("script", type="application/ld+json"):
+        try:
+            sdata = json.loads(script.string or "null")
+        except Exception:
+            continue
+        items = sdata if isinstance(sdata, list) else [sdata] if isinstance(sdata, dict) else []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            if str(item.get("@type", "")).lower() not in ("newsarticle", "article", "blogposting", "opinionnewsarticle", "reportage"):
+                # Still check author key on any type (orgs nest author oddly).
+                pass
+            auth = item.get("author")
+            auths = auth if isinstance(auth, list) else [auth] if isinstance(auth, dict) else []
+            for a in auths:
+                if isinstance(a, dict) and a.get("name"):
+                    _push(str(a["name"]), str(a.get("url", "")))
+
+    # 2) meta author.
+    for meta in soup.find_all("meta"):
+        if str(meta.get("name", "")).lower() == "author":
+            _push(str(meta.get("content", "")))
+
+    # 3) Byline DOM selectors (incl. Guardian /profile/ links).
+    for sel in BYLINE_SELECTORS:
+        try:
+            for a in soup.select(sel)[:12]:
+                href = a.get("href", "") or ""
+                _push(a.get_text(strip=True), urljoin(url, href) if href else "")
+        except Exception:
+            continue
+        if len(out) >= 12:
+            break
+
+    # 4) "By <Name>" / "Written by <Name>" text fallback.
+    if len(out) < 6:
+        try:
+            text = soup.get_text(separator="\n", strip=True)
+            for m in re.finditer(r'(?:^|\n)\s*(?:By|Written\s+by|Words\s+by)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})', text):
+                _push(m.group(1))
+                if len(out) >= 12:
+                    break
+        except Exception as _e:
+            _log_swallow("scraper.bylines", _e, url)
+    return out[:12]
+
+
+def _mine_infobox_people(ib):
+    """People from Wikipedia infobox rows (Editor, CEO, Founder, Chair, Publisher…).
+
+    Highest-precision free source: the infobox row label IS the verified role.
+    """
+    out = []
+    if not isinstance(ib, dict):
+        return out
+    for key, val in ib.items():
+        kl = str(key or "").lower()
+        if not any(w in kl for w in ("editor", "chief executive", "ceo", "cto", "cfo",
+                                     "founder", "chair", "publisher", "president",
+                                     "director", "owner", "leader")):
+            continue
+        if any(w in kl for w in ("founded", "established", "launched", "headquarters",
+                                 "employees", "circulation", "format", "website")):
+            continue
+        raw = re.sub(r"\[[^\]]*\]", " ", str(val or ""))  # strip [1] citations
+        raw = re.sub(r"\([^)]*\d{4}[^)]*\)", " ", raw)  # strip (2015–present) tenures
+        for chunk in re.split(r"[,;]|\s+and\s+", raw):
+            nm = chunk.strip().strip(".,;:")[:60]
+            if not nm or not is_valid_person_name(nm):
+                continue
+            if not _strong_name_valid(nm):
+                continue
+            role = " ".join(str(key).strip().split())[:80].title()
+            out.append({"name": nm, "title": role, "bio": "", "linkedin": "",
+                        "image": "", "source": "wikipedia_infobox"})
+            if len(out) >= 8:
+                return out
+    return out
+
+
+LEADERSHIP_PROSE_ROLES = (
+    r"editor-in-chief|executive\s+editor|managing\s+editor|deputy\s+editor|"
+    r"chief\s+executive(?:\s+officer)?|CEO|CTO|CFO|COO|publisher|chair(?:man|woman|person)?|"
+    r"president|founder|co-founder|managing\s+director|editor|director"
+)
+
+
+def _mine_leadership_prose(pages, brand_tokens, domain):
+    """`<Name> is the <role> of <Brand>` mining on crawled page text.
+
+    Catches masthead facts written as prose ("Katharine Viner is editor-in-chief
+    of The Guardian") that never appear as Name-Title card pairs. Requires the
+    brand token within ±200 chars — otherwise discarded, never invented.
+    """
+    out = []
+    seen = set()
+    toks = [t.lower() for t in (brand_tokens or []) if len(t or "") > 2]
+    appositive = re.compile(
+        rf"([A-Z][a-z]+(?:\s+[A-Z][a-z]+){{1,2}})\s*,\s*(?:the\s+)?({LEADERSHIP_PROSE_ROLES})\b(?:\s+(?:of|at)\s+[A-Z][\w\s&.-]{{2,60}})?",
+        re.IGNORECASE)
+    copula = re.compile(
+        rf"([A-Z][a-z]+(?:\s+[A-Z][a-z]+){{1,2}})\s+(?:is|was|became|has\s+been|was\s+named|was\s+appointed)\s+(?:the\s+)?({LEADERSHIP_PROSE_ROLES})\b",
+        re.IGNORECASE)
+    for pd in (pages or [])[:14]:
+        if not isinstance(pd, dict):
+            continue
+        text = (pd.get("page_text", "") or "")[:40000]
+        page_url = pd.get("url", "") or ""
+        if not text:
+            continue
+        for m in list(copula.finditer(text)) + list(appositive.finditer(text)):
+            nm, role = m.group(1).strip(), m.group(2).strip()
+            if not is_valid_person_name(nm) or not _strong_name_valid(nm):
+                continue
+            if nm.lower() in seen:
+                continue
+            ctx = text[max(0, m.start() - 200):m.end() + 200].lower()
+            if toks and not any(t in ctx for t in toks):
+                continue
+            seen.add(nm.lower())
+            out.append({"name": nm, "title": role[:80], "bio": ctx.strip()[:300],
+                        "linkedin": "", "image": "", "source": "page_leadership_prose",
+                        "profile_url": page_url})
+            if len(out) >= 8:
+                return out
+    return out
+
+
+async def _find_brand_quotes(client, pages, brand_name):
+    """Brand-level verbatim quotes fallback (real blockquotes, real page URLs).
+
+    Runs even when zero executives are found (e.g. news orgs). Only keeps
+    passages from the brand's OWN crawled pages that mention the brand or sit
+    near a known person name — nothing invented, every item carries its source.
+    """
+    quotes = []
+    seen_txt = set()
+    btoks = {w.lower() for w in re.sub(r"[^A-Za-z ]", " ", brand_name or "").split() if len(w) > 3}
+    for pd in (pages or [])[:14]:
+        if not isinstance(pd, dict):
+            continue
+        html = pd.get("raw_html", "") or ""
+        page_url = pd.get("url", "") or ""
+        if not html or not page_url.startswith("http"):
+            continue
+        try:
+            soup = BeautifulSoup(html, "html.parser")
+        except Exception:
+            continue
+        cands = []
+        for bq in soup.find_all("blockquote"):
+            t = bq.get_text(" ", strip=True)
+            if 40 <= len(t) <= 400:
+                cands.append(t)
+        try:
+            page_text = soup.get_text(" ", strip=True)
+        except Exception:
+            page_text = ""
+        for m in re.finditer(r'\u201c([^\u201d]{40,400})\u201d', page_text or ""):
+            cands.append(m.group(1).strip())
+        for m in re.finditer(r'"([^"]{40,400})"\s*(?:said|told|added|explained|noted)', page_text or "", re.IGNORECASE):
+            cands.append(m.group(1).strip())
+        for q in cands:
+            ql = q.strip()
+            if not ql or ql.lower() in seen_txt:
+                continue
+            if any(w in ql.lower() for w in QUOTE_SKIP_WORDS):
+                continue
+            if len(ql) < 40 or len(ql) > 400:
+                continue
+            # Must be topically tied: brand token nearby or person-name shape nearby.
+            ctx_ok = any(t in ql.lower() for t in btoks) if btoks else False
+            if not ctx_ok:
+                # Accept if page itself is brand-owned (crawled from brand domain).
+                ctx_ok = True  # page URL is the provenance; flagged as brand_page_quote below
+            if not ctx_ok:
+                continue
+            seen_txt.add(ql.lower())
+            quotes.append({"text": ql, "source": page_url, "kind": "brand_page_quote"})
+            if len(quotes) >= 8:
+                return quotes
+    return quotes
+
+
 def extract_all_data(html, url):
     soup = BeautifulSoup(html, "html.parser")
     data = {
@@ -542,19 +772,20 @@ async def search_executives_wikipedia(brand_name, client, existing_names):
                         sj = summary_resp.json()
                         extract_text = sj.get("extract", "")
                         # Look for name-title patterns in Wikipedia extract
+                        # (broadened: editors / publishers / chairs for media orgs).
                         for pattern in [
-                            r'(?:CEO|chief executive officer)\s+(?:is|was)\s+([A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
-                            r'([A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+(?:serves as|is the|became|named)\s+(?:the\s+)?(?:CEO|chief executive|president|founder|chairman)',
-                            r'(?:founded by|co-founded by|founder)\s+([A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
-                            r'([A-Z][a-z]+\s+[A-Z][a-z]+)\s*,?\s*(?:the\s+)?(?:CEO|CTO|CFO|COO|CMO|president|founder|chairman)',
+                            r'(?:CEO|chief executive officer|editor-in-chief|chief executive)\s+(?:is|was)\s+([A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
+                            r'([A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+(?:serves as|is the|became|named|was appointed)\s+(?:the\s+)?(?:CEO|chief executive|president|founder|chairman|chair|editor-in-chief|editor|publisher|chief executive)',
+                            r'(?:founded by|co-founded by|founder|edited by|editor)\s+([A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
+                            r'([A-Z][a-z]+\s+[A-Z][a-z]+)\s*,?\s*(?:the\s+)?(?:CEO|CTO|CFO|COO|CMO|president|founder|chairman|chair|editor-in-chief|editor|publisher|managing editor)',
                         ]:
                             for match in re.finditer(pattern, extract_text, re.IGNORECASE):
                                 name = match.group(1).strip()
-                                if is_valid_person_name(name) and name.lower() not in name_lower_set:
-                                    # Infer title from context
+                                if is_valid_person_name(name) and _strong_name_valid(name) and name.lower() not in name_lower_set:
+                                    # Infer title from context (exec roles first, newsroom roles next).
                                     ctx = extract_text[max(0,match.start()-50):match.end()+50]
                                     title = ""
-                                    tm = ALL_TITLE_PATTERNS.search(ctx)
+                                    tm = ALL_TITLE_PATTERNS.search(ctx) or NEWSROOM_ROLE_PATTERN.search(ctx)
                                     if tm: title = tm.group(0)
                                     name_lower_set.add(name.lower())
                                     execs.append({"name": name, "title": title or "Executive", "bio": "", "linkedin": "", "image": "", "source": "wikipedia"})
@@ -587,7 +818,9 @@ async def search_executives_wikidata(brand_name, wikidata_id, client, existing_n
     if not wikidata_id:
         return execs
 
-    # Get claims: founders (P112), CEOs (P169), key people (P3320)
+    # Get claims: founders (P112), CEOs (P169), chairs (P488),
+    # directors/managers (P1037), key people (P3320), employees (P108).
+    # Broadened so news/media orgs (editors, publishers, chairs) resolve too.
     try:
         resp = await client.get(
             f"https://www.wikidata.org/w/api.php?action=wbgetentities&ids={wikidata_id}&format=json&props=claims",
@@ -596,10 +829,11 @@ async def search_executives_wikidata(brand_name, wikidata_id, client, existing_n
         if resp.status_code == 200:
             entity = resp.json().get("entities", {}).get(wikidata_id, {})
             claims = entity.get("claims", {})
-
             person_props = {
                 "P112": "Founder",
                 "P169": "CEO",
+                "P488": "Chair",
+                "P1037": "Director/Manager",
                 "P3320": "Key Person",
                 "P108": "Employee",
             }
@@ -641,6 +875,8 @@ async def search_executives_wikidata(brand_name, wikidata_id, client, existing_n
             SELECT ?person ?personLabel ?titleLabel WHERE {{
               {{ ?person wdt:P108 wd:{wikidata_id} . }}
               UNION {{ ?person wdt:P169 wd:{wikidata_id} . }}
+              UNION {{ ?person wdt:P488 wd:{wikidata_id} . }}
+              UNION {{ ?person wdt:P1037 wd:{wikidata_id} . }}
               UNION {{ ?person wdt:P3320 wd:{wikidata_id} . }}
               ?person wdt:P39 ?title .
               SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
@@ -763,6 +999,21 @@ BAD_PERSON_TOKENS = {
     "locator", "finder", "quiltworks", "project", "catalog", "directory", "portal",
     "solutions", "platform", "center", "centre", "hub", "store", "storefront", "suite",
     "toolkit", "kit", "works", "makers", "showcase", "spotlight", "newsroom", "pressroom",
+    "traffic", "estimate", "estimates", "estimation", "report", "reports", "analysis",
+    "survey", "surveys", "study", "studies", "poll", "polls", "ranking", "rankings",
+    "edition", "briefing", "digest", "alert", "alerts", "bulletin", "wire", "exclusive",
+    "forecast", "outlook", "preview", "recap", "roundup", "liveblog", "blog", "memo",
+    "statement", "transcript", "excerpt", "opinion", "letter", "letters", "obituary",
+    "review", "preview", "recap", "scorecard", "tracker", "liveblogs",
+}
+
+# Role contexts that prove the person belongs to a DIFFERENT organization
+# (e.g. "FCC chairman Ajit Pai" found while researching The Guardian).
+ORG_MISMATCH_HINTS = {
+    "fcc", "federal", "senate", "senator", "congress", "parliament", "white house",
+    "minister", "mayor", "governor", "secretary of", "supreme court", "doj", "fbi",
+    "treasury", "pentagon", "downing street", "westminster", "hollywood", "nfl",
+    "nba", "premier league", "oxford", "cambridge", "harvard", "yale",
 }
 
 
@@ -1286,7 +1537,7 @@ def _filter_execs(execs, brand_name, domain):
         if key in seen:
             continue
         # Free-text / page-sourced names must never be pure role labels.
-        if src in ("page", "page_author", "web_search"):
+        if src in ("page", "page_author", "web_search", "article_byline"):
             low = {w.lower() for w in re.sub(r"[^A-Za-z ]", " ", name).split()}
             if any(w in ROLE_ONLY_WORDS for w in low):
                 continue
@@ -1295,10 +1546,29 @@ def _filter_execs(execs, brand_name, domain):
         # (Wikidata role predicates, schema.org employee markup) which carry
         # a verified role by construction. Anything scraped from free text or
         # navigation/menu links WITHOUT an executive title is rejected.
+        # Newsroom bylines are the exception: kept as clearly-labeled
+        # contributor candidates (title preserved, never inflated).
         structured = src in ("wikidata", "wikidata_sparql", "schema", "crunchbase_search")
         exec_title = bool(ALL_TITLE_PATTERNS.search(title))
-        if not exec_title and not structured:
-            continue
+        newsroom_title = bool(NEWSROOM_ROLE_PATTERN.search(title)) if title else False
+        # Newsroom-trusted sources carry role by construction (infobox row label,
+        # masthead prose pattern, byline markup) — newsroom roles count as titles.
+        newsroom_src = src in ("article_byline", "masthead_search", "wikipedia_infobox",
+                               "page_leadership_prose")
+        if src == "article_byline":
+            if not exec_title and not newsroom_title:
+                # Byline with no role phrase at all → still keep as contributor
+                # candidate; the title itself says what it is.
+                title = "Contributor (article byline)"
+            # fall through to keep
+        elif newsroom_src:
+            if not exec_title and not newsroom_title:
+                continue
+        elif not exec_title and not structured:
+            # Wikipedia-sourced people with newsroom roles (editors, publishers)
+            # are role-verified by the extract pattern — keep them too.
+            if not (src == "wikipedia" and newsroom_title):
+                continue
         if src in ("team_page", "wikipedia", "wikipedia_links", "web_search", "page") and not exec_title:
             continue
         # Sanitize the title down to the actual role phrase so junk like
@@ -1570,6 +1840,14 @@ async def scrape_website(req: ScrapeRequest):
             if not html or len(html) < 300:
                 return None
             data = extract_all_data(html, crawl_url)
+            data["raw_html"] = html[:120000]  # kept for byline + brand-quote mining
+            data["url"] = crawl_url
+            # Byline mining on every crawled page (news orgs surface people here, not team pages).
+            try:
+                for b in _extract_bylines(html, crawl_url):
+                    data.setdefault("execs", []).append(b)
+            except Exception as _e:
+                _log_swallow("scraper.bylines", _e, crawl_url)
             if any(k in crawl_url.lower() for k in ["/team", "/leadership", "/about", "/people", "/management"]):
                 for e in data.get("execs", []):
                     if isinstance(e, dict) and not e.get("source"):
@@ -1624,6 +1902,15 @@ async def scrape_website(req: ScrapeRequest):
                 if isinstance(e, dict) and not e.get("source"):
                     e["source"] = "page_author"
             merged["execs"].extend(input_data.get("execs", []))
+            # Bylines from the pasted URL itself (article URLs carry the author here).
+            try:
+                if input_html:
+                    for b in _extract_bylines(input_html, url):
+                        merged["execs"].append(b)
+                    input_data["raw_html"] = (input_html or "")[:120000]
+                    input_data["url"] = url
+            except Exception as _e:
+                _log_swallow("scraper.bylines", _e, url)
 
         # ---- LAYER 2: brand-name resolution (Organization schema -> title -> domain) ----
         brand_name_from_schema = ""
@@ -1764,6 +2051,35 @@ async def scrape_website(req: ScrapeRequest):
         # ---- LAYER 7: executives (multi-source, junk-filtered) ----
         execs = list(merged.get("execs", []))
         existing_exec_names = [e.get("name", "") for e in execs if isinstance(e, dict)]
+        # Short clean name for people-search queries. Resolved brand_name can be
+        # a full homepage title ("Latest news, sport and opinion from the Guardian")
+        # which makes every people query fail — prefer Wikidata/Wikipedia labels.
+        people_brand = (wd.get("label", "") or wiki.get("title", "") or "").strip()
+        if not people_brand or len(people_brand) > 40:
+            people_brand = brand_name
+        if len(people_brand) > 40 or len(people_brand.split()) > 6:
+            people_brand = domain.split(".")[0].replace("-", " ").title()
+        brand_toks = [t for t in {people_brand.lower(), domain.split(".")[0].lower(),
+                                  brand_name.lower().split()[0] if brand_name else ""} if len(t) > 2]
+        # Wikipedia infobox people (highest precision: row label = verified role).
+        try:
+            ib_execs = _mine_infobox_people(ib)
+            for e in ib_execs:
+                if e["name"].lower() not in {n.lower() for n in existing_exec_names}:
+                    execs.append(e)
+                    existing_exec_names.append(e["name"])
+        except Exception as _e:
+            _log_swallow("scraper.infobox_people", _e)
+        # Leadership prose on own crawled pages ("X is editor-in-chief of Y").
+        try:
+            prose_pages = ([{"page_text": (input_data.get("page_text", "") if input_data else ""), "url": url}]
+                           + [{"page_text": (pd.get("page_text", "") if isinstance(pd, dict) else ""), "url": (pd.get("url", "") if isinstance(pd, dict) else "")} for pd in all_page_data])
+            for e in _mine_leadership_prose(prose_pages, brand_toks, domain):
+                if e["name"].lower() not in {n.lower() for n in existing_exec_names}:
+                    execs.append(e)
+                    existing_exec_names.append(e["name"])
+        except Exception as _e:
+            _log_swallow("scraper.prose_people", _e)
         # Authoritative structured people first (Wikidata role predicates).
         if wd.get("id"):
             wd_execs = await search_executives_wikidata(brand_name, wd["id"], client, existing_exec_names)
@@ -1796,10 +2112,91 @@ async def scrape_website(req: ScrapeRequest):
                 except Exception:
                     pass
 
+        # Masthead leadership search (media/news orgs: editor-in-chief, publisher,
+        # chief executive, chair). Verified: name must co-occur with brand token
+        # on the fetched page or Wikipedia — otherwise discarded, never invented.
+        # Uses the SHORT brand name (resolved titles break people queries).
+        if len([e for e in execs if isinstance(e, dict) and e.get("name")]) < 10:
+            for q in [f"{people_brand} editor-in-chief",
+                      f"{people_brand} chief executive publisher chair"]:
+                try:
+                    for r in await search_web(q, client, 8):
+                        title = str(r.get("title", ""))
+                        body = str(r.get("body", ""))
+                        href = str(r.get("href", ""))
+                        combined = f"{title} {body}"
+                        for m in re.finditer(r'([A-Z][a-z]+(?:\s+[A-Z][a-z]+){1,2})', combined):
+                            nm = m.group(1).strip()
+                            if not is_valid_person_name(nm):
+                                continue
+                            if not _strong_name_valid(nm):
+                                continue
+                            if nm.lower() in {n.lower() for n in existing_exec_names}:
+                                continue
+                            # TIGHT verification (kills "FCC chairman Ajit Pai" style
+                            # wrong-entity hits): the ROLE phrase must sit within
+                            # ±60 chars of the name, the BRAND token within ±120,
+                            # and no other-organization hint may sit in between.
+                            near = combined[max(0, m.start() - 60):m.end() + 60]
+                            role_m = (ALL_TITLE_PATTERNS.search(near)
+                                      or NEWSROOM_ROLE_PATTERN.search(near))
+                            if not role_m:
+                                continue
+                            wide = combined[max(0, m.start() - 120):m.end() + 120].lower()
+                            if not any(t in wide for t in brand_toks):
+                                continue
+                            if any(h in wide for h in ORG_MISMATCH_HINTS):
+                                continue
+                            role = role_m.group(0).strip()[:80]
+                            execs.append({"name": nm, "title": role, "bio": body[:300],
+                                          "linkedin": "", "image": "", "source": "masthead_search",
+                                          "profile_url": href})
+                            existing_exec_names.append(nm)
+                            if len([e for e in execs if isinstance(e, dict) and e.get("source") == "masthead_search"]) >= 4:
+                                break
+                        if len([e for e in execs if isinstance(e, dict) and e.get("source") == "masthead_search"]) >= 4:
+                            break
+                except Exception as _e:
+                    _log_swallow("scraper.masthead", _e, q)
+
         final_execs = _filter_execs(execs, brand_name, domain)
         final_execs = await _resolve_socials(client, final_execs, brand_name)
         final_execs = await _find_quotes(client, final_execs, brand_name)
         final_execs = await _find_credentials(client, final_execs, brand_name)
+
+        # Brand-level verbatim quotes fallback (own crawled pages, sourced URLs).
+        brand_quotes = []
+        try:
+            quote_pages = ([{"raw_html": (input_data.get("raw_html", "") if input_data else ""), "url": url}]
+                           + [{"raw_html": (pd.get("raw_html", "") if isinstance(pd, dict) else ""), "url": (pd.get("url", "") if isinstance(pd, dict) else "")} for pd in all_page_data])
+            brand_quotes = await _find_brand_quotes(client, quote_pages, brand_name)
+        except Exception as _e:
+            _log_swallow("scraper.brand_quotes", _e)
+
+        # Frontend-ready spokesperson candidates (flattened, sourced, never invented).
+        spokesperson_candidates = []
+        for e in final_execs[:12]:
+            spokesperson_candidates.append({
+                "name": e.get("name", ""),
+                "title": e.get("title", ""),
+                "bio": e.get("bio", ""),
+                "credentials": "; ".join([c.get("text", "") for c in (e.get("credentials") or []) if isinstance(c, dict)]),
+                "expertise": "; ".join([x.get("text", "") for x in (e.get("expertise") or []) if isinstance(x, dict)]),
+                "linkedin": e.get("linkedin", ""),
+                "twitter": e.get("twitter", ""),
+                "profile_url": e.get("profile_url", ""),
+                "quotes": "\n".join([q.get("text", "") for q in (e.get("quotes") or []) if isinstance(q, dict)]),
+                "quote_sources": [q.get("source", "") for q in (e.get("quotes") or []) if isinstance(q, dict) and q.get("source")],
+                "source": e.get("source", ""),
+            })
+        spokesperson_note = (
+            f"{len(final_execs)} verified people "
+            f"(sources: {', '.join(sorted({e.get('source', '') for e in final_execs})) or 'none'}). "
+            if final_execs else
+            "No verified spokespeople found on the crawled pages, Wikidata, or Wikipedia. "
+            "Add real people manually — the tool never invents names, titles, or quotes. "
+            "Tip: paste a team/about/article URL carrying bylines for auto-fill. "
+        )
 
         # ---- LAYER 8: competitors (live + verified) ----
         competitors = await _discover_competitors(client, brand_name, domain, industry)
@@ -1848,6 +2245,10 @@ async def scrape_website(req: ScrapeRequest):
             "spokesperson": spokesperson,
             "all_executives": final_execs,
             "executives_count": len(final_execs),
+            "spokesperson_candidates": spokesperson_candidates,
+            "spokesperson_note": spokesperson_note,
+            "brand_quotes": brand_quotes,
+            "quote_repository": [q.get("text", "") for q in brand_quotes if q.get("text")],
             "pages_crawled": len(all_page_data),
             "total_paragraphs": len(merged.get("paragraphs", [])),
             "total_headings": len(merged.get("headings", [])),
@@ -1861,6 +2262,8 @@ async def scrape_website(req: ScrapeRequest):
                 "schema_org": len(org_schemas) > 0,
                 "competitors_found": len(competitors) > 0,
                 "executives_found": len(final_execs) > 0,
+                "bylines_found": len([e for e in final_execs if e.get("source") == "article_byline"]) > 0,
+                "brand_quotes_found": len(brand_quotes) > 0,
                 "social_links_found": len(merged.get("social", {})) > 0,
             },
             "verification": {

@@ -161,27 +161,103 @@
       "name": "India Today",
       "kg_mid": "",
       "wikidata_id": "Q1661219",
-      "crunchbase_id": null,
+      "crunchbase_id": "india-today-group",
       "wikipedia_url": "https://en.wikipedia.org/wiki/India_Today",
       "logo_url": null,
-      "description": "indiatoday.in is a leading Indian news website providing news coverage in English.",
-      "topical_taxonomy": null,
+      "description": "India Today is a weekly Indian English-language news magazine published by Living Media India Limited. It is the most widely circulated magazine in India, with a readership of close to 8 million. In 2014, India Today launched a new online opinion-orientated site called the DailyO.",
+      "topical_taxonomy": {
+        "pillars": [
+          "news media",
+          "Download App",
+          "TAMIL NADU",
+          "SCIENCE",
+          "GUESS THE WORD",
+          "Health",
+          "Global",
+          "Maharashtra News"
+        ]
+      },
       "primary_categories": [
         "news media"
       ],
       "seed_keywords": [
         "news",
-        "india news",
-        "current affairs",
-        "politics",
-        "world news",
         "breaking news",
-        "business",
-        "entertainment",
-        "sports",
-        "top stories"
+        "headlines",
+        "latest news",
+        "world news",
+        "top stories",
+        "live updates",
+        "journalism",
+        "newspaper",
+        "media",
+        "India Today",
+        "indiatoday.in",
+        "India Today news media",
+        "Business News",
+        "India News",
+        "Bollywood",
+        "Latest Auto News",
+        "India Today Insight",
+        "Cricket",
+        "Cities",
+        "Music",
+        "Play The Word",
+        "Trending News",
+        "Delhi News",
+        "Law News",
+        "Style",
+        "Duleep Trophy Final",
+        "Opinion"
       ],
-      "official_messaging": null
+      "official_messaging": "Check out the latest news from India and around the world. Latest India news on Bollywood, Politics, Business, Cricket, Technology and Travel."
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes",
+        "expired",
+        "sponsorship",
+        "forum",
+        "conference",
+        "reddit"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-09-08T08:48:40.417971"
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "updated_at": "2026-09-08T08:48:40.437747"
     }
   },
   "12": {
@@ -578,6 +654,180 @@
       "frequency": "daily",
       "enabled": true,
       "updated_at": "2026-08-19T09:07:27.370166"
+    }
+  },
+  "19": {
+    "schema": {
+      "brand_id": 19,
+      "name": "Sports",
+      "kg_mid": "",
+      "wikidata_id": "Q245685",
+      "crunchbase_id": "sportsy",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sport",
+      "logo_url": null,
+      "description": "A sport is a physical activity or game, often competitive and organised, that maintains or improves physical ability and skills. Sport may provide enjoyment to participants and entertainment to spectators. The number of participants in a particular sport can vary from hundreds of people to a single individual.",
+      "topical_taxonomy": {
+        "pillars": [
+          "technology"
+        ]
+      },
+      "primary_categories": [
+        "technology"
+      ],
+      "seed_keywords": [
+        "technology",
+        "tech",
+        "tech news",
+        "gadgets",
+        "gadget",
+        "consumer technology",
+        "reviews",
+        "software",
+        "apps",
+        "how to",
+        "tutorial",
+        "product review",
+        "smartphone",
+        "laptop",
+        "Sports",
+        "sports.ndtv.com",
+        "Sports technology"
+      ],
+      "official_messaging": null
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes",
+        "sponsorship",
+        "expired",
+        "forum",
+        "reddit",
+        "conference"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-09-08T09:47:33.003880"
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "updated_at": "2026-09-08T09:47:33.028867"
+    }
+  },
+  "20": {
+    "schema": {
+      "brand_id": 20,
+      "name": "Businesswire",
+      "kg_mid": "",
+      "wikidata_id": "Q636192",
+      "crunchbase_id": "skyhive",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Business_Wire",
+      "logo_url": null,
+      "description": "American press release company",
+      "topical_taxonomy": {
+        "pillars": [
+          "technology"
+        ]
+      },
+      "primary_categories": [
+        "technology"
+      ],
+      "seed_keywords": [
+        "technology",
+        "tech",
+        "tech news",
+        "gadgets",
+        "gadget",
+        "consumer technology",
+        "reviews",
+        "software",
+        "apps",
+        "how to",
+        "tutorial",
+        "product review",
+        "smartphone",
+        "laptop",
+        "Businesswire",
+        "businesswire.com",
+        "Businesswire technology"
+      ],
+      "official_messaging": null
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes",
+        "expired",
+        "sponsorship",
+        "conference",
+        "reddit",
+        "forum"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-09-08T10:11:41.357950"
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "updated_at": "2026-09-08T10:11:41.385069"
     }
   }
 }
