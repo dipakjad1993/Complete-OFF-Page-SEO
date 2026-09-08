@@ -53,9 +53,15 @@ class Settings(BaseSettings):
     REQUEST_TIMEOUT_SECONDS: int = 30
     MAX_BACKLINK_REQUESTS: int = 100
 
+    # Strict relevance for single-token brands (e.g. "Healthline") — kills
+    # weak hits like volleyballworld/degreaser while keeping real citations.
+    STRICT_SINGLE_TOKEN_BRANDS: bool = True
+    SINGLE_TOKEN_MIN_SCORE: float = 0.55
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        extra = "ignore"
 
     @property
     def configured_providers(self) -> list[str]:
@@ -76,5 +82,14 @@ class Settings(BaseSettings):
             if key:
                 providers.append(name)
         return providers
+
+    @property
+    def is_production_secret(self) -> bool:
+        return bool(self.SECRET_KEY and self.SECRET_KEY != "change-me-in-production" and len(self.SECRET_KEY) >= 16)
+
+    def secret_warning(self) -> str | None:
+        if not self.is_production_secret:
+            return "SECRET_KEY is default. Generate one and set SECRET_KEY in .env for production."
+        return None
 
 settings = Settings()

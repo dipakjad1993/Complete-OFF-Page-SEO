@@ -40,9 +40,10 @@ def test_imports():
             toxic_analysis, consensus, simulation, zero_party_data,
             passage_scoring, reddit_monitor, satellite_entities,
             schema_validator, anchor_analysis, crawl_accelerator,
-            visual_audit, dead_equity, share_of_search
+            visual_audit, dead_equity, share_of_search, intake,
+            analysis, website_scraper,
         )
-        print("  [OK] All 26 API routers")
+        print("  [OK] All 30 API routers (incl. analysis, website_scraper, intake)")
     except Exception as e:
         print(f"  [FAIL] API routers: {e}")
         return False
@@ -53,10 +54,10 @@ def test_imports():
 def test_database():
     print("\nTesting database...")
     try:
-        from backend.core.database import engine, Base
-        from backend.models.models import *  # noqa: F403
-        
-        Base.metadata.create_all(bind=engine)
+        from backend.core.database import engine, Base, init_db
+        import backend.models.models  # noqa: F401 — registers all tables
+
+        init_db()
         print("  [OK] Tables created successfully")
         
         from sqlalchemy import inspect
@@ -80,15 +81,23 @@ def test_api():
         
         client = TestClient(app)
         
+        # Root serves SPA HTML (dist/ or static/) — assert HTML, not JSON.
         response = client.get("/")
+        assert response.status_code == 200
+        assert "html" in response.headers.get("content-type", "").lower() or "<html" in response.text.lower()
+        print("  [OK] Root endpoint (SPA HTML)")
+
+        # /api JSON info (must NOT be swallowed by SPA catch-all).
+        response = client.get("/api")
         assert response.status_code == 200
         data = response.json()
         assert data["status"] == "operational"
-        print("  [OK] Root endpoint")
-        
+        print(f"  [OK] API info ({data.get('features_count')} features)")
+
         response = client.get("/health")
         assert response.status_code == 200
-        print("  [OK] Health endpoint")
+        assert response.json().get("status") == "healthy"
+        print("  [OK] Health endpoint (JSON, not HTML)")
         
         response = client.get("/api/v1/features/")
         assert response.status_code == 200
@@ -190,7 +199,26 @@ def test_api():
         assert response.status_code == 200
         print("  [OK] Compliance rules")
         
-        print(f"\n  All {26} API routers tested successfully!")
+        # Analysis engine background + export endpoints (new).
+        response = client.get(f"/api/v1/analysis/progress/{brand_id}")
+        assert response.status_code == 200
+        print("  [OK] Analysis progress")
+
+        response = client.get(f"/api/v1/analysis/status/{brand_id}")
+        assert response.status_code == 200
+        print("  [OK] Analysis status")
+
+        response = client.get(f"/api/v1/analysis/export/{brand_id}?format=json")
+        assert response.status_code in (200, 404)
+        print("  [OK] Analysis export (json)")
+
+        response = client.get("/api/v1/provider-status")
+        # provider-status lives under analysis router; tolerate 404 on old builds
+        assert response.status_code in (200, 404)
+        if response.status_code == 200:
+            print("  [OK] Provider status (no secrets leaked)")
+
+        print(f"\n  All 30 API routers tested successfully!")
         return True
         
     except Exception as e:

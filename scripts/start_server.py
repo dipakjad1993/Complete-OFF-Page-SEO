@@ -15,17 +15,26 @@ def main():
     print("=" * 60)
     print()
     
-    # Initialize database
+    # Initialize database (WAL + tables via shared init_db).
     print("[1/3] Initializing database...")
-    from backend.core.database import engine, Base
-    from backend.models.models import *  # noqa: F403
-    Base.metadata.create_all(bind=engine)
-    print("      Database ready!")
+    from backend.core.database import init_db
+    import backend.models.models  # noqa: F401 — registers tables
+    init_db()
+    print("      Database ready (WAL mode)!")
     print()
-    
-    # Start server
+
+    # Warn on default secret.
+    try:
+        from config.settings import settings
+        w = settings.secret_warning()
+        if w:
+            print(f"      WARNING: {w}")
+    except Exception:
+        pass
+
+    # Start server — single canonical port 8000 (vite proxy + docs assume 8000).
     print("[2/3] Starting API server on http://localhost:8000")
-    print("[3/3] Dashboard available at http://localhost:3000")
+    print("[3/3] Dashboard available at http://localhost:3000 (npm run dev) or http://localhost:8000 (built dist)")
     print()
     print("API Documentation: http://localhost:8000/docs")
     print("ReDoc Documentation: http://localhost:8000/redoc")
@@ -33,7 +42,7 @@ def main():
     print("Features loaded: 35/35")
     print("=" * 60)
     print()
-    
+
     import uvicorn
     uvicorn.run(
         "main:app",

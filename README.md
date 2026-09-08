@@ -5,9 +5,10 @@
 A full-stack, 35-module off-page SEO intelligence engine that measures and improves how search engines, LLM agents and AI answers perceive, cite, rank and trust your brand entity — **every number is collected live from real public sources. Nothing is fabricated, simulated or randomly generated.**
 
 - **Frontend:** React + Vite (TypeScript) — step-by-step intake → live progress → full client-ready report
-- **Backend:** Python / FastAPI + SQLAlchemy + SQLite
-- **Data layer:** live web search (Bing RSS, DuckDuckGo), news (Bing News RSS, Google News RSS), Wikipedia/Wikidata (REST), GitHub Search API, Hacker News API, Stack Exchange API, iTunes Search API, RDAP domain registration — all free, no API key required
+- **Backend:** Python / FastAPI + SQLAlchemy + SQLite (WAL mode, non-blocking background jobs)
+- **Data layer:** live web search (SerpAPI when keyed, else Bing RSS → `ddgs` library → DuckDuckGo HTML with rotating UAs), news (Bing News RSS, Google News RSS), Wikipedia/Wikidata (REST), GitHub Search API, Hacker News API, Stack Exchange API, iTunes Search API, RDAP domain registration — all free, no API key required
 - **Optional paid integrations:** NewsAPI, SerpAPI, Ahrefs, Moz, Majestic — when configured, deeper data is used; when not configured, modules report an honest **"No data"** state instead of inventing numbers
+- **Exports & ops:** background `run-async` + progress polling, CSV/PDF/JSON export, provider-status, optional APScheduler re-runs
 
 ---
 
@@ -266,36 +267,41 @@ npm install
 npm run build
 cd ..
 
-# 3. Initialize the database (creates offpage_seo.db + tables)
+# 3. Initialize the database (creates offpage_seo.db + tables, WAL mode)
 python scripts/init_db.py
 
-# 4. Start the server
+# 4. Start the server (canonical port 8000 — matches vite proxy + docs)
 python main.py            # defaults to http://localhost:8000 (reload on)
 # or without reload:
-python -m uvicorn main:app --host 127.0.0.1 --port 8017
+python -m uvicorn main:app --host 127.0.0.1 --port 8000
 
 # 5. Open the UI
-#    http://127.0.0.1:8017
-#    API docs: http://127.0.0.1:8017/docs
-#    Health:   http://127.0.0.1:8017/health
+#    http://127.0.0.1:8000
+#    API docs: http://127.0.0.1:8000/docs
+#    Health:   http://127.0.0.1:8000/health
+#    Provider status: http://127.0.0.1:8000/api/v1/provider-status
 ```
 
-**Minimum requirements:** Python 3.11+ and an internet connection. No API keys are required for the free tier — the engine uses Bing RSS, DuckDuckGo HTML, Bing News RSS, Google News RSS, Wikipedia, Wikidata, GitHub Search, Hacker News, Stack Exchange, iTunes Search and RDAP directly.
+**Minimum requirements:** Python 3.11+ and an internet connection. No API keys are required for the free tier — the engine uses Bing RSS → `ddgs` library → DuckDuckGo HTML (rotating UAs), Bing News RSS, Google News RSS, Wikipedia, Wikidata, GitHub Search, Hacker News, Stack Exchange, iTunes Search and RDAP directly. Install deps with `pip install -r requirements.txt` (`ddgs`, `reportlab`, `apscheduler` included).
 
 ---
 
 ## Configuration & API Keys
 
-Copy `config/.env.example` to `.env` to configure optional providers. When a provider key is missing, the affected modules degrade gracefully and honestly.
+Copy `config/.env.example` to `.env` to configure optional providers. When a provider key is missing, the affected modules degrade gracefully and honestly. `.env` is gitignored and never pushed.
 
 | Provider | Env var(s) | Used by | Free fallback |
 | --- | --- | --- | --- |
-| SerpAPI | `SERPAPI_KEY` | Google SERP data | Bing RSS + DuckDuckGo HTML |
+| SerpAPI | `SERPAPI_KEY` | Google SERP data | Bing RSS → `ddgs` lib → DuckDuckGo HTML |
 | NewsAPI | `NEWSAPI_KEY` | PR hooks news | Bing News RSS + Google News RSS |
 | Ahrefs | `AHREFS_API_KEY` | PBN / backlink footprint | RDAP registration only |
 | Moz | `MOZ_ACCESS_KEY` + `MOZ_SECRET_KEY` | Domain authority | — |
 | Majestic | `MAJESTIC_API_KEY` | Backlinks | — |
 | OpenAI / Anthropic / Perplexity | `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `PERPLEXITY_API_KEY` | LLM co-mention audit, sentiment, hook writing, RAG repair | Honest `unavailable` / term-frequency fallbacks |
+| Google KG | `GOOGLE_API_KEY` | Knowledge Graph lookups | Wikipedia/Wikidata (free) |
+| Search Console / GA4 | `GSC_CREDENTIALS_FILE` + `GA4_PROPERTY_ID` | Telemetry data-PR | Honest `unavailable` |
+
+Strict single-token-brand relevance is tunable in `.env`: `STRICT_SINGLE_TOKEN_BRANDS=true`, `SINGLE_TOKEN_MIN_SCORE=0.55`. Optional scheduler: `SCHEDULE_ENABLED=true`, `SCHEDULE_INTERVAL_HOURS=24`.
 
 Run a quick engine self-test:
 
@@ -327,9 +333,18 @@ Interactive docs at `/docs` (Swagger) and `/redoc`. Health check at `/health`.
 Key analysis endpoints:
 
 ```
-POST /api/v1/analysis/run          body: {"brand_id": 15, "analysis_type": "full"}
-GET  /api/v1/analysis/progress/15  live progress: current module, elapsed, ETA, per-module status
+POST /api/v1/analysis/run            body: {"brand_id": 15, "analysis_type": "full"} (blocking, 60-180s)
+POST /api/v1/analysis/run-async      body: {"brand_id": 15} → {job_id} (non-blocking, poll progress)
+GET  /api/v1/analysis/progress/15    live progress: current module, elapsed, ETA, per-module status
+GET  /api/v1/analysis/job/{job_id}   background job status
+GET  /api/v1/analysis/results/15     latest full JSON
+GET  /api/v1/analysis/status/15      idle/completed + timestamps
+GET  /api/v1/analysis/export/15?format=json|csv|pdf   deliverables download
+GET  /api/v1/analysis/provider-status                keyed vs free-tier providers (no secrets)
+GET  /api/v1/provider-status                         alias for the above
 ```
+
+Frontend uses `POST /pr-engine/generate-pitch` (not GET), 5-min axios timeout, and `pollAnalysisUntilDone()` for background jobs — see `frontend/src/services/api.ts`.
 
 ---
 

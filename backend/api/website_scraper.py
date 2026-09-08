@@ -4,12 +4,24 @@ import httpx
 import re
 import json
 import asyncio
+import logging
+import traceback
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urljoin, quote_plus, unquote, parse_qs
 
 from config.settings import settings
 
+logger = logging.getLogger("offpage.scraper")
+
 router = APIRouter()
+
+
+def _log_swallow(where: str, exc: BaseException, url: str = "") -> None:
+    """Log swallowed scraper failures at debug level — never hides root cause anymore."""
+    try:
+        logger.debug("scraper swallow [%s] url=%s err=%s", where, (url or "")[:160], str(exc)[:220])
+    except Exception:
+        pass
 
 class ScrapeRequest(BaseModel):
     url: str
@@ -57,7 +69,10 @@ async def safe_fetch(url, client, timeout=12):
         resp = await client.get(url, headers=BROWSER_HEADERS, timeout=timeout, follow_redirects=True)
         if resp.status_code < 400 and len(resp.text) > 500:
             return resp.text
-    except: pass
+        logger.debug("safe_fetch non-ok url=%s status=%s len=%s", (url or "")[:160],
+                     getattr(resp, "status_code", "?"), len(getattr(resp, "text", "") or ""))
+    except Exception as e:
+        _log_swallow("safe_fetch", e, url)
     return None
 
 async def search_web(query, client, max_results=8):
@@ -92,7 +107,10 @@ async def search_web(query, client, max_results=8):
                     href = link_el.get("href", "")
                     if href.startswith("/url?q="): href = href.split("/url?q=")[-1].split("&")[0]
                     results.append({"title": title_el.get_text(strip=True), "body": snippet_el.get_text(strip=True) if snippet_el else "", "href": href, "domain": extract_domain(href)})
-    except: pass
+        elif resp.status_code == 429:
+            logger.debug("scraper Google 429 for query=%s", query[:80])
+    except Exception as e:
+        _log_swallow("search.google", e, query)
     # Attempt 2: DuckDuckGo HTML (respects site:/quote operators, decodes redirects)
     needs_operators = ("site:" in query.lower()) or ('"' in query)
     if needs_operators:
@@ -111,7 +129,30 @@ async def search_web(query, client, max_results=8):
                     if title_el:
                         href = decode_ddg(title_el.get("href", ""))
                         results.append({"title": title_el.get_text(strip=True), "body": snippet_el.get_text(strip=True) if snippet_el else "", "href": href, "domain": extract_domain(href)})
-        except: pass
+        except Exception as e:
+            _log_swallow("search.ddg_html", e, query)
+    # Attempt 2b: ddgs library (robust, no HTML regex) — preferred when installed
+    if len(results) < 3:
+        try:
+            from ddgs import DDGS as _DDGS  # type: ignore
+            import asyncio as _aio
+
+            def _run_ddgs():
+                out = []
+                with _DDGS(timeout=12) as _d:
+                    for _r in _d.text(query, max_results=max_results) or []:
+                        _h = _r.get("href") or ""
+                        if _h.startswith("http"):
+                            out.append({"title": (_r.get("title") or "")[:300],
+                                        "body": (_r.get("body") or "")[:600],
+                                        "href": _h, "domain": extract_domain(_h)})
+                return out
+            _ddgs_out = await _aio.to_thread(_run_ddgs)
+            results.extend(_ddgs_out)
+        except ImportError:
+            logger.debug("ddgs package not installed; skipping library fallback")
+        except Exception as e:
+            _log_swallow("search.ddgs_lib", e, query)
     # Attempt 3: Bing RSS (fast, ~0.5s, free and reliable)
     if len(results) < 3:
         try:
@@ -124,7 +165,10 @@ async def search_web(query, client, max_results=8):
                     desc = (item.find("description").get_text(" ", strip=True) if item.find("description") else "")
                     if title and link:
                         results.append({"title": title, "body": desc, "href": link, "domain": extract_domain(link)})
-        except: pass
+            elif resp.status_code == 403:
+                logger.debug("scraper Bing RSS 403 for query=%s", query[:80])
+        except Exception as e:
+            _log_swallow("search.bing_rss", e, query)
     # Attempt 4: Bing HTML (~0.6s)
     if len(results) < 3:
         try:
@@ -137,7 +181,8 @@ async def search_web(query, client, max_results=8):
                     if title_el:
                         href = title_el.get("href", "")
                         results.append({"title": title_el.get_text(strip=True), "body": snippet_el.get_text(strip=True) if snippet_el else "", "href": href, "domain": extract_domain(href)})
-        except: pass
+        except Exception as e:
+            _log_swallow("search.bing_html", e, query)
     # Attempt 5: DuckDuckGo Lite (fallback)
     if len(results) < 3:
         try:
@@ -153,7 +198,8 @@ async def search_web(query, client, max_results=8):
                     if a:
                         href = decode_ddg(a.get("href", ""))
                         results.append({"title": a.get_text(strip=True), "body": sn.get_text(strip=True) if sn else "", "href": href, "domain": extract_domain(href)})
-        except: pass
+        except Exception as e:
+            _log_swallow("search.ddg_lite", e, query)
     seen = set()
     unique = []
     for r in results:
@@ -275,7 +321,8 @@ def extract_executives_from_html(html, page_url):
                     for p in people:
                         if isinstance(p, dict) and p.get("name"):
                             execs.append({"name": p["name"], "title": p.get("jobTitle", key.title()), "bio": p.get("description", ""), "linkedin": "", "image": p.get("image", "")})
-        except: pass
+        except Exception as _e:
+            _log_swallow("scraper", _e)
 
     card_selectors = [
         '[class*="team"]', '[class*="leader"]', '[class*="exec"]', '[class*="staff"]',
@@ -389,7 +436,8 @@ def extract_all_data(html, url):
                     data["addresses"].append({"street": item["address"].get("streetAddress",""), "city": item["address"].get("addressLocality",""), "region": item["address"].get("addressRegion",""), "country": item["address"].get("addressCountry",""), "postal": item["address"].get("postalCode","")})
                 if item.get("telephone"): data["phones"].append(item["telephone"])
                 if item.get("email"): data["emails"].append(item["email"])
-        except: pass
+        except Exception as _e:
+            _log_swallow("scraper", _e)
 
     data["execs"] = extract_executives_from_html(html, url)
 
@@ -510,8 +558,10 @@ async def search_executives_wikipedia(brand_name, client, existing_names):
                                     if tm: title = tm.group(0)
                                     name_lower_set.add(name.lower())
                                     execs.append({"name": name, "title": title or "Executive", "bio": "", "linkedin": "", "image": "", "source": "wikipedia"})
-                except: pass
-    except: pass
+                except Exception as _e:
+                    _log_swallow("scraper", _e)
+    except Exception as _e:
+        _log_swallow("scraper", _e)
 
     return execs
 
@@ -531,7 +581,8 @@ async def search_executives_wikidata(brand_name, wikidata_id, client, existing_n
                 results = resp.json().get("search", [])
                 if results:
                     wikidata_id = results[0].get("id", "")
-        except: pass
+        except Exception as _e:
+            _log_swallow("scraper", _e)
 
     if not wikidata_id:
         return execs
@@ -578,8 +629,10 @@ async def search_executives_wikidata(brand_name, wikidata_id, client, existing_n
                             if desc and ALL_TITLE_PATTERNS.search(desc):
                                 title = ALL_TITLE_PATTERNS.search(desc).group(0)
                             execs.append({"name": label, "title": title, "bio": desc, "linkedin": "", "image": "", "source": "wikidata"})
-                except: pass
-    except: pass
+                except Exception as _e:
+                    _log_swallow("scraper", _e)
+    except Exception as _e:
+        _log_swallow("scraper", _e)
 
     # SPARQL query: find executives
     if len(execs) < 5:
@@ -605,7 +658,8 @@ async def search_executives_wikidata(brand_name, wikidata_id, client, existing_n
                     if label and is_valid_person_name(label) and label.lower() not in name_lower_set:
                         name_lower_set.add(label.lower())
                         execs.append({"name": label, "title": title, "bio": "", "linkedin": "", "image": "", "source": "wikidata_sparql"})
-        except: pass
+        except Exception as _e:
+            _log_swallow("scraper", _e)
 
     return execs
 

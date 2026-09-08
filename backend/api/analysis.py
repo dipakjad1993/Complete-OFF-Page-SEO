@@ -3117,6 +3117,153 @@ async def run_analysis(req: AnalysisRequest, db: Session = Depends(get_db)):
     return results
 
 
+# ---- Non-blocking background jobs (fixes blocking POST /run) ----
+# run-async returns immediately with job_id; poll /progress/{brand_id} or /job/{job_id}.
+# Uses asyncio tasks (no Redis required). For multi-worker scale, plug Celery/Redis here.
+_jobs: dict[str, dict] = {}
+
+
+def _job_id_for(brand_id: int) -> str:
+    import uuid
+    return f"{brand_id}-{uuid.uuid4().hex[:8]}"
+
+
+async def _run_job(job_id: str, brand_id: int):
+    from backend.core.database import SessionLocal
+    _jobs[job_id] = {"job_id": job_id, "brand_id": brand_id, "status": "running",
+                     "started_at": _now_utc(), "error": None}
+    db = SessionLocal()
+    try:
+        results = await run_full_analysis(brand_id, db)
+        _jobs[job_id].update({"status": "completed", "completed_at": _now_utc(),
+                              "overall_score": (results.get("summary") or {}).get("overall_score")})
+    except Exception as e:  # noqa: BLE001
+        _jobs[job_id].update({"status": "failed", "completed_at": _now_utc(), "error": str(e)[:500]})
+        try:
+            _update_progress(brand_id, status="failed")
+        except Exception:
+            pass
+    finally:
+        try:
+            db.close()
+        except Exception:
+            pass
+
+
+@router.post("/run-async")
+async def run_analysis_async(req: AnalysisRequest, db: Session = Depends(get_db)):
+    brand = db.query(Brand).filter(Brand.id == req.brand_id).first()
+    if not brand:
+        raise HTTPException(status_code=404, detail="Brand not found")
+    job_id = _job_id_for(req.brand_id)
+    _update_progress(req.brand_id, status="queued", current_module="queued",
+                     current_module_label="Queued — background worker starting")
+    asyncio.create_task(_run_job(job_id, req.brand_id))
+    return {"job_id": job_id, "brand_id": req.brand_id, "status": "queued",
+            "poll": f"/api/v1/analysis/progress/{req.brand_id}", "job": f"/api/v1/analysis/job/{job_id}"}
+
+
+@router.get("/job/{job_id}")
+def get_job(job_id: str):
+    job = _jobs.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return job
+
+
+@router.get("/provider-status")
+def get_provider_status():
+    """Which providers are configured (booleans only — never leaks secrets)."""
+    try:
+        from backend.services.providers import provider_status
+        from config.settings import settings as _s
+        status = provider_status()
+        return {"providers": status,
+                "configured": _s.configured_providers,
+                "strict_single_token": bool(getattr(_s, "STRICT_SINGLE_TOKEN_BRANDS", True)),
+                "retrieved_at": _now_utc()}
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e)[:300])
+
+
+@router.get("/export/{brand_id}")
+def export_results(brand_id: int, format: str = "json"):
+    """Export latest results as json / csv / pdf (deliverables layer)."""
+    import csv
+    import io
+    path = f"data/analysis_results/{brand_id}_latest.json"
+    if not os.path.exists(path):
+        raise HTTPException(status_code=404, detail="No analysis yet. POST /run first.")
+    with open(path, "r") as f:
+        data = json.load(f)
+    fmt = (format or "json").lower()
+    if fmt == "json":
+        from fastapi.responses import JSONResponse
+        return JSONResponse(content=data)
+    sections = data.get("sections", {}) or {}
+    if fmt == "csv":
+        from fastapi.responses import StreamingResponse
+        buf = io.StringIO()
+        w = csv.writer(buf)
+        w.writerow(["module", "feature_name", "status", "verified", "method", "runtime_secs", "top_finding", "sources_count"])
+        for key, s in sorted(sections.items()):
+            if not isinstance(s, dict):
+                continue
+            findings = s.get("findings") or []
+            top = ""
+            if findings and isinstance(findings[0], dict):
+                top = f"{findings[0].get('metric')}: {findings[0].get('value')}"
+            w.writerow([key, s.get("feature_name", ""), s.get("status", ""), s.get("verified", ""),
+                        s.get("method", ""), s.get("runtime_secs", ""), top, len(s.get("sources") or [])])
+        buf.seek(0)
+        return StreamingResponse(iter([buf.getvalue()]), media_type="text/csv",
+                                 headers={"Content-Disposition": f"attachment; filename=brand-{brand_id}-analysis.csv"})
+    if fmt == "pdf":
+        from fastapi.responses import Response as _Resp
+        try:
+            from reportlab.lib.pagesizes import A4
+            from reportlab.pdfgen import canvas as _canvas
+        except ImportError:
+            raise HTTPException(status_code=500, detail="PDF export requires reportlab (pip install reportlab).")
+        buf = io.BytesIO()
+        c = _canvas.Canvas(buf, pagesize=A4)
+        width, height = A4
+        y = height - 50
+        c.setFont("Helvetica-Bold", 16)
+        c.drawString(40, y, f"Off-Page SEO Report — {data.get('brand', '')} ({data.get('domain', '')})")
+        y -= 20
+        c.setFont("Helvetica", 10)
+        summary = data.get("summary") or {}
+        c.drawString(40, y, f"Overall score: {summary.get('overall_score')} | Modules: {summary.get('features_analyzed')} | Unavailable: {summary.get('modules_unavailable')} | {data.get('completed_at', '')}")
+        y -= 20
+        for key, s in sorted(sections.items()):
+            if not isinstance(s, dict):
+                continue
+            if y < 80:
+                c.showPage()
+                y = height - 50
+                c.setFont("Helvetica", 10)
+            c.setFont("Helvetica-Bold", 11)
+            c.drawString(40, y, f"{key} — {str(s.get('feature_name', ''))[:70]} [{s.get('status', '')}]")
+            y -= 14
+            c.setFont("Helvetica", 9)
+            for fl in (s.get("findings") or [])[:4]:
+                if isinstance(fl, dict):
+                    c.drawString(55, y, f"- {fl.get('metric')}: {fl.get('value')}")
+                    y -= 12
+            srcs = (s.get("sources") or [])[:3]
+            for src in srcs:
+                u = src.get("url", "") if isinstance(src, dict) else str(src)
+                c.drawString(55, y, f"  {u[:95]}")
+                y -= 12
+            y -= 6
+        c.save()
+        pdf = buf.getvalue()
+        return _Resp(content=pdf, media_type="application/pdf",
+                     headers={"Content-Disposition": f"attachment; filename=brand-{brand_id}-analysis.pdf"})
+    raise HTTPException(status_code=400, detail="format must be json, csv or pdf")
+
+
 @router.get("/progress/{brand_id}")
 def get_analysis_progress(brand_id: int):
     if brand_id in _progress:

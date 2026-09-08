@@ -4,11 +4,32 @@ const API_BASE = '/api/v1';
 
 const api = axios.create({
   baseURL: API_BASE,
-  timeout: 30000,
+  // 35-module full analysis takes 60-180s — 30s timeout killed it. 5 min + retries.
+  timeout: 300000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+// Long-poll helper for background analysis jobs (progress every 2s, up to ~6 min).
+export async function pollAnalysisUntilDone(
+  brandId: number,
+  onProgress?: (p: any) => void,
+  intervalMs = 2000,
+  maxWaitMs = 360000,
+): Promise<any> {
+  const started = Date.now();
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const { data } = await api.get(`/analysis/progress/${brandId}`);
+    if (onProgress) {
+      try { onProgress(data); } catch { /* ignore */ }
+    }
+    if (data?.status === 'completed' || data?.status === 'failed') return data;
+    if (Date.now() - started > maxWaitMs) return data;
+    await new Promise((r) => setTimeout(r, intervalMs));
+  }
+}
 
 export const brandAPI = {
   create: (data: any) => api.post('/brands/', data),
@@ -71,8 +92,52 @@ export const vectorEngineAPI = {
 export const prEngineAPI = {
   createPitch: (data: any) => api.post('/pr-engine/pitches', data),
   listPitches: (brandId?: number) => api.get('/pr-engine/pitches', { params: { brand_id: brandId } }),
-  generatePitch: (params: any) => api.get('/pr-engine/generate-pitch', { params }),
+  // FIX: backend is POST /pr-engine/generate-pitch (was GET → 405). Keep backwards-compat wrapper.
+  generatePitch: (params: { brand_id: number; topic: string; journalist_name: string; publication: string }) =>
+    api.post('/pr-engine/generate-pitch', null, { params: {
+      brand_id: (params as any).brand_id ?? (params as any).brandId,
+      topic: (params as any).topic,
+      journalist_name: (params as any).journalist_name ?? (params as any).journalistName,
+      publication: (params as any).publication,
+    } }),
+  generatePitchLegacyGet: (params: any) => api.get('/pr-engine/generate-pitch', { params }),
   dataHooks: (brandId: number) => api.get(`/pr-engine/data-hooks/${brandId}`),
+};
+
+export const analysisAPI = {
+  run: (brand_id: number, analysis_type = 'full') =>
+    api.post('/analysis/run', { brand_id, analysis_type }, { timeout: 300000 }),
+  runAsync: (brand_id: number, analysis_type = 'full') =>
+    api.post('/analysis/run-async', { brand_id, analysis_type }, { timeout: 30000 }),
+  progress: (brandId: number) => api.get(`/analysis/progress/${brandId}`),
+  results: (brandId: number) => api.get(`/analysis/results/${brandId}`),
+  status: (brandId: number) => api.get(`/analysis/status/${brandId}`),
+  exportCsv: (brandId: number) => api.get(`/analysis/export/${brandId}?format=csv`, { responseType: 'blob' }),
+  pollUntilDone: pollAnalysisUntilDone,
+};
+
+export const intakeAPI = {
+  saveSchema: (data: any) => api.post('/intake/brand-schema', data),
+  getSchema: (brandId: number) => api.get(`/intake/brand-schema/${brandId}`),
+  saveRisk: (data: any) => api.post('/intake/risk-config', data),
+  saveScraper: (data: any) => api.post('/intake/scraper-config', data),
+  saveCompetitors: (data: any) => api.post('/intake/competitors', data),
+  listCompetitors: (brandId: number) => api.get(`/intake/competitors/${brandId}`),
+};
+
+export const scraperAPI = {
+  scrape: (url: string) => api.post('/scraper/scrape-website', { url }, { timeout: 120000 }),
+};
+
+export const extendedAPI = {
+  satelliteDiscover: (brandId: number) => api.get(`/satellite-entities/discover/${brandId}`),
+  schemaGenerate: (brandId: number) => api.get(`/schema-validator/generate/${brandId}`),
+  anchorDistribution: (brandId: number) => api.get(`/anchor-analysis/distribution/${brandId}`),
+  crawlStatus: (brandId: number) => api.get(`/crawl-accelerator/status/${brandId}`),
+  visualGap: (brandId: number) => api.get(`/visual-audit/authority-gap/${brandId}`),
+  deadEquityScan: (brandId: number) => api.get(`/dead-equity/scan/${brandId}`),
+  zeroPartyList: (brandId: number) => api.get(`/zero-party-data/assets/${brandId}`),
+  simulationRun: (data: any) => api.post('/simulation/run', data, { timeout: 120000 }),
 };
 
 export const podcastAPI = {

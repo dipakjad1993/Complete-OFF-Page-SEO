@@ -60,14 +60,8 @@ def list_features():
     return {"total_features": len(FEATURES), "features": FEATURES}
 
 
-@router.get("/{feature_id}")
-def get_feature(feature_id: int):
-    feature = next((f for f in FEATURES if f["id"] == feature_id), None)
-    if not feature:
-        raise HTTPException(status_code=404, detail="Feature not found")
-    return feature
-
-
+# NOTE: /status/summary MUST be declared BEFORE /{feature_id} otherwise
+# "status" is parsed as feature_id and returns 422. Explicit ordering fix.
 @router.get("/status/summary")
 def feature_status_summary():
     active = sum(1 for f in FEATURES if f["status"] == "active")
@@ -76,3 +70,11 @@ def feature_status_summary():
         "active": active,
         "inactive": len(FEATURES) - active
     }
+
+
+@router.get("/{feature_id}")
+def get_feature(feature_id: int):
+    feature = next((f for f in FEATURES if f["id"] == feature_id), None)
+    if not feature:
+        raise HTTPException(status_code=404, detail="Feature not found")
+    return feature

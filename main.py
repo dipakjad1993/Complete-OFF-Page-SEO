@@ -7,7 +7,8 @@ from datetime import datetime
 from pathlib import Path
 import uvicorn
 
-from backend.core.database import engine, get_db, Base
+from contextlib import asynccontextmanager
+from backend.core.database import engine, get_db, Base, init_db
 from backend.models.models import Brand
 from config.settings import settings
 from backend.api import (
@@ -21,19 +22,48 @@ from backend.api import (
     website_scraper
 )
 
-Base.metadata.create_all(bind=engine)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Initialize DB on startup (WAL mode + tables) — no longer at import time.
+    try:
+        init_db()
+    except Exception as e:
+        print(f"[startup] DB init warning: {e}")
+    # Warn when running with default SECRET_KEY.
+    try:
+        w = settings.secret_warning()
+        if w:
+            print(f"[startup] WARNING: {w}")
+        else:
+            print("[startup] SECRET_KEY OK (custom)")
+        print(f"[startup] Providers configured: {settings.configured_providers or 'none (free tier)'}")
+    except Exception:
+        pass
+    # Optional periodic re-runs (SCHEDULE_ENABLED=true in .env).
+    try:
+        from backend.services.scheduler import maybe_start_from_env
+        maybe_start_from_env()
+    except Exception as e:
+        print(f"[startup] scheduler skipped: {e}")
+    yield
+
 
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
+# CORS: wildcard origins cannot be combined with credentials (browsers reject it).
+# Use credentials=False with wildcard so local Vite (port 3000) + file:// + any host works.
+# For strict production, set FRONTEND_ORIGINS env / edit allow_origins list.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -76,27 +106,8 @@ SPA_HEADERS = {
 }
 
 
-@app.get("/", response_class=HTMLResponse)
-async def root(request: Request):
-    index_path = FRONTEND_DIST / "index.html"
-    if index_path.exists():
-        return FileResponse(index_path, headers=SPA_HEADERS)
-    return FileResponse("static/index.html", headers=SPA_HEADERS)
-
-
-@app.get("/{full_path:path}", include_in_schema=False)
-async def serve_frontend(full_path: str):
-    if full_path.startswith("api/") or full_path in ("docs", "redoc", "openapi.json"):
-        raise HTTPException(status_code=404, detail="Not found")
-    asset = FRONTEND_DIST / full_path
-    if FRONTEND_DIST.exists() and full_path and asset.is_file():
-        return FileResponse(asset, headers=SPA_HEADERS)
-    index_path = FRONTEND_DIST / "index.html"
-    if index_path.exists():
-        return FileResponse(index_path, headers=SPA_HEADERS)
-    raise HTTPException(status_code=404, detail="Not found")
-
-
+# ---- Health + API info MUST be registered BEFORE the SPA catch-all ----
+# Otherwise GET /health and GET /api match /{full_path:path} and return HTML.
 @app.get("/api")
 async def api_info():
     return {
@@ -110,6 +121,48 @@ async def api_info():
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.utcnow().isoformat()}
+
+
+@app.get("/api/v1/provider-status", include_in_schema=False)
+async def provider_status_alias():
+    """Top-level alias for /api/v1/analysis/provider-status (verify_engine + frontend compat)."""
+    try:
+        from backend.services.providers import provider_status
+        return {"providers": provider_status(),
+                "configured": settings.configured_providers,
+                "retrieved_at": datetime.utcnow().isoformat()}
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e)[:300])
+
+
+@app.get("/", response_class=HTMLResponse)
+async def root(request: Request):
+    index_path = FRONTEND_DIST / "index.html"
+    if index_path.exists():
+        return FileResponse(index_path, headers=SPA_HEADERS)
+    return FileResponse("static/index.html", headers=SPA_HEADERS)
+
+
+# ---- SPA catch-all is intentionally LAST so /api/*, /docs, /health, /openapi.json never collide ----
+@app.get("/{full_path:path}", include_in_schema=False)
+async def serve_frontend(full_path: str):
+    # Explicitly never swallow API / docs / health paths (with or without trailing slash).
+    if (
+        full_path.startswith("api/")
+        or full_path == "api"
+        or full_path.startswith("api/v1")
+        or full_path in ("docs", "redoc", "openapi.json", "health")
+        or full_path.startswith("docs/")
+        or full_path.startswith("redoc/")
+    ):
+        raise HTTPException(status_code=404, detail="Not found")
+    asset = FRONTEND_DIST / full_path
+    if FRONTEND_DIST.exists() and full_path and asset.is_file():
+        return FileResponse(asset, headers=SPA_HEADERS)
+    index_path = FRONTEND_DIST / "index.html"
+    if index_path.exists():
+        return FileResponse(index_path, headers=SPA_HEADERS)
+    raise HTTPException(status_code=404, detail="Not found")
 
 
 if __name__ == "__main__":

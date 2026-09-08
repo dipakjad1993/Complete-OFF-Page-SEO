@@ -17,15 +17,38 @@ from typing import Any, Optional
 from urllib.parse import urlparse, quote_plus
 
 import httpx
+import logging
+import random as _rand
 
 from backend.services.verification import VerifiedData, UnavailableData, utcnow_iso
 from backend.services.providers import serpapi
 
+logger = logging.getLogger("offpage.search")
+
 API_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                  "(KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+                   "(KHTML, like Gecko) Chrome/125.0 Safari/537.36",
     "Accept-Language": "en-US,en;q=0.9",
 }
+
+# Rotating browser UAs — Bing RSS returns 403 for repeated identical UAs.
+# Rotation + retries dramatically reduce silent [] fallbacks.
+_ROTATING_UAS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/125.0.0.0 Safari/537.36",
+]
+
+
+def _pick_headers() -> dict:
+    h = dict(API_HEADERS)
+    try:
+        h["User-Agent"] = _rand.choice(_ROTATING_UAS)
+    except Exception:
+        pass
+    return h
 
 # Domains that are definition/reference pages and are almost never the
 # right "source" for a brand citation. Strictly rejected during relevance pass.
@@ -69,8 +92,14 @@ def _strip_html(text: str) -> str:
 
 
 def _relevance_score(title: str, snippet: str, query: str, brand_terms: list[str],
-                     query_terms: list[str]) -> float:
-    """Score how relevant a result is to the brand query. 0.0 = junk."""
+                     query_terms: list[str], url: str = "") -> float:
+    """Score how relevant a result is to the brand query. 0.0 = junk.
+
+    STRICT single-token-brand mode (kills volleyballworld/degreaser noise):
+    when the brand is a single token (e.g. "Healthline"), a result must have
+    the brand token in title OR domain, or match >=2 query terms. Otherwise 0.0.
+    URL evidence counts — domain-brand match rescues otherwise thin snippets.
+    """
     text = f"{title} {snippet}".lower()
 
     if any(re.search(p, title, re.IGNORECASE) for p in BLOCKED_TITLE_PATTERNS):
@@ -94,7 +123,47 @@ def _relevance_score(title: str, snippet: str, query: str, brand_terms: list[str
     if any(b for b in brand_terms if len(b) > 3 and b in title_l):
         score += 0.25
 
-    return min(score, 1.0)
+    # URL/domain brand evidence — strong authentic signal (e.g. healthline.com/..., github HealthLine).
+    try:
+        from urllib.parse import urlparse as _up
+        dom = (_up(url).netloc or "").lower() if url else ""
+        if url and brand_terms:
+            for b in brand_terms:
+                bl = (b or "").lower()
+                if len(bl) > 3 and (bl in dom or bl.replace(" ", "") in dom.replace(".", "")):
+                    score += 0.2
+                    break
+    except Exception:
+        pass
+
+    score = min(score, 1.0)
+
+    # ---- Strict single-token gate ----
+    try:
+        from config.settings import settings as _s
+        strict = bool(getattr(_s, "STRICT_SINGLE_TOKEN_BRANDS", True))
+        min_single = float(getattr(_s, "SINGLE_TOKEN_MIN_SCORE", 0.55) or 0.55)
+    except Exception:
+        strict, min_single = True, 0.55
+    if strict and len(brand_terms) == 1 and len(brand_terms[0]) > 2:
+        bt = brand_terms[0].lower()
+        try:
+            from urllib.parse import urlparse as _up2
+            dom2 = (_up2(url).netloc or "").lower() if url else ""
+        except Exception:
+            dom2 = ""
+        title_hit = bt in title_l
+        domain_hit = bt in dom2 or bt.replace(" ", "") in dom2.replace(".", "")
+        # Single-token brands need title/domain proof OR multi-term match.
+        if not (title_hit or domain_hit) and matched < 2:
+            return 0.0
+        # Even with proof, enforce higher bar to keep verified:true meaningful.
+        if score < min_single and not (title_hit and domain_hit):
+            # Allow through only if both title+snippet contain brand (strong textual proof).
+            if brand_hits < 1:
+                return 0.0
+
+    return score
 
 
 def _clean_results(raw: list[dict], query: str, brand_name: str, min_score: float = 0.35) -> list[dict]:
@@ -112,8 +181,16 @@ def _clean_results(raw: list[dict], query: str, brand_name: str, min_score: floa
             continue
         title = _strip_html(r.get("title") or r.get("title", ""))
         snippet = _strip_html(r.get("snippet") or r.get("body") or r.get("description") or "")
-        score = _relevance_score(title, snippet, query, brand_terms, query_terms)
-        if score < min_score:
+        score = _relevance_score(title, snippet, query, brand_terms, query_terms, url=url)
+        # Auto-escalate threshold for single-token brands so verified:true stays meaningful.
+        eff_min = min_score
+        try:
+            from config.settings import settings as _s2
+            if bool(getattr(_s2, "STRICT_SINGLE_TOKEN_BRANDS", True)) and len(brand_terms) == 1:
+                eff_min = max(min_score, float(getattr(_s2, "SINGLE_TOKEN_MIN_SCORE", 0.55) or 0.55) - 0.1)
+        except Exception:
+            pass
+        if score < eff_min:
             continue
         cleaned.append({
             "title": title[:300],
@@ -134,25 +211,67 @@ def _clean_results(raw: list[dict], query: str, brand_name: str, min_score: floa
 
 
 async def _bing_search(query: str, num: int = 10) -> list[dict]:
-    """Bing RSS search - free tier, no key required. Returns raw result dicts."""
+    """Bing RSS search - free tier, no key required. Returns raw result dicts.
+
+    Hardened: rotating UA + 2 retries (Bing 403s intermittently). Logs instead of silent [].
+    """
+    last_err: str = ""
+    for attempt in range(3):
+        try:
+            url = f"https://www.bing.com/search?q={quote_plus(query)}&format=rss&count={num}"
+            async with httpx.AsyncClient(timeout=10, headers=_pick_headers(), follow_redirects=True) as c:
+                r = await c.get(url)
+                if r.status_code == 403:
+                    last_err = "403 forbidden (Bing bot-gate)"
+                    continue
+                r.raise_for_status()
+                page = r.text
+            results = []
+            for block in re.findall(r"<item>(.*?)</item>", page, re.DOTALL):
+                def _grab(patt):
+                    m = re.search(patt, block, re.DOTALL)
+                    return _strip_html(m.group(1)) if m else ""
+                title = _grab(r"<title>(.*?)</title>")
+                link = _grab(r"<link>(.*?)</link>")
+                desc = _grab(r"<description>(.*?)</description>")
+                if link and link.startswith("http"):
+                    results.append({"title": title[:300], "url": link, "snippet": desc[:600]})
+            if results:
+                return results[:num]
+            last_err = "empty RSS payload"
+        except Exception as e:  # noqa: BLE001
+            last_err = str(e)[:160]
+    if last_err:
+        logger.warning("Bing RSS failed for %r after retries: %s", query[:80], last_err)
+    return []
+
+
+async def _ddgs_library_search(query: str, num: int = 10) -> list[dict]:
+    """DuckDuckGo via `ddgs` Python package (more robust than HTML scraping).
+
+    Optional dependency — returns [] when package is missing so free tier still works.
+    """
     try:
-        url = f"https://www.bing.com/search?q={quote_plus(query)}&format=rss&count={num}"
-        async with httpx.AsyncClient(timeout=10, headers=API_HEADERS, follow_redirects=True) as c:
-            r = await c.get(url)
-            r.raise_for_status()
-            page = r.text
-        results = []
-        for block in re.findall(r"<item>(.*?)</item>", page, re.DOTALL):
-            def _grab(patt):
-                m = re.search(patt, block, re.DOTALL)
-                return _strip_html(m.group(1)) if m else ""
-            title = _grab(r"<title>(.*?)</title>")
-            link = _grab(r"<link>(.*?)</link>")
-            desc = _grab(r"<description>(.*?)</description>")
-            if link and link.startswith("http"):
-                results.append({"title": title[:300], "url": link, "snippet": desc[:600]})
-        return results[:num]
-    except Exception:  # noqa: BLE001
+        from ddgs import DDGS  # type: ignore
+    except Exception:
+        return []
+    try:
+        import asyncio as _aio
+        def _run():
+            out: list[dict] = []
+            with DDGS(timeout=12) as ddgs:
+                for r in ddgs.text(query, max_results=num) or []:
+                    href = r.get("href") or r.get("link") or ""
+                    if href and href.startswith("http"):
+                        out.append({
+                            "title": (r.get("title") or "")[:300],
+                            "url": href,
+                            "snippet": (r.get("body") or "")[:600],
+                        })
+            return out
+        return await _aio.to_thread(_run)
+    except Exception as e:  # noqa: BLE001
+        logger.warning("ddgs library search failed for %r: %s", query[:80], str(e)[:160])
         return []
 
 
@@ -161,7 +280,7 @@ async def _bing_news_search(query: str, num: int = 20) -> list[dict]:
     try:
         url = (f"https://www.bing.com/news/search?q={quote_plus(query)}"
                f"&format=rss&count={num}&setlang=en-US")
-        async with httpx.AsyncClient(timeout=10, headers=API_HEADERS, follow_redirects=True) as c:
+        async with httpx.AsyncClient(timeout=10, headers=_pick_headers(), follow_redirects=True) as c:
             r = await c.get(url)
             r.raise_for_status()
             page = r.text
@@ -202,7 +321,7 @@ async def search_news(query: str, brand_name: str = "", num: int = 10) -> Any:
     try:
         url = ("https://news.google.com/rss/search?"
                f"q={quote_plus(query)}&hl=en-US&gl=US&ceid=US:en")
-        async with httpx.AsyncClient(timeout=10, headers=API_HEADERS, follow_redirects=True) as c:
+        async with httpx.AsyncClient(timeout=10, headers=_pick_headers(), follow_redirects=True) as c:
             r = await c.get(url)
             r.raise_for_status()
             try:
@@ -258,27 +377,49 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
             )
 
     # Bing RSS search (free tier, no key required).
-    bing_results = await _bing_search(query)
+    bing_results = await _bing_search(query, num=num)
     if bing_results:
         cleaned = _clean_results(bing_results, query, brand_name, min_score) if require_relevance else bing_results
-        return VerifiedData(
-            value=cleaned,
-            source="bing_rss", method="bing_rss+relevance_filter",
-            retrieved_at=utcnow_iso(), confidence=1.0, verified=True,
-            metadata={"query": query, "raw_count": len(bing_results), "kept": len(cleaned)},
-        )
+        if cleaned or not require_relevance:
+            return VerifiedData(
+                value=cleaned if require_relevance else bing_results,
+                source="bing_rss", method="bing_rss+relevance_filter",
+                retrieved_at=utcnow_iso(), confidence=1.0, verified=True,
+                metadata={"query": query, "raw_count": len(bing_results), "kept": len(cleaned)},
+            )
+        # Bing returned rows but none passed strict relevance — keep raw count for diagnostics,
+        # then continue to ddgs fallbacks instead of silently returning thin data.
+        logger.info("Bing RSS %d raw → 0 kept for %r; trying ddgs fallbacks", len(bing_results), query[:80])
 
-    # DuckDuckGo HTML fallback (free, no key)
+    # DuckDuckGo via `ddgs` library (robust, no HTML regex) — preferred over scraping.
+    ddgs_results = await _ddgs_library_search(query, num=num)
+    if ddgs_results:
+        cleaned = _clean_results(ddgs_results, query, brand_name, min_score) if require_relevance else ddgs_results
+        if cleaned or not require_relevance:
+            return VerifiedData(
+                value=cleaned if require_relevance else ddgs_results,
+                source="ddgs_library", method="ddgs_text+relevance_filter",
+                retrieved_at=utcnow_iso(), confidence=1.0, verified=True,
+                metadata={"query": query, "raw_count": len(ddgs_results), "kept": len(cleaned)},
+            )
+
+    # DuckDuckGo HTML fallback (free, no key) — last resort, markup-fragile.
     try:
         url = f"https://html.duckduckgo.com/html/?q={quote_plus(query)}&ia=web"
-        async with httpx.AsyncClient(timeout=8, headers=API_HEADERS, follow_redirects=True) as c:
+        async with httpx.AsyncClient(timeout=8, headers=_pick_headers(), follow_redirects=True) as c:
             r = await c.get(url)
             r.raise_for_status()
             page = r.text
 
         results = []
-        for block in re.findall(r'<div class="result[^"]*"[^>]*>(.*?)</div>\s*</div>', page, re.DOTALL):
+        # Primary selector (current DDG markup) + legacy fallback selector.
+        blocks = re.findall(r'<div class="result[^"]*"[^>]*>(.*?)</div>\s*</div>', page, re.DOTALL)
+        if not blocks:
+            blocks = re.findall(r'<div[^>]*class="[^"]*result__body[^"]*"[^>]*>(.*?)</div>', page, re.DOTALL)
+        for block in blocks:
             m_title = re.search(r'<a[^>]*class="result__a"[^>]*href="([^"]+)"[^>]*>(.*?)</a>', block, re.DOTALL)
+            if not m_title:
+                m_title = re.search(r'<a[^>]*href="([^"]+)"[^>]*>(.*?)</a>', block, re.DOTALL)
             m_snippet = re.search(r'<a[^>]*class="result__snippet"[^>]*>(.*?)</a>', block, re.DOTALL)
             if not m_title:
                 continue
@@ -289,11 +430,17 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
                 href = inner.group(1)
             import urllib.parse
             href = urllib.parse.unquote(href)
+            if href.startswith("//"):
+                href = "https:" + href
+            if not href.startswith("http"):
+                continue
             title = _strip_html(m_title.group(2))
             snippet = _strip_html(m_snippet.group(1)) if m_snippet else ""
             results.append({"title": title, "url": href, "snippet": snippet})
 
         cleaned = _clean_results(results, query, brand_name, min_score) if require_relevance else results
+        if not results:
+            logger.warning("DDG HTML returned 0 blocks for %r (markup may have changed)", query[:80])
         return VerifiedData(
             value=cleaned,
             source="duckduckgo", method="ddg_html_scrape+relevance_filter",
@@ -301,9 +448,10 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
             metadata={"query": query, "raw_count": len(results), "kept": len(cleaned)},
         )
     except Exception as e:  # noqa: BLE001
+        logger.warning("Search chain failed for %r: %s", query[:80], str(e)[:200])
         return UnavailableData(
-            reason=f"Search failed: {e}",
-            requires="SERPAPI_KEY (or working DuckDuckGo access)",
+            reason=f"Search failed after Bing RSS + ddgs + DDG HTML: {e}",
+            requires="SERPAPI_KEY (or working DuckDuckGo/Bing access)",
         )
 
 
@@ -313,7 +461,7 @@ async def verify_url(url: str, expected_terms: list[str]) -> Any:
     Returns VerifiedData(value=True/False) with the fetched evidence.
     """
     try:
-        async with httpx.AsyncClient(timeout=10, headers=API_HEADERS, follow_redirects=True) as c:
+        async with httpx.AsyncClient(timeout=10, headers=_pick_headers(), follow_redirects=True) as c:
             r = await c.get(url)
             r.raise_for_status()
             text = _strip_html(r.text).lower()
