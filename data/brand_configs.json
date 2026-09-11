@@ -284,51 +284,79 @@
     "schema": {
       "brand_id": 14,
       "name": "MakeUseOf",
-      "kg_mid": "/g/11b6s0c6ly",
-      "wikidata_id": "Q135456040",
+      "kg_mid": "",
+      "wikidata_id": "Q110454090",
       "crunchbase_id": "makeuseof",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Valnet",
       "logo_url": null,
-      "description": "MakeUseOf (MUO) is an online technology magazine and digital publishing media outlet that produces practical how-to guides, consumer electronics reviews, software tutorials, and technical explanations. Founded in 2006 and owned by Valnet Inc. since 2020, MUO simplifies modern digital ecosystems\u00e2\u20ac\u201dincluding desktop OS, mobile platforms, web applications, cybersecurity, and smart home tech\u00e2\u20ac\u201dfor a global consumer audience.",
+      "description": "MUO is your guide to modern tech. Learn how to make use of the tech and gadgets around you, and discover cool stuff on the internet.",
       "topical_taxonomy": {
         "pillars": [
-          "consumer technology tutorials",
-          "software troubleshooting",
-          "digital lifestyle guides",
-          "operating system how-tos",
-          "tech buying recommendations",
-          "accessible hardware analysis"
+          "news media",
+          "Latest",
+          "About MakeUseOf",
+          "latest",
+          "What IsMakeUseOfAll About?",
+          "The Sensor List page",
+          "The Hardware View page",
+          "Worth keeping an eye on"
         ]
       },
       "primary_categories": [
-        "consumer technology",
-        "how-to guides",
-        "tech tutorials"
+        "news media"
       ],
       "seed_keywords": [
-        "muo tech",
-        "how to fix windows error",
-        "macOS tutorial",
-        "iphone tips and tricks",
-        "linux beginner guide",
-        "smart home setup",
-        "cybersecurity tips"
+        "MakeUseOf",
+        "makeuseof.com",
+        "MakeUseOf news media",
+        "Must Reads",
+        "I won't ever buy a wireless charger again",
+        "PC & Mobile",
+        "Technology Explained",
+        "Contact",
+        "Legal",
+        "Explore",
+        "The Editorial Team",
+        "Gavin Phillips",
+        "Amir Bohlooli",
+        "Rob LeFebvre",
+        "Sara Gitkos",
+        "Amy Cottreau-Moore",
+        "Contact MakeUseOf",
+        "Technology News",
+        "Get to Know Some ofMakeUseOf\u2019sTop Articles",
+        "Apps and Websites LoveMakeUseOf",
+        "Want to Write forMakeUseOf?",
+        "Opportunities atMakeUseOf",
+        "Segment Lead",
+        "Features Writer",
+        "News Reporter",
+        "Summary",
+        "Memory integrity can cost you frames",
+        "Sensors",
+        "graphs",
+        "and pinnable widgets for every component"
       ],
-      "official_messaging": "\"Technology, Simplified.\"\n\n\nCore Value Proposition: Providing practical, accessible guidance and actionable solutions for everyday consumer technology, helping users make the best use of their gadgets, applications, and digital platforms."
+      "official_messaging": "MUO is your guide to modern tech. Learn how to make use of the tech and gadgets around you, and discover cool stuff on the internet.",
+      "gsc_property_id": "",
+      "ga4_property_id": "",
+      "bot_crawl_api": "",
+      "link_graph_providers": []
     },
     "risk": {
       "risk_level": "enterprise_safe",
+      "risk_score": 100,
       "allowed_tactics": [
         "digital_pr",
         "guest_posts",
         "podcasts",
         "data_studies",
         "expert_quotes",
+        "expired",
+        "sponsorship",
         "conference",
         "reddit",
-        "forum",
-        "expired",
-        "sponsorship"
+        "forum"
       ],
       "blocked_domains": [],
       "blocked_topics": [
@@ -339,8 +367,8 @@
       ],
       "ftc_compliance": true,
       "sec_compliance": true,
-      "max_outreach_per_day": 20,
-      "updated_at": "2026-08-18T08:44:53.400591"
+      "max_outreach_per_day": 996,
+      "updated_at": "2026-09-11T08:51:59.806597"
     },
     "scraper": {
       "sources": [
@@ -361,7 +389,17 @@
       ],
       "frequency": "daily",
       "enabled": true,
-      "updated_at": "2026-08-18T08:44:53.427656"
+      "listening_streams": [
+        "podcast_transcripts",
+        "youtube_transcripts",
+        "news_rss",
+        "reddit_stream",
+        "github_stream",
+        "substack_stream"
+      ],
+      "include_transcripts": true,
+      "crawl_depth": 2,
+      "updated_at": "2026-09-11T08:51:59.840467"
     }
   },
   "15": {
@@ -600,35 +638,38 @@
   "19": {
     "schema": {
       "brand_id": 19,
-      "name": "Sports",
+      "name": "NDTV Sports",
       "kg_mid": "",
-      "wikidata_id": "Q245685",
-      "crunchbase_id": "sportsy",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Sport",
+      "wikidata_id": "",
+      "crunchbase_id": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NDTV",
       "logo_url": null,
-      "description": "A sport is a physical activity or game, often competitive and organised, that maintains or improves physical ability and skills. Sport may provide enjoyment to participants and entertainment to spectators. The number of participants in a particular sport can vary from hundreds of people to a single individual.",
+      "description": "NDTV Sports is the sports news vertical of NDTV (New Delhi Television), covering cricket, football and other sports with live scores, match reports and analysis at sports.ndtv.com.",
       "topical_taxonomy": {
-        "pillars": []
+        "pillars": [
+          "sports",
+          "cricket",
+          "football",
+          "live scores"
+        ]
       },
       "primary_categories": [
-        "technology"
+        "sports",
+        "sports news"
       ],
       "seed_keywords": [
-        "tech",
-        "tech news",
-        "gadgets",
-        "gadget",
-        "consumer technology",
-        "reviews",
-        "software",
-        "apps",
-        "how to",
-        "tutorial",
-        "product review",
-        "smartphone",
-        "laptop",
+        "cricket",
+        "football",
+        "IPL 2026",
+        "live cricket scores",
+        "sports news",
+        "match highlights",
+        "cricket schedule",
+        "football news",
+        "tennis updates",
+        "hockey india",
         "sports.ndtv.com",
-        "Sports technology"
+        "NDTV Sports sports news"
       ],
       "official_messaging": null
     },
