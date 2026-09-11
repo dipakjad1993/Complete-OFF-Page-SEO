@@ -27,6 +27,7 @@ temp/
 *.tmp
 
 # Local run artifacts (regenerated on every analysis run — not versioned)
+offpage_seo.db
 offpage_seo.db-shm
 offpage_seo.db-wal
 data/analysis_progress/

@@ -1,12 +1,14 @@
 # Off-Page SEO Intelligence
 
-**Entity-First Off-Page Command Center · 35 Modules · Real Data Only**
+**Entity-First Off-Page Command Center · 35 Modules · Real Data Only · v2026.2 Depth Release**
 
 A full-stack, 35-module off-page SEO intelligence engine that measures and improves how search engines, LLM agents and AI answers perceive, cite, rank and trust your brand entity — **every number is collected live from real public sources. Nothing is fabricated, simulated or randomly generated.**
 
+> **v2026.2 Depth Release (11 Sep 2026)** — deeper intake (risk slider 0–100, GSC/GA4 property bindings, bot-crawl API, per-brand link-graph providers, transcript-first listening streams, SME spokesperson matrix), deeper modules (Shannon anchor-entropy with SpamBrain boundary gauge, Monte Carlo SoS scenarios, journalist-ready PR outreach drafts), deeper outputs (Topical Vector Distance Index 0–100, LLM Citation Share-of-Voice matrix), plus hardening: UTF-8 crash-proof file layer, synthetic-anchor fabrication removed, static DA/competitor/keyword filler tables deleted, and a real error screen (failures can no longer render a blank page).
+
 - **Frontend:** React + Vite (TypeScript) — step-by-step intake → live progress → full client-ready report
 - **Backend:** Python / FastAPI + SQLAlchemy + SQLite (WAL mode, non-blocking background jobs)
-- **Data layer:** live web search (SerpAPI when keyed, else Bing RSS → `ddgs` library → DuckDuckGo HTML with rotating UAs), news (Bing News RSS, Google News RSS), Wikipedia/Wikidata (REST), GitHub Search API, Hacker News API, Stack Exchange API, iTunes Search API, RDAP domain registration — all free, no API key required
+- **Data layer:** live web search (SerpAPI when keyed, else Bing RSS → `ddgs` library → DuckDuckGo HTML with rotating UAs; zero-yield legs report honest `unavailable`, never empty success), news (Bing News RSS, Google News RSS), Wikipedia/Wikidata (REST), GitHub Search API, Hacker News API, Stack Exchange API, iTunes Search API, RDAP domain registration — all free, no API key required
 - **Optional paid integrations:** NewsAPI, SerpAPI, Ahrefs, Moz, Majestic — when configured, deeper data is used; when not configured, modules report an honest **"No data"** state instead of inventing numbers
 - **Exports & ops:** background `run-async` + progress polling, CSV/JSON export, **enterprise PDF report** (cover + KPI cards + charts + all 5 outputs + full 35-module appendix), provider-status, optional APScheduler re-runs
 
@@ -78,7 +80,7 @@ Each module runs against the live web for the specific brand and returns:
 | # | Module | What it measures |
 | --- | --- | --- |
 | 1 | LLM Co-Mention & Perception Auditing | How often and how accurately LLM answers mention your brand + verify cited URLs |
-| 2 | Predictive Digital PR & Trend Hook Engine | Real newsroom topics from the last 14 days → journalist-ready PR hooks |
+| 2 | Predictive Digital PR & Trend Hook Engine | Real newsroom topics from the last 14 days → journalist-ready PR hooks **with target outlet, covering-outlet list, priority score and a ready-to-send outreach draft per hook** |
 | 3 | Unlinked Citation & Co-Occurrence Converter | Real third-party pages that mention you without linking |
 | 4 | Algorithmic Link Poisoning & Anomaly Radar | Suspicious/anomalous backlink patterns (paid provider optional) |
 | 5 | Podcast & Video Citation Finder | Real podcast RSS feeds & YouTube content citing your brand |
@@ -87,7 +89,7 @@ Each module runs against the live web for the specific brand and returns:
 | 8 | Third-Party Consensus Engine | Sentiment & co-mentions across third-party web results |
 | 9 | Agentic Commerce Protocol Placement (GEO/AEO) | Live probe of `llms.txt`, robots AI directives, AI plugins, schema |
 | 10 | Synthetic Network & Footprint De-Anonymizer | PBN signals from real backlinks + public RDAP registration |
-| 11 | Share-of-Search Revenue Simulator | Real SERP share on branded queries (revenue projection clearly labeled) |
+| 11 | Share-of-Search Revenue Simulator | Real SERP share on branded queries (**revenue projection clearly labeled**) + **deterministic Monte Carlo SoS scenarios (5/10/20 citations, P10/P50/P90) with a GSC/GA4-to-pipeline-$ conversion formula** |
 | 12 | Edge-Redirect & Dead-Equity Salvage | Live outbound link/redirect health checks |
 | 13 | Negative SEO Counter-Measure Deployment | Real third-party pages with genuine risk terms (scam/fraud/lawsuit…) |
 | 14 | GitHub Citation Harvester | Real GitHub repos, Stack Overflow & Hacker News references |
@@ -108,7 +110,7 @@ Each module runs against the live web for the specific brand and returns:
 | 29 | Reddit & Forum Consensus Graph | Real Reddit/HN/Quora discussions (entity-gated, correct domains) |
 | 30 | Competitor BERT-Vector Extraction | Real phrase extraction vs. competitors |
 | 31 | Agentic API & Schema Protocol Auditor | Live scan of agent-facing protocols |
-| 32 | Anchor-Text Entropy Boundary Predictor | Entropy analysis of your link profile |
+| 32 | Anchor-Text Entropy Boundary Predictor | **Shannon entropy over live anchor contexts in 4 classes (branded-exact/branded/partial/commercial) + SpamBrain boundary-distance gauge + linking-domain table** |
 | 33 | AI Crawler Re-Indexation Pinger | Live robots/sitemap/IndexNow/AI-bot directive probe |
 | 34 | FTC & Sponsored-Mention Penalty Shield | Real sponsored mentions & disclosure-policy pages |
 | 35 | Cross-Border Hreflang Equity Balancer | Hreflang tags + international versions + cannibalization risk |
@@ -220,7 +222,7 @@ Both the downloadable PDF and the on-screen Tool Outputs are enterprise-formatte
 
 **On-screen deliverables layer** (`frontend/src/pages/Deliverables.tsx`):
 - Report header (brand, domain) + 4 KPI cards: overall authority, verified-module mix, AEO/GEO readiness, open risk flags
-- Live `recharts` visuals: module-health donut (verified / no-data / error) + key-signal bar chart (SoS, AEO score, KG coverage, anchor entropy, FTC score, vector index, PR hooks)
+- Boardroom depth metrics (new in v2026.2): **Topical Vector Distance Index** (0–100 spatial authority score from live competitor cosine similarity) and **LLM Citation Share-of-Voice matrix** (null — never guessed — until an LLM key is configured)- Live `recharts` visuals: module-health donut (verified / no-data / error) + key-signal bar chart (SoS, AEO score, KG coverage, anchor entropy, FTC score, vector index, PR hooks)
 - All 5 Tool Outputs with takeaway callouts, aligned metric tables, confidence bars, evidence tables, copy-paste edge payloads, link chips
 - All-module coverage matrix (status badge, assessment, finding counts per module)
 
@@ -323,6 +325,20 @@ Copy `config/.env.example` to `.env` to configure optional providers. When a pro
 
 Strict single-token-brand relevance is tunable in `.env`: `STRICT_SINGLE_TOKEN_BRANDS=true`, `SINGLE_TOKEN_MIN_SCORE=0.55`. Optional scheduler: `SCHEDULE_ENABLED=true`, `SCHEDULE_INTERVAL_HOURS=24`.
 
+### Intake depth (per-brand, no migration needed)
+
+Beyond API keys, the intake form (`ToolApp → IntakeForm`) captures the full 2026 intake layer and persists it per brand:
+
+| Intake area | Fields |
+| --- | --- |
+| Entity schema | KG MID, Wikidata ID, Crunchbase ID, Wikipedia URL, official messaging, topical taxonomy, categories, seed keywords |
+| Spokesperson matrix | Bio, credentials, expertise, quotes, socials + **KG MID, Wikidata ID, department, SME flag** (SMEs prioritized for expert-consensus pitches) |
+| Technical APIs | GSC credentials file + **GSC property** (`sc-domain:…`), **GA4 property ID**, **bot-crawl/log API**, per-brand **link-graph provider selection** (Ahrefs / Majestic / Moz / SerpAPI) |
+| Listening streams | Source toggles + **transcript-first streams** (podcast transcripts, YouTube transcripts, news RSS, Reddit/forum, GitHub/Stack Overflow, Substack/Medium) + AI engines to monitor (Perplexity, ChatGPT, Gemini) |
+| Governance | Risk level + **risk score slider 0–100** (0 = Fortune-50 safe, 100 = venture aggressive; gates expired-domain + sponsorship tactics), allowed tactics, blocked domains/topics, max outreach/day, FTC/SEC compliance rules |
+
+All intake endpoints (`/api/v1/intake/*`) accept and return the new fields; the analysis run posts them automatically.
+
 Run a quick engine self-test:
 
 ```bash
@@ -387,6 +403,8 @@ This tool was built around one hard rule: **never fabricate data.**
 6. **Every reported URL is real and live.** Click any source in the UI or the report to verify it.
 7. **Projections are labeled.** Revenue and simulation outputs are explicitly marked as projections built on real baselines.
 8. **Nav-junk keyword scrubbing.** Auto-extracted keywords reject navigation/footer copy (`Contact us`, `Privacy Policy`, `ABOUT US`, `Trending on …`, `Markets Snapshot`, all-caps buttons, article headlines, etc.) so brand schemas stay clean.
+9. **No synthetic fallbacks.** When live search returns zero anchor contexts, the entropy module reports honest `low_signal` with nulls — the old injected demo anchors are gone. Static DA tables, hardcoded competitor lists and generic industry keyword injections were deleted outright (v2026.2).
+10. **Crash-proof file layer.** Every JSON read/write in the backend uses explicit UTF-8 (reads tolerate decoding errors), and all persisted JSON is ASCII-safe — a data file can never 500 an endpoint again.
 
 ---
 

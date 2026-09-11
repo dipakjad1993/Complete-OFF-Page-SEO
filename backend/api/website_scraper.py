@@ -209,33 +209,24 @@ async def search_web(query, client, max_results=8):
             unique.append(r)
     return unique[:max_results]
 
-COMPETITOR_DB = {
-    "cybersecurity": [("Palo Alto Networks","paloaltonetworks.com"),("SentinelOne","sentinelone.com"),("Fortinet","fortinet.com"),("Trend Micro","trendmicro.com"),("McAfee","mcafee.com")],
-    "cloud computing": [("AWS","aws.com"),("Microsoft Azure","azure.com"),("Google Cloud","cloud.google.com"),("IBM Cloud","cloud.ibm.com"),("Oracle Cloud","oracle.com/cloud")],
-    "artificial intelligence": [("OpenAI","openai.com"),("Anthropic","anthropic.com"),("Google DeepMind","deepmind.google"),("Meta AI","ai.meta.com"),("Cohere","cohere.com")],
-    "fintech": [("Stripe","stripe.com"),("PayPal","paypal.com"),("Square","squareup.com"),("Adyen","adyen.com"),("Klarna","klarna.com")],
-    "healthcare": [("Epic Systems","epic.com"),("Cerner","oracle.com/health"),("Teladoc","teladoc.com"),("Veracyte","veracyte.com")],
-    "e-commerce": [("Shopify","shopify.com"),("WooCommerce","woocommerce.com"),("BigCommerce","bigcommerce.com"),("Magento","adobe.com/commerce")],
-    "enterprise software": [("Salesforce","salesforce.com"),("Microsoft","microsoft.com"),("SAP","sap.com"),("Oracle","oracle.com"),("ServiceNow","servicenow.com")],
-    "developer tools": [("GitHub","github.com"),("GitLab","gitlab.com"),("Atlassian","atlassian.com"),("JetBrains","jetbrains.com"),("Postman","postman.com")],
-    "data analytics": [("Tableau","tableau.com"),("Looker","looker.com"),("Databricks","databricks.com"),("Snowflake","snowflake.com"),("Palantir","palantir.com")],
-    "social media": [("Meta","meta.com"),("X/Twitter","x.com"),("LinkedIn","linkedin.com"),("TikTok","tiktok.com"),("Snapchat","snapchat.com")],
-    "marketing": [("HubSpot","hubspot.com"),("Marketo","adobe.com/marketing"),("Mailchimp","mailchimp.com"),("Hootsuite","hootsuite.com"),("Buffer","buffer.com")],
-    "news media": [("Reuters","reuters.com"),("Associated Press","apnews.com"),("Bloomberg","bloomberg.com"),("The New York Times","nytimes.com"),("CNN","cnn.com")],
-    "technology": [("TechCrunch","techcrunch.com"),("The Verge","theverge.com"),("Wired","wired.com"),("CNET","cnet.com"),("ZDNet","zdnet.com")],
-}
+
+# REMOVED 2026-09-11: static COMPETITOR_DB hardcoded peer table
+# (e.g. news media -> Reuters/AP/Bloomberg/NYT/CNN) was generic demo data,
+# identical for every brand in an industry — not a live finding for THIS
+# brand. Competitor resolution is now live-only in _discover_competitors()
+# (web-search discovery + live HTTP verification, honest empty on failure).
 
 def extract_domain(url):
     try: return urlparse(url).netloc.replace("www.", "")
     except: return ""
 
-def get_da(domain):
-    DA = {"techcrunch.com":95,"forbes.com":95,"reuters.com":96,"bloomberg.com":97,"wsj.com":97,"nytimes.com":97,"bbc.com":95,"cnn.com":94,"reddit.com":99,"github.com":99,"wikipedia.org":99,"gartner.com":93,"forrester.com":91,"zdnet.com":93,"cnet.com":94,"venturebeat.com":91,"wired.com":95,"theverge.com":94,"g2.com":91,"capterra.com":89,"medium.com":95,"linkedin.com":99,"twitter.com":99,"youtube.com":99,"crunchbase.com":92,"glassdoor.com":93,"trustpilot.com":90,"stackoverflow.com":93,"quora.com":93,"producthunt.com":90,"sourceforge.net":92,"dev.to":89,"substack.com":90}
-    d = domain.lower().replace("www.", "")
-    if d in DA: return DA[d]
-    for k, v in DA.items():
-        if d.endswith("." + k): return v - 5
-    return 50
+# NOTE: a previous version of this file contained a hardcoded get_da()
+# static lookup table (techcrunch.com:95, reuters:96, default 50, ...).
+# That table was fabricated demo data — REMOVED 2026-09-11. Domain
+# authority is now ONLY reported via live providers (Moz/Ahrefs/Majestic)
+# in backend/api/analysis.py:get_da(), which returns honest
+# UnavailableData when no provider key is configured. Nothing here may
+# ever return a static authority score.
 
 def detect_industry(merged, extra_desc=""):
     if isinstance(merged, dict):
@@ -909,21 +900,10 @@ async def search_executives_wikidata(brand_name, wikidata_id, client, existing_n
 # returned empty with a provenance note.
 # ============================================================
 
-INDUSTRY_SEEDS = {
-    "cybersecurity": ["cybersecurity", "threat intelligence", "endpoint security", "ransomware", "zero trust", "malware analysis", "security operations", "siem", "xdr", "cloud security"],
-    "cloud computing": ["cloud computing", "cloud platform", "saas", "paas", "iaas", "kubernetes", "docker", "cloud infrastructure", "aws", "azure"],
-    "artificial intelligence": ["artificial intelligence", "machine learning", "large language model", "generative ai", "ai agents", "neural network", "deep learning", "nlp", "computer vision", "ai assistant"],
-    "fintech": ["fintech", "digital payments", "online banking", "financial technology", "mobile payments", "digital wallet", "lending", "blockchain", "investment"],
-    "healthcare": ["healthcare", "telehealth", "digital health", "clinical", "patient care", "medical", "health technology", "hospital", "health records"],
-    "e-commerce": ["e-commerce", "online shopping", "marketplace", "retail", "ecommerce platform", "online store", "checkout", "shopping"],
-    "enterprise software": ["enterprise software", "crm", "erp", "business software", "workflow automation", "productivity", "collaboration", "project management"],
-    "developer tools": ["developer tools", "api", "sdk", "devops", "open source", "programming", "software development", "code repository", "ci/cd"],
-    "data analytics": ["data analytics", "business intelligence", "data science", "data platform", "analytics", "data warehouse", "data engineering", "dashboards"],
-    "social media": ["social media", "social media marketing", "social platform", "engagement", "content", "community"],
-    "marketing": ["seo", "search engine optimization", "content marketing", "digital marketing", "backlink", "link building", "keyword research", "brand awareness"],
-    "news media": ["news", "breaking news", "headlines", "latest news", "world news", "top stories", "live updates", "journalism", "newspaper", "media"],
-    "technology": ["technology", "tech", "tech news", "gadgets", "gadget", "consumer technology", "reviews", "software", "apps", "how to", "tutorial", "product review", "smartphone", "laptop", "pc"],
-}
+# REMOVED 2026-09-11: static INDUSTRY_SEEDS generic keyword table (identical
+# filler terms injected into every brand schema, e.g. every news-media brand
+# got "news, breaking news, headlines..."). Seed keywords are now derived
+# ONLY from the brand's own crawled content in _extract_seed_keywords().
 
 ROLE_ONLY_WORDS = {
     "lead", "trainer", "founder", "ceo", "cto", "cfo", "coo", "cmo", "cio", "cso", "cvp",
@@ -937,7 +917,7 @@ ROLE_ONLY_WORDS = {
 }
 
 def _wd_type_to_industry(labels):
-    """Map Wikidata instance-of / industry labels to an INDUSTRY_SEEDS key."""
+    """Map Wikidata instance-of / industry labels to an industry key."""
     if not labels:
         return ""
     low = " ".join(str(l).lower() for l in labels if l)
@@ -1307,12 +1287,20 @@ def _pick_description(brand_name, domain, schema_desc, meta_desc, wiki, wd_desc,
 
 
 def _extract_seed_keywords(merged, industry, brand_name, domain):
+    """Brand-derived seed keywords ONLY — no generic industry injection.
+
+    REMOVED 2026-09-11: the old `for s in INDUSTRY_SEEDS.get(industry, [])`
+    loop injected identical generic terms (e.g. every healthcare brand got
+    "telehealth, digital health, clinical...") into every brand schema.
+    That was generic filler, not a finding about THIS brand. Keywords now
+    come only from the brand's own meta keywords + headings + brand tokens.
+    """
     out = []
     seen = set()
     NAV_JUNK = [
         "contact us", "about us", "privacy policy", "terms of use", "terms and conditions",
         "cookie", "advertise", "copyright", "all rights reserved", "quick links", "newsletter",
-        "follow us", "trending on", "trending today", "trending now", "trending shorts",
+        "follow us", "trending on", "trending today", "trending now", "trending shorts", "trending",
         "popular sections", "related topics", "group news sites", "other products",
         "photo gallery", "top listing", "more news", "markets snapshot", "heatmap",
         "all you need to know", "research reports", "the talking point", "joining the dots",
@@ -1320,7 +1308,16 @@ def _extract_seed_keywords(merged, industry, brand_name, domain):
         "chronic condition", "our stance", "ad & sponsorship", "mailing address", "new york office",
         "download app", "get the app", "also watch", "also read", "happening now",
         "sign up", "sign in", "subscribe", "download now", "get started",
+        "policies", "policy", "about", "follow", "share", "menu", "search", "home",
+        "latest videos", "latest news", "top stories", "breaking news", "live updates",
+        "play the word", "guess the word",
     ]
+    # Single generic tokens that are never brand-distinctive on their own.
+    GENERIC_SINGLETONS = {
+        "news", "videos", "sports", "business", "politics", "entertainment",
+        "technology", "health", "world", "india", "latest", "trending", "top",
+        "live", "updates", "headlines", "stories", "opinion", "cities",
+    }
 
     def add(s):
         s = str(s).strip()
@@ -1328,6 +1325,13 @@ def _extract_seed_keywords(merged, industry, brand_name, domain):
             return
         sl = s.lower()
         if any(p in sl for p in NAV_JUNK):
+            return
+        # Reject all-caps nav buttons ("ABOUT US", "POLICIES") even when the
+        # phrase list misses a variant.
+        if re.fullmatch(r"[A-Z\s&'\-]{4,}", s):
+            return
+        # Reject single generic tokens; keep multi-word specific phrases.
+        if len(sl.split()) == 1 and sl in GENERIC_SINGLETONS:
             return
         key = sl
         if key in seen:
@@ -1341,8 +1345,6 @@ def _extract_seed_keywords(merged, industry, brand_name, domain):
             part = part.strip()
             if part and len(part) < 80 and not any(c.isdigit() for c in part):
                 add(part)
-    for s in INDUSTRY_SEEDS.get(industry, []):
-        add(s)
     add(brand_name)
     add(domain)
     add(f"{brand_name} {industry}")
@@ -1466,18 +1468,11 @@ async def _discover_competitors(client, brand_name, domain, industry):
             cands.setdefault(d, single[d])
 
     verified = {}
-    # 1) Curated industry peers (from the verified COMPETITOR_DB) are the baseline.
-    for (nm, cd) in COMPETITOR_DB.get(industry, COMPETITOR_DB.get("technology", [])):
-        dd = _normalize_domain(cd)
-        if not dd or dd == _normalize_domain(domain):
-            continue
-        if any(dd == s or dd.endswith("." + s) for s in skip):
-            continue
-        alive = await _verify_domain(client, dd)
-        if alive:
-            verified[dd] = nm
-        if len(verified) >= 5:
-            break
+    # Live-only competitor resolution (2026-09: static COMPETITOR_DB baseline
+    # REMOVED — hardcoded peers like "Reuters/reuters.com" were generic demo
+    # data, not live findings for this brand). Only domains discovered live
+    # via web search above AND passing a live HTTP reachability check are
+    # returned. Empty list = honest "no live competitors found", never seeds.
 
     # 2) Web-found domains enrich ONLY when multi-vote (appear across queries).
     tasks = []
@@ -2037,13 +2032,33 @@ async def scrape_website(req: ScrapeRequest):
                 pass
 
         # ---- LAYER 6: keywords + topical taxonomy ----
+        # Pillars use the SAME nav-junk gate as seed keywords (2026-09 fix:
+        # old code appended raw h1-h4 text, which leaked "ABOUT US",
+        # "POLICIES", "Download App", "GUESS THE WORD" into stored schemas).
         keywords = _extract_seed_keywords(merged, industry, brand_name, domain)
+        _PILLAR_JUNK = {
+            "about us", "about", "policies", "policy", "contact us", "contact",
+            "privacy policy", "terms", "cookies", "follow us", "follow",
+            "download app", "get the app", "trending", "latest videos",
+            "top stories", "breaking news", "live updates", "play the word",
+            "guess the word", "sign up", "sign in", "subscribe", "menu",
+            "search", "home", "news", "videos", "sports", "business",
+        }
         topical_pillars = []
+        _kw_lower = {k.lower() for k in keywords}
         for h in merged.get("headings", []):
             hh = str(h).strip()
             if len(hh) < 4 or len(hh) > 50 or len(hh.split()) > 6:
                 continue
-            if hh.lower() in {k.lower() for k in keywords}:
+            hl = hh.lower()
+            if hl in _kw_lower or hl in _PILLAR_JUNK:
+                continue
+            if any(j in hl for j in ("trending on", "all rights reserved", "cookie",
+                                     "newsletter", "quick links", "explore by")):
+                continue
+            if re.fullmatch(r"[A-Z\s&'\-]{4,}", hh):
+                continue
+            if any(c.isdigit() for c in hh):
                 continue
             topical_pillars.append(hh)
         topical_taxonomy = list(dict.fromkeys([industry] + topical_pillars[:7]))

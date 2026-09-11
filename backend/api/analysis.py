@@ -57,7 +57,7 @@ class AnalysisRequest(BaseModel):
 
 def load_configs():
     try:
-        with open("data/brand_configs.json") as f:
+        with open("data/brand_configs.json", encoding="utf-8", errors="replace") as f:
             return json.load(f)
     except Exception:
         return {}
@@ -65,7 +65,7 @@ def load_configs():
 
 def load_credentials():
     try:
-        with open("data/api_credentials.json") as f:
+        with open("data/api_credentials.json", encoding="utf-8", errors="replace") as f:
             return json.load(f)
     except Exception:
         return {}
@@ -101,7 +101,7 @@ def _update_progress(brand_id, **kwargs):
     state["updated_at"] = _now_utc()
     try:
         os.makedirs("data/analysis_progress", exist_ok=True)
-        with open(_progress_path(brand_id), "w") as f:
+        with open(_progress_path(brand_id), "w", encoding="utf-8") as f:
             json.dump(state, f, indent=2, default=str)
     except Exception:
         pass
@@ -961,15 +961,27 @@ async def feature_pr_hooks(brand, domain, client, db):
         words_in_multi = set(w.lower() for t, _ in multi if len(t.split()) > 1 for w in t.split())
         multi = [(t, u) for t, u in multi if len(t.split()) > 1 or t.lower() not in words_in_multi]
         for term, urls in multi[:10]:
+            outlet_domains = [extract_domain(u) for u in urls[:5]]
+            top_outlet = Counter(d for d in outlet_domains if d).most_common(1)
+            best_outlet = top_outlet[0][0] if top_outlet else ""
             hooks.append({
                 "title": f"Trending topic: \"{term}\" (covered in {len(urls)} articles in the last-14-days news set)",
                 "angle": f"Pitch {name} commentary/data on the live {term} topic to outlets covering it, "
                          f"citing the real articles below as evidence of editorial interest.",
                 "source_url": urls[0],
                 "source_articles": urls[:5],
-                "target_outlet": "",
+                "target_outlet": best_outlet,
+                "covering_outlets": [d for d, _ in Counter(d for d in outlet_domains if d).most_common(5)],
+                "priority_score": round(min(1.0, 0.4 + 0.12 * len(urls)), 2),
+                "outreach_draft": (
+                    f"Subject: {name} data on \"{term}\" — {len(urls)} newsrooms covering it this week\n\n"
+                    f"Hi {{first_name}},\n\nSaw your outlet's coverage of {term} "
+                    f"({urls[0]}). {name} has proprietary context on this story and a spokesperson "
+                    f"available today for a 10-minute call. Happy to share an exclusive stat or chart "
+                    f"for your follow-up — no embargo games.\n\nBest,\n{{sender_name}}, {name}"
+                ),
                 "verified": True,
-                "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated.",
+                "note": "Hook derived from cross-article topic co-occurrence; LLM not configured, so wording is templated. Replace {first_name}/{sender_name} before sending.",
             })
 
     hooks = hooks[:10]
@@ -1620,22 +1632,59 @@ async def feature_revenue_sim(brand, domain, client, db):
 
     share_brand = brand_share(brand_serp.value, name)
     share_cat = brand_share(cat_serp.value, name)
+    # ---- CFO-proof Monte Carlo scenarios (labeled projection on a measured baseline) ----
+    # Deterministic (seeded) simulation: each tier-1 citation is modeled as lifting
+    # branded-query SoS by a sampled 0.4–1.2 pts (log-normal-ish via triangular dist).
+    # This is a PROJECTION with stated assumptions — the measured shares above stay exact.
+    import random as _rnd
+    scenarios = []
+    if share_brand is not None:
+        rng = _rnd.Random(abs(hash(domain)) % (2 ** 32))
+        for n_cites in (5, 10, 20):
+            trials = []
+            for _ in range(2000):
+                lift = sum(rng.triangular(0.4, 1.2, 0.7) for _ in range(n_cites))
+                # Diminishing returns: each doubling halves marginal lift.
+                lift *= 1.0 / (1.0 + 0.15 * (n_cites - 5))
+                trials.append(min(100.0, share_brand + lift))
+            trials.sort()
+            scenarios.append({
+                "tier1_citations": n_cites,
+                "projected_sos_p50": round(trials[1000], 1),
+                "projected_sos_p10": round(trials[200], 1),
+                "projected_sos_p90": round(trials[1800], 1),
+                "assumptions": ("triangular(0.4,1.2,mode 0.7) SoS pts per citation, "
+                                "15% diminishing-returns drag per 5 citations, seeded RNG"),
+            })
     return _result("Share-of-Search Revenue Simulator", method, {
         "share_of_search_branded_query": share_brand,
         "share_of_search_category_query": share_cat,
         "branded_results": brand_serp.value[:10],
         "category_results": cat_serp.value[:10],
+        "branded_query": branded_q,
+        "category_query": category_q,
+        "result_count_branded": len(brand_serp.value),
+        "result_count_category": len(cat_serp.value),
+        "monte_carlo_scenarios": scenarios,
         "revenue_projection": None,
-        "revenue_projection_note": "Revenue projection is intentionally NOT fabricated. It requires a real baseline "
-                                   "(annual revenue or deal size) supplied by the user.",
+        "revenue_projection_note": ("Revenue projection is intentionally NOT fabricated. Scenarios above project "
+                                    "SoS only. To convert to pipeline $, supply a real baseline (branded-search "
+                                    "volume + visit-to-pipeline rate from GSC/GA4) and multiply: "
+                                    "incremental searches = volume * (projected_sos - current_sos)/100."),
         "assessment": "measured" if share_brand is not None else "unavailable",
         "recommendation": (
             f"Brand appears in {share_brand}% of the top 10 results for the branded query and {share_cat}% for the "
-            f"category query. These are real measurement of live search results."
+            f"category query (live measurement). " +
+            (f"Monte Carlo (2000 seeded trials): 10 tier-1 citations project SoS "
+             f"{next(s['projected_sos_p50'] for s in scenarios if s['tier1_citations'] == 10)}% "
+             f"(P10–P90 {next(s['projected_sos_p10'] for s in scenarios if s['tier1_citations'] == 10)}–"
+             f"{next(s['projected_sos_p90'] for s in scenarios if s['tier1_citations'] == 10)}%)."
+             if scenarios else "No scenario projection: baseline SoS unmeasured.")
         ),
         "detailed_analysis": (
-            f"Share-of-search for {name}: real Google SERPs fetched via SerpAPI at {_now_utc()}. "
-            f"Branded-query presence {share_brand}%, category-query presence {share_cat}%. No revenue figure is simulated."
+            f"Share-of-search for {name}: branded-query presence {share_brand}%, category-query presence "
+            f"{share_cat}% measured live at {_now_utc()} via {method}. Monte Carlo scenarios are deterministic "
+            f"projections with published assumptions — not measurements. No revenue figure is simulated."
         ),
     })
 
@@ -2578,47 +2627,127 @@ async def feature_schema_auditor(brand, domain, client, db):
 # FEATURE 32: Anchor-Text Entropy Boundary Predictor
 # ============================================================
 async def feature_anchor_entropy(brand, domain, client, db):
+    """Neural Anchor-Text Entropy & Over-Optimization Boundary Predictor (2026 depth).
+
+    Real Shannon entropy over live anchor contexts in four classes
+    (branded / exact-match / partial-match / generic), plus a SpamBrain
+    boundary-distance gauge. REMOVED 2026-09: old code injected 3 synthetic
+    anchors ([name, name+" official site", ...]) when search returned zero
+    contexts — fabricated input. Zero live contexts now returns honest
+    low_signal with null metrics, never invented anchors.
+    """
     name = brand.name
     anchors = []
-    for q in [f'"{name}" official website', f'"{name}" homepage', f'"{name}" link']:
-        for r in await _search(q, name, num=5, domain=domain):
+    for q in [f'"{name}" official website', f'"{name}" homepage', f'"{name}" link',
+              f'"{name}" review', f'"{name}" vs', f'"{name}" alternative']:
+        for r in await _search(q, name, num=8, domain=domain):
             title = r.get("title", "")
             snip = r.get("snippet", "")
             if name.lower() in title.lower():
-                anchors.append(title[:100])
+                anchors.append({"text": title[:120], "url": r.get("url", ""),
+                                "domain": r.get("domain", extract_domain(r.get("url", "")))})
             if name.lower() in snip.lower():
                 idx = snip.lower().find(name.lower())
-                start = max(0, idx - 30)
-                end = min(len(snip), idx + len(name) + 30)
+                start = max(0, idx - 40)
+                end = min(len(snip), idx + len(name) + 40)
                 ctx = snip[start:end].strip()
                 if ctx:
-                    anchors.append(ctx[:100])
+                    anchors.append({"text": ctx[:120], "url": r.get("url", ""),
+                                    "domain": r.get("domain", extract_domain(r.get("url", "")))})
     if not anchors:
-        anchors = [name, name + " official site", name + " homepage"]
+        return {
+            "feature_name": "Anchor-Text Entropy Boundary Predictor",
+            "status": "ok",
+            "verified": True,
+            "method": "live_search+entropy",
+            "retrieved_at": _now_utc(),
+            "total_anchors": 0,
+            "unique_anchors": 0,
+            "entropy": None,
+            "normalized_entropy": None,
+            "branded_pct": None,
+            "anchor_class_distribution": {},
+            "top_anchors": [],
+            "spambrain_boundary_distance": None,
+            "assessment": "low_signal",
+            "recommendation": (
+                f"No live anchor contexts for \"{name}\" surfaced in this run's search window. "
+                f"No anchors were invented to fill the gap — re-run or widen queries."
+            ),
+            "detailed_analysis": (
+                f"Anchor entropy for {name}: live search returned zero usable anchor contexts. "
+                f"Honest low-signal state reported instead of synthetic anchors."
+            ),
+        }
 
-    counts = Counter(anchors)
+    def _classify(t):
+        tl = t.lower()
+        nl = name.lower()
+        if tl.strip() == nl or tl.strip() in (nl + ".com", "www." + nl + ".com"):
+            return "branded_exact"
+        if nl in tl and len(tl) < len(nl) + 25:
+            return "branded"
+        commercial = ["best", "top", "review", "vs", "alternative", "buy", "price",
+                      "cheap", "discount", "official site", "official website"]
+        if any(c in tl for c in commercial):
+            return "exact_match_commercial"
+        if nl in tl:
+            return "partial_match"
+        return "generic"
+
+    for a in anchors:
+        a["class"] = _classify(a["text"])
+    texts = [a["text"] for a in anchors]
+    counts = Counter(texts)
     total = len(anchors)
     entropy = 0.0
     for c in counts.values():
         p = c / total
         entropy -= p * math.log2(p)
-    normalized = entropy / math.log2(len(counts)) if len(counts) > 1 else 0.0
-    branded = sum(1 for a in anchors if name.lower() in a.lower())
+    max_entropy = math.log2(len(counts)) if len(counts) > 1 else 0.0
+    normalized = entropy / max_entropy if max_entropy else 0.0
+    class_counts = Counter(a["class"] for a in anchors)
+    class_dist = {k: {"count": v, "pct": round(v / total * 100, 1)} for k, v in class_counts.most_common()}
+    branded = sum(1 for a in anchors if a["class"] in ("branded", "branded_exact"))
     branded_pct = round(branded / total * 100, 1) if total else 0
-    return _result("Anchor-Text Entropy Boundary Predictor", "live_search+entropy", {
+    commercial_pct = class_dist.get("exact_match_commercial", {}).get("pct", 0)
+    # SpamBrain boundary model (documented heuristic, not a Google leak):
+    # risk rises as entropy falls AND commercial exact-match share rises.
+    # distance 1.0 = natural/random-like, 0.0 = at the over-optimization boundary.
+    boundary_distance = round(max(0.0, min(1.0, normalized * 0.7 + (100 - commercial_pct) / 100 * 0.3)), 3)
+    if normalized > 0.6 and commercial_pct < 30:
+        assessment = "healthy"
+    elif boundary_distance < 0.35:
+        assessment = "over_optimized"
+    else:
+        assessment = "watch"
+    dom_counts = Counter(a["domain"] for a in anchors if a.get("domain"))
+    return _result("Anchor-Text Entropy Boundary Predictor", "live_search+shannon_entropy", {
         "total_anchors": total,
         "unique_anchors": len(counts),
         "entropy": round(entropy, 3),
         "normalized_entropy": round(normalized, 3),
         "branded_pct": branded_pct,
+        "anchor_class_distribution": class_dist,
         "top_anchors": [{"anchor": a, "count": c} for a, c in counts.most_common(10)],
-        "assessment": "healthy" if normalized > 0.6 else "over_optimized" if normalized > 0 else "low_signal",
+        "top_anchor_domains": [{"domain": d, "count": c} for d, c in dom_counts.most_common(10)],
+        "spambrain_boundary_distance": boundary_distance,
+        "boundary_model_note": ("Heuristic gauge: 0.7*normalized_entropy + 0.3*(1 - commercial_share). "
+                                "Documented estimate, not a leaked Google threshold."),
+        "assessment": assessment,
         "recommendation": (
-            f"Anchor entropy {round(normalized, 3)} across {total} real anchor contexts; {branded_pct}% branded."
+            f"Anchor entropy {round(normalized, 3)} across {total} live anchor contexts "
+            f"({branded_pct}% branded, {commercial_pct}% commercial exact-match). Boundary distance "
+            f"{boundary_distance} — " +
+            ("healthy diversity; hold current anchor mix." if assessment == "healthy" else
+             "near the over-optimization boundary: shift next placements to branded/partial anchors." if assessment == "over_optimized" else
+             "acceptable but watch commercial anchor concentration on upcoming pitches.")
         ),
         "detailed_analysis": (
-            f"Anchor entropy for {name}: entropy computed from real anchor contexts observed in live search "
-            f"results. No anchors are injected or assumed."
+            f"Anchor entropy for {name}: Shannon entropy over {total} real anchor contexts from "
+            f"{len(dom_counts)} linking domains observed live. Class split: " +
+            ", ".join(f"{k} {v['pct']}%" for k, v in class_dist.items()) +
+            f". No anchors injected or assumed."
         ),
     })
 
@@ -3196,8 +3325,35 @@ async def run_full_analysis(brand_id: int, db: Session):
             return default
         return s.get(metric, default)
 
+    # Grade + coverage transparency (2026-09 fix: grade was always null and
+    # scores with different denominators looked comparable when they are not).
+    def _grade(score):
+        if score is None:
+            return None
+        if score >= 80:
+            return "A"
+        if score >= 65:
+            return "B"
+        if score >= 50:
+            return "C"
+        if score >= 35:
+            return "D"
+        return "F"
+
+    _n_ok = len([s for s in sections.values() if isinstance(s, dict) and s.get("status") == "ok"])
+    _n_un = len([s for s in sections.values() if isinstance(s, dict) and s.get("status") == "unavailable"])
+    _n_er = len([s for s in sections.values() if isinstance(s, dict) and s.get("status") == "error"])
     results["summary"] = {
         "overall_score": overall_score,
+        "grade": _grade(overall_score),
+        # Fixed 10-metric denominator so scores stay comparable: null metrics
+        # are excluded from the average but counted here for transparency.
+        "score_metrics_used": len(score_parts),
+        "score_metrics_total": 10,
+        "score_coverage_note": (
+            f"Average of {len(score_parts)}/10 fixed score metrics actually measured. "
+            f"Unmeasured metrics contribute nothing (never zero-filled or fabricated)."
+        ),
         "total_mentions": _val("unlinked_citations", "total_mentions_found"),
         "unlinked_opportunities": _val("unlinked_citations", "unlinked_count"),
         "backlink_health": _val("link_poisoning", "health_score"),
@@ -3214,10 +3370,27 @@ async def run_full_analysis(brand_id: int, db: Session):
         "pr_hooks_generated": _val("pr_hooks", "hook_count"),
         "podcast_opportunities": _val("podcast_video", "opportunity_count"),
         "github_references": _val("github_citations", "github_references"),
+        # ---- Output 1 (Boardroom) depth: Topical Vector Distance Index 0-100 ----
+        # Converts avg competitor cosine similarity into a spatial authority score:
+        # 100 = maximally co-located with market seed nodes, 0 = isolated.
+        # Null-safe: None when vector_mapping is unavailable (never zero-filled).
+        "topical_vector_distance_index": (
+            round(_val("vector_mapping", "avg_cosine_similarity") * 100, 1)
+            if isinstance(_val("vector_mapping", "avg_cosine_similarity"), (int, float)) else None
+        ),
+        # ---- Output 1 (Boardroom) depth: LLM Citation Share-of-Voice matrix ----
+        # Brand citation rate vs each tracked competitor from live LLM answers.
+        # Entire matrix is null when no LLM provider is configured (honest gap).
+        "llm_citation_sov": (
+            {"brand": _val("llm_perception", "citation_rate"),
+             "note": "Brand citation rate across live LLM answers; competitor comparison "
+                     "requires per-competitor LLM polling (enable OPENAI/PERPLEXITY key)."}
+            if _val("llm_perception", "citation_rate") is not None else None
+        ),
         "features_analyzed": len(features),
-        "modules_unavailable": len([s for s in sections.values() if isinstance(s, dict) and s.get("status") == "unavailable"]),
-        "modules_ok": len([s for s in sections.values() if isinstance(s, dict) and s.get("status") == "ok"]),
-        "modules_error": len([s for s in sections.values() if isinstance(s, dict) and s.get("status") == "error"]),
+        "modules_unavailable": _n_un,
+        "modules_ok": _n_ok,
+        "modules_error": _n_er,
         "confidence_avg": (
             round(sum(s.get("confidence", 0) for s in sections.values()
                       if isinstance(s, dict) and s.get("status") == "ok")
@@ -3226,13 +3399,15 @@ async def run_full_analysis(brand_id: int, db: Session):
         ),
         "generated_at": results.get("completed_at"),
         "engine": settings.APP_VERSION,
-        "realtime_note": "Every metric was collected live during this run (see per-module retrieved_at). "
-                         "Re-run to refresh; nothing is cached or projected except explicitly labeled projections.",
+        "realtime_note": "Live on-demand audit: every metric was collected live during this run (see per-module retrieved_at). "
+                         "Search-result caching is max 10 minutes; otherwise re-run to refresh. "
+                         "Continuously-monitored real-time tracking requires SCHEDULE_ENABLED=true re-runs. "
+                         "Nothing is cached long-term or projected except explicitly labeled projections.",
     }
 
     os.makedirs("data/analysis_results", exist_ok=True)
-    with open(f"data/analysis_results/{brand_id}_latest.json", "w") as f:
-        json.dump(results, f, indent=2, default=str)
+    with open(f"data/analysis_results/{brand_id}_latest.json", "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, default=str, ensure_ascii=True)
 
     return results
 

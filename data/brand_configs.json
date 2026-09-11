@@ -14,22 +14,14 @@
         "news media"
       ],
       "seed_keywords": [
-        "news",
-        "live updates",
         "local news",
         "current events",
         "livestream",
         "live video",
         "world news",
         "us news",
-        "breaking news",
         "india news",
-        "politics",
-        "business",
-        "entertainment",
-        "sports",
-        "current affairs",
-        "top stories"
+        "current affairs"
       ],
       "official_messaging": null
     },
@@ -64,16 +56,9 @@
         "news media"
       ],
       "seed_keywords": [
-        "news",
         "india news",
-        "politics",
         "world news",
-        "breaking news",
-        "business",
-        "entertainment",
-        "sports",
-        "current affairs",
-        "top stories"
+        "current affairs"
       ],
       "official_messaging": null
     },
@@ -140,17 +125,9 @@
         "news media"
       ],
       "seed_keywords": [
-        "news",
-        "headlines",
         "world news",
-        "breaking news",
         "india news",
-        "politics",
-        "business",
-        "entertainment",
-        "sports",
-        "current affairs",
-        "top stories"
+        "current affairs"
       ],
       "official_messaging": null
     }
@@ -168,11 +145,9 @@
       "topical_taxonomy": {
         "pillars": [
           "news media",
-          "Download App",
-          "TAMIL NADU",
-          "SCIENCE",
-          "GUESS THE WORD",
           "Health",
+          "SCIENCE",
+          "TAMIL NADU",
           "Global",
           "Maharashtra News"
         ]
@@ -181,13 +156,8 @@
         "news media"
       ],
       "seed_keywords": [
-        "news",
-        "breaking news",
-        "headlines",
         "latest news",
         "world news",
-        "top stories",
-        "live updates",
         "journalism",
         "newspaper",
         "media",
@@ -200,15 +170,12 @@
         "Latest Auto News",
         "India Today Insight",
         "Cricket",
-        "Cities",
         "Music",
-        "Play The Word",
         "Trending News",
         "Delhi News",
         "Law News",
         "Style",
-        "Duleep Trophy Final",
-        "Opinion"
+        "Duleep Trophy Final"
       ],
       "official_messaging": "Check out the latest news from India and around the world. Latest India news on Bollywood, Politics, Business, Cricket, Technology and Travel."
     },
@@ -306,16 +273,9 @@
         "Television",
         "Reviews",
         "Celebrities",
-        "news",
-        "breaking news",
         "india news",
-        "politics",
-        "business",
         "world news",
-        "entertainment",
-        "sports",
-        "current affairs",
-        "top stories"
+        "current affairs"
       ],
       "official_messaging": null
     }
@@ -477,10 +437,10 @@
       "topical_taxonomy": {
         "pillars": [
           "news media",
-          "India",
-          "Videos",
-          "Health Risks Behind The Drink",
           "Technology",
+          "Videos",
+          "India",
+          "Health Risks Behind The Drink",
           "Shopping"
         ]
       },
@@ -488,10 +448,7 @@
         "news media"
       ],
       "seed_keywords": [
-        "news",
-        "headlines",
         "world news",
-        "live updates",
         "journalism",
         "newspaper",
         "media",
@@ -499,16 +456,9 @@
         "NDTV Profit news media",
         "NDTV Profit Daily",
         "Personal Finance",
-        "World",
         "Economy",
-        "breaking news",
         "india news",
-        "politics",
-        "business",
-        "entertainment",
-        "sports",
-        "current affairs",
-        "top stories"
+        "current affairs"
       ],
       "official_messaging": "Business News LIVE: Get the latest and breaking business news, finance news, stock market updates from India and International markets on NDTV Profit."
     },
@@ -567,14 +517,7 @@
       "description": "Healthline Media, Inc. is an American website and provider of health information headquartered in San Francisco, California. It was founded in 1999, and purchased by Red Ventures in 2019. Healthline claimed to be using AI to generate content from 2023\u20132026, although that claim has now been reversed.",
       "topical_taxonomy": {
         "pillars": [
-          "healthcare",
-          "Explore by health topic",
-          "Featured programs",
-          "ABOUT US",
-          "Medical Integrity",
-          "Chronic Condition Communities",
-          "Follow Us",
-          "POLICIES"
+          "healthcare"
         ]
       },
       "primary_categories": [
@@ -593,8 +536,6 @@
         "Healthline",
         "healthline.com",
         "Healthline healthcare",
-        "Trending",
-        "Latest videos",
         "Healthline Editorial",
         "About Healthline Media",
         "Our Approach to Content Integrity",
@@ -667,15 +608,12 @@
       "logo_url": null,
       "description": "A sport is a physical activity or game, often competitive and organised, that maintains or improves physical ability and skills. Sport may provide enjoyment to participants and entertainment to spectators. The number of participants in a particular sport can vary from hundreds of people to a single individual.",
       "topical_taxonomy": {
-        "pillars": [
-          "technology"
-        ]
+        "pillars": []
       },
       "primary_categories": [
         "technology"
       ],
       "seed_keywords": [
-        "technology",
         "tech",
         "tech news",
         "gadgets",
@@ -689,7 +627,6 @@
         "product review",
         "smartphone",
         "laptop",
-        "Sports",
         "sports.ndtv.com",
         "Sports technology"
       ],
@@ -754,15 +691,12 @@
       "logo_url": null,
       "description": "American press release company",
       "topical_taxonomy": {
-        "pillars": [
-          "technology"
-        ]
+        "pillars": []
       },
       "primary_categories": [
         "technology"
       ],
       "seed_keywords": [
-        "technology",
         "tech",
         "tech news",
         "gadgets",
@@ -828,6 +762,111 @@
       "frequency": "daily",
       "enabled": true,
       "updated_at": "2026-09-08T10:11:41.385069"
+    }
+  },
+  "21": {
+    "schema": {
+      "brand_id": 21,
+      "name": "ABP Live English",
+      "kg_mid": "",
+      "wikidata_id": "",
+      "crunchbase_id": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/News",
+      "logo_url": null,
+      "description": "ABP LIVE English: Latest News Updates from India and Across the world! Breaking News Alerts, Live News Updates on Politics, Business, Technology, Bollywood, Cricket, and More!",
+      "topical_taxonomy": {
+        "pillars": [
+          "news media",
+          "Latest News",
+          "Entertainment",
+          "Photo Gallery",
+          "Opinion",
+          "Technology",
+          "World",
+          "Trending News"
+        ]
+      },
+      "primary_categories": [
+        "news media"
+      ],
+      "seed_keywords": [
+        "ABP Live English",
+        "news.abplive.com",
+        "ABP Live English news media",
+        "Latest Uploads",
+        "Short Video",
+        "Astrology",
+        "Your Money Your Life",
+        "Deep Dive",
+        "Regional News",
+        "TV Show",
+        "Viral Sach",
+        "ABP Decodes",
+        "Education",
+        "Auto",
+        "Mutual Funds",
+        "Television",
+        "Movies",
+        "Ideas Of India",
+        "Top Headlines",
+        "Games",
+        "Stock Market Updates",
+        "Personal Corner",
+        "Top News",
+        "News Latest Reels",
+        "All Authors",
+        "All Blog",
+        "Point of View",
+        "CBSE Asks Schools\u00a0To\u00a0Keep Student Details Ready"
+      ],
+      "official_messaging": "ABP LIVE English: Latest News Updates from India and Across the world! Breaking News Alerts, Live News Updates on Politics, Business, Technology, Bollywood, Cricket, and More!"
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes",
+        "expired",
+        "sponsorship",
+        "conference",
+        "reddit",
+        "forum"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-09-11T08:14:59.620217"
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "updated_at": "2026-09-11T08:14:59.639130"
     }
   }
 }

@@ -671,14 +671,29 @@ export default function ToolApp() {
       if (existing) {
         brandId = existing.id;
       } else {
-        const created = await postJson('/api/v1/brands/', {
-          name: intake.name || domain.split('.')[0],
-          domain,
-          description: intake.description || '',
-          primary_categories: splitList(intake.categories),
-          seed_keywords: splitList(intake.keywords),
-        });
-        brandId = created.id;
+        try {
+          const created = await postJson('/api/v1/brands/', {
+            name: intake.name || domain.split('.')[0],
+            domain,
+            description: intake.description || '',
+            primary_categories: splitList(intake.categories),
+            seed_keywords: splitList(intake.keywords),
+          });
+          brandId = created.id;
+        } catch (e) {
+          // Race / duplicate: brand was registered already (e.g. another run
+          // created it). Reuse the existing record instead of dying on 400.
+          const retryRes = await fetch('/api/v1/brands/');
+          const retryList = await retryRes.json();
+          const found = Array.isArray(retryList)
+            ? retryList.find((b: { domain?: string }) => (b.domain || '').toLowerCase() === domain)
+            : null;
+          if (found) {
+            brandId = found.id;
+          } else {
+            throw e;
+          }
+        }
       }
       setStepStatus('brand', 'done');
 
@@ -697,6 +712,10 @@ export default function ToolApp() {
         seed_keywords: splitList(intake.keywords),
         official_messaging: intake.officialMessaging || null,
         topical_taxonomy: intake.taxonomy ? { pillars: splitList(intake.taxonomy) } : null,
+        gsc_property_id: intake.gscProperty || '',
+        ga4_property_id: intake.ga4Id || '',
+        bot_crawl_api: (intake as any).botCrawlApi || '',
+        link_graph_providers: (intake as any).linkProviders || [],
       });
       for (const s of intake.spokes) {
         if (!s.name || !s.name.trim()) continue;
@@ -710,6 +729,10 @@ export default function ToolApp() {
             expertise_areas: splitList(s.expertise),
             social_profiles: { linkedin: s.linkedin || '', twitter: s.twitter || '' },
             quotes: splitLines(s.quotes),
+            kg_mid: (s as any).kgMid || '',
+            wikidata_id: (s as any).wikidataId || '',
+            is_sme: !!(s as any).isSme,
+            department: (s as any).department || '',
           });
         } catch (_) { /* non-fatal */ }
       }
@@ -739,6 +762,7 @@ export default function ToolApp() {
         await postJson('/api/v1/intake/risk-config', {
           brand_id: brandId,
           risk_level: intake.riskLevel,
+          risk_score: (intake as any).riskScore ?? 10,
           allowed_tactics: intake.tactics,
           blocked_domains: splitLines(intake.blockedDomains),
           blocked_topics: splitList(intake.blockedTopics),
@@ -751,6 +775,9 @@ export default function ToolApp() {
           sources: intake.sources,
           frequency: 'daily',
           enabled: true,
+          listening_streams: (intake as any).listeningStreams || [],
+          include_transcripts: true,
+          crawl_depth: 2,
         });
       } catch (_) { /* non-fatal */ }
       if (intake.compName && intake.compContent) {
@@ -921,6 +948,30 @@ export default function ToolApp() {
             )}
             <div className="intake-actions" style={{ paddingBottom: '2rem' }}>
               <button onClick={reset} className="info-cta tool-run-btn cancel">Cancel & Edit Inputs</button>
+            </div>
+          </section>
+        )}
+
+        {/* ============ ERROR (was missing: any failure rendered a blank page) ============ */}
+        {phase === 'error' && (
+          <section className="tool-error-page" style={{ maxWidth: '720px', margin: '2rem auto', textAlign: 'center' }}>
+            <div className="tool-error" style={{ textAlign: 'left' }}>
+              <XCircle size={20} className="flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="font-bold mb-0.5" style={{ fontSize: '1.1rem' }}>Analysis failed</div>
+                <div>{error || 'Something went wrong while running the analysis.'}</div>
+                <div className="field-hint" style={{ marginTop: '0.5rem' }}>
+                  Nothing was lost — your inputs are still filled in. Common causes: the brand
+                  domain is already registered (now auto-reused), a long run timed out, or the
+                  server restarted mid-run. Retry, or go back and edit inputs.
+                </div>
+              </div>
+            </div>
+            <div className="intake-actions" style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', marginTop: '1rem' }}>
+              <button onClick={runAnalysis} className="info-cta tool-run-btn" style={{ fontSize: '1rem', padding: '0.9rem 2rem' }}>
+                <Brain size={18} /> Retry Analysis
+              </button>
+              <button onClick={reset} className="info-cta tool-run-btn cancel">← Back to Inputs</button>
             </div>
           </section>
         )}

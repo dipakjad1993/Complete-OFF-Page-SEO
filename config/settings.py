@@ -4,7 +4,7 @@ import os
 
 class Settings(BaseSettings):
     APP_NAME: str = "Complete Off Page SEO - Entity-First Brand Consensus Engine"
-    APP_VERSION: str = "2026.1.0"
+    APP_VERSION: str = "2026.2.0"
     DEBUG: bool = False
     
     DATABASE_URL: str = "sqlite:///./offpage_seo.db"

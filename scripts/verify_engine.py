@@ -105,9 +105,11 @@ def test_api():
         assert data["total_features"] == 35
         print(f"  [OK] Features endpoint ({data['total_features']} features)")
         
+        import uuid as _uuid
+        _uniq = _uuid.uuid4().hex[:8]
         response = client.post("/api/v1/brands/", json={
-            "name": "Verification Test Brand",
-            "domain": "example.com",
+            "name": f"Verification Test Brand {_uniq}",
+            "domain": f"verify-{_uniq}.example.com",
             "description": "A test brand for verification only"
         })
         assert response.status_code == 200

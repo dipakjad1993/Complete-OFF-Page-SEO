@@ -10,6 +10,10 @@ export interface Spokesperson {
   linkedin: string;
   twitter: string;
   quotes: string;
+  kgMid: string;
+  wikidataId: string;
+  isSme: boolean;
+  department: string;
 }
 
 export interface CompetitorInput {
@@ -35,16 +39,21 @@ export interface IntakeState {
   competitors: CompetitorInput[];
   // B. Technical & Performance APIs
   gscFile: string;
+  gscProperty: string;
   ga4Id: string;
+  botCrawlApi: string;
   ahrefs: string;
   majestic: string;
   mozId: string;
   mozSecret: string;
+  linkProviders: string[];
   // C. Real-Time Web & Social Listening Streams
   sources: string[];
   aiEngines: string[];
+  listeningStreams: string[];
   // D. Governance & Guardrail Parameters
   riskLevel: string;
+  riskScore: number;
   tactics: string[];
   blockedDomains: string;
   blockedTopics: string;
@@ -66,17 +75,22 @@ export const emptyIntake = (): IntakeState => ({
   taxonomy: '',
   categories: '',
   keywords: '',
-  spokes: [{ name: '', title: '', bio: '', credentials: '', expertise: '', linkedin: '', twitter: '', quotes: '' }],
+  spokes: [{ name: '', title: '', bio: '', credentials: '', expertise: '', linkedin: '', twitter: '', quotes: '', kgMid: '', wikidataId: '', isSme: false, department: '' }],
   competitors: [{ name: '', domain: '', wikidata_id: '' }],
   gscFile: '',
+  gscProperty: '',
   ga4Id: '',
+  botCrawlApi: '',
   ahrefs: '',
   majestic: '',
   mozId: '',
   mozSecret: '',
+  linkProviders: [],
   sources: ['news', 'indpub', 'medium', 'substack', 'reddit', 'twitter', 'youtube', 'podcasts', 'stackoverflow', 'github', 'quora', 'trustpilot', 'g2', 'linkedin'],
   aiEngines: ['perplexity', 'chatgpt', 'gemini'],
+  listeningStreams: ['podcast_transcripts', 'youtube_transcripts', 'news_rss', 'reddit_stream'],
   riskLevel: 'enterprise_safe',
+  riskScore: 10,
   tactics: ['digital_pr', 'guest_posts', 'podcasts', 'data_studies', 'expert_quotes'],
   blockedDomains: '',
   blockedTopics: 'gambling, adult content, political controversy, crypto pump schemes',
@@ -147,13 +161,29 @@ const AI_ENGINE_OPTIONS = [
   { v: 'gemini', l: 'Google Gemini / AI Overviews' },
 ];
 
+const LISTENING_OPTIONS = [
+  { v: 'podcast_transcripts', l: 'Podcast transcripts (Whisper-vector monitor)' },
+  { v: 'youtube_transcripts', l: 'YouTube transcripts' },
+  { v: 'news_rss', l: 'News RSS firehose' },
+  { v: 'reddit_stream', l: 'Reddit / forum streams' },
+  { v: 'github_stream', l: 'GitHub / Stack Overflow' },
+  { v: 'substack_stream', l: 'Substack / Medium' },
+];
+
+const LINK_PROVIDER_OPTIONS = [
+  { v: 'ahrefs', l: 'Ahrefs link graph' },
+  { v: 'majestic', l: 'Majestic link graph' },
+  { v: 'moz', l: 'Moz link graph' },
+  { v: 'serpapi', l: 'SerpAPI Google SERPs' },
+];
+
 export default function IntakeForm({ value, onChange }: Props) {
   const [urlInput, setUrlInput] = React.useState('');
   const [fetching, setFetching] = React.useState(false);
   const [fetchError, setFetchError] = React.useState('');
   const [fetchInfo, setFetchInfo] = React.useState('');
   const set = <K extends keyof IntakeState>(k: K, v: IntakeState[K]) => onChange({ ...value, [k]: v });
-  const setSpoke = (i: number, k: keyof Spokesperson, v: string) => {
+  const setSpoke = (i: number, k: keyof Spokesperson, v: string | boolean) => {
     const spokes = value.spokes.map((s, j) => (j === i ? { ...s, [k]: v } : s));
     set('spokes', spokes);
   };
@@ -205,7 +235,7 @@ export default function IntakeForm({ value, onChange }: Props) {
       const keywords = Array.isArray(d.keywords) ? d.keywords.map(String) : [];
       const seedKeywords = Array.isArray(d.seed_keywords) ? d.seed_keywords.map(String) : keywords;
       const taxonomy = Array.isArray(d.topical_taxonomy) ? d.topical_taxonomy.map(String) : [];
-      const mappedSpokes = candPool.slice(0, 12).map((e: any, idx: number) => ({
+      const mappedSpokes: Spokesperson[] = candPool.slice(0, 12).map((e: any, idx: number) => ({
         name: String(e.name || ''),
         title: String(e.title || ''),
         bio: String(e.bio || ''),
@@ -214,6 +244,10 @@ export default function IntakeForm({ value, onChange }: Props) {
         linkedin: String(e.linkedin || e.social_links?.linkedin || ''),
         twitter: String(e.twitter || e.social_links?.twitter || ''),
         quotes: flatLines(e.quotes) || (idx === 0 ? brandQuotes.slice(0, 4).join('\n') : ''),
+        kgMid: String(e.kg_mid || ''),
+        wikidataId: String(e.wikidata_id || ''),
+        isSme: false,
+        department: '',
       })).filter((s: any) => s.name);
       onChange({
         ...value,
@@ -367,12 +401,29 @@ export default function IntakeForm({ value, onChange }: Props) {
             <F label="Quote repository" hint="Verbatim quotes available for placement. No invented quotes.">
               <TA value={s.quotes} onChange={(e) => setSpoke(i, 'quotes', e.target.value)} placeholder="Each real quote on its own line" />
             </F>
+            <div className="intake-grid">
+              <F label="KG MID (executive)" hint="Google Knowledge Graph ID for this person, if known.">
+                <I value={s.kgMid} onChange={(e) => setSpoke(i, 'kgMid', e.target.value)} placeholder="kg:/m/…" />
+              </F>
+              <F label="Wikidata ID (executive)">
+                <I value={s.wikidataId} onChange={(e) => setSpoke(i, 'wikidataId', e.target.value)} placeholder="Q…" />
+              </F>
+              <F label="Department">
+                <I value={s.department} onChange={(e) => setSpoke(i, 'department', e.target.value)} placeholder="Engineering, Research…" />
+              </F>
+              <F label="Subject-matter expert">
+                <label className="checkbox-item">
+                  <input type="checkbox" checked={!!s.isSme} onChange={(e) => setSpoke(i, 'isSme', e.target.checked)} />
+                  <span>SME — prioritize for expert-consensus pitches</span>
+                </label>
+              </F>
+            </div>
           </div>
         ))}
         <button
           type="button"
           className="btn btn-b"
-          onClick={() => set('spokes', [...value.spokes, { name: '', title: '', bio: '', credentials: '', expertise: '', linkedin: '', twitter: '', quotes: '' }])}
+          onClick={() => set('spokes', [...value.spokes, { name: '', title: '', bio: '', credentials: '', expertise: '', linkedin: '', twitter: '', quotes: '', kgMid: '', wikidataId: '', isSme: false, department: '' }])}
         >
           + Add spokesperson
         </button>
@@ -416,8 +467,14 @@ export default function IntakeForm({ value, onChange }: Props) {
           <F label="GSC credentials file" hint="Path to service-account JSON. Tracks Brand Search Volume + referral paths.">
             <I value={value.gscFile} onChange={(e) => set('gscFile', e.target.value)} placeholder="/path/to/gsc-service-account.json" />
           </F>
+          <F label="GSC property" hint="Search Console property, e.g. sc-domain:example.com. Enables real branded-query volume.">
+            <I value={value.gscProperty} onChange={(e) => set('gscProperty', e.target.value)} placeholder="sc-domain:example.com" />
+          </F>
           <F label="GA4 property ID" hint="Multi-touch attribution + branded-query pipeline conversion.">
             <I value={value.ga4Id} onChange={(e) => set('ga4Id', e.target.value)} placeholder="384756129" />
+          </F>
+          <F label="Bot crawl / log API" hint="Log-file or bot-crawl endpoint. Monitors spider re-crawls after citation spikes.">
+            <I value={value.botCrawlApi} onChange={(e) => set('botCrawlApi', e.target.value)} placeholder="https://…/crawl-logs or provider name" />
           </F>
           <F label="Ahrefs API key" hint="Link graph, anchor distribution, link velocity.">
             <I type="password" value={value.ahrefs} onChange={(e) => set('ahrefs', e.target.value)} placeholder="Stored in brand config; engine also reads .env" />
@@ -434,6 +491,20 @@ export default function IntakeForm({ value, onChange }: Props) {
         </div>
         <div className="field-hint" style={{ marginTop: '0.6rem' }}>
           Provider integrations also honor <code>.env</code> (AHREFS_API_KEY, MAJESTIC_API_KEY, MOZ_ACCESS_KEY / MOZ_SECRET_KEY, GSC_CREDENTIALS_FILE, GA4_PROPERTY_ID). Keys entered here are saved to the brand's credential vault via the API.
+        </div>
+        <div className="checkbox-group">
+          <div className="checkbox-title">Link-graph providers to use for this brand (anchor distribution, velocity)</div>
+          <div className="checkbox-list">
+            {LINK_PROVIDER_OPTIONS.map((o) => (
+              <label key={o.v} className="checkbox-item">
+                <input type="checkbox" checked={value.linkProviders.includes(o.v)} onChange={() => {
+                  const arr = value.linkProviders;
+                  set('linkProviders', arr.includes(o.v) ? arr.filter((x) => x !== o.v) : [...arr, o.v]);
+                }} />
+                <span>{o.l}</span>
+              </label>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -453,6 +524,20 @@ export default function IntakeForm({ value, onChange }: Props) {
             </div>
           </div>
         ))}
+        <div className="checkbox-group">
+          <div className="checkbox-title">Transcript-first listening streams (Whisper-vector monitor inputs)</div>
+          <div className="checkbox-list">
+            {LISTENING_OPTIONS.map((o) => (
+              <label key={o.v} className="checkbox-item">
+                <input type="checkbox" checked={value.listeningStreams.includes(o.v)} onChange={() => {
+                  const arr = value.listeningStreams;
+                  set('listeningStreams', arr.includes(o.v) ? arr.filter((x) => x !== o.v) : [...arr, o.v]);
+                }} />
+                <span>{o.l}</span>
+              </label>
+            ))}
+          </div>
+        </div>
         <div className="checkbox-group">
           <div className="checkbox-title">AI search engines to monitor (RAG pipeline on engine outputs)</div>
           <div className="checkbox-list">
@@ -478,6 +563,9 @@ export default function IntakeForm({ value, onChange }: Props) {
               <option value="enterprise_safe">Fortune 50 Enterprise Safety — 100% white-hat Digital PR, zero paid placements</option>
               <option value="aggressive">Venture-Backed Aggressive — tactical expired-domain redirects, high-risk sponsorships</option>
             </select>
+          </F>
+          <F label={`Risk score: ${value.riskScore} / 100`} hint="0 = Fortune-50 safe (white-hat only) · 100 = venture aggressive. Gates expired-domain + sponsorship tactics.">
+            <input type="range" min={0} max={100} value={value.riskScore} onChange={(e) => set('riskScore', Number(e.target.value))} style={{ width: '100%' }} />
           </F>
           <F label="Max outreach per day">
             <I type="number" value={value.maxOutreach} onChange={(e) => set('maxOutreach', Number(e.target.value) || 0)} />

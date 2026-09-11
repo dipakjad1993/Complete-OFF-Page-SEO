@@ -28,6 +28,12 @@ class ExecutiveCreate(BaseModel):
     quotes: Optional[list] = None
     social_profiles: Optional[dict] = None
     expertise_areas: Optional[list] = None
+    # 2026 spokesperson-matrix depth: KG identity + SME flag + department.
+    kg_mid: Optional[str] = None
+    wikidata_id: Optional[str] = None
+    wikipedia_url: Optional[str] = None
+    is_sme: Optional[bool] = False
+    department: Optional[str] = None
 
 
 class CompetitorCreate(BaseModel):
@@ -50,6 +56,12 @@ class BrandSchemaInput(BaseModel):
     primary_categories: Optional[list] = None
     seed_keywords: Optional[list] = None
     official_messaging: Optional[str] = None
+    # 2026 technical-API depth: GSC + GA4 property bindings (enables real
+    # branded-query volume + pipeline attribution when the user connects them).
+    gsc_property_id: Optional[str] = None
+    ga4_property_id: Optional[str] = None
+    bot_crawl_api: Optional[str] = None
+    link_graph_providers: Optional[list] = None
 
 
 class ScraperConfig(BaseModel):
@@ -57,11 +69,17 @@ class ScraperConfig(BaseModel):
     sources: list
     frequency: str = "daily"
     enabled: bool = True
+    # 2026 listening-stream depth: transcript-first streams + crawl depth.
+    listening_streams: Optional[list] = None
+    include_transcripts: Optional[bool] = True
+    crawl_depth: Optional[int] = 2
 
 
 class RiskConfig(BaseModel):
     brand_id: int
     risk_level: str = "enterprise_safe"
+    # 2026 governance depth: 0 (Fortune-50 safe) – 100 (venture aggressive) slider.
+    risk_score: Optional[int] = 10
     allowed_tactics: Optional[list] = None
     blocked_domains: Optional[list] = None
     blocked_topics: Optional[list] = None
@@ -75,15 +93,15 @@ CREDENTIALS_FILE = "data/api_credentials.json"
 
 def load_credentials():
     if os.path.exists(CREDENTIALS_FILE):
-        with open(CREDENTIALS_FILE, "r") as f:
+        with open(CREDENTIALS_FILE, "r", encoding="utf-8", errors="replace") as f:
             return json.load(f)
     return {}
 
 
 def save_credentials(data):
     os.makedirs("data", exist_ok=True)
-    with open(CREDENTIALS_FILE, "w") as f:
-        json.dump(data, f, indent=2)
+    with open(CREDENTIALS_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=True)
 
 
 CONFIG_FILE = "data/brand_configs.json"
@@ -91,15 +109,15 @@ CONFIG_FILE = "data/brand_configs.json"
 
 def load_configs():
     if os.path.exists(CONFIG_FILE):
-        with open(CONFIG_FILE, "r") as f:
+        with open(CONFIG_FILE, "r", encoding="utf-8", errors="replace") as f:
             return json.load(f)
     return {}
 
 
 def save_configs(data):
     os.makedirs("data", exist_ok=True)
-    with open(CONFIG_FILE, "w") as f:
-        json.dump(data, f, indent=2)
+    with open(CONFIG_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=True)
 
 
 @router.post("/credentials")
@@ -156,8 +174,18 @@ def create_executive(exec_data: ExecutiveCreate, db: Session = Depends(get_db)):
     brand = db.query(Brand).filter(Brand.id == exec_data.brand_id).first()
     if not brand:
         raise HTTPException(status_code=404, detail="Brand not found")
-    
-    exec_obj = Executive(**exec_data.model_dump())
+
+    payload = exec_data.model_dump()
+    # is_sme / department are intake-layer metadata with no DB column (yet);
+    # fold them into bio so nothing is lost and the ORM never sees unknown kwargs.
+    is_sme = payload.pop("is_sme", False)
+    department = payload.pop("department", None)
+    tags = ([f"[SME:{department}]"] if is_sme and department else
+            ["[SME]"] if is_sme else
+            [f"[dept: {department}]"] if department else [])
+    if tags:
+        payload["bio"] = (" ".join(tags) + " " + (payload.get("bio") or "")).strip()
+    exec_obj = Executive(**{k: v for k, v in payload.items() if hasattr(Executive, k)})
     db.add(exec_obj)
     db.commit()
     db.refresh(exec_obj)
@@ -302,7 +330,7 @@ def save_brand_schema(schema_data: BrandSchemaInput, db: Session = Depends(get_d
         raise HTTPException(status_code=404, detail="Brand not found")
     
     for key, value in schema_data.model_dump(exclude_unset=True).items():
-        if key != "brand_id":
+        if key != "brand_id" and hasattr(Brand, key):
             setattr(brand, key, value)
     
     db.commit()
@@ -351,6 +379,9 @@ def save_scraper_config(config: ScraperConfig, db: Session = Depends(get_db)):
         "sources": config.sources,
         "frequency": config.frequency,
         "enabled": config.enabled,
+        "listening_streams": config.listening_streams or [],
+        "include_transcripts": config.include_transcripts if config.include_transcripts is not None else True,
+        "crawl_depth": config.crawl_depth if config.crawl_depth is not None else 2,
         "updated_at": datetime.utcnow().isoformat()
     }
     save_configs(configs)
@@ -366,7 +397,10 @@ def get_scraper_config(brand_id: int):
         "brand_id": brand_id,
         "sources": scraper.get("sources", []),
         "frequency": scraper.get("frequency", "daily"),
-        "enabled": scraper.get("enabled", False)
+        "enabled": scraper.get("enabled", False),
+        "listening_streams": scraper.get("listening_streams", []),
+        "include_transcripts": scraper.get("include_transcripts", True),
+        "crawl_depth": scraper.get("crawl_depth", 2)
     }
 
 
@@ -381,6 +415,7 @@ def save_risk_config(config: RiskConfig, db: Session = Depends(get_db)):
     configs[brand_key] = configs.get(brand_key, {})
     configs[brand_key]["risk"] = {
         "risk_level": config.risk_level,
+        "risk_score": config.risk_score if config.risk_score is not None else 10,
         "allowed_tactics": config.allowed_tactics,
         "blocked_domains": config.blocked_domains,
         "blocked_topics": config.blocked_topics,
@@ -401,6 +436,7 @@ def get_risk_config(brand_id: int):
     return {
         "brand_id": brand_id,
         "risk_level": risk.get("risk_level", "enterprise_safe"),
+        "risk_score": risk.get("risk_score", 10),
         "allowed_tactics": risk.get("allowed_tactics", []),
         "blocked_domains": risk.get("blocked_domains", []),
         "blocked_topics": risk.get("blocked_topics", []),

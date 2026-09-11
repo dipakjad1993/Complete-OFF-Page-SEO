@@ -404,6 +404,10 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
             )
 
     # DuckDuckGo HTML fallback (free, no key) — last resort, markup-fragile.
+    # NOTE 2026-09: DDG markup changed repeatedly and this leg now yields 0
+    # blocks on most queries (see server logs). Kept only as a best-effort
+    # probe with an updated multi-selector parser; a zero-yield is reported
+    # as honest UnavailableData — never as an empty "verified success".
     try:
         url = f"https://html.duckduckgo.com/html/?q={quote_plus(query)}&ia=web"
         async with httpx.AsyncClient(timeout=8, headers=_pick_headers(), follow_redirects=True) as c:
@@ -412,15 +416,22 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
             page = r.text
 
         results = []
-        # Primary selector (current DDG markup) + legacy fallback selector.
+        # Updated multi-selector parser: legacy result__body, current
+        # result/organic wrappers, plus generic DDG result-link fallback.
         blocks = re.findall(r'<div class="result[^"]*"[^>]*>(.*?)</div>\s*</div>', page, re.DOTALL)
         if not blocks:
             blocks = re.findall(r'<div[^>]*class="[^"]*result__body[^"]*"[^>]*>(.*?)</div>', page, re.DOTALL)
+        if not blocks:
+            blocks = re.findall(r'<div[^>]*class="[^"]*(?:organic|web-result)[^"]*"[^>]*>(.*?)</div>', page, re.DOTALL)
         for block in blocks:
             m_title = re.search(r'<a[^>]*class="result__a"[^>]*href="([^"]+)"[^>]*>(.*?)</a>', block, re.DOTALL)
             if not m_title:
+                m_title = re.search(r'<a[^>]*class="[^"]*result__a[^"]*"[^>]*href="([^"]+)"[^>]*>(.*?)</a>', block, re.DOTALL)
+            if not m_title:
                 m_title = re.search(r'<a[^>]*href="([^"]+)"[^>]*>(.*?)</a>', block, re.DOTALL)
             m_snippet = re.search(r'<a[^>]*class="result__snippet"[^>]*>(.*?)</a>', block, re.DOTALL)
+            if not m_snippet:
+                m_snippet = re.search(r'<(?:div|span|td)[^>]*class="[^"]*snippet[^"]*"[^>]*>(.*?)</(?:div|span|td)>', block, re.DOTALL)
             if not m_title:
                 continue
             href = m_title.group(1)
@@ -441,6 +452,15 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
         cleaned = _clean_results(results, query, brand_name, min_score) if require_relevance else results
         if not results:
             logger.warning("DDG HTML returned 0 blocks for %r (markup may have changed)", query[:80])
+            return UnavailableData(
+                reason="DuckDuckGo HTML fallback returned no parseable results (markup changed or bot-gated). Bing RSS + ddgs library legs already attempted.",
+                requires="SERPAPI_KEY (or working DuckDuckGo/Bing access)",
+            )
+        if require_relevance and not cleaned:
+            return UnavailableData(
+                reason=f"DDG HTML returned {len(results)} raw rows but none passed the relevance gate for this brand.",
+                requires="A more specific brand query, or SERPAPI_KEY for Google organic",
+            )
         return VerifiedData(
             value=cleaned,
             source="duckduckgo", method="ddg_html_scrape+relevance_filter",
