@@ -8,7 +8,7 @@ A full-stack, 35-module off-page SEO intelligence engine that measures and impro
 
 - **Frontend:** React + Vite (TypeScript) — step-by-step intake → live progress → full client-ready report
 - **Backend:** Python / FastAPI + SQLAlchemy + SQLite (WAL mode, non-blocking background jobs)
-- **Data layer:** live web search (SerpAPI when keyed, else Bing RSS → `ddgs` library → DuckDuckGo HTML with rotating UAs; zero-yield legs report honest `unavailable`, never empty success), news (Bing News RSS, Google News RSS), Wikipedia/Wikidata (REST), GitHub Search API, Hacker News API, Stack Exchange API, iTunes Search API, RDAP domain registration — all free, no API key required
+- **Data layer:** live web search (SerpAPI when keyed, else Bing RSS → `ddgs` library with rotating UAs; the dead DuckDuckGo-HTML leg was removed in v2026.2 — exhausted chains report honest `unavailable`, never empty success), news (Bing News RSS, Google News RSS), Wikipedia/Wikidata (REST), GitHub Search API, Hacker News API, Stack Exchange API, iTunes Search API, RDAP domain registration — all free, no API key required
 - **Optional paid integrations:** NewsAPI, SerpAPI, Ahrefs, Moz, Majestic — when configured, deeper data is used; when not configured, modules report an honest **"No data"** state instead of inventing numbers
 - **Exports & ops:** background `run-async` + progress polling, CSV/JSON export, **enterprise PDF report** (cover + KPI cards + charts + all 5 outputs + full 35-module appendix), provider-status, optional APScheduler re-runs
 

@@ -8,7 +8,13 @@ are ever produced. If every search backend fails, an UnavailableData is returned
 Backends (in priority order):
 1. SerpAPI (Google organic) - when SERPAPI_KEY is set (paid tier).
 2. Bing RSS search - free tier, no key required.
-3. DuckDuckGo HTML scraping - free fallback, no key required.
+3. DuckDuckGo via the `ddgs` library - free fallback, no key required.
+
+REMOVED 2026-09: the DuckDuckGo HTML-scraping leg was deleted. DDG's markup
+changed and the leg returned 0 parseable blocks on every query (dozens of
+"0 blocks (markup may have changed)" warnings in production logs) — dead code
+that only added latency. Exhausting Bing RSS + ddgs now returns honest
+UnavailableData instead of pretending a third leg exists.
 """
 
 import re
@@ -403,76 +409,14 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
                 metadata={"query": query, "raw_count": len(ddgs_results), "kept": len(cleaned)},
             )
 
-    # DuckDuckGo HTML fallback (free, no key) — last resort, markup-fragile.
-    # NOTE 2026-09: DDG markup changed repeatedly and this leg now yields 0
-    # blocks on most queries (see server logs). Kept only as a best-effort
-    # probe with an updated multi-selector parser; a zero-yield is reported
-    # as honest UnavailableData — never as an empty "verified success".
-    try:
-        url = f"https://html.duckduckgo.com/html/?q={quote_plus(query)}&ia=web"
-        async with httpx.AsyncClient(timeout=8, headers=_pick_headers(), follow_redirects=True) as c:
-            r = await c.get(url)
-            r.raise_for_status()
-            page = r.text
-
-        results = []
-        # Updated multi-selector parser: legacy result__body, current
-        # result/organic wrappers, plus generic DDG result-link fallback.
-        blocks = re.findall(r'<div class="result[^"]*"[^>]*>(.*?)</div>\s*</div>', page, re.DOTALL)
-        if not blocks:
-            blocks = re.findall(r'<div[^>]*class="[^"]*result__body[^"]*"[^>]*>(.*?)</div>', page, re.DOTALL)
-        if not blocks:
-            blocks = re.findall(r'<div[^>]*class="[^"]*(?:organic|web-result)[^"]*"[^>]*>(.*?)</div>', page, re.DOTALL)
-        for block in blocks:
-            m_title = re.search(r'<a[^>]*class="result__a"[^>]*href="([^"]+)"[^>]*>(.*?)</a>', block, re.DOTALL)
-            if not m_title:
-                m_title = re.search(r'<a[^>]*class="[^"]*result__a[^"]*"[^>]*href="([^"]+)"[^>]*>(.*?)</a>', block, re.DOTALL)
-            if not m_title:
-                m_title = re.search(r'<a[^>]*href="([^"]+)"[^>]*>(.*?)</a>', block, re.DOTALL)
-            m_snippet = re.search(r'<a[^>]*class="result__snippet"[^>]*>(.*?)</a>', block, re.DOTALL)
-            if not m_snippet:
-                m_snippet = re.search(r'<(?:div|span|td)[^>]*class="[^"]*snippet[^"]*"[^>]*>(.*?)</(?:div|span|td)>', block, re.DOTALL)
-            if not m_title:
-                continue
-            href = m_title.group(1)
-            # DuckDuckGo wraps links in /l/?uddg=... or /r/
-            inner = re.search(r"[?&](?:uddg|u)=([^&]+)", href)
-            if inner:
-                href = inner.group(1)
-            import urllib.parse
-            href = urllib.parse.unquote(href)
-            if href.startswith("//"):
-                href = "https:" + href
-            if not href.startswith("http"):
-                continue
-            title = _strip_html(m_title.group(2))
-            snippet = _strip_html(m_snippet.group(1)) if m_snippet else ""
-            results.append({"title": title, "url": href, "snippet": snippet})
-
-        cleaned = _clean_results(results, query, brand_name, min_score) if require_relevance else results
-        if not results:
-            logger.warning("DDG HTML returned 0 blocks for %r (markup may have changed)", query[:80])
-            return UnavailableData(
-                reason="DuckDuckGo HTML fallback returned no parseable results (markup changed or bot-gated). Bing RSS + ddgs library legs already attempted.",
-                requires="SERPAPI_KEY (or working DuckDuckGo/Bing access)",
-            )
-        if require_relevance and not cleaned:
-            return UnavailableData(
-                reason=f"DDG HTML returned {len(results)} raw rows but none passed the relevance gate for this brand.",
-                requires="A more specific brand query, or SERPAPI_KEY for Google organic",
-            )
-        return VerifiedData(
-            value=cleaned,
-            source="duckduckgo", method="ddg_html_scrape+relevance_filter",
-            retrieved_at=utcnow_iso(), confidence=1.0, verified=True,
-            metadata={"query": query, "raw_count": len(results), "kept": len(cleaned)},
-        )
-    except Exception as e:  # noqa: BLE001
-        logger.warning("Search chain failed for %r: %s", query[:80], str(e)[:200])
-        return UnavailableData(
-            reason=f"Search failed after Bing RSS + ddgs + DDG HTML: {e}",
-            requires="SERPAPI_KEY (or working DuckDuckGo/Bing access)",
-        )
+    # DuckDuckGo HTML leg REMOVED 2026-09 (dead: 0 parseable blocks on every
+    # query after DDG markup changes). Bing RSS + ddgs library exhausted here —
+    # report honest UnavailableData instead of an empty "verified success".
+    logger.warning("Search chain exhausted for %r (Bing RSS + ddgs yielded nothing usable)", query[:80])
+    return UnavailableData(
+        reason="Search failed after Bing RSS + ddgs library (DDG HTML leg removed as dead).",
+        requires="SERPAPI_KEY (or working DuckDuckGo/Bing access)",
+    )
 
 
 async def verify_url(url: str, expected_terms: list[str]) -> Any:
