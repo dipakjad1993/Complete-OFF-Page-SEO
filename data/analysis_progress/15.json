@@ -1,11 +1,11 @@
 {
   "status": "completed",
-  "started_at": "2026-08-19T09:19:19.323120+00:00",
+  "started_at": "2026-09-14T07:18:00.245594+00:00",
   "module_index": 35,
   "total_modules": 35,
   "current_module": "",
   "current_module_label": "",
-  "elapsed_secs": 21.3,
+  "elapsed_secs": 42.3,
   "eta_secs": 0,
   "modules": {
     "llm_perception": {
@@ -15,7 +15,7 @@
     },
     "unlinked_citations": {
       "status": "done",
-      "runtime_secs": 5.9,
+      "runtime_secs": 23.5,
       "label": "Unlinked Citation & Co-Occurrence Converter"
     },
     "consensus": {
@@ -30,42 +30,42 @@
     },
     "vector_mapping": {
       "status": "done",
-      "runtime_secs": 6.5,
+      "runtime_secs": 3.2,
       "label": "Vector Co-Location & Embedding Mapping"
     },
     "pr_hooks": {
       "status": "done",
-      "runtime_secs": 8.7,
+      "runtime_secs": 5.9,
       "label": "Predictive Digital PR & Trend Hook Engine"
     },
     "link_poisoning": {
       "status": "done",
-      "runtime_secs": 9.2,
+      "runtime_secs": 0.0,
       "label": "Algorithmic Link Poisoning & Anomaly Radar"
     },
     "podcast_video": {
       "status": "done",
-      "runtime_secs": 3.1,
+      "runtime_secs": 1.7,
       "label": "Podcast & Video Citation Finder"
     },
     "aeo": {
       "status": "done",
-      "runtime_secs": 10.9,
+      "runtime_secs": 6.2,
       "label": "Agentic Commerce Protocol Placement (GEO/AEO)"
     },
     "pbn_detector": {
       "status": "done",
-      "runtime_secs": 7.9,
+      "runtime_secs": 1.9,
       "label": "Synthetic Network & Footprint De-Anonymizer"
     },
     "revenue_sim": {
       "status": "done",
-      "runtime_secs": 4.8,
+      "runtime_secs": 0.0,
       "label": "Share-of-Search Revenue Simulator"
     },
     "dead_equity": {
       "status": "done",
-      "runtime_secs": 8.1,
+      "runtime_secs": 5.6,
       "label": "Edge-Redirect & Dead-Equity Salvage"
     },
     "negative_seo": {
@@ -75,7 +75,7 @@
     },
     "github_citations": {
       "status": "done",
-      "runtime_secs": 4.7,
+      "runtime_secs": 1.6,
       "label": "GitHub Citation Harvester"
     },
     "transcription": {
@@ -85,7 +85,7 @@
     },
     "kg_arbitrage": {
       "status": "done",
-      "runtime_secs": 4.0,
+      "runtime_secs": 4.3,
       "label": "Knowledge Graph & Wikidata Triple Arbitrage"
     },
     "data_pr": {
@@ -95,7 +95,7 @@
     },
     "simulation": {
       "status": "done",
-      "runtime_secs": 2.6,
+      "runtime_secs": 0.0,
       "label": "Multi-Agent Off-Page Simulation Sandbox"
     },
     "satellite": {
@@ -110,12 +110,12 @@
     },
     "visual_audit": {
       "status": "done",
-      "runtime_secs": 0.5,
+      "runtime_secs": 1.0,
       "label": "Multi-Modal Schema & Visual Graph Alignment"
     },
     "apn_proxy": {
       "status": "done",
-      "runtime_secs": 4.9,
+      "runtime_secs": 4.2,
       "label": "Agentic Protocol Negotiation (APN) Proxy"
     },
     "graph_decay": {
@@ -125,32 +125,32 @@
     },
     "c2pa": {
       "status": "done",
-      "runtime_secs": 1.8,
+      "runtime_secs": 1.1,
       "label": "Cryptographic Entity-Origin Proof Signing"
     },
     "compliance_guard": {
       "status": "done",
-      "runtime_secs": 4.2,
+      "runtime_secs": 5.6,
       "label": "Legal / SEC Disclosure Risk Profiling"
     },
     "geo_crawl": {
       "status": "done",
-      "runtime_secs": 1.3,
+      "runtime_secs": 14.2,
       "label": "Geo-IP Citation Localization"
     },
     "zero_party": {
       "status": "done",
-      "runtime_secs": 4.6,
+      "runtime_secs": 5.7,
       "label": "Zero-Party Data Exchange"
     },
     "passage_scoring": {
       "status": "done",
-      "runtime_secs": 0.0,
+      "runtime_secs": 0.9,
       "label": "Passage-Level BERT Evaluator"
     },
     "reddit_consensus": {
       "status": "done",
-      "runtime_secs": 0.9,
+      "runtime_secs": 0.8,
       "label": "Reddit & Forum Consensus Graph"
     },
     "competitor_bert": {
@@ -160,7 +160,7 @@
     },
     "schema_auditor": {
       "status": "done",
-      "runtime_secs": 2.1,
+      "runtime_secs": 1.6,
       "label": "Agentic API & Schema Protocol Auditor"
     },
     "anchor_entropy": {
@@ -170,20 +170,20 @@
     },
     "crawl_priority": {
       "status": "done",
-      "runtime_secs": 1.1,
+      "runtime_secs": 1.2,
       "label": "AI Crawler Re-Indexation Pinger"
     },
     "ftc_compliance": {
       "status": "done",
-      "runtime_secs": 2.3,
+      "runtime_secs": 2.7,
       "label": "FTC & Sponsored-Mention Penalty Shield"
     },
     "hreflang": {
       "status": "done",
-      "runtime_secs": 3.6,
+      "runtime_secs": 4.0,
       "label": "Cross-Border Hreflang Equity Balancer"
     }
   },
-  "updated_at": "2026-08-19T09:19:40.580146+00:00",
-  "avg_per_module_secs": 0.6
+  "updated_at": "2026-09-14T07:18:42.526093+00:00",
+  "avg_per_module_secs": 1.2
 }

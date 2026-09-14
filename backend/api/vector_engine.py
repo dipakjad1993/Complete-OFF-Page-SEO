@@ -3,8 +3,11 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from pydantic import BaseModel
 from datetime import datetime
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
+
+# NOTE (v2026.3): numpy/sklearn intentionally NOT imported here — they live in
+# requirements-ml.txt (optional 2GB stack). This router only reads stored
+# VectorDistance rows; live similarity math uses backend/services/vector_explain.py
+# (sentence-transformers when installed, pure-Python TF-IDF fallback otherwise).
 
 from backend.core.database import get_db
 from backend.models.models import Brand, VectorDistance, Competitor

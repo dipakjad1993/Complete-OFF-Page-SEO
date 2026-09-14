@@ -1,0 +1,27 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements-base.txt
+      - run: pip install pytest
+      - name: Init database (SQLite, WAL mode)
+        run: python scripts/init_db.py
+      - name: Import check
+        run: |
+          python -c "import main; from backend.modules.registry import get_registry; assert len(get_registry()) == 35; print('import OK: 35 modules')"
+      - name: Anti-fabrication static audit
+        run: python scripts/anti_fabrication_check.py
+      - name: Lean-import audit (no ML-stack hard imports in base install)
+        run: python scripts/lean_import_check.py
+      - name: Python 3.11 syntax compat (CI runs 3.11; dev may run newer)
+        run: python scripts/py311_compat_scan.py
+      - name: Python 3.11 f-string gate (tokenizer-level PEP-701 check)
+        run: python scripts/py311_fstring_scan.py
+      - name: "Unit tests (tests/ only; manual scripts excluded)"
+        run: pytest -q tests/

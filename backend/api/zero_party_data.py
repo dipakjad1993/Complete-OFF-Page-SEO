@@ -108,7 +108,9 @@ def generate_syndication_pitch(brand_id: int, db: Session = Depends(get_db)):
     assets = db.query(ZeroPartyDataAsset).filter(
         ZeroPartyDataAsset.brand_id == brand_id
     ).all()
-    
+
+    widget_lines = [f"- {a.asset_name} ({a.asset_type})" for a in assets]
+
     pitch = {
         "brand": brand.name,
         "subject": f"Exclusive Data: {brand.name} Industry Insights for Your Coverage",
@@ -117,7 +119,7 @@ def generate_syndication_pitch(brand_id: int, db: Session = Depends(get_db)):
 I saw your recent piece on industry trends. We have some exclusive first-party data from {brand.name} that could add depth to your reporting.
 
 Available data widgets:
-{chr(10).join(f"- {a.asset_name} ({a.asset_type})" for a in assets)}
+{chr(10).join(widget_lines)}
 
 These are interactive, embeddable widgets with real-time data that your readers can explore directly in the article.
 

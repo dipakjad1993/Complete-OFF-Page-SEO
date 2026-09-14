@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   BarChart3, Brain, Network, PenTool, Link2, Mic, Server, ShieldAlert,
   ShieldCheck, Fingerprint, Bug, Database, Globe, FileCode2, Handshake, Gauge, Hash,
@@ -197,6 +197,61 @@ function PdfButton({ brandId, brandName }: { brandId?: number | null; brandName?
   );
 }
 
+function RunDelta({ brandId }: { brandId?: number | null }) {
+  const [delta, setDelta] = useState<any>(null);
+  useEffect(() => {
+    if (!brandId) return;
+    let live = true;
+    fetch(`/api/v1/multi-brand/diff?brand_id=${brandId}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (live) setDelta(d); })
+      .catch(() => {});
+    return () => { live = false; };
+  }, [brandId]);
+  if (!brandId || !delta || delta.status !== 'ok') return null;
+  const scores = Object.entries((delta.score_deltas ?? {}) as Record<string, any>);
+  const mods = Object.entries((delta.status_deltas ?? {}) as Record<string, any>);
+  if (delta.note && scores.length === 0 && mods.length === 0) {
+    return (
+      <div className="deliverable-block">
+        <h3 className="deliverable-title"><Activity size={16} /> Run-over-run delta</h3>
+        <p className="deliverable-note" style={{ marginBottom: 0 }}>First recorded run — deltas appear from the second run onward (snapshots auto-saved per run).</p>
+      </div>
+    );
+  }
+  return (
+    <div className="deliverable-block">
+      <h3 className="deliverable-title"><Activity size={16} /> Run-over-run delta{delta.previous_snapshot ? ` · vs ${String(delta.previous_snapshot).slice(0, 19).replace('T', ' ')}` : ''}</h3>
+      {scores.length > 0 && (
+        <div className="table-wrap" style={{ marginTop: '0.5rem' }}>
+          <table>
+            <thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Δ</th></tr></thead>
+            <tbody>
+              {scores.map(([k, v]: any) => (
+                <tr key={k}>
+                  <td style={{ fontWeight: 600 }}>{k.replace(/_/g, ' ')}</td>
+                  <td>{fmt(v.before)}</td><td>{fmt(v.after)}</td>
+                  <td style={{ fontWeight: 700, color: Number(v.delta) < 0 ? 'var(--danger)' : 'var(--success)' }}>
+                    {Number(v.delta) > 0 ? '+' : ''}{fmt(v.delta)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {mods.length > 0 && (
+        <p className="deliverable-note" style={{ marginBottom: 0 }}>
+          Module status changes: {mods.slice(0, 8).map(([k, v]: any) => `${k} (${v.before}→${v.after})`).join(' · ')}{mods.length > 8 ? ` · +${mods.length - 8} more` : ''}
+        </p>
+      )}
+      {scores.length === 0 && mods.length === 0 && (
+        <p className="deliverable-note" style={{ marginBottom: 0 }}>No changes vs previous run — scores and module mix are stable.</p>
+      )}
+    </div>
+  );
+}
+
 export default function Deliverables({ summary, sections, brandId, brandName, brandDomain }: Props) {
   const llm = sections.llm_perception ?? {};
   const cons = sections.consensus ?? {};
@@ -278,6 +333,9 @@ export default function Deliverables({ summary, sections, brandId, brandName, br
   }, [sections]);
 
   const overall = (summary as any)?.overall_score ?? null;
+  const entityAuth = (summary as any)?.entity_authority ?? overall;
+  const entityGrade = (summary as any)?.entity_grade ?? '';
+  const proxySov = (summary as any)?.proxy_sov_free?.proxy_sov ?? null;
   const aeoScore = (sections as any)?.aeo?.aeo_score ?? (summary as any)?.aeo_score ?? null;
 
   return (
@@ -298,10 +356,14 @@ export default function Deliverables({ summary, sections, brandId, brandName, br
           <PdfButton brandId={brandId} brandName={brandName} />
         </div>
         <div className="summary-grid" style={{ marginTop: '1.1rem' }}>
-          <KpiCard label="Overall authority" value={overall !== null && overall !== undefined ? String(overall) : '—'} sub={`${health.ok} of ${health.total} modules verified`} />
+          <KpiCard label="Entity Authority (replaces DA)" value={entityAuth !== null && entityAuth !== undefined ? `${entityAuth}${entityGrade ? ` · ${entityGrade}` : ''}` : '—'} sub={`${health.ok} of ${health.total} modules verified · real-data-only`} />
           <KpiCard label="Modules verified" value={`${health.ok}/${health.total}`} sub={`${health.un} no-data · ${health.er} error`} tone={health.er > 0 ? 'var(--danger)' : 'var(--success)'} />
+          <KpiCard label="Proxy SoV (free)" value={proxySov !== null ? `${Math.round(Number(proxySov) * 100)}%` : '—'} sub="10-prompt SERP proxy · keyed LLM SoV when keyed" />
           <KpiCard label="AEO / GEO readiness" value={aeoScore !== null && aeoScore !== undefined ? String(aeoScore) : '—'} sub="Machine-readable entity readiness" />
           <KpiCard label="Open risk flags" value={String(openRisks)} sub="FTC issues + PBN suspicious" tone={openRisks > 0 ? 'var(--warning)' : 'var(--success)'} />
+        </div>
+        <div style={{ marginTop: '1rem' }}>
+          <RunDelta brandId={brandId} />
         </div>
         <div className="deliverable-grid2" style={{ marginTop: '1rem' }}>
           <div className="deliverable-block">

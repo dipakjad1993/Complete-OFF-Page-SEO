@@ -30,5 +30,11 @@ temp/
 offpage_seo.db
 offpage_seo.db-shm
 offpage_seo.db-wal
+search_cache.db
 data/analysis_progress/
 data/analysis_results/
+data/prompt_runs/
+data/run_snapshots/
+data/credentials.vault
+data/webhooks.json
+data/audit_log.jsonl

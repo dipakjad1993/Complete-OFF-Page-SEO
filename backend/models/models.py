@@ -564,3 +564,60 @@ class ZeroPartyDataAsset(Base):
     target_publication = Column(String(255))
     is_active = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class PromptRun(Base):
+    """Daily prompt-tracking runs (module 37): citation rate + SoV + sentiment."""
+
+    __tablename__ = "prompt_runs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    brand_id = Column(Integer, ForeignKey("brands.id"), nullable=False)
+    mode = Column(String(50))  # llm_keyed | proxy_serp
+    prompts_tested = Column(Integer, default=0)
+    prompts_cited = Column(Integer, default=0)
+    citation_rate = Column(Float)
+    sentiment = Column(JSON)
+    rows = Column(JSON)
+    run_at = Column(DateTime, default=datetime.utcnow)
+
+
+class BotAudit(Base):
+    """AI bot governance snapshots (module 36)."""
+
+    __tablename__ = "bot_audits"
+
+    id = Column(Integer, primary_key=True, index=True)
+    brand_id = Column(Integer, ForeignKey("brands.id"), nullable=False)
+    governance_score = Column(Float)
+    llms_present = Column(Boolean, default=False)
+    robots_matrix = Column(JSON)
+    probes = Column(JSON)
+    audited_at = Column(DateTime, default=datetime.utcnow)
+
+
+class AuthorEntity(Base):
+    """E-E-A-T author entities (module 41)."""
+
+    __tablename__ = "author_entities"
+
+    id = Column(Integer, primary_key=True, index=True)
+    brand_id = Column(Integer, ForeignKey("brands.id"), nullable=False)
+    name = Column(String(255), nullable=False)
+    authority_score = Column(Float)
+    credentials = Column(JSON)
+    publications = Column(JSON)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
+class ImageBacklink(Base):
+    """Image/logo usage without attribution (module 40)."""
+
+    __tablename__ = "image_backlinks"
+
+    id = Column(Integer, primary_key=True, index=True)
+    brand_id = Column(Integer, ForeignKey("brands.id"), nullable=False)
+    page_url = Column(String(1000))
+    image_url = Column(String(1000))
+    has_attribution = Column(Boolean, default=False)
+    detected_at = Column(DateTime, default=datetime.utcnow)

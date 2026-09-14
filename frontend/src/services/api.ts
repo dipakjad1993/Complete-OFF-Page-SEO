@@ -126,7 +126,52 @@ export const intakeAPI = {
 };
 
 export const scraperAPI = {
-  scrape: (url: string) => api.post('/scraper/scrape-website', { url }, { timeout: 120000 }),
+  scrape: (url: string, lean = false) =>
+    api.post('/scraper/scrape-website', { url, lean }, { timeout: 120000 }),
+};
+
+export const botGovernanceAPI = {
+  audit: (brandId: number) => api.get(`/bot-governance/audit/${brandId}`),
+  parseLogs: (lines: string[]) => api.post('/bot-governance/parse-logs', { lines }),
+};
+
+export const promptTrackingAPI = {
+  prompts: (brandId: number) => api.get(`/prompt-tracking/prompts/${brandId}`),
+  run: (brandId: number) => api.post(`/prompt-tracking/run/${brandId}`, {}, { timeout: 180000 }),
+  history: (brandId: number) => api.get(`/prompt-tracking/history/${brandId}`),
+};
+
+export const kgOpsAPI = {
+  chain: (brandId: number) => api.get(`/kg-ops/chain/${brandId}`),
+  nap: (brandId: number) => api.get(`/kg-ops/nap/${brandId}`),
+};
+
+export const ugcDepthAPI = {
+  subreddits: (brandId: number) => api.get(`/ugc-depth/subreddits/${brandId}`),
+  reviews: (brandId: number) => api.get(`/ugc-depth/reviews/${brandId}`),
+  youtube: (brandId: number) => api.get(`/ugc-depth/youtube/${brandId}`),
+};
+
+export const imageBacklinksAPI = {
+  scan: (brandId: number) => api.get(`/image-backlinks/scan/${brandId}`),
+};
+
+export const authorGraphAPI = {
+  graph: (brandId: number) => api.get(`/author-graph/graph/${brandId}`),
+};
+
+export const multiBrandAPI = {
+  runMany: (brand_ids: number[]) => api.post('/multi-brand/run-many', { brand_ids }, { timeout: 60000 }),
+  diff: (brandId: number) => api.get('/multi-brand/diff', { params: { brand_id: brandId } }),
+};
+
+export const prOutreachAPI = {
+  beatMatch: (topic: string, outlets?: string[], brand?: string) =>
+    api.post('/pr-outreach/beat-match', { topic, outlets, brand }),
+  newsjacking: (angle: string, proof_points?: string[]) =>
+    api.post('/pr-outreach/newsjacking-score', { angle, proof_points }),
+  citationLoop: (brand: string, candidates: string[]) =>
+    api.post('/pr-outreach/citation-loop', { brand, candidates }),
 };
 
 export const extendedAPI = {

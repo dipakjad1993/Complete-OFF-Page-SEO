@@ -25,6 +25,7 @@ def _log_swallow(where: str, exc: BaseException, url: str = "") -> None:
 
 class ScrapeRequest(BaseModel):
     url: str
+    lean: bool = False  # v2026.3: lean=true returns title/H1/schema/OG only (fast intake path)
 
 BROWSER_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
@@ -76,138 +77,54 @@ async def safe_fetch(url, client, timeout=12):
     return None
 
 async def search_web(query, client, max_results=8):
-    results = []
-
-    def decode_ddg(href):
-        if "/l/?uddg=" in href:
-            try:
-                return unquote(href.split("/l/?uddg=")[-1].split("&")[0])
-            except Exception:
-                return href
-        if href.startswith("http%3A") or href.startswith("https%3A"):
-            try:
-                return unquote(href)
-            except Exception:
-                return href
-        return href
-
-    # Attempt 1: Google (fast, ~0.8s)
+    """Delegate to the central provider chain (SerpAPI -> cache -> Brave ->
+    Bing Web -> Bing RSS -> ddgs) with provider attribution. The old
+    Google-HTML / DDG-HTML / DDG-Lite scraping legs were removed in v2026.3:
+    they broke on markup changes and caused log spam. Returns the legacy
+    [{title, body, href, domain}] shape so callers are unchanged.
+    """
     try:
-        resp = await client.get(
-            f"https://www.google.com/search?q={quote_plus(query)}&num={max_results}",
-            headers=SEARCH_HEADERS, timeout=10
-        )
-        if resp.status_code == 200:
-            soup = BeautifulSoup(resp.text, "html.parser")
-            for r in soup.select("div.g")[:max_results]:
-                title_el = r.select_one("h3")
-                snippet_el = r.select_one("div[data-sncf],div.VwiC3b,span.aCOpRe")
-                link_el = r.select_one("a[href]")
-                if title_el and link_el:
-                    href = link_el.get("href", "")
-                    if href.startswith("/url?q="): href = href.split("/url?q=")[-1].split("&")[0]
-                    results.append({"title": title_el.get_text(strip=True), "body": snippet_el.get_text(strip=True) if snippet_el else "", "href": href, "domain": extract_domain(href)})
-        elif resp.status_code == 429:
-            logger.debug("scraper Google 429 for query=%s", query[:80])
-    except Exception as e:
-        _log_swallow("search.google", e, query)
-    # Attempt 2: DuckDuckGo HTML (respects site:/quote operators, decodes redirects)
-    needs_operators = ("site:" in query.lower()) or ('"' in query)
-    if needs_operators:
-        results = []  # Google/Bing ignore site:/quote operators; drop their noise
-    if len(results) < 3 or needs_operators:
-        try:
-            resp = await client.get(
-                f"https://html.duckduckgo.com/html/?q={quote_plus(query)}",
-                headers=SEARCH_HEADERS, timeout=14
-            )
-            if resp.status_code == 200:
-                soup = BeautifulSoup(resp.text, "html.parser")
-                for r in soup.select(".result")[:max_results]:
-                    title_el = r.select_one(".result__a")
-                    snippet_el = r.select_one(".result__snippet")
-                    if title_el:
-                        href = decode_ddg(title_el.get("href", ""))
-                        results.append({"title": title_el.get_text(strip=True), "body": snippet_el.get_text(strip=True) if snippet_el else "", "href": href, "domain": extract_domain(href)})
-        except Exception as e:
-            _log_swallow("search.ddg_html", e, query)
-    # Attempt 2b: ddgs library (robust, no HTML regex) — preferred when installed
-    if len(results) < 3:
-        try:
-            from ddgs import DDGS as _DDGS  # type: ignore
-            import asyncio as _aio
-
-            def _run_ddgs():
+        from backend.services.search import search_web as _central
+        from backend.services.verification import is_verified
+        res = await _central(query, brand_name="", num=max_results, require_relevance=False)
+        if is_verified(res):
+            out = []
+            for r in (res.value or [])[:max_results]:
+                url = r.get("url") or r.get("link") or ""
+                if not url.startswith("http"):
+                    continue
+                out.append({"title": (r.get("title") or "")[:300],
+                            "body": (r.get("snippet") or r.get("body") or r.get("description") or "")[:600],
+                            "href": url, "domain": r.get("domain") or extract_domain(url)})
+            if out:
+                return out[:max_results]
+    except Exception as e:  # noqa: BLE001
+        _log_swallow("search.central", e, query)
+    # Last-resort: Bing RSS direct (free, no key) so intake never hard-fails.
+    try:
+        from urllib.parse import quote_plus
+        import httpx as _hx
+        async with _hx.AsyncClient(timeout=10, follow_redirects=True, verify=False) as _c:
+            resp = await _c.get(
+                f"https://www.bing.com/search?q={quote_plus(query)}&format=rss&count={max_results}",
+                headers=SEARCH_HEADERS)
+            if resp.status_code == 200 and resp.text.strip().startswith("<?xml"):
+                from bs4 import BeautifulSoup as _BS
+                soup = _BS(resp.text, "xml")
                 out = []
-                with _DDGS(timeout=12) as _d:
-                    for _r in _d.text(query, max_results=max_results) or []:
-                        _h = _r.get("href") or ""
-                        if _h.startswith("http"):
-                            out.append({"title": (_r.get("title") or "")[:300],
-                                        "body": (_r.get("body") or "")[:600],
-                                        "href": _h, "domain": extract_domain(_h)})
-                return out
-            _ddgs_out = await _aio.to_thread(_run_ddgs)
-            results.extend(_ddgs_out)
-        except ImportError:
-            logger.debug("ddgs package not installed; skipping library fallback")
-        except Exception as e:
-            _log_swallow("search.ddgs_lib", e, query)
-    # Attempt 3: Bing RSS (fast, ~0.5s, free and reliable)
-    if len(results) < 3:
-        try:
-            resp = await client.get(f"https://www.bing.com/search?q={quote_plus(query)}&format=rss&count={max_results}", headers=SEARCH_HEADERS, timeout=10)
-            if resp.status_code == 200 and "text/xml" in resp.headers.get("content-type", "") or resp.text.strip().startswith("<?xml"):
-                soup = BeautifulSoup(resp.text, "xml" if resp.text.strip().startswith("<?xml") else "html.parser")
                 for item in soup.find_all("item")[:max_results]:
                     title = item.title.get_text(strip=True) if item.title else ""
                     link = item.link.get_text(strip=True) if item.link else ""
-                    desc = (item.find("description").get_text(" ", strip=True) if item.find("description") else "")
-                    if title and link:
-                        results.append({"title": title, "body": desc, "href": link, "domain": extract_domain(link)})
-            elif resp.status_code == 403:
-                logger.debug("scraper Bing RSS 403 for query=%s", query[:80])
-        except Exception as e:
-            _log_swallow("search.bing_rss", e, query)
-    # Attempt 4: Bing HTML (~0.6s)
-    if len(results) < 3:
-        try:
-            resp = await client.get(f"https://www.bing.com/search?q={quote_plus(query)}&count={max_results}", headers=SEARCH_HEADERS, timeout=10)
-            if resp.status_code == 200:
-                soup = BeautifulSoup(resp.text, "html.parser")
-                for r in soup.select("li.b_algo")[:max_results]:
-                    title_el = r.select_one("h2 a")
-                    snippet_el = r.select_one("div.b_caption p")
-                    if title_el:
-                        href = title_el.get("href", "")
-                        results.append({"title": title_el.get_text(strip=True), "body": snippet_el.get_text(strip=True) if snippet_el else "", "href": href, "domain": extract_domain(href)})
-        except Exception as e:
-            _log_swallow("search.bing_html", e, query)
-    # Attempt 5: DuckDuckGo Lite (fallback)
-    if len(results) < 3:
-        try:
-            resp = await client.get(
-                f"https://lite.duckduckgo.com/lite/?q={quote_plus(query)}",
-                headers=SEARCH_HEADERS, timeout=14
-            )
-            if resp.status_code == 200:
-                soup = BeautifulSoup(resp.text, "html.parser")
-                for tr in soup.select("table.result")[:max_results]:
-                    a = tr.select_one("a")
-                    sn = tr.select_one(".result-snippet")
-                    if a:
-                        href = decode_ddg(a.get("href", ""))
-                        results.append({"title": a.get_text(strip=True), "body": sn.get_text(strip=True) if sn else "", "href": href, "domain": extract_domain(href)})
-        except Exception as e:
-            _log_swallow("search.ddg_lite", e, query)
-    seen = set()
-    unique = []
-    for r in results:
-        key = r["domain"] + r["title"][:40]
-        if key not in seen:
-            seen.add(key)
-            unique.append(r)
-    return unique[:max_results]
+                    desc = item.find("description").get_text(" ", strip=True) if item.find("description") else ""
+                    if title and link.startswith("http"):
+                        out.append({"title": title[:300], "body": desc[:600],
+                                    "href": link, "domain": extract_domain(link)})
+                return out[:max_results]
+    except Exception as e:  # noqa: BLE001
+        _log_swallow("search.bing_rss_fallback", e, query)
+    return []
+
+
 
 
 # REMOVED 2026-09-11: static COMPETITOR_DB hardcoded peer table
@@ -1814,6 +1731,31 @@ async def scrape_website(req: ScrapeRequest):
     domain = netloc.replace("www.", "").lower()
     root = f"https://{netloc}"
     brand_name = domain.split(".")[0].title()
+
+    # v2026.3 lean path: title/H1/schema/OG + seed keywords only (intake fast lane).
+    if req.lean:
+        async with httpx.AsyncClient(follow_redirects=True, timeout=12, verify=False) as _c:
+            html = await safe_fetch(url, _c)
+            if not html:
+                raise HTTPException(status_code=502, detail="Lean fetch failed (no live HTML).")
+            soup = BeautifulSoup(html, "lxml")
+            title = (soup.title.string.strip()[:300] if soup.title and soup.title.string else "")
+            h1 = (soup.find("h1").get_text(" ", strip=True)[:300] if soup.find("h1") else "")
+            schemas = [s.get("type", "") for s in ([{"type": t} for t in []])]
+            try:
+                import json as _j
+                for tag in soup.find_all("script", {"type": "application/ld+json"}):
+                    try:
+                        schemas.append(str((_j.loads(tag.string or "{}") or {}).get("@type", ""))[:80])
+                    except Exception:
+                        continue
+            except Exception:
+                pass
+            ogs = {m.get("property", ""): (m.get("content", "") or "")[:300]
+                   for m in soup.find_all("meta", {"property": True})[:12]}
+            return {"status": "ok", "mode": "lean", "url": url, "domain": domain,
+                    "title": title, "h1": h1, "schemas": [s for s in schemas if s][:8],
+                    "og": ogs, "methodology": "lean fetch: single live page, no crawl."}
 
     async with httpx.AsyncClient(follow_redirects=True, timeout=12, verify=False) as client:
         # ---- LAYER 0: fetch the input page (works for blog/article URLs too) ----

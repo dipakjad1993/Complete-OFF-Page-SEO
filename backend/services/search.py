@@ -281,6 +281,54 @@ async def _ddgs_library_search(query: str, num: int = 10) -> list[dict]:
         return []
 
 
+async def _brave_search(query: str, num: int = 10) -> list[dict]:
+    """Brave Search API ($5/1k, generous free) — paid primary fallback. [] when unkeyed."""
+    try:
+        from config.settings import settings as _s
+        key = getattr(_s, "BRAVE_SEARCH_API_KEY", None)
+        if not key:
+            return []
+        async with httpx.AsyncClient(timeout=12, headers={"X-Subscription-Token": key}) as c:
+            r = await c.get("https://api.search.brave.com/res/v1/web/search",
+                            params={"q": query, "count": min(num, 20)})
+            r.raise_for_status()
+            data = r.json()
+        out = []
+        for it in ((data.get("web") or {}).get("results") or [])[:num]:
+            url = it.get("url") or ""
+            if url.startswith("http"):
+                out.append({"title": (it.get("title") or "")[:300], "url": url,
+                            "snippet": (it.get("description") or "")[:600]})
+        return out
+    except Exception as e:  # noqa: BLE001
+        logger.warning("Brave search failed for %r: %s", query[:80], str(e)[:160])
+        return []
+
+
+async def _bing_web_search(query: str, num: int = 10) -> list[dict]:
+    """Bing Web Search API — paid fallback before ddgs. [] when unkeyed."""
+    try:
+        from config.settings import settings as _s
+        key = getattr(_s, "BING_SEARCH_API_KEY", None)
+        if not key:
+            return []
+        async with httpx.AsyncClient(timeout=12, headers={"Ocp-Apim-Subscription-Key": key}) as c:
+            r = await c.get("https://api.bing.microsoft.com/v7.0/search",
+                            params={"q": query, "count": min(num, 20), "mkt": "en-US"})
+            r.raise_for_status()
+            data = r.json()
+        out = []
+        for it in ((data.get("webPages") or {}).get("value") or [])[:num]:
+            url = it.get("url") or ""
+            if url.startswith("http"):
+                out.append({"title": (it.get("name") or "")[:300], "url": url,
+                            "snippet": (it.get("snippet") or "")[:600]})
+        return out
+    except Exception as e:  # noqa: BLE001
+        logger.warning("Bing Web API failed for %r: %s", query[:80], str(e)[:160])
+        return []
+
+
 async def _bing_news_search(query: str, num: int = 20) -> list[dict]:
     """Bing News RSS search - free tier, no key required. Returns real publisher URLs."""
     try:
@@ -368,13 +416,44 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
                      require_relevance: bool = True, min_score: float = 0.35) -> Any:
     """Search the web for brand-relevant results.
 
-    Returns VerifiedData with a list of vetted results, or UnavailableData.
+    Chain: SerpAPI (keyed) -> 7-day disk cache -> Brave API (keyed) ->
+    Bing Web API (keyed) -> Bing RSS (free) -> ddgs library (free).
+    Returns VerifiedData with provider attribution in source/method, or
+    honest UnavailableData. Exponential backoff is inside each leg.
     """
+    # 0. disk cache (7-day TTL) — real payloads only
+    try:
+        from backend.services.search_cache import cache_get, cache_put
+        hit = cache_get(query, num, brand_name)
+        if hit and hit.get("payload"):
+            raw_cached = hit["payload"]
+            cleaned = _clean_results(raw_cached, query, brand_name, min_score) if require_relevance else raw_cached
+            if cleaned or not require_relevance:
+                return VerifiedData(
+                    value=cleaned if require_relevance else raw_cached,
+                    source=f"{hit.get('provider', 'cache')}+cache",
+                    method="sqlite_cache_7d+relevance_filter",
+                    retrieved_at=utcnow_iso(), confidence=0.95, verified=True,
+                    metadata={"query": query, "cached": True,
+                              "provider": hit.get("provider")},
+                )
+    except Exception:
+        pass
+
+    def _remember(payload: list, provider: str) -> None:
+        try:
+            from backend.services.search_cache import cache_put
+            if payload:
+                cache_put(query, num, brand_name, payload, provider)
+        except Exception:
+            pass
+
     if serpapi.available:
         res = await serpapi.search(query, num=num)
         if isinstance(res, VerifiedData) and res.value:
             raw = res.value
             cleaned = _clean_results(raw, query, brand_name, min_score) if require_relevance else raw
+            _remember(raw, "serpapi")
             return VerifiedData(
                 value=cleaned,
                 source="serpapi", method="serpapi_google_organic+relevance_filter",
@@ -382,11 +461,29 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
                 metadata={"query": query, "raw_count": len(raw), "kept": len(cleaned)},
             )
 
+    # Paid fallbacks before free scraping (reliability first).
+    for _fn, _prov, _meth in (
+        (_brave_search, "brave_api", "brave_web_search+relevance_filter"),
+        (_bing_web_search, "bing_web_api", "bing_web_search+relevance_filter"),
+    ):
+        paid = await _fn(query, num=num)
+        if paid:
+            cleaned = _clean_results(paid, query, brand_name, min_score) if require_relevance else paid
+            if cleaned or not require_relevance:
+                _remember(paid, _prov)
+                return VerifiedData(
+                    value=cleaned if require_relevance else paid,
+                    source=_prov, method=_meth,
+                    retrieved_at=utcnow_iso(), confidence=1.0, verified=True,
+                    metadata={"query": query, "raw_count": len(paid), "kept": len(cleaned)},
+                )
+
     # Bing RSS search (free tier, no key required).
     bing_results = await _bing_search(query, num=num)
     if bing_results:
         cleaned = _clean_results(bing_results, query, brand_name, min_score) if require_relevance else bing_results
         if cleaned or not require_relevance:
+            _remember(bing_results, "bing_rss")
             return VerifiedData(
                 value=cleaned if require_relevance else bing_results,
                 source="bing_rss", method="bing_rss+relevance_filter",
@@ -402,6 +499,7 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
     if ddgs_results:
         cleaned = _clean_results(ddgs_results, query, brand_name, min_score) if require_relevance else ddgs_results
         if cleaned or not require_relevance:
+            _remember(ddgs_results, "ddgs_library")
             return VerifiedData(
                 value=cleaned if require_relevance else ddgs_results,
                 source="ddgs_library", method="ddgs_text+relevance_filter",
@@ -412,10 +510,10 @@ async def search_web(query: str, brand_name: str = "", num: int = 10,
     # DuckDuckGo HTML leg REMOVED 2026-09 (dead: 0 parseable blocks on every
     # query after DDG markup changes). Bing RSS + ddgs library exhausted here —
     # report honest UnavailableData instead of an empty "verified success".
-    logger.warning("Search chain exhausted for %r (Bing RSS + ddgs yielded nothing usable)", query[:80])
+    logger.warning("Search chain exhausted for %r (SerpAPI/cache/Brave/Bing-Web/Bing RSS + ddgs yielded nothing usable)", query[:80])
     return UnavailableData(
-        reason="Search failed after Bing RSS + ddgs library (DDG HTML leg removed as dead).",
-        requires="SERPAPI_KEY (or working DuckDuckGo/Bing access)",
+        reason="Search failed after SerpAPI + cache + Brave + Bing Web + Bing RSS + ddgs library (DDG HTML leg removed as dead).",
+        requires="SERPAPI_KEY or BRAVE_SEARCH_API_KEY/BING_SEARCH_API_KEY (or working Bing/ddgs access)",
     )
 
 

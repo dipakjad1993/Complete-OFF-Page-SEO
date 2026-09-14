@@ -19,7 +19,9 @@ from backend.api import (
     passage_scoring, reddit_monitor, satellite_entities,
     schema_validator, anchor_analysis, crawl_accelerator,
     visual_audit, dead_equity, share_of_search, intake, analysis,
-    website_scraper
+    website_scraper, bot_governance, prompt_tracking, kg_ops,
+    ugc_depth, image_backlinks, author_graph, multi_brand,
+    pr_outreach, auth as auth_api,
 )
 
 
@@ -57,12 +59,12 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS: wildcard origins cannot be combined with credentials (browsers reject it).
-# Use credentials=False with wildcard so local Vite (port 3000) + file:// + any host works.
-# For strict production, set FRONTEND_ORIGINS env / edit allow_origins list.
+# CORS: FRONTEND_ORIGINS env in production; wildcard dev default (no credentials).
+# Set FRONTEND_ORIGINS=https://app.example.com,https://admin.example.com to lock down.
+_cors_origins = settings.cors_origins if hasattr(settings, "cors_origins") else ["*"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_cors_origins,
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -97,6 +99,14 @@ app.include_router(share_of_search.router, prefix="/api/v1/share-of-search", tag
 app.include_router(intake.router, prefix="/api/v1/intake", tags=["Intake Data Layer"])
 app.include_router(analysis.router, prefix="/api/v1/analysis", tags=["Analysis Engine"])
 app.include_router(website_scraper.router, prefix="/api/v1/scraper", tags=["Website Scraper"])
+app.include_router(bot_governance.router, prefix="/api/v1/bot-governance", tags=["Bot Governance"])
+app.include_router(prompt_tracking.router, prefix="/api/v1/prompt-tracking", tags=["Prompt Tracking"])
+app.include_router(kg_ops.router, prefix="/api/v1/kg-ops", tags=["KG Ops"])
+app.include_router(ugc_depth.router, prefix="/api/v1/ugc-depth", tags=["UGC Depth"])
+app.include_router(image_backlinks.router, prefix="/api/v1/image-backlinks", tags=["Image Backlinks"])
+app.include_router(author_graph.router, prefix="/api/v1/author-graph", tags=["Author Graph"])
+app.include_router(multi_brand.router, prefix="/api/v1/multi-brand", tags=["Multi-Brand"])
+app.include_router(pr_outreach.router, prefix="/api/v1/pr-outreach", tags=["PR Outreach 2.0"])
 
 FRONTEND_DIST = Path(__file__).resolve().parent / "frontend" / "dist"
 SPA_HEADERS = {

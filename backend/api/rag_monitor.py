@@ -32,8 +32,7 @@ class RAGCitationResponse(BaseModel):
     incorrect_facts: Optional[dict]
     detected_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 
 def _has_llm():

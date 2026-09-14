@@ -909,5 +909,129 @@
       "enabled": true,
       "updated_at": "2026-09-11T08:14:59.639130"
     }
+  },
+  "27": {
+    "schema": {
+      "brand_id": 27,
+      "name": "Latest news, sport and opinion from the Guardian",
+      "kg_mid": "",
+      "wikidata_id": "Q5614018",
+      "crunchbase_id": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/The_Guardian",
+      "logo_url": null,
+      "description": "The Guardian is a British daily newspaper. It was founded in Manchester in 1821 as The Manchester Guardian and changed its name in 1959, followed by a move to London. Along with its sister paper, The Guardian Weekly, The Guardian is part of the Guardian Media Group, owned by the Scott Trust Limited. The trust was created in 1936 to \"secure the financial and editorial independence of The Guardian in perpetuity and to safeguard the journalistic freedom and liberal values of The Guardian free from commercial or political interference\". The trust was converted into a limited company in 2008, with a constitution written so as to maintain for The Guardian the same protections as were built into the structure of the Scott Trust by its creators. Profits are reinvested in its journalism rather than distributed to owners or shareholders. It is considered a newspaper of record in the UK.",
+      "topical_taxonomy": {
+        "pillars": [
+          "news media",
+          "Opinion",
+          "More top stories",
+          "What to watch",
+          "What to read",
+          "Most viewed",
+          "Deeply read",
+          "Our organisation"
+        ]
+      },
+      "primary_categories": [
+        "news media"
+      ],
+      "seed_keywords": [
+        "theguardian.com",
+        "In focus",
+        "Features",
+        "More features",
+        "Sport",
+        "As it happenedRead Scott Murray's hole-by-hole reprt",
+        "More sport",
+        "More opinion",
+        "Editorials",
+        "Cartoon",
+        "Nicola Jennings on Nigel Farage\u2019s fundraising",
+        "Climate crisis & environment",
+        "UK news",
+        "World news",
+        "Culture",
+        "What to listen to",
+        "What to play",
+        "More culture",
+        "Lifestyle",
+        "Food",
+        "Fashion & beauty",
+        "Relationships",
+        "Health & fitness",
+        "More lifestyle",
+        "You may have missed",
+        "Take part",
+        "In pictures",
+        "Most popular"
+      ],
+      "official_messaging": "Latest international news, sport and comment from the Guardian",
+      "gsc_property_id": "",
+      "ga4_property_id": "",
+      "bot_crawl_api": "",
+      "link_graph_providers": [
+        "ahrefs",
+        "majestic",
+        "moz",
+        "serpapi"
+      ]
+    },
+    "risk": {
+      "risk_level": "enterprise_safe",
+      "risk_score": 38,
+      "allowed_tactics": [
+        "digital_pr",
+        "guest_posts",
+        "podcasts",
+        "data_studies",
+        "expert_quotes",
+        "expired",
+        "sponsorship",
+        "conference",
+        "forum",
+        "reddit"
+      ],
+      "blocked_domains": [],
+      "blocked_topics": [
+        "gambling",
+        "adult content",
+        "political controversy",
+        "crypto pump schemes"
+      ],
+      "ftc_compliance": true,
+      "sec_compliance": true,
+      "max_outreach_per_day": 20,
+      "updated_at": "2026-09-14T07:21:32.113720"
+    },
+    "scraper": {
+      "sources": [
+        "news",
+        "indpub",
+        "medium",
+        "substack",
+        "reddit",
+        "twitter",
+        "youtube",
+        "podcasts",
+        "stackoverflow",
+        "github",
+        "quora",
+        "trustpilot",
+        "g2",
+        "linkedin"
+      ],
+      "frequency": "daily",
+      "enabled": true,
+      "listening_streams": [
+        "podcast_transcripts",
+        "youtube_transcripts",
+        "news_rss",
+        "reddit_stream",
+        "github_stream"
+      ],
+      "include_transcripts": true,
+      "crawl_depth": 2,
+      "updated_at": "2026-09-14T07:21:32.146900"
+    }
   }
 }

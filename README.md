@@ -1,10 +1,10 @@
 # Off-Page SEO Intelligence
 
-**Entity-First Off-Page Command Center · 35 Modules · Real Data Only · v2026.2 Depth Release**
+**Entity-First Off-Page Command Center · 35 Modules + 7 Extended · Real Data Only · v2026.3 Enterprise Release**
 
-A full-stack, 35-module off-page SEO intelligence engine that measures and improves how search engines, LLM agents and AI answers perceive, cite, rank and trust your brand entity — **every number is collected live from real public sources. Nothing is fabricated, simulated or randomly generated.**
+A full-stack, 42-section off-page SEO intelligence engine that measures and improves how search engines, LLM agents and AI answers perceive, cite, rank and trust your brand entity — **every number is collected live from real public sources. Nothing is fabricated, simulated or randomly generated.**
 
-> **v2026.2 Depth Release (11 Sep 2026)** — deeper intake (risk slider 0–100, GSC/GA4 property bindings, bot-crawl API, per-brand link-graph providers, transcript-first listening streams, SME spokesperson matrix), deeper modules (Shannon anchor-entropy with SpamBrain boundary gauge, Monte Carlo SoS scenarios, journalist-ready PR outreach drafts), deeper outputs (Topical Vector Distance Index 0–100, LLM Citation Share-of-Voice matrix), plus hardening: UTF-8 crash-proof file layer, synthetic-anchor fabrication removed, static DA/competitor/keyword filler tables deleted, and a real error screen (failures can no longer render a blank page).
+> **v2026.3 Enterprise Release (14 Sep 2026)** — monolith split (`backend/api/analysis.py` 4,568 → 1,749 lines; features live in `backend/modules/{common,llm,pr,kg,technical,risk}.py` with per-module timeout + retry + circuit breaker), unified brand-config resolver (nested intake + DB fallback — risk slider, competitors, spokespeople now resolve everywhere), scraper search rebuilt on the central provider chain (fragile Google/DDG-HTML legs deleted), run-over-run snapshots + working multi-brand diff + regression webhooks, run-over-run delta panel in Deliverables, PDF real-data-only footer + `WHITE_LABEL_BRAND` theming, Pydantic v2 cleanup. Live proof: The Hindu — **42 sections, 39 ok / 3 honest-unavailable / 0 errors, Entity Authority 68.3 (B)**.
 
 - **Frontend:** React + Vite (TypeScript) — step-by-step intake → live progress → full client-ready report
 - **Backend:** Python / FastAPI + SQLAlchemy + SQLite (WAL mode, non-blocking background jobs)
@@ -115,6 +115,18 @@ Each module runs against the live web for the specific brand and returns:
 | 34 | FTC & Sponsored-Mention Penalty Shield | Real sponsored mentions & disclosure-policy pages |
 | 35 | Cross-Border Hreflang Equity Balancer | Hreflang tags + international versions + cannibalization risk |
 
+**Extended modules 36–42** (run automatically after the core 35, best-effort, never fail the run):
+
+| # | Module | What it measures |
+| --- | --- | --- |
+| 36 | AI Bot Crawler Governance | Live `llms.txt` / `robots.txt` AI-directive / `ai.txt` / `ai-plugin.json` / `/api` / `/graphql` / `/openapi.json` probe + `llms.txt` generator + governance score |
+| 37 | Daily Prompt Tracking + Sentiment | Fixed prompt set per brand (navigational/commercial/comparison), citation rate, SoV, sentiment; keyed LLM probing + free SERP proxy |
+| 38 | Knowledge Graph Ops Chain | Organization JSON-LD `sameAs` → Wikidata QID → Wikipedia → Google KG chain visual + NAP audit + Wikidata edit suggester |
+| 39 | UGC Depth (Reddit/LinkedIn/YouTube/Reviews) | Subreddit affinity, YouTube depth, G2/Capterra/Trustpilot review aggregation |
+| 40 | Image + Video Backlinks | Logo/image usage without attribution finder + image-intent citation scan |
+| 41 | E-E-A-T Author Entity Graph | SME spokesperson authority score (publications 40 + credentials 20 + KG IDs 20 + depth 20) from live co-search |
+| 42 | Proxy Share-of-Voice (free) | 10-prompt SERP mention-rate proxy SoV, clearly labeled `proxy_sov_free` (keyed LLM SoV appears when LLM keys are configured) |
+
 ---
 
 ## Real World Audit — The Hindu
@@ -137,6 +149,8 @@ On **19 Aug 2026** the full 35-module engine was run live against **The Hindu** 
 - **PR hooks generated from real news** with real article URLs (e.g. West Asia war coverage, Tamil Nadu policy coverage)
 
 > **Anti-fabrication example:** the FTC module found *zero* sponsored mentions in the live search window, so it reported `no_sponsored_content_detected` — it did **not** invent a compliance score. The PBN module found zero backlinks available (no paid provider key), so it reported `registration_only` with the **real RDAP registration record** (eNom registrar, registered 1996-03-01, age 30.5 years, expiry 2028-03-02) — it did **not** claim the domain was "clean".
+
+**Latest live run (14 Sep 2026, v2026.3 engine):** The Hindu re-audited end-to-end after the monolith split — **42 sections, 39 ok / 3 honest-unavailable / 0 errors, Entity Authority 68.3 (B)**, governance enforcing intake risk policy (risk 30, blocked topics, expired/PBN gated), proxy SoV 0.3, snapshot archived + diff showing real score deltas. Proof the split changed zero behavior.
 
 ---
 
@@ -221,50 +235,37 @@ Captured from the live audit above (19 Aug 2026). These are genuine pages found 
 Both the downloadable PDF and the on-screen Tool Outputs are enterprise-formatted (2026-ready): KPI cards, live charts, aligned tables, verified sources — no screenshots of the UI, everything is generated from the run data.
 
 **On-screen deliverables layer** (`frontend/src/pages/Deliverables.tsx`):
-- Report header (brand, domain) + 4 KPI cards: overall authority, verified-module mix, AEO/GEO readiness, open risk flags
-- Boardroom depth metrics (new in v2026.2): **Topical Vector Distance Index** (0–100 spatial authority score from live competitor cosine similarity) and **LLM Citation Share-of-Voice matrix** (null — never guessed — until an LLM key is configured)- Live `recharts` visuals: module-health donut (verified / no-data / error) + key-signal bar chart (SoS, AEO score, KG coverage, anchor entropy, FTC score, vector index, PR hooks)
+- Report header (brand, domain) + 5 KPI cards: Entity Authority hero (replaces DA), verified-module mix, Proxy SoV (free), AEO/GEO readiness, open risk flags
+- **Run-over-run delta panel** (new in v2026.3): score deltas + module status changes vs previous snapshot, fetched live from `/multi-brand/diff`
+- Live `recharts` visuals: module-health donut (verified / no-data / error) + key-signal bar chart (SoS, AEO score, KG coverage, anchor entropy, FTC score, vector index, PR hooks)
 - All 5 Tool Outputs with takeaway callouts, aligned metric tables, confidence bars, evidence tables, copy-paste edge payloads, link chips
 - All-module coverage matrix (status badge, assessment, finding counts per module)
 
 **PDF report** (`GET /api/v1/analysis/export/{brand_id}?format=pdf`, `backend/api/analysis.py`):
 - Cover page with KPI cards + document meta, module-health pie + per-output confidence charts (reportlab graphics)
 - Contents page, then Outputs 1–5 in full (metrics, payloads, sources, limitations)
-- **Appendix A — all 35 modules**, each with status, score/assessment, confidence, method, runtime, key findings, sub-function evidence table, recommendation, detailed analysis, next actions, limitations, verified sources
+- **Appendix A — all 42 sections**, each with status, score/assessment, confidence, method, runtime, key findings, sub-function evidence table, recommendation, detailed analysis, next actions, limitations, verified sources
 - **Appendix B** — 2026 methodology, cross-module limitations, deduped source library
-- Layout guarantees: wrapped table text, repeating headers, brand header/footer + page numbers on every page, UTF-8 safe (no font crashes)
+- Layout guarantees: wrapped table text, repeating headers, brand header/footer + page numbers on every page, **real-data-only guarantee in the footer of every page**, UTF-8 safe (no font crashes), white-label via `WHITE_LABEL_BRAND` env var
 
 ---
 
 ## Architecture
 
-```
-┌────────────────────────────┐
-│  React SPA (frontend/)     │  Intake → Pipeline → Results
-│  served by FastAPI (dist)  │
-└────────────┬───────────────┘
-             │ /api/v1/*
-┌────────────▼───────────────┐
-│  FastAPI (main.py)         │  ~30 routers, /docs, /health
-└────────────┬───────────────┘
-┌────────────▼───────────────┐
-│  Analysis Engine           │  35 async modules in backend/api/analysis.py
-│  (backend/api/analysis.py) │  per-module methodology + honest "unavailable"
-└────────────┬───────────────┘
-┌────────────▼───────────────┐
-│  Data Services             │
-│  backend/services/search.py│  Bing RSS, DDG, Bing News RSS, Google News RSS
-│  backend/services/free_apis│  GitHub API, HN API, StackExchange, iTunes, RDAP
-│  backend/services/providers│  SerpAPI, NewsAPI, Ahrefs, Moz, Majestic (optional)
-│  backend/services/verification │ verify_url() — live URL→brand mention checks
-└────────────┬───────────────┘
-┌────────────▼───────────────┐
-│  SQLite (offpage_seo.db)   │  brands, execs, competitors, triples, results
-│  + data/ JSON + analysis   │  brand_configs.json, api_credentials.json,
-│    results                 │  data/analysis_results/*_latest.json
-└────────────────────────────┘
+```mermaid
+flowchart LR
+  UI[React SPA intake pipeline results] -->|/api/v1/*| API[FastAPI main.py]
+  API --> MOD[modules registry 35+7 guarded timeout retry breaker]
+  MOD --> ENG[analysis.py canonical engine]
+  ENG --> SRC[search chain SerpAPI cache Brave BingWeb BingRSS ddgs]
+  SRC --> FREE[news Wikidata GitHub HN SE iTunes RDAP probes]
+  ENG --> EXT[extended 36-42 bot prompt KG UGC image author proxySoV]
+  API --> NEW[bot-governance prompt-tracking kg-ops ugc-depth image-backlinks author-graph multi-brand pr-outreach]
+  API --> MCP[mcp_server.py offpage_audit kg_check pr_hooks]
+  ENG --> DB[(SQLite WAL dev Postgres option)]
 ```
 
-**Entity-disambiguation safety layer** (`backend/api/analysis.py`):
+**Entity-disambiguation safety layer** (`backend/modules/common.py` — split out of the old `analysis.py` monolith in v2026.3):
 - `WRONG_ENTITY_LEXICON` — rejects same-name wrong-entity collisions (e.g. religion/temple/Gita results for a newspaper called "The Hindu")
 - `_entity_ok()` / `_entity_keep()` — every search result is gated by brand name variants, brand domain and a wrong-entity lexicon before it can become a "verified" citation
 - Own-domain and subdomain results (e.g. `epaper.thehindu.com`, `branchioth.thehindu.co.in`) are correctly treated as the brand
@@ -413,47 +414,73 @@ This tool was built around one hard rule: **never fabricate data.**
 ```
 Complete-OFF-Page-SEO/
 ├── main.py                      # FastAPI app: routers, SPA serving, /health, /docs
-├── setup.py / requirements.txt  # install + deps
-├── offpage_seo.db               # SQLite: brands, execs, competitors, results
+├── mcp_server.py                # MCP tools for Claude/Cursor: offpage_audit, kg_check, pr_hooks, bot_governance, prompt_tracking
+├── setup.py / requirements*.txt # base (lean) vs ml (2GB embeddings, optional) installs
+├── Dockerfile / docker-compose.yml  # prod: backend + frontend dev + optional Postgres
+├── offpage_seo.db               # SQLite (WAL dev; Postgres via DATABASE_URL for scale)
 ├── config/
 │   ├── settings.py
-│   └── .env.example             # optional API keys
+│   └── .env.example             # optional API keys (+ WHITE_LABEL_BRAND, FRONTEND_ORIGINS)
 ├── backend/
-│   ├── core/database.py         # SQLAlchemy engine + session
+│   ├── core/database.py         # SQLAlchemy engine + session (SQLite WAL / Postgres)
 │   ├── models/models.py         # ORM models
-│   ├── api/                     # ~30 FastAPI routers
-│   │   ├── analysis.py          # ★ the 35-module engine (search, entity gate, KG arbitrage, PR hooks, …)
+│   ├── modules/                 # ★ v2026.3: the engine, split by domain (was one 4,568-line file)
+│   │   ├── common.py            # shared helpers: entity gate, URL utils, wiki/RDAP lookups, progress, lexicons
+│   │   ├── llm.py               # 9 features: perception, vector, RAG, consensus, simulation, passage, competitor-BERT…
+│   │   ├── pr.py                # 5 features: PR hooks, podcast/video, transcription, satellite, zero-party
+│   │   ├── kg.py                # 8 features: unlinked, GitHub, KG arbitrage, visual, decay, C2PA, reddit, schema
+│   │   ├── technical.py         # 7 features: AEO, dead equity, compliance, geo, APN, crawl priority, hreflang
+│   │   ├── risk.py              # 6 features: poisoning, PBN, revenue sim, negative SEO, anchor entropy, FTC
+│   │   ├── registry.py          # 35-module map + per-module timeouts (no circular imports)
+│   │   ├── base.py              # ModuleResult + timeout/retry/circuit-breaker guard
+│   │   └── extended.py          # modules 36–42 (bot governance, prompts, KG ops, UGC, image, author, proxy SoV)
+│   ├── api/                     # FastAPI routers
+│   │   ├── analysis.py          # thin orchestrator: runner, enrichment, governance, Entity Authority, PDF, endpoints
 │   │   ├── intake.py            # intake data layer
-│   │   ├── website_scraper.py   # live site scrape → seed keywords (nav-junk filtered)
+│   │   ├── website_scraper.py   # intake scrape (lean path + central-chain search, no HTML scraping)
+│   │   ├── bot_governance.py / prompt_tracking.py / kg_ops.py / ugc_depth.py  # P1 routers
+│   │   ├── image_backlinks.py / author_graph.py / multi_brand.py / pr_outreach.py / auth.py
 │   │   └── … 25 more feature routers
 │   └── services/
-│       ├── search.py            # Bing RSS, DDG, Bing News RSS, Google News RSS (encoding-safe)
+│       ├── search.py            # SerpAPI → 7-day disk cache → Brave → Bing Web → Bing RSS → ddgs (provider attribution)
+│       ├── brand_config.py      # ★ v2026.3: nested-intake + DB fallback resolver (risk/competitors/SMEs everywhere)
+│       ├── governance.py        # risk-slider tactic gating + anchor warnings + outreach filtering
+│       ├── entity_authority.py  # Entity Authority hero (replaces DA) with sub-scores
+│       ├── vector_explain.py / sov_proxy.py / search_cache.py / credential_vault.py
 │       ├── free_apis.py         # GitHub, HN, StackExchange, iTunes, RDAP
 │       ├── providers.py         # SerpAPI/NewsAPI/Ahrefs/Moz/Majestic (optional)
 │       └── verification.py      # live URL → brand-mention verification
 ├── frontend/
 │   ├── src/pages/ToolApp.tsx    # intake → pipeline → results SPA
-│   ├── src/pages/Deliverables.tsx  # enterprise outputs UI (KPIs, recharts, coverage matrix)
+│   ├── src/pages/Deliverables.tsx  # enterprise outputs UI (KPIs, run-over-run delta, recharts, coverage matrix)
 │   ├── src/data/features.ts     # the 35 module definitions
 │   └── dist/                    # prebuilt bundle served by FastAPI (git-ignored, `npm run build`)
 ├── data/
-│   ├── brand_configs.json       # persisted brand schemas
-│   ├── api_credentials.json     # stored keys (empty until configured)
-│   └── analysis_results/        # *_latest.json per brand (real run outputs)
-├── scripts/                     # init_db, verify_engine, start_server
-└── docs/screenshots/            # real screenshots used in this README
+│   ├── brand_configs.json       # persisted brand schemas (nested: schema/risk/scraper)
+│   ├── api_credentials.json     # stored keys (empty until configured; Fernet vault available)
+│   ├── analysis_results/        # *_latest.json per brand (local runs; git-ignored except seeded sample)
+│   └── run_snapshots/           # ★ v2026.3: per-run archives powering diff + delta panel (git-ignored)
+├── scripts/                     # init_db, verify_engine, start_server, anti_fabrication_check, split_monolith
+├── tests/test_modules.py        # per-module mock tests (guard, vector, governance, registry, resolver)
+└── .github/workflows/ci.yml     # lint + anti-fabrication audit + pytest
 ```
 
 ---
 
 ## Contributing & Roadmap
 
+**Shipped in v2026.3 (14 Sep 2026):**
+- Monolith split: `analysis.py` 4,568 → ~1,750 lines; features in `backend/modules/*` + `registry.py` (per-module timeout + retry + circuit breaker); 4 stranded-lexicon + star-export bugs found and fixed via live runs
+- Unified `brand_config` resolver — risk slider, competitors, spokespeople resolve in every router (governance went from silently erroring to enforcing)
+- Scraper search rebuilt on the central provider chain; Google/DDG-HTML scraping legs deleted
+- Snapshots + fixed `run-many` + corrected `diff` + regression webhooks + Deliverables delta panel
+- PDF real-data-only footer + `WHITE_LABEL_BRAND`; Pydantic v2 cleanup; 10/10 tests green; live proof run (42 sections, 0 errors)
+
 **Open ideas:**
-- Multi-brand parallel analysis with delta reporting
-- Scheduled re-runs + alerting on module regressions
 - Scheduled PDF delivery (email/webhook) + white-label report themes
 - Optional LLM provider integrations for deeper co-mention auditing
 - Ahrefs/Moz deep backlink integration with live PBN scoring
+- Postgres-backed production deploy + Celery/Redis scale-out option
 
 To contribute: fork, branch, open a PR. Keep the **real-data-only** rule: any change that would ever produce a fabricated number will be rejected.
 
@@ -461,4 +488,5 @@ To contribute: fork, branch, open a PR. Keep the **real-data-only** rule: any ch
 
 ## License
 
-Proprietary. All rights reserved. The data, brand configurations and analysis results in this repository are real outputs from live audits and must not be republished as fabricated marketing claims.
+Apache-2.0. See LICENSE. Real-data-only rule survives licensing: contributions
+that would ever produce a fabricated number are rejected (CI anti-fabrication check).

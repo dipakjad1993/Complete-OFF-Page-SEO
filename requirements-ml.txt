@@ -1,0 +1,16 @@
+# requirements-ml.txt — OPTIONAL local embeddings/NLP (2GB+).
+# Install only when you need SOTA vector mapping / NER. Engine falls back to TF-IDF.
+-r requirements-base.txt
+sentence-transformers==3.1.0
+scikit-learn==1.5.0
+numpy==1.26.0
+pandas==2.2.0
+spacy==3.7.0
+nltk==3.9.0
+tiktoken==0.7.0
+scipy==1.14.0
+google-api-python-client==2.149.0
+google-auth==2.35.0
+google-auth-oauthlib==1.2.0
+openai==1.51.0
+anthropic==0.37.0
