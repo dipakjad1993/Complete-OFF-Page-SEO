@@ -307,6 +307,14 @@ python -m uvicorn main:app --host 127.0.0.1 --port 8000
 
 **Minimum requirements:** Python 3.11+ and an internet connection. No API keys are required for the free tier — the engine uses SerpAPI (when keyed) → 7-day disk cache → Brave → Bing Web → Bing RSS → `ddgs` library (rotating UAs; dead DDG-HTML leg deleted v2026.2), Bing News RSS, Google News RSS, Wikipedia, Wikidata, GitHub Search, Hacker News, Stack Exchange, iTunes Search and RDAP directly. Install deps with `pip install -r requirements.txt` (`ddgs`, `reportlab`, `apscheduler` included).
 
+### Deploy on Render (Docker)
+
+The repo ships a production `Dockerfile` (Node stage builds the React SPA → Python stage serves API + UI) plus `render.yaml` (health check `/health`, 1 GB persistent disk at `/app/data`).
+
+1. Render dashboard → New → Blueprint → select this repo (or New → Web Service → Docker, health check path `/health`).
+2. Set env vars: `SECRET_KEY` (Generate), `FRONTEND_ORIGINS=https://<your-app>.onrender.com`, `REQUIRE_AUTH=false`, `DATABASE_URL=sqlite:///./offpage_seo.db`.
+3. Deploy. `GET /` serves the UI when bundled and API info in API-only mode — it never 500s. The container listens on `$PORT` (Render injects it; local default `8000`).
+
 ---
 
 ## Configuration & API Keys

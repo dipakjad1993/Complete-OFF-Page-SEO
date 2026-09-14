@@ -1,0 +1,25 @@
+# Render Blueprint — one-click deploy for Complete OFF Page SEO.
+# In Render: New > Blueprint > select this repo. Then set SECRET_KEY in the dashboard.
+services:
+  - type: web
+    name: offpage-seo
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FRONTEND_ORIGINS
+        value: "*"
+      - key: REQUIRE_AUTH
+        value: "false"
+      - key: DATABASE_URL
+        value: sqlite:///./offpage_seo.db
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    disk:
+      name: offpage-data
+      mountPath: /app/data
+      sizeGB: 1

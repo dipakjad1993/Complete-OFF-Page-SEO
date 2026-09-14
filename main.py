@@ -157,12 +157,29 @@ async def provider_status_alias():
         raise HTTPException(status_code=500, detail=str(e)[:300])
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=None)
 async def root(request: Request):
+    """Serve the SPA when bundled; otherwise return API info (never 500).
+
+    Docker/Render images may not include frontend/dist — the API must stay up
+    regardless. /health is the orchestrator health gate; / must never crash it.
+    """
     index_path = FRONTEND_DIST / "index.html"
-    if index_path.exists():
+    if index_path.is_file():
         return FileResponse(index_path, headers=SPA_HEADERS)
-    return FileResponse("static/index.html", headers=SPA_HEADERS)
+    static_fallback = Path(__file__).resolve().parent / "static" / "index.html"
+    if static_fallback.is_file():
+        return FileResponse(static_fallback, headers=SPA_HEADERS)
+    from fastapi.responses import JSONResponse
+    return JSONResponse({
+        "name": settings.APP_NAME,
+        "version": settings.APP_VERSION,
+        "status": "operational",
+        "ui": "not bundled in this image (API-only mode)",
+        "docs": "/docs",
+        "health": "/health",
+        "analysis": "/api/v1/analysis/run",
+    })
 
 
 # ---- SPA catch-all is intentionally LAST so /api/*, /docs, /health, /openapi.json never collide ----
@@ -182,10 +199,15 @@ async def serve_frontend(full_path: str):
     if FRONTEND_DIST.exists() and full_path and asset.is_file():
         return FileResponse(asset, headers=SPA_HEADERS)
     index_path = FRONTEND_DIST / "index.html"
-    if index_path.exists():
+    if index_path.is_file():
         return FileResponse(index_path, headers=SPA_HEADERS)
-    raise HTTPException(status_code=404, detail="Not found")
+    static_fallback = Path(__file__).resolve().parent / "static" / "index.html"
+    if static_fallback.is_file():
+        return FileResponse(static_fallback, headers=SPA_HEADERS)
+    raise HTTPException(status_code=404, detail="Not found (UI not bundled in this image; API is operational — see /docs)")
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    import os
+    _port = int(os.environ.get("PORT", "8000"))
+    uvicorn.run("main:app", host="0.0.0.0", port=_port, reload=True)

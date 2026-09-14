@@ -1,0 +1,23 @@
+# Keep the Docker build context small (faster Render builds, no secrets shipped).
+.git/
+.github/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+frontend/node_modules/
+frontend/dist/
+node_modules/
+*.log
+server_stdout.log
+server_stderr.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+offpage_seo.db*
+search_cache.db
+data/
+.pytest_cache/
+docs/screenshots/
