@@ -1,5 +1,7 @@
 # Off-Page SEO Intelligence
 
+**Live: https://complete-off-page-seo.onrender.com/ · API docs: https://complete-off-page-seo.onrender.com/docs · Health: https://complete-off-page-seo.onrender.com/health**
+
 **Entity-First Off-Page Command Center · 35 Modules + 7 Extended + 8 P0 2026 Routers · Real Data Only · v2026.4 Enterprise+ Release**
 
 A full-stack, 42-section off-page SEO intelligence engine that measures and improves how search engines, LLM agents and AI answers perceive, cite, rank and trust your brand entity — **every number is collected live from real public sources. Nothing is fabricated, simulated or randomly generated.**
@@ -299,10 +301,13 @@ python main.py            # defaults to http://localhost:8000 (reload on)
 python -m uvicorn main:app --host 127.0.0.1 --port 8000
 
 # 5. Open the UI
-#    http://127.0.0.1:8000
-#    API docs: http://127.0.0.1:8000/docs
-#    Health:   http://127.0.0.1:8000/health
-#    Provider status: http://127.0.0.1:8000/api/v1/provider-status
+#    Local:  http://127.0.0.1:8000
+#    Live:   https://complete-off-page-seo.onrender.com/
+#    API docs (local): http://127.0.0.1:8000/docs
+#    API docs (live):  https://complete-off-page-seo.onrender.com/docs
+#    Health (local):   http://127.0.0.1:8000/health
+#    Health (live):    https://complete-off-page-seo.onrender.com/health
+#    Provider status:  https://complete-off-page-seo.onrender.com/api/v1/provider-status
 ```
 
 **Minimum requirements:** Python 3.11+ and an internet connection. No API keys are required for the free tier — the engine uses SerpAPI (when keyed) → 7-day disk cache → Brave → Bing Web → Bing RSS → `ddgs` library (rotating UAs; dead DDG-HTML leg deleted v2026.2), Bing News RSS, Google News RSS, Wikipedia, Wikidata, GitHub Search, Hacker News, Stack Exchange, iTunes Search and RDAP directly. Install deps with `pip install -r requirements.txt` (`ddgs`, `reportlab`, `apscheduler` included).
@@ -312,8 +317,9 @@ python -m uvicorn main:app --host 127.0.0.1 --port 8000
 The repo ships a production `Dockerfile` (Node stage builds the React SPA → Python stage serves API + UI) plus `render.yaml` (health check `/health`, 1 GB persistent disk at `/app/data`).
 
 1. Render dashboard → New → Blueprint → select this repo (or New → Web Service → Docker, health check path `/health`).
-2. Set env vars: `SECRET_KEY` (Generate), `FRONTEND_ORIGINS=https://<your-app>.onrender.com`, `REQUIRE_AUTH=false`, `DATABASE_URL=sqlite:///./offpage_seo.db`.
+2. Set env vars: `SECRET_KEY` (Generate), `FRONTEND_ORIGINS=https://complete-off-page-seo.onrender.com`, `REQUIRE_AUTH=false`, `DATABASE_URL=sqlite:///./offpage_seo.db`.
 3. Deploy. `GET /` serves the UI when bundled and API info in API-only mode — it never 500s. The container listens on `$PORT` (Render injects it; local default `8000`).
+4. Live instance: **https://complete-off-page-seo.onrender.com/** ([docs](https://complete-off-page-seo.onrender.com/docs) · [health](https://complete-off-page-seo.onrender.com/health) · [provider status](https://complete-off-page-seo.onrender.com/api/v1/provider-status)).
 
 ---
 
@@ -358,7 +364,7 @@ python scripts/verify_engine.py
 
 ## API Reference
 
-Interactive docs at `/docs` (Swagger) and `/redoc`. Health check at `/health`.
+Interactive docs at `/docs` locally or [live on Render](https://complete-off-page-seo.onrender.com/docs) (and `/redoc`). Health check at `/health` ([live](https://complete-off-page-seo.onrender.com/health)).
 
 | Area | Router prefix |
 | --- | --- |
