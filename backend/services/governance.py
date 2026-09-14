@@ -37,11 +37,14 @@ def gate_tactics(tactics: list[str], risk_score: int) -> dict[str, Any]:
         tl = (t or "").lower()
         is_risky = any(k in tl for k in ("expired", "pbn", "paid link", "sponsor", "buy link"))
         if risk_score < 40 and is_risky:
-            blocked.append({"tactic": t, "reason": f"risk {risk_score}<40 blocks high-risk tactic"})
+            blocked.append({"tactic": t, "reason": f"risk {risk_score}<40 blocks high-risk tactic",
+                            "replace_with": "digital PR + satellite entity claiming + unlinked-citation conversion (SpamBrain/manual-review safe)"})
         else:
             allowed.append(t)
     return {"allowed": allowed, "blocked": blocked, "risk_score": risk_score,
-            "policy": "risk<40 blocks expired/PBN/paid; 40-59 warns; 60+ permits with disclosure"}
+            "policy": "risk<40 blocks expired/PBN/paid; 40-59 warns; 60+ permits with disclosure",
+            "safe_alternatives": ["digital PR (newsroom hooks with real URLs)", "satellite entity claiming",
+                                  "unlinked citation conversion", "Reddit/YouTube citable content"]}
 
 
 def anchor_warnings(commercial_ratio: float, top_domain_share: float) -> list[str]:

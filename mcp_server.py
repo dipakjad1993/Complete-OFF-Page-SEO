@@ -17,8 +17,8 @@ TOOLS = ["offpage_audit", "kg_check", "pr_hooks", "bot_governance", "prompt_trac
 
 
 async def offpage_audit(brand_id: int) -> dict:
-    from backend.api.analysis import get_analysis_results  # noqa
     import os
+    # Prefer live latest snapshot; fall back to honest no_results (never fake).
     path = f"data/analysis_results/{brand_id}_latest.json"
     if not os.path.exists(path):
         return {"status": "no_results", "hint": "POST /api/v1/analysis/run first."}
@@ -58,23 +58,52 @@ _HANDLERS = {"offpage_audit": offpage_audit, "kg_check": kg_check,
 def _try_fastmcp():
     try:
         from fastmcp import FastMCP  # type: ignore
+        from pydantic import BaseModel, Field
         mcp = FastMCP("offpage-seo")
+
+        class BrandArg(BaseModel):
+            brand_id: int = Field(..., ge=1, description="Brand row ID")
 
         @mcp.tool()
         async def offpage_audit_tool(brand_id: int) -> dict:
-            return await offpage_audit(brand_id)
+            BrandArg(brand_id=brand_id)
+            data = await offpage_audit(brand_id)
+            return _truncate(data)
 
         @mcp.tool()
         async def kg_check_tool(brand_id: int) -> dict:
-            return await kg_check(brand_id)
+            BrandArg(brand_id=brand_id)
+            return _truncate(await kg_check(brand_id))
 
         @mcp.tool()
         async def pr_hooks_tool(brand_id: int) -> dict:
-            return await pr_hooks(brand_id)
+            BrandArg(brand_id=brand_id)
+            return _truncate(await pr_hooks(brand_id))
+
+        @mcp.tool()
+        async def bot_governance_tool(brand_id: int) -> dict:
+            BrandArg(brand_id=brand_id)
+            return _truncate(await bot_governance(brand_id))
+
+        @mcp.tool()
+        async def prompt_tracking_tool(brand_id: int) -> dict:
+            BrandArg(brand_id=brand_id)
+            return _truncate(await prompt_tracking(brand_id))
 
         return mcp
     except Exception:
         return None
+
+
+def _truncate(data: dict, limit: int = 20000) -> dict:
+    """Truncate payloads safely but preserve full JSON via pagination hint."""
+    import json as _j
+    s = _j.dumps(data, default=str)
+    if len(s) <= limit:
+        return data
+    return {"truncated": True, "bytes": len(s),
+            "preview": s[:limit],
+            "hint": "Use REST GET /api/v1/analysis/results/{brand_id} for full paginated payload."}
 
 
 async def _stdio_loop():

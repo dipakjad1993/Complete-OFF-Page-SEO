@@ -37,7 +37,6 @@ class Settings(BaseSettings):
     PERPLEXITY_API_KEY: Optional[str] = None
     BRAVE_SEARCH_API_KEY: Optional[str] = None
     BING_SEARCH_API_KEY: Optional[str] = None
-    GOOGLE_CSE_ID: Optional[str] = None
     CREDENTIALS_FERNET_KEY: Optional[str] = None
     REQUIRE_AUTH: bool = False
     SEARCH_CACHE_TTL_DAYS: int = 7

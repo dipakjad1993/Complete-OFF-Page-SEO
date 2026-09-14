@@ -86,27 +86,36 @@ async def run_prompts(brand_id: int, payload: dict | None = None):
     keyed = 0
     for p in prompts:
         hit = await _keyed_probe(p["prompt"])
-        if hit and brand.lower() in hit["text"].lower():
-            rows.append({**p, "mode": "llm_keyed", "cited": True,
-                         "sentiment": "neutral", "engines": [hit["engine"]]})
-            keyed += 1
-        elif hit:
-            rows.append({**p, "mode": "llm_keyed", "cited": False,
-                         "sentiment": "neutral", "engines": [hit["engine"]]})
+        if hit:
+            txt_low = hit["text"].lower()
+            cited = brand.lower() in txt_low or (domain and domain in txt_low)
+            # naive sentiment: lexicon over LLM text (real text, heuristic score labeled)
+            pos = sum(w in txt_low for w in ("best", "great", "excellent", "love", "recommend", "leading"))
+            neg = sum(w in txt_low for w in ("worst", "avoid", "scam", "terrible", "fraud", "poor"))
+            sent = "positive" if pos > neg else "negative" if neg > pos else "neutral"
+            rows.append({**p, "mode": "llm_keyed", "engine": hit["engine"],
+                         "cited": cited, "cited_yn": "Y" if cited else "N",
+                         "position": 1 if cited else None,
+                         "sentiment": sent, "date": datetime.now(timezone.utc).date().isoformat(),
+                         "engines": [hit["engine"]]})
             keyed += 1
         else:
-            # honest proxy: live SERP mention check
+            # honest proxy: live SERP mention check with rank position
             from backend.services.search import search_web
             res = await search_web(p["prompt"], brand_name=brand, num=6)
-            cited = False
+            cited, pos_idx, prov = False, None, "serp-proxy"
             if isinstance(res, VerifiedData) and res.value:
-                for r in res.value:
+                prov = getattr(res, "source", "serp-proxy")
+                for i, r in enumerate(res.value, start=1):
                     blob = f"{r.get('title','')} {r.get('snippet','')} {r.get('url','')}".lower()
                     if brand.lower() in blob or (domain and domain in blob):
-                        cited = True
+                        cited, pos_idx = True, i
                         break
-            rows.append({**p, "mode": "proxy_serp", "cited": cited,
-                         "sentiment": "unknown (proxy)", "engines": ["serp-proxy"]})
+            rows.append({**p, "mode": "proxy_serp", "engine": prov,
+                         "cited": cited, "cited_yn": "Y" if cited else "N",
+                         "position": pos_idx, "sentiment": "unknown (proxy)",
+                         "date": datetime.now(timezone.utc).date().isoformat(),
+                         "engines": ["serp-proxy"]})
     cited_n = sum(1 for r in rows if r["cited"])
     run = {"at": datetime.now(timezone.utc).isoformat(), "brand_id": brand_id,
            "mode": "llm_keyed" if keyed else "proxy_serp",
@@ -133,6 +142,10 @@ async def history(brand_id: int):
                 runs.append(json.loads(line))
             except Exception:
                 continue
-    trend = [{"at": r["at"], "citation_rate": r["citation_rate"], "mode": r["mode"]} for r in runs[-30:]]
+    trend = [{"at": r["at"], "date": r.get("at", "")[:10], "citation_rate": r["citation_rate"], "mode": r["mode"],
+              "cited": r.get("cited"), "tested": r.get("tested")} for r in runs[-30:]]
+    # Persist note: JSONL is the dev store; Postgres table prompt_runs (Alembic) is the prod store
+    # with columns (brand_id, prompt, engine, cited_yn, position, sentiment, date). Rows already carry those fields.
     return {"status": "ok", "runs": runs[-30:], "trend": trend,
-            "methodology": "JSONL prompt-run store; chart citation_rate over time."}
+            "schema": ["prompt", "engine", "cited(Y/N)", "position", "sentiment", "date"],
+            "methodology": "JSONL prompt-run store (dev) / Postgres prompt_runs (prod); chart citation_rate over time."}

@@ -1,10 +1,10 @@
 # Off-Page SEO Intelligence
 
-**Entity-First Off-Page Command Center · 35 Modules + 7 Extended · Real Data Only · v2026.3 Enterprise Release**
+**Entity-First Off-Page Command Center · 35 Modules + 7 Extended + 8 P0 2026 Routers · Real Data Only · v2026.4 Enterprise+ Release**
 
 A full-stack, 42-section off-page SEO intelligence engine that measures and improves how search engines, LLM agents and AI answers perceive, cite, rank and trust your brand entity — **every number is collected live from real public sources. Nothing is fabricated, simulated or randomly generated.**
 
-> **v2026.3 Enterprise Release (14 Sep 2026)** — monolith split (`backend/api/analysis.py` 4,568 → 1,749 lines; features live in `backend/modules/{common,llm,pr,kg,technical,risk}.py` with per-module timeout + retry + circuit breaker), unified brand-config resolver (nested intake + DB fallback — risk slider, competitors, spokespeople now resolve everywhere), scraper search rebuilt on the central provider chain (fragile Google/DDG-HTML legs deleted), run-over-run snapshots + working multi-brand diff + regression webhooks, run-over-run delta panel in Deliverables, PDF real-data-only footer + `WHITE_LABEL_BRAND` theming, Pydantic v2 cleanup. Live proof: The Hindu — **42 sections, 39 ok / 3 honest-unavailable / 0 errors, Entity Authority 68.3 (B)**.
+> **v2026.4 Enterprise+ Release (14 Sep 2026)** — builds on v2026.3 (monolith split `backend/api/analysis.py` 4,568 → ~1,750 lines; unified brand-config resolver; central-chain scraper search with Google/DDG-HTML legs deleted; snapshots + multi-brand diff + regression webhooks; delta panel; PDF honesty footer + `WHITE_LABEL_BRAND`): TLS hardened (`verify=True` everywhere, shared client + per-module guard with timeout + retry + circuit breaker), `social.py` facade fixed, MCP FastMCP parity 5/5 tools + pydantic validation, Docker HEALTHCHECK + non-root + Postgres-16 prod path, LLM perception + RAG repair free proxy tiers (10-prompt SERP SoV, never empty), prompt tracking with prompt/engine/cited-Y-N/position/sentiment/date, E-E-A-T author audit, 14-bot governance split (GPTBot vs OAI-SearchBot vs PerplexityBot vs CCBot), UGC citation-share, 8 new P0 routers (AIO tracker, zero-click, transcripts, llms 29-check, sentiment, source-influence ROI, CWV, billing/RBAC), CSV with confidence+evidence, Deliverables CSV/JSON + zero-click panel, optimization human-in-loop queue. Live proof: The Hindu — **42 sections, 39 ok / 3 honest-unavailable / 0 errors, Entity Authority 68.3 (B)**.
 
 - **Frontend:** React + Vite (TypeScript) — step-by-step intake → live progress → full client-ready report
 - **Backend:** Python / FastAPI + SQLAlchemy + SQLite (WAL mode, non-blocking background jobs)
@@ -305,7 +305,7 @@ python -m uvicorn main:app --host 127.0.0.1 --port 8000
 #    Provider status: http://127.0.0.1:8000/api/v1/provider-status
 ```
 
-**Minimum requirements:** Python 3.11+ and an internet connection. No API keys are required for the free tier — the engine uses Bing RSS → `ddgs` library → DuckDuckGo HTML (rotating UAs), Bing News RSS, Google News RSS, Wikipedia, Wikidata, GitHub Search, Hacker News, Stack Exchange, iTunes Search and RDAP directly. Install deps with `pip install -r requirements.txt` (`ddgs`, `reportlab`, `apscheduler` included).
+**Minimum requirements:** Python 3.11+ and an internet connection. No API keys are required for the free tier — the engine uses SerpAPI (when keyed) → 7-day disk cache → Brave → Bing Web → Bing RSS → `ddgs` library (rotating UAs; dead DDG-HTML leg deleted v2026.2), Bing News RSS, Google News RSS, Wikipedia, Wikidata, GitHub Search, Hacker News, Stack Exchange, iTunes Search and RDAP directly. Install deps with `pip install -r requirements.txt` (`ddgs`, `reportlab`, `apscheduler` included).
 
 ---
 
@@ -366,6 +366,15 @@ Interactive docs at `/docs` (Swagger) and `/redoc`. Health check at `/health`.
 | Reddit monitor | `/api/v1/reddit-monitor` |
 | Share of search | `/api/v1/share-of-search` |
 | Vector engine, Consensus, Simulation, Geo audit, Edge redirect, Toxic analysis, Zero-party data, Passage scoring, Satellite entities, Schema validator, Anchor analysis, Crawl accelerator, Visual audit, Dead equity, Dashboard, Campaigns, Alerts, Features | `/api/v1/*` |
+| AIO citation tracker (cited vs mentioned vs linked) | `/api/v1/aio-tracker` (`/report/{brand_id}`, `/history/{brand_id}`) |
+| Zero-click + AI attribution | `/api/v1/zero-click` (`/dashboard/{brand_id}`) |
+| Transcript pipeline (YouTube/TikTok/Whisper) | `/api/v1/transcripts` (`/audit/{brand_id}`, `/whisper`) |
+| llms.txt 29-check audit | `/api/v1/llms-audit` (`/audit/{brand_id}`) |
+| Sentiment / narrative + hallucination | `/api/v1/sentiment` (`/narrative/{brand_id}`) |
+| Source Influence ROI (closed loop) | `/api/v1/source-influence` (`/roi/{brand_id}`) |
+| CrUX / CWV + hreflang cluster | `/api/v1/cwv` (`/audit/{brand_id}`) |
+| UGC citation-share | `/api/v1/ugc-depth` (`/citation-share/{brand_id}`) |
+| Billing + white-label tenant | `/api/v1/billing` (`/plans`, `/tenant`) |
 
 Key analysis endpoints:
 
@@ -413,8 +422,8 @@ This tool was built around one hard rule: **never fabricate data.**
 
 ```
 Complete-OFF-Page-SEO/
-├── main.py                      # FastAPI app: routers, SPA serving, /health, /docs
-├── mcp_server.py                # MCP tools for Claude/Cursor: offpage_audit, kg_check, pr_hooks, bot_governance, prompt_tracking
+├── main.py                      # FastAPI app: 47 routers, SPA serving, /health, /docs
+├── mcp_server.py                # MCP tools for Claude/Cursor: offpage_audit, kg_check, pr_hooks, bot_governance, prompt_tracking (FastMCP 5/5 + stdio fallback)
 ├── setup.py / requirements*.txt # base (lean) vs ml (2GB embeddings, optional) installs
 ├── Dockerfile / docker-compose.yml  # prod: backend + frontend dev + optional Postgres
 ├── offpage_seo.db               # SQLite (WAL dev; Postgres via DATABASE_URL for scale)
@@ -438,8 +447,10 @@ Complete-OFF-Page-SEO/
 │   │   ├── analysis.py          # thin orchestrator: runner, enrichment, governance, Entity Authority, PDF, endpoints
 │   │   ├── intake.py            # intake data layer
 │   │   ├── website_scraper.py   # intake scrape (lean path + central-chain search, no HTML scraping)
-│   │   ├── bot_governance.py / prompt_tracking.py / kg_ops.py / ugc_depth.py  # P1 routers
-│   │   ├── image_backlinks.py / author_graph.py / multi_brand.py / pr_outreach.py / auth.py
+│   │   ├── bot_governance.py / prompt_tracking.py / kg_ops.py / ugc_depth.py  # P1 routers (+citation-share)
+│   │   ├── image_backlinks.py / author_graph.py (E-E-A-T audit) / multi_brand.py / pr_outreach.py / auth.py (JWT+RBAC)
+│   │   ├── aio_tracker.py / zero_click.py / transcript_pipeline.py / llms_audit.py  # ★ v2026.4 P0
+│   │   ├── sentiment.py / source_influence.py / cwv.py / billing.py  # ★ v2026.4 P0
 │   │   └── … 25 more feature routers
 │   └── services/
 │       ├── search.py            # SerpAPI → 7-day disk cache → Brave → Bing Web → Bing RSS → ddgs (provider attribution)
@@ -452,14 +463,15 @@ Complete-OFF-Page-SEO/
 │       └── verification.py      # live URL → brand-mention verification
 ├── frontend/
 │   ├── src/pages/ToolApp.tsx    # intake → pipeline → results SPA
-│   ├── src/pages/Deliverables.tsx  # enterprise outputs UI (KPIs, run-over-run delta, recharts, coverage matrix)
+│   ├── src/pages/Deliverables.tsx  # enterprise outputs UI (KPIs, delta, zero-click panel, CSV/JSON/PDF, recharts, coverage matrix)
 │   ├── src/data/features.ts     # the 35 module definitions
 │   └── dist/                    # prebuilt bundle served by FastAPI (git-ignored, `npm run build`)
 ├── data/
 │   ├── brand_configs.json       # persisted brand schemas (nested: schema/risk/scraper)
 │   ├── api_credentials.json     # stored keys (empty until configured; Fernet vault available)
 │   ├── analysis_results/        # *_latest.json per brand (local runs; git-ignored except seeded sample)
-│   └── run_snapshots/           # ★ v2026.3: per-run archives powering diff + delta panel (git-ignored)
+│   └── run_snapshots/           # per-run archives powering diff + delta panel (git-ignored)
+│   ├── aio_runs/ / prompt_runs/ / optimization_queue/  # P0 trend stores + human-approve queue (git-ignored)
 ├── scripts/                     # init_db, verify_engine, start_server, anti_fabrication_check, split_monolith
 ├── tests/test_modules.py        # per-module mock tests (guard, vector, governance, registry, resolver)
 └── .github/workflows/ci.yml     # lint + anti-fabrication audit + pytest
@@ -468,6 +480,13 @@ Complete-OFF-Page-SEO/
 ---
 
 ## Contributing & Roadmap
+
+**Shipped in v2026.4 Enterprise+ (14 Sep 2026):**
+- Hardening: TLS verify=True everywhere, shared-client guard + circuit breaker on all 35 modules, social.py facade fixed, MCP FastMCP 5/5 tools + validation, Dockerfile HEALTHCHECK + non-root, compose Postgres-16 prod path
+- LLM proxy tiers: perception (10-prompt SERP SoV) + RAG repair (claim-page verification) never empty; vector TF-IDF labeled low_signal; prompt tracking persists prompt/engine/cited-Y-N/position/sentiment/date
+- Depth: E-E-A-T author audit (Person schema + byline FAIL), 14-bot governance split + spoof/drop alerts, UGC citation-share, CSV confidence+evidence, Deliverables CSV/JSON + zero-click panel + P0 links
+- New P0 routers: aio-tracker, zero-click, transcripts, llms-audit 29-check, sentiment/narrative, source-influence ROI, cwv/hreflang, billing/RBAC + scheduler human-in-loop optimization queue
+- 10/10 tests green + anti-fabrication + lean-import + py311 scans green
 
 **Shipped in v2026.3 (14 Sep 2026):**
 - Monolith split: `analysis.py` 4,568 → ~1,750 lines; features in `backend/modules/*` + `registry.py` (per-module timeout + retry + circuit breaker); 4 stranded-lexicon + star-export bugs found and fixed via live runs

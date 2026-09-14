@@ -46,25 +46,7 @@ WIKI_HEADERS = {
     "Accept": "application/json",
 }
 
-MODULE_TIMEOUT_SECS = 120
-
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Upgrade-Insecure-Requests": "1",
-}
-
-# Wikidata requires a descriptive User-Agent with contact info (browser UAs get 403).
-WIKI_HEADERS = {
-    "User-Agent": "CompleteSEOScraper/2.0 (https://github.com/completeseo; contact@completeseo.com)",
-    "Accept": "application/json",
-}
+# NOTE: Wikidata requires a descriptive User-Agent with contact info (browser UAs get 403).
 
 
 
@@ -329,7 +311,7 @@ def _title_matches(url, brand_name, brand_category):
         return _source_title_cache[url]
     result = False
     try:
-        resp = httpx.get(url, headers=HEADERS, timeout=6, follow_redirects=True, verify=False)
+        resp = httpx.get(url, headers=HEADERS, timeout=6, follow_redirects=True, verify=True)
         if resp.status_code == 200 and resp.text:
             soup = BeautifulSoup(resp.text, "html.parser")
             title = soup.title.get_text(strip=True) if soup.title else ""

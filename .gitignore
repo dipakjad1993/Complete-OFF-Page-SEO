@@ -35,6 +35,8 @@ data/analysis_progress/
 data/analysis_results/
 data/prompt_runs/
 data/run_snapshots/
+data/aio_runs/
+data/optimization_queue/
 data/credentials.vault
 data/webhooks.json
 data/audit_log.jsonl

@@ -59,7 +59,7 @@ async def run_full_analysis(brand_id: int, db: Session):
         "status": "running",
     }
 
-    async with httpx.AsyncClient(timeout=30, follow_redirects=True, verify=False) as client:
+    async with httpx.AsyncClient(timeout=30, follow_redirects=True, verify=True) as client:
         ddg_features = [
             ("llm_perception", feature_llm_perception),
             ("unlinked_citations", feature_unlinked_citations),
@@ -143,13 +143,22 @@ async def run_full_analysis(brand_id: int, db: Session):
         import time as _time
 
         async def run_feature(key, func):
+            from backend.modules.base import breaker_allows, breaker_record
             _mstart = _time.time()
             _timeout = MODULE_TIMEOUTS.get(key, MODULE_TIMEOUT_SECS)
+            if not breaker_allows(key):
+                return key, {"feature_name": key, "status": "unavailable", "data_status": "unavailable",
+                         "requires": "Live data source", "verified": False, "score": None,
+                         "assessment": "circuit_open",
+                         "recommendation": f"{MODULE_LABELS.get(key, key)} skipped: circuit open after 3 consecutive failures (5-min cooldown).",
+                         "detailed_analysis": "Registry circuit-breaker open. No live call attempted; no data fabricated.",
+                         "runtime_secs": 0.0}
             for _attempt in range(2):  # 1 retry with backoff
                 try:
                     r = await asyncio.wait_for(func(brand, domain, client, db), timeout=_timeout)
                     r["runtime_secs"] = round(_time.time() - _mstart, 1)
                     r.setdefault("provider", r.get("method") or "free-tier")
+                    breaker_record(key, True)
                     return key, r
                 except asyncio.TimeoutError:
                     if _attempt == 0:
@@ -164,6 +173,8 @@ async def run_full_analysis(brand_id: int, db: Session):
                     return key, r
                 except Exception as e:
                     import traceback
+                    from backend.modules.base import breaker_record as _br
+                    _br(key, False)
                     r = {"error": str(e), "feature_name": key, "traceback": traceback.format_exc(),
                          "assessment": "error", "status": "error", "verified": False,
                          "recommendation": f"Feature encountered an error: {str(e)[:200]}",
@@ -1036,7 +1047,7 @@ def export_results(brand_id: int, format: str = "json"):
         from fastapi.responses import StreamingResponse
         buf = io.StringIO()
         w = csv.writer(buf)
-        w.writerow(["module", "feature_name", "status", "verified", "method", "runtime_secs", "top_finding", "sources_count"])
+        w.writerow(["module", "feature_name", "status", "verified", "confidence", "method", "runtime_secs", "top_finding", "sources_count", "evidence", "sources"])
         for key, s in sorted(sections.items()):
             if not isinstance(s, dict):
                 continue
@@ -1044,8 +1055,10 @@ def export_results(brand_id: int, format: str = "json"):
             top = ""
             if findings and isinstance(findings[0], dict):
                 top = f"{findings[0].get('metric')}: {findings[0].get('value')}"
+            srcs = s.get("sources") or []
+            src_urls = "; ".join([(x.get("url", "") if isinstance(x, dict) else str(x)) for x in srcs[:5]])
             w.writerow([key, s.get("feature_name", ""), s.get("status", ""), s.get("verified", ""),
-                        s.get("method", ""), s.get("runtime_secs", ""), top, len(s.get("sources") or [])])
+                        s.get("confidence", ""), s.get("method", ""), s.get("runtime_secs", ""), top, len(srcs), top, src_urls])
         buf.seek(0)
         return StreamingResponse(iter([buf.getvalue()]), media_type="text/csv",
                                  headers={"Content-Disposition": f"attachment; filename=brand-{brand_id}-analysis.csv"})

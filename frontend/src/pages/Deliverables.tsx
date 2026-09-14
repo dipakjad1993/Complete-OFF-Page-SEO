@@ -164,36 +164,74 @@ function UrlLine({ url, extra }: { url: unknown; extra?: React.ReactNode }) {
   );
 }
 
-function PdfButton({ brandId, brandName }: { brandId?: number | null; brandName?: string }) {
-  const [busy, setBusy] = React.useState(false);
+function ExportButtons({ brandId, brandName }: { brandId?: number | null; brandName?: string }) {
+  const [busy, setBusy] = React.useState('');
   const [err, setErr] = React.useState('');
   if (!brandId) return null;
-  const download = async () => {
-    setBusy(true);
+  const dl = async (format: 'pdf' | 'csv' | 'json') => {
+    setBusy(format);
     setErr('');
     try {
-      const res = await fetch(`/api/v1/analysis/export/${brandId}?format=pdf`);
-      if (!res.ok) throw new Error(`PDF export failed (${res.status})`);
+      const res = await fetch(`/api/v1/analysis/export/${brandId}?format=${format}`);
+      if (!res.ok) throw new Error(`${format.toUpperCase()} export failed (${res.status})`);
       const blob = await res.blob();
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `brand-${brandId}-deliverables.pdf`;
+      a.download = `brand-${brandId}-deliverables.${format}`;
       document.body.appendChild(a);
       a.click();
       setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
     } catch (e) {
-      setErr((e as Error).message || 'PDF download failed.');
+      setErr((e as Error).message || 'Download failed.');
     } finally {
-      setBusy(false);
+      setBusy('');
     }
   };
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-      <button type="button" className="info-cta" onClick={download} disabled={busy} style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem' }}>
-        {busy ? <><Loader2 size={15} className="animate-spin" /> Building PDF…</> : <><Download size={15} /> Download full report PDF{brandName ? ` — ${brandName}` : ''}</>}
+      <button type="button" className="info-cta" onClick={() => dl('pdf')} disabled={!!busy} style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem' }}>
+        {busy === 'pdf' ? <><Loader2 size={15} className="animate-spin" /> Building PDF…</> : <><Download size={15} /> PDF{brandName ? ` — ${brandName}` : ''}</>}
+      </button>
+      <button type="button" className="info-cta" onClick={() => dl('csv')} disabled={!!busy} style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem' }}>
+        {busy === 'csv' ? <><Loader2 size={15} className="animate-spin" /> Building CSV…</> : <><FileText size={15} /> CSV (confidence+evidence)</>}
+      </button>
+      <button type="button" className="info-cta" onClick={() => dl('json')} disabled={!!busy} style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem' }}>
+        {busy === 'json' ? <><Loader2 size={15} className="animate-spin" /> Building JSON…</> : <><FileCode2 size={15} /> JSON</>}
       </button>
       {err && <span style={{ color: 'var(--danger)', fontSize: '0.78rem' }}>{err}</span>}
     </span>
+  );
+}
+
+function PdfButton({ brandId, brandName }: { brandId?: number | null; brandName?: string }) {
+  return <ExportButtons brandId={brandId} brandName={brandName} />;
+}
+
+function ZeroClickPanel({ brandId }: { brandId?: number | null }) {
+  const [zc, setZc] = useState<any>(null);
+  useEffect(() => {
+    if (!brandId) return;
+    let live = true;
+    fetch(`/api/v1/zero-click/dashboard/${brandId}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (live) setZc(d); })
+      .catch(() => {});
+    return () => { live = false; };
+  }, [brandId]);
+  if (!brandId || !zc || zc.status !== 'ok') return null;
+  return (
+    <div className="deliverable-block">
+      <h3 className="deliverable-title"><Gauge size={16} /> Zero-click + AI-referral diagnostic</h3>
+      <p className="deliverable-note" style={{ marginBottom: '0.4rem' }}>
+        {zc.mode === 'proxy_serp'
+          ? `Proxy CTR ${zc.ctr_proxy} (${zc.clicks_proxy}/${zc.impressions_proxy}) — ${zc.zero_click_victim ? 'LIKELY zero-click victim (<0.5% CTR rule with AIO).' : 'no strong victim signal.'}`
+          : 'Keyed GSC+GA4 mode — see CTR per query + ChatGPT/Perplexity referral split in API.'}
+      </p>
+      <p className="deliverable-note" style={{ margin: 0 }}>
+        AI referrals: {zc.ai_referrals?.status === 'unavailable' ? zc.ai_referrals.reason : 'segmented (chatgpt.com / perplexity.ai / claude.ai).'}
+        {' '}Money: {zc.money?.note ?? 'connect GSC+GA4 for $$$ saved/lost.'}
+      </p>
+    </div>
   );
 }
 
@@ -364,6 +402,24 @@ export default function Deliverables({ summary, sections, brandId, brandName, br
         </div>
         <div style={{ marginTop: '1rem' }}>
           <RunDelta brandId={brandId} />
+        </div>
+        <div style={{ marginTop: '1rem' }}>
+          <ZeroClickPanel brandId={brandId} />
+        </div>
+        <div className="deliverable-block" style={{ marginTop: '1rem' }}>
+          <h3 className="deliverable-title"><Network size={16} /> 2026 P0 deep-dive APIs (live)</h3>
+          <p className="deliverable-note">
+            {brandId ? (<>
+              <a className="inline-link" href={`/api/v1/aio-tracker/report/${brandId}`} target="_blank" rel="noreferrer">AIO citation tracker</a>{' · '}
+              <a className="inline-link" href={`/api/v1/zero-click/dashboard/${brandId}`} target="_blank" rel="noreferrer">Zero-click attribution</a>{' · '}
+              <a className="inline-link" href={`/api/v1/llms-audit/audit/${brandId}`} target="_blank" rel="noreferrer">llms.txt 29-check</a>{' · '}
+              <a className="inline-link" href={`/api/v1/sentiment/narrative/${brandId}`} target="_blank" rel="noreferrer">Sentiment/narrative</a>{' · '}
+              <a className="inline-link" href={`/api/v1/source-influence/roi/${brandId}`} target="_blank" rel="noreferrer">Source Influence ROI</a>{' · '}
+              <a className="inline-link" href={`/api/v1/cwv/audit/${brandId}`} target="_blank" rel="noreferrer">CrUX/CWV</a>{' · '}
+              <a className="inline-link" href={`/api/v1/transcripts/audit/${brandId}`} target="_blank" rel="noreferrer">Transcripts</a>{' · '}
+              <a className="inline-link" href={`/api/v1/ugc-depth/citation-share/${brandId}`} target="_blank" rel="noreferrer">UGC citation-share</a>
+            </>) : 'Run an analysis to unlock live P0 endpoints.'}
+          </p>
         </div>
         <div className="deliverable-grid2" style={{ marginTop: '1rem' }}>
           <div className="deliverable-block">

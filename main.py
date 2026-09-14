@@ -22,6 +22,8 @@ from backend.api import (
     website_scraper, bot_governance, prompt_tracking, kg_ops,
     ugc_depth, image_backlinks, author_graph, multi_brand,
     pr_outreach, auth as auth_api,
+    aio_tracker, zero_click, transcript_pipeline, llms_audit,
+    sentiment, source_influence, cwv, billing,
 )
 
 
@@ -107,6 +109,14 @@ app.include_router(image_backlinks.router, prefix="/api/v1/image-backlinks", tag
 app.include_router(author_graph.router, prefix="/api/v1/author-graph", tags=["Author Graph"])
 app.include_router(multi_brand.router, prefix="/api/v1/multi-brand", tags=["Multi-Brand"])
 app.include_router(pr_outreach.router, prefix="/api/v1/pr-outreach", tags=["PR Outreach 2.0"])
+app.include_router(aio_tracker.router, prefix="/api/v1/aio-tracker", tags=["AIO Citation Tracker"])
+app.include_router(zero_click.router, prefix="/api/v1/zero-click", tags=["Zero-Click Attribution"])
+app.include_router(transcript_pipeline.router, prefix="/api/v1/transcripts", tags=["Transcript Pipeline"])
+app.include_router(llms_audit.router, prefix="/api/v1/llms-audit", tags=["LLMs.txt 29-Check"])
+app.include_router(sentiment.router, prefix="/api/v1/sentiment", tags=["Sentiment & Narrative"])
+app.include_router(source_influence.router, prefix="/api/v1/source-influence", tags=["Source Influence ROI"])
+app.include_router(cwv.router, prefix="/api/v1/cwv", tags=["CWV & Hreflang"])
+app.include_router(billing.router, prefix="/api/v1/billing", tags=["Billing & White-Label"])
 
 FRONTEND_DIST = Path(__file__).resolve().parent / "frontend" / "dist"
 SPA_HEADERS = {
@@ -125,6 +135,8 @@ async def api_info():
         "version": settings.APP_VERSION,
         "status": "operational",
         "features_count": 35,
+        "extended_count": 7,
+        "p0_2026": ["aio-tracker", "zero-click", "transcripts", "llms-audit", "sentiment", "source-influence", "cwv"],
     }
 
 

@@ -104,7 +104,7 @@ async def search_web(query, client, max_results=8):
     try:
         from urllib.parse import quote_plus
         import httpx as _hx
-        async with _hx.AsyncClient(timeout=10, follow_redirects=True, verify=False) as _c:
+        async with _hx.AsyncClient(timeout=10, follow_redirects=True, verify=True) as _c:
             resp = await _c.get(
                 f"https://www.bing.com/search?q={quote_plus(query)}&format=rss&count={max_results}",
                 headers=SEARCH_HEADERS)
@@ -1734,7 +1734,7 @@ async def scrape_website(req: ScrapeRequest):
 
     # v2026.3 lean path: title/H1/schema/OG + seed keywords only (intake fast lane).
     if req.lean:
-        async with httpx.AsyncClient(follow_redirects=True, timeout=12, verify=False) as _c:
+        async with httpx.AsyncClient(follow_redirects=True, timeout=12, verify=True) as _c:
             html = await safe_fetch(url, _c)
             if not html:
                 raise HTTPException(status_code=502, detail="Lean fetch failed (no live HTML).")
@@ -1757,7 +1757,7 @@ async def scrape_website(req: ScrapeRequest):
                     "title": title, "h1": h1, "schemas": [s for s in schemas if s][:8],
                     "og": ogs, "methodology": "lean fetch: single live page, no crawl."}
 
-    async with httpx.AsyncClient(follow_redirects=True, timeout=12, verify=False) as client:
+    async with httpx.AsyncClient(follow_redirects=True, timeout=12, verify=True) as client:
         # ---- LAYER 0: fetch the input page (works for blog/article URLs too) ----
         input_data = None
         input_html = await safe_fetch(url, client)
