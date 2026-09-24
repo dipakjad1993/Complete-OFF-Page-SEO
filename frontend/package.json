@@ -1,6 +1,6 @@
 {
   "name": "offpage-seo-dashboard",
-  "version": "2026.1.0",
+  "version": "2026.4.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -15,7 +15,8 @@
     "recharts": "^2.12.0",
     "lucide-react": "^0.400.0",
     "date-fns": "^3.6.0",
-    "clsx": "^2.1.0"
+    "clsx": "^2.1.0",
+    "react-window": "^1.8.8"
   },
   "devDependencies": {
     "@types/react": "^18.3.0",

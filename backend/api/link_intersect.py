@@ -124,9 +124,60 @@ async def link_intersect(brand_id: int):
                                 "Submit disavow.txt in GSC only after manual review (one bad domain can devalue legitimate equity)."]}
 
 
+@router.post("/disavow/review")
+async def disavow_review(payload: dict):
+    """Human-in-loop queue for disavow — never auto-submit to GSC.
+
+    POST {brand_id, action: "approve"|"reject"|"edit", lines?: [str], note?: str}
+    Approved edits are stored in data/disavow_queue/{brand_id}.jsonl and returned
+    by GET /disavow/{brand_id} as the reviewed file (with audit trail).
+    """
+    import json as _j, os as _o
+    from datetime import datetime, timezone
+    brand_id = int((payload or {}).get("brand_id", 0) or 0)
+    action = str((payload or {}).get("action") or "").lower().strip()
+    if not brand_id or action not in ("approve", "reject", "edit"):
+        return {"status": "error", "reason": "brand_id + action approve|reject|edit required."}
+    _o.makedirs("data/disavow_queue", exist_ok=True)
+    row = {"at": datetime.now(timezone.utc).isoformat(), "brand_id": brand_id, "action": action,
+           "lines": (payload or {}).get("lines") if isinstance((payload or {}).get("lines"), list) else None,
+           "note": (payload or {}).get("note")}
+    with open(f"data/disavow_queue/{brand_id}.jsonl", "a", encoding="utf-8") as f:
+        f.write(_j.dumps(row) + "\n")
+    # audit log
+    try:
+        from backend.api.auth import audit
+        audit("disavow_review", {"brand_id": brand_id, "action": action})
+    except Exception:
+        pass
+    return {"status": "ok", "queued": row, "next": f"GET /api/v1/link-intersect/disavow/{brand_id} returns reviewed file; submit manually in GSC."}
+
+
 @router.get("/disavow/{brand_id}")
 async def disavow_file(brand_id: int):
-    """Return disavow.txt as downloadable text."""
+    """Return disavow.txt as downloadable text — reviewed queue wins when present."""
+    import json as _j, os as _o
+    # if human-in-loop queue has an approved review, serve that
+    qpath = f"data/disavow_queue/{brand_id}.jsonl"
+    if _o.path.exists(qpath):
+        try:
+            rows = []
+            for line in open(qpath, encoding="utf-8", errors="replace"):
+                try:
+                    rows.append(_j.loads(line))
+                except Exception:
+                    continue
+            approved = [r for r in rows if r.get("action") == "approve" or r.get("action") == "edit"]
+            if approved:
+                last = approved[-1]
+                lines = last.get("lines")
+                if isinstance(lines, list) and lines:
+                    txt = "# Human-reviewed disavow (from POST /disavow/review) — submit in GSC after final check\n"
+                    txt += "\n".join(str(x) for x in lines if isinstance(x, str)) + "\n"
+                    from fastapi.responses import PlainTextResponse
+                    return PlainTextResponse(txt, media_type="text/plain", headers={"Content-Disposition": f"attachment; filename=brand-{brand_id}-disavow.txt"})
+        except Exception:
+            pass
     data = await link_intersect(brand_id)
     from fastapi.responses import PlainTextResponse
     txt = (data.get("disavow") or {}).get("disavow_txt", "# no data")

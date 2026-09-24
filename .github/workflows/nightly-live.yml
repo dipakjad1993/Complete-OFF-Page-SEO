@@ -1,0 +1,20 @@
+name: nightly-live
+on:
+  schedule:
+    - cron: "30 2 * * *" # 02:30 UTC daily — live Bing RSS + ddgs + Wikidata smoke
+  workflow_dispatch: {}
+jobs:
+  live-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -r requirements-base.txt
+      - run: pip install pytest httpx
+      - name: Init DB
+        run: python scripts/init_db.py
+      - name: Live smoke — Bing RSS + ddgs + Wikidata QIDs
+        run: pytest -q -m live tests/test_integration_smoke.py -v
+      - name: Live provider chain check (SerpAPI/cache/Brave/Bing RSS/ddgs)
+        run: python -c "from backend.services.search import _chain_hint; print(_chain_hint()); assert 'Bing RSS' in _chain_hint()"

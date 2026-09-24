@@ -249,10 +249,30 @@ async def history(brand_id: int):
                 runs.append(json.loads(line))
             except Exception:
                 continue
-    trend = [{"at": r["at"], "date": r.get("at", "")[:10], "citation_rate": r["citation_rate"], "mode": r["mode"],
-              "cited": r.get("cited"), "tested": r.get("tested")} for r in runs[-30:]]
+    # trend for share-of-model chart: citation_rate over time + per-engine breakdown + variance
+    trend = []
+    for r in runs[-30:]:
+        row = {"at": r["at"], "date": r.get("at", "")[:10], "citation_rate": r["citation_rate"], "mode": r["mode"],
+               "cited": r.get("cited"), "tested": r.get("tested"), "locale": r.get("locale", "en-US"), "repeats": r.get("repeats", 1)}
+        # per-engine cited rate for that day
+        try:
+            from collections import Counter
+            per_eng = {}
+            for rec in r.get("rows") or []:
+                eng = rec.get("engine", "unknown")
+                per_eng.setdefault(eng, []).append(1 if rec.get("cited") else 0)
+            row["per_engine_rate"] = {k: round(sum(v)/len(v), 3) for k, v in per_eng.items()}
+            # variance that day
+            var = r.get("repeat_variance")
+            if isinstance(var, list) and var:
+                row["avg_variance"] = round(sum(x.get("variance", 0) for x in var)/len(var), 3) if var else 0.0
+        except Exception:
+            pass
+        trend.append(row)
     # Persist note: JSONL is the dev store; Postgres table prompt_runs (Alembic) is the prod store
-    # with columns (brand_id, prompt, engine, cited_yn, position, sentiment, date). Rows already carry those fields.
+    # with columns (brand_id, prompt, engine, model, cited_yn, linked_yn, position, passage, supporting_url, sentiment, hallucinated, date, locale, repeat). Rows already carry those fields.
     return {"status": "ok", "runs": runs[-30:], "trend": trend,
-            "schema": ["prompt", "engine", "cited(Y/N)", "position", "sentiment", "date"],
-            "methodology": "JSONL prompt-run store (dev) / Postgres prompt_runs (prod); chart citation_rate over time."}
+            "share_of_model_trend": trend,
+            "schema": ["prompt", "engine", "model", "cited(Y/N)", "linked(Y/N)", "position", "passage", "supporting_url", "sentiment", "hallucinated", "date", "locale", "repeat"],
+            "alerts": {"hallucinated": sum(len(r.get("hallucination_alerts") or []) for r in runs[-5:]), "negative": sum(len(r.get("negative_sentiment_alerts") or []) for r in runs[-5:])},
+            "methodology": "JSONL prompt-run store (dev) / Postgres prompt_runs (prod); chart citation_rate + per_engine_rate + avg_variance over time; alerts on hallucinated + negative."}

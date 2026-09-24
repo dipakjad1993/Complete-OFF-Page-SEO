@@ -13,7 +13,7 @@ import {
 import { useTheme } from '../context/ThemeContext';
 import { FEATURES, FeatureDef } from '../data/features';
 import IntakeForm, { IntakeState, emptyIntake } from './IntakeForm';
-import Deliverables from './Deliverables';
+const Deliverables = React.lazy(() => import('./Deliverables'));
 
 type StepStatus = 'pending' | 'active' | 'done' | 'error';
 
@@ -792,9 +792,9 @@ export default function ToolApp() {
       }
       setStepStatus('intake', 'done');
 
-      // 4. Run analysis (long-running, polled for live progress)
+      // 4. Run analysis — NON-BLOCKING by default (run-async + poll). Blocking /run kept for scripts only.
       setStepStatus('analysis', 'active');
-      setProgressLabel('Starting 35-module engine…');
+      setProgressLabel('Starting 35-module engine (non-blocking)…');
       let pollStopped = false;
       (async () => {
         while (!pollStopped) {
@@ -804,13 +804,43 @@ export default function ToolApp() {
             if (p && typeof p === 'object' && p.status) {
               setProgress(p);
               if (p.current_module_label && p.status === 'running') setProgressLabel(p.current_module_label);
-              if (p.status === 'completed' || p.status === 'error') break;
+              if (p.status === 'completed' || p.status === 'failed') break;
             }
           } catch (_) { /* transient */ }
           await new Promise((r) => setTimeout(r, 1200));
         }
       })();
-      const analysis = await postJson('/api/v1/analysis/run', { brand_id: brandId, analysis_type: 'full' });
+      // Prefer run-async (50s * 7 batches = 60-180s without holding Render proxy). Fall back to blocking only if /run-async is missing.
+      let analysis: any = null;
+      try {
+        const asyncRes = await postJson('/api/v1/analysis/run-async', { brand_id: brandId, analysis_type: 'full' });
+        const jobId = asyncRes.job_id || asyncRes.job;
+        // poll progress until completed (or fetch results when progress says completed)
+        for (let tries = 0; tries < 180; tries++) {
+          await new Promise((r) => setTimeout(r, 2000));
+          try {
+            const pr = await fetch(`/api/v1/analysis/progress/${brandId}`).then((x) => x.json());
+            if (pr?.status === 'completed') break;
+            if (pr?.status === 'failed' || pr?.status === 'error') throw new Error(pr?.reason || 'Analysis failed');
+          } catch {}
+          // also try fetching results directly — run_full_analysis writes *_latest.json atomically
+          try {
+            const rr = await fetch(`/api/v1/analysis/results/${brandId}`).then((x) => x.json());
+            if (rr && rr.brand) { analysis = rr; break; }
+          } catch {}
+        }
+        if (!analysis) {
+          const final = await fetch(`/api/v1/analysis/results/${brandId}`).then((x) => x.json());
+          if (final && final.brand) analysis = final;
+          else throw new Error('Async job did not produce results in time — check /api/v1/analysis/progress/' + brandId);
+        }
+        // warn if server returned deprecated header on fallback path
+        if (analysis && (analysis as any).deprecated) console.warn('[analysis] using deprecated /run path');
+      } catch (e) {
+        // Only as last resort for local scripts without run-async: blocking /run (will be Sunset 2026-12-31)
+        console.warn('[analysis] run-async failed, falling back to blocking /run (deprecated):', (e as Error).message);
+        analysis = await postJson('/api/v1/analysis/run', { brand_id: brandId, analysis_type: 'full' });
+      }
       pollStopped = true;
       setProgress((prev) => (prev ? { ...prev, status: 'completed' } : { status: 'completed', module_index: 35, total_modules: 35 }));
       setStepStatus('analysis', 'done');
@@ -1067,13 +1097,15 @@ export default function ToolApp() {
                 )}
               </>
             ) : (
-              <Deliverables
-                summary={summary}
-                sections={sections}
-                brandId={typeof brand?.id === 'number' ? brand.id : null}
-                brandName={String(brand?.name ?? result?.brand ?? '')}
-                brandDomain={String(brand?.domain ?? result?.domain ?? '')}
-              />
+              <React.Suspense fallback={<div className="deliverables" style={{ padding: '2rem', textAlign: 'center' }}><Loader2 size={18} className="animate-spin" style={{ display: 'inline-block' }} /> Loading deliverables (code-split)…</div>}>
+                <Deliverables
+                  summary={summary}
+                  sections={sections}
+                  brandId={typeof brand?.id === 'number' ? brand.id : null}
+                  brandName={String(brand?.name ?? result?.brand ?? '')}
+                  brandDomain={String(brand?.domain ?? result?.domain ?? '')}
+                />
+              </React.Suspense>
             )}
 
             {/* Footer info */}

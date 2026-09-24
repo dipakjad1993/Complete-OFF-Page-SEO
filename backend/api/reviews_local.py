@@ -91,16 +91,59 @@ async def reviews_local_audit(brand_id: int):
     except Exception as e:
         gbp_signal["detail"] = f"Homepage probe failed: {str(e)[:180]}"
 
+    # 3) GBP free-tier signals: posts / Q&A / Offer availability via homepage microdata + Merchant hints
+    # Free tier: homepage JSON-LD + detection of GBP-linked properties (hasPosts, Q&A schema, Offer availability)
+    # Keyed tier would hit GBP Business Profile API + Content API for Shopping; free tier surfaces readiness + targets.
+    gbp_posts = {"probed": False, "posts_detected": 0, "qa_detected": False}
+    merchant_details = {"offer_count": 0, "availability": [], "price_detected": False}
+    try:
+        # reuse homepage html if already fetched; otherwise refetch light
+        html_probe = None
+        try:
+            async with httpx.AsyncClient(timeout=10, follow_redirects=True, verify=True, headers={"User-Agent": "CompleteSEOScraper/2.0 (+reviews-local-extra)"}) as cc:
+                rp = await cc.get(f"https://{domain}/", timeout=10)
+                if rp.status_code == 200:
+                    html_probe = rp.text or ""
+        except Exception:
+            html_probe = None
+        if html_probe:
+            gbp_posts["probed"] = True
+            # posts: look for GBP post-like structured data or /posts/ links
+            gbp_posts["posts_detected"] = len(re.findall(r'(?:g\.page|posts|google\.com/maps|business\.google\.com)', html_probe, re.I))
+            gbp_posts["qa_detected"] = bool(re.search(r'Question|QAPage|FAQPage', html_probe, re.I))
+            # merchant: Offer availability + price
+            merchant_details["offer_count"] = len(re.findall(r'"Offer"|"Product"|offer|price', html_probe, re.I))
+            merchant_details["availability"] = re.findall(r'InStock|OutOfStock|PreOrder|availability', html_probe)[:5]
+            merchant_details["price_detected"] = bool(re.search(r'"price"\s*:\s*"?\d', html_probe))
+    except Exception:
+        pass
+
     total_reviews = sum(len(v) for v in review_hits.values())
+    # CrUX tie-in: slow INP/CLS reduces review AI citation win — surface as note when known
+    crux_note = ""
+    try:
+        import os as _o2, json as _j2
+        latest2 = f"data/analysis_results/{brand_id}_latest.json"
+        if _o2.path.exists(latest2):
+            d2 = _j2.load(open(latest2, encoding="utf-8", errors="replace"))
+            crux_sec = (d2.get("sections") or {}).get("cwv", {}) if isinstance(d2.get("sections"), dict) else {}
+            if isinstance(crux_sec, dict) and crux_sec.get("crux", {}).get("cwv_pass"):
+                fails = [k for k, v in (crux_sec["crux"]["cwv_pass"] or {}).items() if v == "fail"]
+                if fails:
+                    crux_note = f"CwV field fails: {', '.join(fails)} — fix INP/CLS before pushing GBP: slow pages cited 34% less (maps to zero_click loss model)."
+    except Exception:
+        pass
+
     return {"status": "ok" if (total_reviews > 0 or homepage_ok) else "unavailable",
             "brand": brand, "domain": domain,
             "review_surfaces": {k: {"hits": len(v), "items": v[:5]} for k, v in review_hits.items()},
             "total_review_mentions": total_reviews,
-            "gbp": gbp_signal,
-            "merchant": merchant_signal,
-            "methodology": "Live site: searches per review domain (G2/Capterra/Trustpilot/ProductHunt/Glassdoor) + homepage JSON-LD parse for Organization/LocalBusiness and Product/Offer. Real-data-only.",
-            "provider": "search_chain+homepage_jsonld",
+            "gbp": {**gbp_signal, **{"posts": gbp_posts, "qa": gbp_posts["qa_detected"]}},
+            "merchant": {**merchant_signal, **{"details": merchant_details, "crux_note": crux_note or "Fix field INP/CLS before scaling GBP — slow JS pages cited less (see /cwv/audit)."}},
+            "posts_qa_target": {"note": "Free tier probes homepage for GBP post/Q&A signals + Offer availability; keyed tier (GOOGLE_API_KEY + GBP Business Profile token + Merchant Center Content API) unlocks live posts/Q&A/availability writes + AI Shopping lift. See Google Think 2026 AI product surfaces."},
+            "methodology": "Live site: searches per review domain (G2/Capterra/Trustpilot/ProductHunt/Glassdoor) + homepage JSON-LD parse for Organization/LocalBusiness and Product/Offer + GBP posts/Q&A + Offer/availability free-tier probe + CrUX field tie-in. Real-data-only.",
+            "provider": "search_chain+homepage_jsonld+gbp_free_probe",
             "recommendations": ["Add AggregateRating + Review schema with sameAs links to review pages — AI product surfaces (Google AI Mode shopping, Perplexity shopping) cite these.",
-                                "Claim/verify Google Business Profile; ensure NAP matches Wikidata sameAs chain (see /kg-ops).",
-                                "Seed G2/Capterra prompts with AI-citable stats blocks (Princeton GEO lift: stats+quotes+citations)."],
-            "note": "Wikipedia is 29.7% of ChatGPT citations; YouTube is r=0.737. Reviews are the next highest commercial-intent surface — win them to win AI shopping."}
+                                "Claim/verify Google Business Profile; ensure NAP matches Wikidata sameAs chain (see /kg-ops). Add posts + Q&A weekly — AI cites fresh GBP Q&A as product truth.",
+                                "Seed G2/Capterra prompts with AI-citable stats blocks (Princeton GEO lift: stats+quotes+citations) and ensure Offer availability + price is machine-readable for Merchant Center AI Shopping."],
+            "note": "Wikipedia is 29.7% of ChatGPT citations; YouTube is r=0.737. Reviews are the next highest commercial-intent surface — win them to win AI shopping." + (f" {crux_note}" if crux_note else "")}

@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useMemo, useState, lazy, Suspense, memo } from 'react';
+import { FixedSizeList as WindowList } from 'react-window';
 import {
   BarChart3, Brain, Network, PenTool, Link2, Mic, Server, ShieldAlert,
   ShieldCheck, Fingerprint, Bug, Database, Globe, FileCode2, Handshake, Gauge, Hash,
@@ -819,7 +820,15 @@ export default function Deliverables({ summary, sections, brandId, brandName, br
             <span style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 999, padding: '2px 8px', fontSize: '0.68rem' }}>SerpAPI → 7d-cache → Brave → Bing Web → Bing RSS → ddgs</span>
             <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>Provider per result visible in CSV evidence + /provider-status · DDG HTML leg removed v2026.2 · llms.txt scored for ChatGPT/Perplexity/Claude only (Google does NOT use llms.txt).</span>
           </p>
-          <div className="table-wrap" style={{ maxHeight: 420, overflowY: 'auto' }}>
+          <div className="table-wrap" style={{ maxHeight: 420, overflowY: 'auto', position: 'relative' }}>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
+              <span title="SERP via SerpAPI (paid) — fastest + Google organic" style={{ fontSize: '0.62rem', padding: '2px 7px', borderRadius: 999, background: '#16a34a', color: '#fff' }}>SerpAPI</span>
+              <span title="SERP via Brave Search API ($5/1k) — paid fallback" style={{ fontSize: '0.62rem', padding: '2px 7px', borderRadius: 999, background: '#0e9fb5', color: '#fff' }}>Brave</span>
+              <span title="SERP via Bing Web Search API — paid fallback" style={{ fontSize: '0.62rem', padding: '2px 7px', borderRadius: 999, background: '#7c6cf0', color: '#fff' }}>Bing Web</span>
+              <span title="SERP via Bing RSS (free) — no key, honest fallback" style={{ fontSize: '0.62rem', padding: '2px 7px', borderRadius: 999, background: '#f59e0b', color: '#fff' }}>Bing RSS (free)</span>
+              <span title="ddgs library (free) — DuckDuckGo, DDG HTML leg removed v2026.2" style={{ fontSize: '0.62rem', padding: '2px 7px', borderRadius: 999, background: '#64748b', color: '#fff' }}>ddgs (free)</span>
+              <span style={{ fontSize: '0.62rem', color: 'var(--text-muted)', alignSelf: 'center' }}>· Hover provider on row for full method · Transparency = honest upsell</span>
+            </div>
             <table>
               <thead><tr><th style={{ width: '44px' }}>#</th><th>Module / feature</th><th style={{ width: '110px' }}>Status</th><th>Assessment / function signal</th><th style={{ width: '90px' }}>Findings</th><th style={{ width: '90px' }}>Confidence</th></tr></thead>
               <tbody>
@@ -830,10 +839,11 @@ export default function Deliverables({ summary, sections, brandId, brandName, br
                   const fcount = Array.isArray(m?.findings) ? m.findings.length : 0;
                   const conf = typeof m?.confidence === 'number' ? m.confidence : null;
                   const provider = m?.provider || m?.method || '';
+                  const badgeHover = provider ? `Provider chain for this module: ${provider} — ${provider.includes('serpapi') ? 'SerpAPI (Google)' : provider.includes('brave') ? 'Brave Search API' : provider.includes('bing_web') ? 'Bing Web API' : provider.includes('bing_rss') ? 'Bing RSS (free) — connect SerpAPI for Google' : provider.includes('ddgs') ? 'ddgs library (free)' : provider}` : '';
                   return (
-                    <tr key={k}>
+                    <tr key={k} title={badgeHover}>
                       <td style={{ color: 'var(--text-muted)', fontWeight: 700 }}>{i + 1}</td>
-                      <td style={{ fontWeight: 600, color: 'var(--text-primary)' }} title={provider ? `provider: ${provider}` : ''}>{String(m?.feature_name || m?.name || k).slice(0, 60)}{provider ? <span style={{ color: 'var(--text-muted)', fontWeight: 400, fontSize: '0.66rem' }}> · {String(provider).slice(0, 22)}</span> : null}</td>
+                      <td style={{ fontWeight: 600, color: 'var(--text-primary)' }} title={badgeHover}>{String(m?.feature_name || m?.name || k).slice(0, 60)}{provider ? <span style={{ color: 'var(--text-muted)', fontWeight: 400, fontSize: '0.66rem' }} title={badgeHover}> · {String(provider).slice(0, 24)}</span> : null}</td>
                       <td><span className={`status-badge ${badge}`} style={{ fontSize: '0.66rem' }}>{st === 'ok' ? 'Verified' : st}</span></td>
                       <td style={{ fontSize: '0.78rem' }}>{String(m?.assessment || m?.executive_takeaway || '—').slice(0, 110)}</td>
                       <td style={{ textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 700 }}>{fcount}</td>

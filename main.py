@@ -25,7 +25,7 @@ from backend.api import (
     pr_outreach, auth as auth_api,
     aio_tracker, zero_click, transcript_pipeline, llms_audit,
     sentiment, source_influence, cwv, billing,
-    link_intersect, reviews_local, scheduled_reports,
+    link_intersect, reviews_local, scheduled_reports, geo_lift,
 )
 
 
@@ -127,6 +127,7 @@ app.include_router(billing.router, prefix="/api/v1/billing", tags=["Billing & Wh
 app.include_router(link_intersect.router, prefix="/api/v1/link-intersect", tags=["Link Intersect & Disavow"])
 app.include_router(reviews_local.router, prefix="/api/v1/reviews-local", tags=["Reviews & Local Entity"])
 app.include_router(scheduled_reports.router, prefix="/api/v1/scheduled-reports", tags=["Scheduled Reports & Webhooks"])
+app.include_router(geo_lift.router, prefix="/api/v1/geo-lift", tags=["Princeton GEO Lift (Stats/Quotes/Citations)"])
 
 FRONTEND_DIST = Path(__file__).resolve().parent / "frontend" / "dist"
 SPA_HEADERS = {
@@ -147,8 +148,8 @@ async def api_info():
         "features_count": 35,
         "extended_count": 7,
         "enterprise_sections": 42,
-        "routers": 50,
-        "p0_2026": ["aio-tracker", "zero-click", "transcripts", "llms-audit", "sentiment", "source-influence", "cwv", "link-intersect", "reviews-local", "scheduled-reports"],
+        "routers": 51,
+        "p0_2026": ["aio-tracker", "zero-click", "transcripts", "llms-audit", "sentiment", "source-influence", "cwv", "link-intersect", "reviews-local", "scheduled-reports", "geo-lift"],
         "search_chain": "SerpAPI -> 7d-cache -> Brave -> Bing Web -> Bing RSS -> ddgs (DDG HTML leg removed v2026.2)",
     }
 
