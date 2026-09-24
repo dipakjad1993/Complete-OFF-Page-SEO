@@ -831,6 +831,7 @@ ROLE_ONLY_WORDS = {
     "coordinator", "supervisor", "administrator", "recruiter", "intern", "researcher",
     "scientist", "strategist", "architect", "evangelist", "advocate", "expert", "sr", "jr",
     "board", "committee", "crew", "bio", "bios", "profile", "profiles", "meet", "the", "our",
+    "correspondent", "reporter", "anchor", "producer", "sub", "editor-in-chief", "chief",
 }
 
 def _wd_type_to_industry(labels):
@@ -1710,6 +1711,223 @@ async def _find_credentials(client, execs, brand_name):
     return execs
 
 
+# ── Deep-auth helpers: sitemap discovery, author-profile enrichment, TF-IDF mining ──
+STOPWORDS_DEEP = {
+    "the","a","an","and","or","but","in","on","at","to","for","of","with","by","is","are","was","were","be","been",
+    "has","have","had","will","would","can","could","should","this","that","these","those","it","its","as","from",
+    "we","you","your","our","they","their","he","she","his","her","not","no","yes","do","does","did","about","into",
+    "over","under","after","before","than","also","more","most","new","latest","top","best","all","any","are",
+}
+
+
+async def _fetch_sitemap_urls(client, root, domain, limit=35):
+    """Discover sitemap URLs and return same-domain article/page URLs (deep crawl)."""
+    found = []
+    seen = set()
+    sitemap_candidates = [f"{root}/sitemap.xml", f"{root}/sitemap_index.xml",
+                          f"{root}/wp-sitemap.xml", f"{root}/news-sitemap.xml",
+                          f"{root}/sitemap-index.xml", f"{root}/post-sitemap.xml"]
+    # robots.txt may declare extra sitemaps
+    try:
+        r = await client.get(f"{root}/robots.txt", headers=BROWSER_HEADERS, timeout=8, follow_redirects=True)
+        if r.status_code == 200 and "Sitemap:" in r.text:
+            for m in re.finditer(r"Sitemap:\s*(\S+)", r.text, re.I):
+                u = m.group(1).strip()
+                if u.startswith("http") and u not in sitemap_candidates:
+                    sitemap_candidates.append(u)
+    except Exception:
+        pass
+    for sm_url in sitemap_candidates[:6]:
+        if len(found) >= limit:
+            break
+        try:
+            r = await client.get(sm_url, headers=BROWSER_HEADERS, timeout=10, follow_redirects=True)
+            if r.status_code != 200 or len(r.text) < 200:
+                continue
+            xml = r.text
+            # Sitemap index → recurse one level
+            if "<sitemap>" in xml:
+                subs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", xml)
+                for sub in subs[:6]:
+                    if len(found) >= limit:
+                        break
+                    try:
+                        sr = await client.get(sub.strip(), headers=BROWSER_HEADERS, timeout=10, follow_redirects=True)
+                        if sr.status_code == 200:
+                            for loc in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", sr.text):
+                                loc = loc.strip().split("?")[0]
+                                if _normalize_domain(loc) == _normalize_domain(domain) or _host_match(loc, domain):
+                                    if loc not in seen and loc.startswith("http") and not any(x in loc.lower() for x in [".jpg",".png",".gif",".pdf",".xml"]):
+                                        seen.add(loc); found.append(loc)
+                                        if len(found) >= limit:
+                                            break
+                    except Exception:
+                        continue
+            else:
+                for loc in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", xml):
+                    loc = loc.strip().split("?")[0]
+                    if _normalize_domain(loc) == _normalize_domain(domain) or _host_match(loc, domain):
+                        if loc not in seen and loc.startswith("http") and not any(x in loc.lower() for x in [".jpg",".png",".gif",".pdf",".xml"]):
+                            seen.add(loc); found.append(loc)
+                            if len(found) >= limit:
+                                break
+        except Exception as _e:
+            _log_swallow("scraper.sitemap", _e, sm_url)
+    return found[:limit]
+
+
+def _tfidf_keywords_from_text(all_text, brand_name, domain, headings, paragraphs, existing_keywords, top_n=12):
+    """TF-IDF-ish phrase mining on brand's own crawled corpus — brand-derived only."""
+    try:
+        existing_low = {str(k).lower() for k in existing_keywords}
+        blob = (all_text or "")[:60000].lower()
+        # candidate phrases: 2-3 word sequences that contain at least one non-stopword
+        words = re.findall(r"[a-z]{3,}", blob)
+        freq = {}
+        # unigrams
+        for w in words:
+            if w in STOPWORDS_DEEP or len(w) < 4:
+                continue
+            if w in {"news","videos","sports","about","policy","policies","contact","privacy","terms","cookies"}:
+                continue
+            freq[w] = freq.get(w, 0) + 1
+        # bigrams/trigrams from headings (higher signal)
+        heading_phrases = []
+        for h in (headings or [])[:30]:
+            hh = str(h).lower()
+            if len(hh.split()) in (2,3) and len(hh) < 40:
+                if not any(s in hh for s in ["sign up","sign in","subscribe","trending","follow us"]):
+                    heading_phrases.append(hh.strip())
+        scored = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+        out = []
+        for phrase in heading_phrases:
+            if phrase not in existing_low and phrase not in [o.lower() for o in out]:
+                out.append(phrase.title())
+                if len(out) >= top_n:
+                    break
+        for w, _c in scored:
+            if len(out) >= top_n:
+                break
+            wl = w.lower()
+            if wl in existing_low or wl in [o.lower() for o in out]:
+                continue
+            # surface as title-cased keyword
+            out.append(w.title())
+        return out[:top_n]
+    except Exception:
+        return []
+
+
+async def _enrich_competitors_wikidata(client, competitors):
+    """Attach Wikidata QIDs to discovered competitors via live wbsearchentities."""
+    for c in competitors[:5]:
+        if c.get("wikidata_id"):
+            continue
+        nm = c.get("name") or ""
+        dom = c.get("domain") or ""
+        if not nm:
+            continue
+        try:
+            for q in [nm, dom.split(".")[0]]:
+                r = await client.get(
+                    f"https://www.wikidata.org/w/api.php?action=wbsearchentities&search={quote_plus(q)}&language=en&format=json&limit=3",
+                    headers=API_HEADERS, timeout=8)
+                if r.status_code == 200:
+                    hits = r.json().get("search", [])
+                    if hits:
+                        # prefer hit whose label matches domain token
+                        best = hits[0].get("id", "")
+                        c["wikidata_id"] = best
+                        break
+            # verify via wbgetentities to ensure it's an organization
+            if c.get("wikidata_id"):
+                er = await client.get(
+                    f"https://www.wikidata.org/w/api.php?action=wbgetentities&ids={c['wikidata_id']}&format=json&props=descriptions&languages=en",
+                    headers=API_HEADERS, timeout=8)
+                if er.status_code != 200:
+                    c["wikidata_id"] = ""
+        except Exception:
+            pass
+    return competitors
+
+
+async def _enrich_execs_identity(client, execs, brand_name):
+    """Resolve Wikidata QID + KG MID for top spokespeople via live APIs (verified)."""
+    for e in execs[:6]:
+        nm = e.get("name") or ""
+        if not nm:
+            continue
+        if not e.get("wikidata_id"):
+            try:
+                r = await client.get(
+                    f"https://www.wikidata.org/w/api.php?action=wbsearchentities&search={quote_plus(nm)}&language=en&format=json&limit=3",
+                    headers=API_HEADERS, timeout=8)
+                if r.status_code == 200:
+                    hits = r.json().get("search", [])
+                    for h in hits:
+                        # verify via description contains brand or person
+                        label = str(h.get("label","")).lower()
+                        desc = str(h.get("description","")).lower()
+                        if nm.lower().split()[0] in label or nm.lower().split()[-1] in label:
+                            e["wikidata_id"] = h.get("id","")
+                            if desc and ("journalist" in desc or "editor" in desc or "author" in desc or brand_name.lower() in desc):
+                                break
+                            break
+            except Exception:
+                pass
+        if not e.get("kg_mid") and settings.GOOGLE_API_KEY:
+            try:
+                kr = await client.get(
+                    f"https://kgsearch.googleapis.com/v1/entities:search?query={quote_plus(nm)}&types=Person&limit=2&key={settings.GOOGLE_API_KEY}",
+                    headers=API_HEADERS, timeout=8)
+                if kr.status_code == 200:
+                    items = kr.json().get("itemListElement", [])
+                    if items:
+                        e["kg_mid"] = items[0].get("result", {}).get("@id", "")
+            except Exception:
+                pass
+        # Department inference from title
+        if not e.get("department") and e.get("title"):
+            t = str(e["title"]).lower()
+            if "editor" in t:
+                e["department"] = "Editorial"
+            elif "engineer" in t or "tech" in t:
+                e["department"] = "Engineering"
+            elif "research" in t or "science" in t:
+                e["department"] = "Research"
+    return execs
+
+
+def _deep_official_messaging(merged, brand_name, domain, schema_desc, meta_desc, wiki_extract):
+    """Aggregate hero / slogan / first long paragraph mentioning brand into official messaging."""
+    try:
+        cands = []
+        if schema_desc:
+            cands.append(schema_desc[:500])
+        if merged.get("titles"):
+            cands.append(str(merged["titles"][0])[:400])
+        # first paragraph that mentions brand token
+        btoks = {w.lower() for w in re.split(r"[^a-z0-9]+", brand_name.lower()) if len(w) > 3}
+        for p in (merged.get("paragraphs") or [])[:10]:
+            pl = str(p).lower()
+            if len(p) > 80 and any(t in pl for t in btoks):
+                cands.append(str(p)[:500]); break
+        if meta_desc:
+            cands.append(meta_desc[:500])
+        if wiki_extract:
+            cands.append(wiki_extract[:600])
+        # pick longest brand-tied
+        best = ""
+        for c in cands:
+            if len(c) > len(best) and any(t in c.lower() for t in btoks):
+                best = c
+        if not best and cands:
+            best = cands[0]
+        return best[:900] if best else (meta_desc or schema_desc or "")[:600]
+    except Exception:
+        return ""
+
+
 # ============================================================
 # PRIMARY AUTO-RESEARCH ENDPOINT
 # ============================================================
@@ -1764,12 +1982,29 @@ async def scrape_website(req: ScrapeRequest):
         if input_html:
             input_data = extract_all_data(input_html, url)
 
-        # ---- LAYER 1: crawl the REAL site root pages (not article paths) ----
-        pages_to_crawl = [
+        # ---- LAYER 1: crawl the REAL site root pages (deep + sitemap-discovered) ----
+        # Base candidates cover home + canonical entity pages + masthead/author hubs
+        base_candidates = [
             root, root + "/about", root + "/about-us", root + "/team", root + "/leadership",
             root + "/management", root + "/people", root + "/contact", root + "/news",
-            root + "/blog", root + "/category",
+            root + "/blog", root + "/category", root + "/authors", root + "/author",
+            root + "/masthead", root + "/editorial", root + "/editorial-team", root + "/our-team",
         ]
+        # Sitemap-discovered URLs — up to 22 same-domain pages (real site inventory, capped for latency)
+        sitemap_urls = []
+        try:
+            sitemap_urls = await _fetch_sitemap_urls(client, root, domain, limit=22)
+        except Exception as _e:
+            _log_swallow("scraper.sitemap_outer", _e, root)
+        # Prefer sitemap URLs but cap total candidates to keep crawl bounded
+        seen_crawl = set()
+        pages_to_crawl = []
+        for u in base_candidates + sitemap_urls:
+            if u not in seen_crawl:
+                seen_crawl.add(u)
+                pages_to_crawl.append(u)
+            if len(pages_to_crawl) >= 40:
+                break
         all_page_data = []
 
         async def crawl_page(crawl_url):
@@ -1785,7 +2020,19 @@ async def scrape_website(req: ScrapeRequest):
                     data.setdefault("execs", []).append(b)
             except Exception as _e:
                 _log_swallow("scraper.bylines", _e, crawl_url)
-            if any(k in crawl_url.lower() for k in ["/team", "/leadership", "/about", "/people", "/management"]):
+            # Extract og:site_name for brand-name fallback
+            try:
+                soup2 = BeautifulSoup(html, "lxml")
+                og_site = ""
+                for meta in soup2.find_all("meta"):
+                    if str(meta.get("property","")).lower() == "og:site_name" and meta.get("content"):
+                        og_site = str(meta.get("content","")).strip()[:80]
+                        if og_site:
+                            data.setdefault("og_site_name", og_site)
+                            break
+            except Exception:
+                pass
+            if any(k in crawl_url.lower() for k in ["/team", "/leadership", "/about", "/people", "/management", "/author", "/masthead", "/editorial"]):
                 for e in data.get("execs", []):
                     if isinstance(e, dict) and not e.get("source"):
                         e["source"] = "team_page"
@@ -1800,21 +2047,54 @@ async def scrape_website(req: ScrapeRequest):
                 if r and not isinstance(r, Exception):
                     all_page_data.append(r)
 
-        # Follow discovered internal team/leadership links
+        # Follow discovered internal team/leadership/author links + top internal nav links
         internal_team_links = set()
+        extra_nav_links = set()
         for pd in all_page_data:
             if isinstance(pd, dict):
                 for link in pd.get("internal_links", []):
                     internal_team_links.add(link)
-        extra_links = list(internal_team_links)[:6]
-        if extra_links:
-            for i in range(0, len(extra_links), batch_size):
-                batch = extra_links[i:i + batch_size]
+                # also sample top page_links that stay on same domain (categories/authors)
+                for pl in (pd.get("page_links", []) or [])[:20]:
+                    href = str(pl.get("url","")) if isinstance(pl, dict) else str(pl)
+                    if _host_match(href, domain) and href.startswith("http"):
+                        if any(k in href.lower() for k in ["/author", "/team", "/about", "/category", "/topic", "/section"]):
+                            extra_nav_links.add(href.split("?")[0].split("#")[0])
+        extra_links = list(internal_team_links)[:8] + list(extra_nav_links)[:6]
+        # cap deduped
+        seen_extra = set()
+        deduped_extra = []
+        for u in extra_links:
+            if u not in seen_extra and u not in pages_to_crawl:
+                seen_extra.add(u); deduped_extra.append(u)
+        deduped_extra = deduped_extra[:10]
+        if deduped_extra:
+            for i in range(0, len(deduped_extra), batch_size):
+                batch = deduped_extra[i:i + batch_size]
                 tasks = [crawl_page(u) for u in batch]
                 results = await asyncio.gather(*tasks, return_exceptions=True)
                 for r in results:
                     if r and not isinstance(r, Exception):
                         all_page_data.append(r)
+        # Author-profile deep crawl: fetch top byline profile URLs for real bios
+        try:
+            profile_urls = []
+            for pd in all_page_data:
+                for e in (pd.get("execs") or [])[:6]:
+                    pu = str(e.get("profile_url") or "") if isinstance(e, dict) else ""
+                    if pu.startswith("http") and _host_match(pu, domain) and pu not in seen_extra:
+                        profile_urls.append(pu)
+            profile_urls = list(dict.fromkeys(profile_urls))[:8]
+            if profile_urls:
+                for i in range(0, len(profile_urls), 4):
+                    batch = profile_urls[i:i+4]
+                    results = await asyncio.gather(*[crawl_page(u) for u in batch], return_exceptions=True)
+                    for r in results:
+                        if r and not isinstance(r, Exception) and r.get("page_text"):
+                            # merge author bio paragraphs into main corpus
+                            all_page_data.append(r)
+        except Exception as _e:
+            _log_swallow("scraper.author_profiles", _e)
 
         merged = merge_all_data(all_page_data) if all_page_data else {
             "all_text": "", "titles": [], "descriptions": [], "headings": [],
@@ -1879,8 +2159,13 @@ async def scrape_website(req: ScrapeRequest):
                     official_messaging = str(chosen_schema[k])[:400]
                     break
 
+        # og:site_name fallback (stronger than raw <title> for news sites)
+        og_site_names = [str(pd.get("og_site_name","")).strip() for pd in all_page_data if isinstance(pd, dict) and pd.get("og_site_name")]
+        og_site_name = next((x for x in og_site_names if len(x) >= 3), "")
         if brand_name_from_schema and len(brand_name_from_schema) >= 2:
             brand_name = brand_name_from_schema
+        elif og_site_name and len(og_site_name) >= 3 and len(og_site_name.split()) <= 5:
+            brand_name = og_site_name[:80]
         elif merged["titles"]:
             title = str(merged["titles"][0])
             cand = title.split("|")[0].split("-")[0].split("–")[0].split(":")[0].strip()[:80]
@@ -1973,11 +2258,33 @@ async def scrape_website(req: ScrapeRequest):
             except Exception:
                 pass
 
-        # ---- LAYER 6: keywords + topical taxonomy ----
+        # Deepen official messaging now that wiki is resolved (slogan/hero/tied paragraph)
+        try:
+            deep_msg = _deep_official_messaging(merged, brand_name, domain, desc_from_schema, meta_desc, wiki.get("extract",""))
+            if deep_msg and len(deep_msg) > len(official_messaging or ""):
+                official_messaging = deep_msg[:700]
+        except Exception:
+            pass
+
+        # ---- LAYER 6: keywords + topical taxonomy (deep, TF-IDF enriched) ----
         # Pillars use the SAME nav-junk gate as seed keywords (2026-09 fix:
         # old code appended raw h1-h4 text, which leaked "ABOUT US",
         # "POLICIES", "Download App", "GUESS THE WORD" into stored schemas).
         keywords = _extract_seed_keywords(merged, industry, brand_name, domain)
+        # TF-IDF mining on full crawled corpus — adds brand-derived mid-tail phrases that
+        # meta-keywords alone miss (critical for news/entertainment sites where headings are nav)
+        try:
+            tfidf_extra = _tfidf_keywords_from_text(merged.get("all_text",""), brand_name, domain,
+                                                     merged.get("headings",[]), merged.get("paragraphs",[]),
+                                                     keywords, top_n=12)
+            for kw in tfidf_extra:
+                if kw.lower() not in {k.lower() for k in keywords}:
+                    keywords.append(kw)
+                    if len(keywords) >= 34:
+                        break
+        except Exception:
+            pass
+        # Ensure taxonomy always has at least industry + 4 pillars (expand cap to 10)
         _PILLAR_JUNK = {
             "about us", "about", "policies", "policy", "contact us", "contact",
             "privacy policy", "terms", "cookies", "follow us", "follow",
@@ -1990,7 +2297,7 @@ async def scrape_website(req: ScrapeRequest):
         _kw_lower = {k.lower() for k in keywords}
         for h in merged.get("headings", []):
             hh = str(h).strip()
-            if len(hh) < 4 or len(hh) > 50 or len(hh.split()) > 6:
+            if len(hh) < 4 or len(hh) > 55 or len(hh.split()) > 6:
                 continue
             hl = hh.lower()
             if hl in _kw_lower or hl in _PILLAR_JUNK:
@@ -2003,7 +2310,17 @@ async def scrape_website(req: ScrapeRequest):
             if any(c.isdigit() for c in hh):
                 continue
             topical_pillars.append(hh)
-        topical_taxonomy = list(dict.fromkeys([industry] + topical_pillars[:7]))
+        # If headings are still nav-heavy, supplement pillars from TF-IDF keywords
+        if len(topical_pillars) < 4:
+            for kw in keywords:
+                if kw.lower() not in {p.lower() for p in topical_pillars} and len(kw) > 4:
+                    topical_pillars.append(kw)
+                    if len(topical_pillars) >= 8:
+                        break
+        topical_taxonomy = list(dict.fromkeys([industry] + topical_pillars[:10]))
+        # categories: keep detected industry plus any explicit schema keywords that look categorical
+        if not industry and keywords:
+            topical_taxonomy = topical_taxonomy or keywords[:6]
 
         # ---- LAYER 7: executives (multi-source, junk-filtered) ----
         execs = list(merged.get("execs", []))
@@ -2120,6 +2437,11 @@ async def scrape_website(req: ScrapeRequest):
         final_execs = await _resolve_socials(client, final_execs, brand_name)
         final_execs = await _find_quotes(client, final_execs, brand_name)
         final_execs = await _find_credentials(client, final_execs, brand_name)
+        # Deep identity enrichment: Wikidata QID + KG MID + department for each spokesperson
+        try:
+            final_execs = await _enrich_execs_identity(client, final_execs, brand_name)
+        except Exception as _e:
+            _log_swallow("scraper.enrich_execs", _e)
 
         # Brand-level verbatim quotes fallback (own crawled pages, sourced URLs).
         brand_quotes = []
@@ -2130,13 +2452,17 @@ async def scrape_website(req: ScrapeRequest):
         except Exception as _e:
             _log_swallow("scraper.brand_quotes", _e)
 
-        # Frontend-ready spokesperson candidates (flattened, sourced, never invented).
+        # Frontend-ready spokesperson candidates (flattened, sourced, never invented — now with KG/Wikidata/department).
         spokesperson_candidates = []
         for e in final_execs[:12]:
+            # bio fallback: if no bio, use expertise/credentials text
+            bio_val = str(e.get("bio") or "").strip()
+            if not bio_val and e.get("expertise"):
+                bio_val = "; ".join([x.get("text","") for x in (e.get("expertise") or []) if isinstance(x, dict)])[:400]
             spokesperson_candidates.append({
                 "name": e.get("name", ""),
                 "title": e.get("title", ""),
-                "bio": e.get("bio", ""),
+                "bio": bio_val,
                 "credentials": "; ".join([c.get("text", "") for c in (e.get("credentials") or []) if isinstance(c, dict)]),
                 "expertise": "; ".join([x.get("text", "") for x in (e.get("expertise") or []) if isinstance(x, dict)]),
                 "linkedin": e.get("linkedin", ""),
@@ -2145,6 +2471,9 @@ async def scrape_website(req: ScrapeRequest):
                 "quotes": "\n".join([q.get("text", "") for q in (e.get("quotes") or []) if isinstance(q, dict)]),
                 "quote_sources": [q.get("source", "") for q in (e.get("quotes") or []) if isinstance(q, dict) and q.get("source")],
                 "source": e.get("source", ""),
+                "kg_mid": e.get("kg_mid", ""),
+                "wikidata_id": e.get("wikidata_id", ""),
+                "department": e.get("department", ""),
             })
         spokesperson_note = (
             f"{len(final_execs)} verified people "
@@ -2155,8 +2484,12 @@ async def scrape_website(req: ScrapeRequest):
             "Tip: paste a team/about/article URL carrying bylines for auto-fill. "
         )
 
-        # ---- LAYER 8: competitors (live + verified) ----
+        # ---- LAYER 8: competitors (live + verified, with Wikidata QIDs) ----
         competitors = await _discover_competitors(client, brand_name, domain, industry)
+        try:
+            competitors = await _enrich_competitors_wikidata(client, competitors)
+        except Exception as _e:
+            _log_swallow("scraper.enrich_competitors", _e)
 
         # ---- LAYER 8.5: Crunchbase slug (free search, no API key) ----
         crunchbase_id, crunchbase_url = "", ""

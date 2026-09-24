@@ -235,6 +235,7 @@ export default function IntakeForm({ value, onChange }: Props) {
       const keywords = Array.isArray(d.keywords) ? d.keywords.map(String) : [];
       const seedKeywords = Array.isArray(d.seed_keywords) ? d.seed_keywords.map(String) : keywords;
       const taxonomy = Array.isArray(d.topical_taxonomy) ? d.topical_taxonomy.map(String) : [];
+      const roleOnlyNames = new Set(['senior correspondent','correspondent','editor','reporter','author','contributor','writer','anchor','producer','staff']);
       const mappedSpokes: Spokesperson[] = candPool.slice(0, 12).map((e: any, idx: number) => ({
         name: String(e.name || ''),
         title: String(e.title || ''),
@@ -244,11 +245,13 @@ export default function IntakeForm({ value, onChange }: Props) {
         linkedin: String(e.linkedin || e.social_links?.linkedin || ''),
         twitter: String(e.twitter || e.social_links?.twitter || ''),
         quotes: flatLines(e.quotes) || (idx === 0 ? brandQuotes.slice(0, 4).join('\n') : ''),
-        kgMid: String(e.kg_mid || ''),
-        wikidataId: String(e.wikidata_id || ''),
-        isSme: false,
-        department: '',
-      })).filter((s: any) => s.name);
+        kgMid: String(e.kg_mid || e.kgMid || ''),
+        wikidataId: String(e.wikidata_id || e.wikidataId || ''),
+        isSme: Boolean((e as any).is_sme || (e as any).isSme),
+        department: String((e as any).department || ''),
+      })).filter((s: any) => s.name && !roleOnlyNames.has(s.name.trim().toLowerCase()) && s.name.trim().toLowerCase() !== s.title.trim().toLowerCase());
+      // Technical API auto-suggest: GSC property is derivable, others stay empty (private keys — never invented)
+      const autoGsc = domain ? `sc-domain:${domain}` : value.gscProperty;
       onChange({
         ...value,
         name: String(d.name || value.name),
@@ -259,11 +262,12 @@ export default function IntakeForm({ value, onChange }: Props) {
         wikidataId: String(d.wikidata_id || value.wikidataId),
         crunchbaseId: String(d.crunchbase_id || value.crunchbaseId),
         wikipediaUrl: String(d.wikipedia_url || value.wikipediaUrl),
-        taxonomy: (taxonomy.length ? taxonomy : seedKeywords).slice(0, 8).join(', ') || value.taxonomy,
+        taxonomy: (taxonomy.length ? taxonomy : seedKeywords).slice(0, 10).join(', ') || value.taxonomy,
         categories: String(d.category || value.categories),
         keywords: seedKeywords.join(', ') || value.keywords,
         spokes: mappedSpokes.length > 0 ? mappedSpokes : value.spokes,
         competitors: competitors.length > 0 ? competitors : value.competitors,
+        gscProperty: autoGsc || value.gscProperty,
       });
       const v: any = d.verification ?? {};
       const ds: any = d.data_sources ?? {};
