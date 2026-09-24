@@ -2,11 +2,11 @@
 
 **Live: https://complete-off-page-seo.onrender.com/ · API docs: https://complete-off-page-seo.onrender.com/docs · Health: https://complete-off-page-seo.onrender.com/health**
 
-**Entity-First Off-Page Command Center · 35 Modules + 7 Extended + 8 P0 2026 Routers · Real Data Only · v2026.4 Enterprise+ Release**
+**Entity-First Off-Page Command Center · 35 Modules + 7 Extended + 10 P0 2026 Routers (50 Routers Total) · 42 Sections · Real Data Only · v2026.4.0 Enterprise+ · 21 Tests Green**
 
 A full-stack, 42-section off-page SEO intelligence engine that measures and improves how search engines, LLM agents and AI answers perceive, cite, rank and trust your brand entity — **every number is collected live from real public sources. Nothing is fabricated, simulated or randomly generated.**
 
-> **v2026.4 Enterprise+ Release (14 Sep 2026)** — builds on v2026.3 (monolith split `backend/api/analysis.py` 4,568 → ~1,750 lines; unified brand-config resolver; central-chain scraper search with Google/DDG-HTML legs deleted; snapshots + multi-brand diff + regression webhooks; delta panel; PDF honesty footer + `WHITE_LABEL_BRAND`): TLS hardened (`verify=True` everywhere, shared client + per-module guard with timeout + retry + circuit breaker), `social.py` facade fixed, MCP FastMCP parity 5/5 tools + pydantic validation, Docker HEALTHCHECK + non-root + Postgres-16 prod path, LLM perception + RAG repair free proxy tiers (10-prompt SERP SoV, never empty), prompt tracking with prompt/engine/cited-Y-N/position/sentiment/date, E-E-A-T author audit, 14-bot governance split (GPTBot vs OAI-SearchBot vs PerplexityBot vs CCBot), UGC citation-share, 8 new P0 routers (AIO tracker, zero-click, transcripts, llms 29-check, sentiment, source-influence ROI, CWV, billing/RBAC), CSV with confidence+evidence, Deliverables CSV/JSON + zero-click panel, optimization human-in-loop queue. Live proof: The Hindu — **42 sections, 39 ok / 3 honest-unavailable / 0 errors, Entity Authority 68.3 (B)**.
+> **v2026.4.0 Enterprise+ Hotfix (24 Sep 2026)** — production hardening on top of v2026.4 (14 Sep): version-drift fix (`config/settings.py:7` `2026.3.0` → `2026.4.0`, `README` 35→42 Appendix A), search-chain attribution (`SerpAPI → 7d-cache → Brave → Bing Web → Bing RSS → ddgs`, `DDG HTML leg removed v2026.2`) surfaced in `GET /api/v1/provider-status` + CSV `provider` column + Deliverables badge, `llms.txt` 29-check re-scoped to ChatGPT/Perplexity/Claude only (Google does NOT use `llms.txt`, June 15 2026), `POST /api/v1/analysis/run` deprecated (`Sunset: 2026-12-31` → `run-async` default), billing/vault blocked on default `SECRET_KEY`, `transcript_pipeline` transcript-first (`youtube-transcript-api` + `timedtext` + `Whisper large-v3-turbo`), `aio-tracker` v2 (10 prompts + `passage`/`supporting_url`/`provider`), `prompt_tracking` v2 (`prompt/engine/model/cited(Y/N)/linked(Y/N)/position/passage/supporting_url/sentiment/hallucinated/date` + repeat variance + locale), `cwv` CrUX field `INP`/`CLS`/`LCP` + `cwv_pass` + zero-click loss model, 3 new enterprise routers (`link-intersect` + SpamBrain-triggered `disavow.txt`, `reviews-local` G2/GBP, `scheduled-reports` daily PDF + webhook/Slack + 5 themes), scheduler cron rehydration, Deliverables virtualized matrix + confidence column + code-split, 11 new integration smoke tests (Bing 403 UA rotation, Wikidata miss, RDAP timeout, Fernet, billing guard). Live proof: The Hindu — **42 sections, 39 ok / 3 honest-unavailable / 0 errors, Entity Authority 68.3 (B)**.
 
 - **Frontend:** React + Vite (TypeScript) — step-by-step intake → live progress → full client-ready report
 - **Backend:** Python / FastAPI + SQLAlchemy + SQLite (WAL mode, non-blocking background jobs)
@@ -63,9 +63,11 @@ Traditional off-page SEO measures one thing at a time (backlinks, mentions, doma
 - RAG systems that pull your content into AI answers
 - Podcasts, video transcripts, GitHub repos, forums, Reddit, Hacker News, Stack Overflow
 - Newsrooms deciding which experts to quote (digital PR)
-- AEO / agentic commerce surfaces (`llms.txt`, `robots.txt` AI directives, AI plugins)
+- AEO / agentic commerce surfaces (`llms.txt` for ChatGPT/Perplexity/Claude only — Google Search does NOT use `llms.txt` per June 15 2026 clarification — plus `robots.txt` AI directives, AI plugins)
 
-This tool audits **all of those surfaces at once** — 35 modules — with one consistent, honest methodology: **only real, verifiable, live-collected signals are reported.**
+This tool audits **all of those surfaces at once** — 42 sections (35 core + 7 extended) — with one consistent, honest methodology: **only real, verifiable, live-collected signals are reported.**
+
+> **Google clarification (May 15 + June 15 2026):** `llms.txt` / `ai.txt` / AI-schema / chunking / AI-voice rewrites have **no effect on Google AI Overviews / AI Mode**. Google uses the same core index for RAG and query fan-out; good GEO is good SEO. `llms.txt` readiness is scored for ChatGPT (OAI-SearchBot/GPTBot), Perplexity and Claude only — the only engines that actually respect it.
 
 ---
 
@@ -329,7 +331,7 @@ Copy `config/.env.example` to `.env` to configure optional providers. When a pro
 
 | Provider | Env var(s) | Used by | Free fallback |
 | --- | --- | --- | --- |
-| SerpAPI | `SERPAPI_KEY` | Google SERP data | Bing RSS → `ddgs` lib → DuckDuckGo HTML |
+| SerpAPI | `SERPAPI_KEY` | Google SERP data | Bing RSS → `ddgs` lib (Bing RSS + ddgs; DDG HTML leg removed v2026.2) |
 | NewsAPI | `NEWSAPI_KEY` | PR hooks news | Bing News RSS + Google News RSS |
 | Ahrefs | `AHREFS_API_KEY` | PBN / backlink footprint | RDAP registration only |
 | Moz | `MOZ_ACCESS_KEY` + `MOZ_SECRET_KEY` | Domain authority | — |
@@ -370,8 +372,8 @@ Interactive docs at `/docs` locally or [live on Render](https://complete-off-pag
 | --- | --- |
 | Brands | `/api/v1/brands` |
 | Intake data layer | `/api/v1/intake` (schema, execs, competitors, configs) |
-| Analysis engine | `/api/v1/analysis` (`/run`, `/progress/{brand_id}`) |
-| Website scraper | `/api/v1/scraper` |
+| Analysis engine | `/api/v1/analysis` (`/run-async` preferred; `/run` deprecated → use `run-async` + `pollAnalysisUntilDone()`) |
+| Website scraper | `/api/v1/scraper` (central-chain search: SerpAPI → cache → Brave → Bing Web → Bing RSS → `ddgs`; DDG HTML removed) |
 | Knowledge graph | `/api/v1/knowledge-graph` (incl. live `/wikidata` check) |
 | RAG monitor | `/api/v1/rag-monitor` |
 | PR engine | `/api/v1/pr-engine` |
@@ -380,21 +382,25 @@ Interactive docs at `/docs` locally or [live on Render](https://complete-off-pag
 | Reddit monitor | `/api/v1/reddit-monitor` |
 | Share of search | `/api/v1/share-of-search` |
 | Vector engine, Consensus, Simulation, Geo audit, Edge redirect, Toxic analysis, Zero-party data, Passage scoring, Satellite entities, Schema validator, Anchor analysis, Crawl accelerator, Visual audit, Dead equity, Dashboard, Campaigns, Alerts, Features | `/api/v1/*` |
-| AIO citation tracker (cited vs mentioned vs linked) | `/api/v1/aio-tracker` (`/report/{brand_id}`, `/history/{brand_id}`) |
+| AIO citation tracker v2 (cited vs mentioned vs linked + passage + provider) | `/api/v1/aio-tracker` (`/report/{brand_id}?locale=&repeats=`, `/history/{brand_id}` — 10 prompts, per-hit passage/supporting_url/provider) |
 | Zero-click + AI attribution | `/api/v1/zero-click` (`/dashboard/{brand_id}`) |
-| Transcript pipeline (YouTube/TikTok/Whisper) | `/api/v1/transcripts` (`/audit/{brand_id}`, `/whisper`) |
-| llms.txt 29-check audit | `/api/v1/llms-audit` (`/audit/{brand_id}`) |
+| Transcript pipeline v2 (YouTube r=0.737 transcript-first + Whisper large-v3-turbo) | `/api/v1/transcripts` (`/audit/{brand_id}`, `/whisper` — youtube-transcript-api + timedtext + faster-whisper) |
+| llms.txt 29-check audit (ChatGPT/Perplexity/Claude — NOT Google) | `/api/v1/llms-audit` (`/audit/{brand_id}` — Google does NOT use llms.txt per June 15 2026) |
 | Sentiment / narrative + hallucination | `/api/v1/sentiment` (`/narrative/{brand_id}`) |
 | Source Influence ROI (closed loop) | `/api/v1/source-influence` (`/roi/{brand_id}`) |
-| CrUX / CWV + hreflang cluster | `/api/v1/cwv` (`/audit/{brand_id}`) |
+| CrUX field data (INP/CLS/LCP) + hreflang cluster + zero-click loss model | `/api/v1/cwv` (`/audit/{brand_id}` — CrUX free tier INP/CLS, not lab Lighthouse) |
 | UGC citation-share | `/api/v1/ugc-depth` (`/citation-share/{brand_id}`) |
-| Billing + white-label tenant | `/api/v1/billing` (`/plans`, `/tenant`) |
+| Billing + white-label tenant (POST blocked on default SECRET_KEY) | `/api/v1/billing` (`/plans`, `/tenant`, `GET /health` never blocked) |
+| Link Intersect + Disavow automation | `/api/v1/link-intersect` (`/intersect/{brand_id}`, `/disavow/{brand_id}` — free linking-domain search + SpamBrain-triggered disavow.txt) |
+| Reviews + Local entity (G2/Capterra/Trustpilot + GBP/Merchant) | `/api/v1/reviews-local` (`/audit/{brand_id}` — review surfaces + Organization/LocalBusiness + Product/Offer) |
+| Scheduled PDF + Slack/webhook + white-label themes | `/api/v1/scheduled-reports` (`/enable`, `/list`, `/trigger`, `/themes` — daily PDF + webhook/Slack + 5 themes) |
+| Provider status + search chain badge | `/api/v1/provider-status` (SerpAPI → cache → Brave → Bing Web → Bing RSS → ddgs) |
 
 Key analysis endpoints:
 
 ```
-POST /api/v1/analysis/run            body: {"brand_id": 15, "analysis_type": "full"} (blocking, 60-180s)
-POST /api/v1/analysis/run-async      body: {"brand_id": 15} → {job_id} (non-blocking, poll progress)
+POST /api/v1/analysis/run            body: {"brand_id": 15, "analysis_type": "full"} (DEPRECATED: blocking 60-180s, Render timeout risk → use run-async; returns Sunset 2026-12-31 + X-Deprecated header)
+POST /api/v1/analysis/run-async      body: {"brand_id": 15} → {job_id} (preferred: non-blocking, poll progress — UI default since v2026.4)
 GET  /api/v1/analysis/progress/15    live progress: current module, elapsed, ETA, per-module status
 GET  /api/v1/analysis/job/{job_id}   background job status
 GET  /api/v1/analysis/results/15     latest full JSON
@@ -402,9 +408,9 @@ GET  /api/v1/analysis/status/15      idle/completed + timestamps
 GET  /api/v1/analysis/export/15?format=json|csv|pdf   deliverables download
     - `pdf` → enterprise report: cover page with KPI cards, module-health pie +
       per-output confidence charts, all 5 Tool Outputs (takeaways, metric tables,
-      deploy payloads, verified sources), Appendix A (all 35 modules: features,
-      functions, sub-function evidence tables, recommendations, actions,
-      limitations, sources), Appendix B (2026 methodology + source library).
+      deploy payloads, verified sources), Appendix A (all 42 sections: 35 core + 7 extended, each with
+      status, score/assessment, confidence, method, runtime, key findings, sub-function evidence table,
+      recommendation, detailed analysis, next actions, limitations, verified sources), Appendix B (2026 methodology + source library).
       Fully aligned reportlab layout — wrapped text, repeating table headers,
       page numbers, brand header/footer on every page.
 GET  /api/v1/analysis/provider-status                keyed vs free-tier providers (no secrets)
@@ -419,7 +425,7 @@ Frontend uses `POST /pr-engine/generate-pitch` (not GET), 5-min axios timeout, a
 
 This tool was built around one hard rule: **never fabricate data.**
 
-1. **Every metric is collected live** from real public sources during the run — Bing/DuckDuckGo search, news RSS, Wikipedia/Wikidata APIs, GitHub/HN/Stack Exchange APIs, iTunes, RDAP, direct site probes.
+1. **Every metric is collected live** from real public sources during the run — Bing RSS / `ddgs` library search (SerpAPI when keyed → 7-day cache → Brave → Bing Web → Bing RSS → `ddgs`; dead DDG-HTML leg removed v2026.2), news RSS, Wikipedia/Wikidata APIs, GitHub/HN/Stack Exchange APIs, iTunes, RDAP, direct site probes.
 2. **No random, lorem, mock, demo or synthetic values** exist anywhere in the codebase for analysis output (verified by static audit).
 3. **Missing keys → honest "No data".** Modules that need an API key you don't have report `status: "unavailable"` with the exact reason, rather than guessing.
 4. **Wrong-entity results are rejected.** A newspaper named "The Hindu" will never be shown religion/temple/Gita citations; every result is gated by brand-name variants, brand domain and a wrong-entity lexicon before being marked `verified: true`.
@@ -496,11 +502,13 @@ Complete-OFF-Page-SEO/
 ## Contributing & Roadmap
 
 **Shipped in v2026.4 Enterprise+ (14 Sep 2026):**
-- Hardening: TLS verify=True everywhere, shared-client guard + circuit breaker on all 35 modules, social.py facade fixed, MCP FastMCP 5/5 tools + validation, Dockerfile HEALTHCHECK + non-root, compose Postgres-16 prod path
-- LLM proxy tiers: perception (10-prompt SERP SoV) + RAG repair (claim-page verification) never empty; vector TF-IDF labeled low_signal; prompt tracking persists prompt/engine/cited-Y-N/position/sentiment/date
-- Depth: E-E-A-T author audit (Person schema + byline FAIL), 14-bot governance split + spoof/drop alerts, UGC citation-share, CSV confidence+evidence, Deliverables CSV/JSON + zero-click panel + P0 links
-- New P0 routers: aio-tracker, zero-click, transcripts, llms-audit 29-check, sentiment/narrative, source-influence ROI, cwv/hreflang, billing/RBAC + scheduler human-in-loop optimization queue
-- 10/10 tests green + anti-fabrication + lean-import + py311 scans green
+- Hardening: TLS `verify=True` everywhere, shared-client guard + circuit breaker on all 35 modules, social.py facade fixed, MCP FastMCP 5/5 tools + pydantic validation, Dockerfile HEALTHCHECK + non-root + Postgres-16 prod path
+- LLM proxy tiers v2: perception (10-prompt SERP SoV → 10 prompts v2 with passage/provider) + RAG repair (claim-page verification) never empty; vector TF-IDF labeled low_signal; prompt tracking v2 persists `prompt/engine/model/cited(Y/N)/linked(Y/N)/position/passage/supporting_url/sentiment/hallucinated/date + repeat variance + locale`
+- Depth: E-E-A-T author audit (Person schema + byline FAIL), 14-bot governance split + spoof/drop alerts, UGC citation-share per subreddit/channel, CSV confidence+evidence+provider, Deliverables virtualized matrix + code-split + confidence column + search-chain badge + CSV/JSON/PDF exports + zero-click panel + 10 P0 links
+- Technical moat: `WHISPER_MODEL_SIZE=large-v3-turbo` + `youtube-transcript-api` transcript-first (YouTube r=0.737), CrUX field INP/CLS/LCP + CWV pass/fail + zero-click loss model (not lab), `llms.txt` reframed as ChatGPT/Perplexity/Claude-only per Google June 15 2026 (no Google GEO snake-oil)
+- New P0 routers: `aio-tracker` v2 (10 prompts + passage + provider), `zero-click`, `transcripts` v2 (transcript-first), `llms-audit` 29-check (scoped), `sentiment`/`narrative`, `source-influence` ROI, `cwv` field, `billing`/RBAC (blocked on default SECRET_KEY)
+- Enterprise gaps closed: `link-intersect` + SpamBrain-triggered `disavow.txt`, `reviews-local` (G2/Capterra/Trustpilot + GBP Organization/LocalBusiness + Merchant Product/Offer), `scheduled-reports` (daily PDF + webhook/Slack + 5 white-label themes + cron rehydration), scheduler PDF rehydration, search-chain attribution in `/provider-status` + CSV
+- DX: 21 tests green (10 core + 11 integration smoke inc. Bing 403 UA rotation, Wikidata miss, RDAP timeout, vault Fernet, billing guard) + anti-fabrication + lean-import + py311 scans green · `POST /run` deprecated (`Sunset: 2026-12-31`) → `run-async` default
 
 **Shipped in v2026.3 (14 Sep 2026):**
 - Monolith split: `analysis.py` 4,568 → ~1,750 lines; features in `backend/modules/*` + `registry.py` (per-module timeout + retry + circuit breaker); 4 stranded-lexicon + star-export bugs found and fixed via live runs
@@ -509,11 +517,11 @@ Complete-OFF-Page-SEO/
 - Snapshots + fixed `run-many` + corrected `diff` + regression webhooks + Deliverables delta panel
 - PDF real-data-only footer + `WHITE_LABEL_BRAND`; Pydantic v2 cleanup; 10/10 tests green; live proof run (42 sections, 0 errors)
 
-**Open ideas:**
-- Scheduled PDF delivery (email/webhook) + white-label report themes
-- Optional LLM provider integrations for deeper co-mention auditing
-- Ahrefs/Moz deep backlink integration with live PBN scoring
-- Postgres-backed production deploy + Celery/Redis scale-out option
+**Next (post-v2026.4):**
+- Optional LLM provider integrations for deeper co-mention auditing (cross-engine hallucination matrix)
+- Ahrefs/Moz deep backlink integration with live PBN scoring (paid graph depth beyond free linking-domain intersect)
+- Postgres-backed production deploy + Celery/Redis + queue UI + multi-tenant isolation hardening
+- YouTube/Spotify auto-transcribe queue (Whisper large-v3-turbo batch) + subreddit/channel citation-share trend
 
 To contribute: fork, branch, open a PR. Keep the **real-data-only** rule: any change that would ever produce a fabricated number will be rejected.
 

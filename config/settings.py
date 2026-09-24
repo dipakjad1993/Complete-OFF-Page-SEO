@@ -4,7 +4,7 @@ import os
 
 class Settings(BaseSettings):
     APP_NAME: str = "Complete Off Page SEO - Entity-First Brand Consensus Engine"
-    APP_VERSION: str = "2026.3.0"
+    APP_VERSION: str = "2026.4.0"
     DEBUG: bool = False
 
     # Postgres optional: DATABASE_URL=postgresql+psycopg2://user:pass@host:5432/db
@@ -57,7 +57,9 @@ class Settings(BaseSettings):
     CRAWL_DELAY_SECONDS: float = 1.0
     PROXY_URL: Optional[str] = None
     
-    WHISPER_MODEL_SIZE: str = "base"
+    # Transcript pipeline: faster-whisper model size. Use large-v3-turbo for best accuracy
+    # (requires requirements-ml.txt + ~3GB). Default base for lean installs.
+    WHISPER_MODEL_SIZE: str = "large-v3-turbo"
 
     # Provider reliability / verification settings
     VERIFY_SEARCH_RESULTS: bool = True

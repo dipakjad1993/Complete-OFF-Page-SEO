@@ -104,13 +104,80 @@ async def _optimization_tick():
         logger.warning("optimization tick failed: %s", str(e)[:200])
 
 
+def register_daily_pdf_job(brand_id: int, hour_utc: int = 8, webhook_url: str | None = None, slack_url: str | None = None, theme: str = "default") -> bool:
+    """Register/overwrite a daily PDF + webhook push job for one brand."""
+    global _scheduler
+    if _scheduler is None:
+        return False
+    jid = f"pdf-daily-{brand_id}"
+    try:
+        try:
+            _scheduler.remove_job(jid)
+        except Exception:
+            pass
+        # cron daily at hour_utc
+        from apscheduler.triggers.cron import CronTrigger
+        import asyncio as _aio
+        async def _pdf_tick():
+            try:
+                import json as _j, httpx as _hx, os as _o
+                from datetime import datetime as _dt, timezone as _tz
+                latest = f"data/analysis_results/{brand_id}_latest.json"
+                if not _o.path.exists(latest):
+                    return
+                data = _j.load(open(latest, encoding="utf-8", errors="replace"))
+                from backend.api.analysis import build_deliverables
+                deliv = build_deliverables(data)
+                url = webhook_url
+                if url:
+                    try:
+                        async with _hx.AsyncClient(timeout=15) as _c:
+                            await _c.post(url, json={"brand_id": brand_id, "at": _dt.now(_tz.utc).isoformat(), "deliverables": deliv, "source": "daily_pdf_cron"})
+                    except Exception:
+                        pass
+                logger.info("daily PDF push brand=%s hour=%s webhook=%s", brand_id, hour_utc, bool(url))
+            except Exception as e:
+                logger.warning("daily PDF tick failed brand=%s err=%s", brand_id, str(e)[:200])
+        _scheduler.add_job(lambda: _aio.create_task(_pdf_tick()), CronTrigger(hour=hour_utc, minute=5, timezone="UTC"), id=jid, replace_existing=True)
+        logger.info("daily PDF job registered brand=%s hour=%s UTC webhook=%s", brand_id, hour_utc, bool(webhook_url))
+        return True
+    except Exception as e:
+        logger.warning("register_daily_pdf_job failed brand=%s err=%s", brand_id, str(e)[:200])
+        return False
+
+
+def unregister_daily_pdf_job(brand_id: int) -> bool:
+    global _scheduler
+    if _scheduler is None:
+        return False
+    try:
+        _scheduler.remove_job(f"pdf-daily-{brand_id}")
+        return True
+    except Exception:
+        return False
+
+
 def maybe_start_from_env():
     try:
         enabled = os.getenv("SCHEDULE_ENABLED", "").lower() in ("1", "true", "yes")
         if not enabled:
             return None
         hours = float(os.getenv("SCHEDULE_INTERVAL_HOURS", "24") or 24)
-        return start_scheduler(hours)
+        sched = start_scheduler(hours)
+        # Re-hydrate persisted daily PDF schedules
+        try:
+            import json as _j, os as _o
+            sp = "data/scheduled_reports.json"
+            if _o.path.exists(sp):
+                rows = _j.load(open(sp, encoding="utf-8", errors="replace"))
+                for r in rows if isinstance(rows, list) else []:
+                    try:
+                        register_daily_pdf_job(int(r.get("brand_id", 0)), int(r.get("hour_utc", 8)), r.get("webhook_url"), None, r.get("theme", "default"))
+                    except Exception:
+                        continue
+        except Exception:
+            pass
+        return sched
     except Exception as e:  # noqa: BLE001
         logger.warning("scheduler auto-start skipped: %s", str(e)[:160])
         return None

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, lazy, Suspense } from 'react';
 import {
   BarChart3, Brain, Network, PenTool, Link2, Mic, Server, ShieldAlert,
   ShieldCheck, Fingerprint, Bug, Database, Globe, FileCode2, Handshake, Gauge, Hash,
@@ -175,12 +175,19 @@ function ExportButtons({ brandId, brandName }: { brandId?: number | null; brandN
       const res = await fetch(`/api/v1/analysis/export/${brandId}?format=${format}`);
       if (!res.ok) throw new Error(`${format.toUpperCase()} export failed (${res.status})`);
       const blob = await res.blob();
+      const ct = res.headers.get('content-type') || '';
+      // provider attribution badge: show which search provider served the export data
+      const providerHint = res.headers.get('x-provider-chain') || ct.includes('csv') ? 'CSV includes confidence+evidence+provider per row' : '';
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
       a.download = `brand-${brandId}-deliverables.${format}`;
       document.body.appendChild(a);
       a.click();
       setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+      if (providerHint && format === 'csv') {
+        // surface provider row hint in console for debugging
+        console.debug('[export]', providerHint);
+      }
     } catch (e) {
       setErr((e as Error).message || 'Download failed.');
     } finally {
@@ -407,18 +414,21 @@ export default function Deliverables({ summary, sections, brandId, brandName, br
           <ZeroClickPanel brandId={brandId} />
         </div>
         <div className="deliverable-block" style={{ marginTop: '1rem' }}>
-          <h3 className="deliverable-title"><Network size={16} /> 2026 P0 deep-dive APIs (live)</h3>
+          <h3 className="deliverable-title"><Network size={16} /> 2026 P0 deep-dive APIs (live) — 10 enterprise surfaces</h3>
           <p className="deliverable-note">
             {brandId ? (<>
-              <a className="inline-link" href={`/api/v1/aio-tracker/report/${brandId}`} target="_blank" rel="noreferrer">AIO citation tracker</a>{' · '}
-              <a className="inline-link" href={`/api/v1/zero-click/dashboard/${brandId}`} target="_blank" rel="noreferrer">Zero-click attribution</a>{' · '}
-              <a className="inline-link" href={`/api/v1/llms-audit/audit/${brandId}`} target="_blank" rel="noreferrer">llms.txt 29-check</a>{' · '}
+              <a className="inline-link" href={`/api/v1/aio-tracker/report/${brandId}`} target="_blank" rel="noreferrer">AIO citation tracker v2</a>{' · '}
+              <a className="inline-link" href={`/api/v1/zero-click/dashboard/${brandId}`} target="_blank" rel="noreferrer">Zero-click</a>{' · '}
+              <a className="inline-link" href={`/api/v1/llms-audit/audit/${brandId}`} target="_blank" rel="noreferrer">llms.txt 29-check (ChatGPT/Perplexity/Claude — not Google)</a>{' · '}
               <a className="inline-link" href={`/api/v1/sentiment/narrative/${brandId}`} target="_blank" rel="noreferrer">Sentiment/narrative</a>{' · '}
               <a className="inline-link" href={`/api/v1/source-influence/roi/${brandId}`} target="_blank" rel="noreferrer">Source Influence ROI</a>{' · '}
-              <a className="inline-link" href={`/api/v1/cwv/audit/${brandId}`} target="_blank" rel="noreferrer">CrUX/CWV</a>{' · '}
-              <a className="inline-link" href={`/api/v1/transcripts/audit/${brandId}`} target="_blank" rel="noreferrer">Transcripts</a>{' · '}
-              <a className="inline-link" href={`/api/v1/ugc-depth/citation-share/${brandId}`} target="_blank" rel="noreferrer">UGC citation-share</a>
-            </>) : 'Run an analysis to unlock live P0 endpoints.'}
+              <a className="inline-link" href={`/api/v1/cwv/audit/${brandId}`} target="_blank" rel="noreferrer">CrUX field (INP/CLS)</a>{' · '}
+              <a className="inline-link" href={`/api/v1/transcripts/audit/${brandId}`} target="_blank" rel="noreferrer">Transcripts (YouTube r=0.737)</a>{' · '}
+              <a className="inline-link" href={`/api/v1/ugc-depth/citation-share/${brandId}`} target="_blank" rel="noreferrer">UGC citation-share</a>{' · '}
+              <a className="inline-link" href={`/api/v1/link-intersect/intersect/${brandId}`} target="_blank" rel="noreferrer">Link Intersect + Disavow</a>{' · '}
+              <a className="inline-link" href={`/api/v1/reviews-local/audit/${brandId}`} target="_blank" rel="noreferrer">Reviews + Local (G2/GBP)</a>{' · '}
+              <a className="inline-link" href={`/api/v1/scheduled-reports/list`} target="_blank" rel="noreferrer">Scheduled PDFs</a>
+            </>) : 'Run an analysis to unlock live P0 endpoints. llms.txt path is ChatGPT/Perplexity/Claude only — Google AIO/AI Mode uses core index.'}
           </p>
         </div>
         <div className="deliverable-grid2" style={{ marginTop: '1rem' }}>
@@ -803,24 +813,31 @@ export default function Deliverables({ summary, sections, brandId, brandName, br
 
       {/* Module coverage matrix — all features / functions at a glance */}
       <div className="deliverable-group">
-        <h2 className="deliverable-group-title">Appendix · All-module coverage <span>{health.ok} verified · {health.un} no-data · {health.er} error — full functions &amp; sub-functions ship in the PDF Appendix A</span></h2>
+        <h2 className="deliverable-group-title">Appendix · All-module coverage <span>{health.ok} verified · {health.un} no-data · {health.er} error — full functions &amp; sub-functions ship in the PDF Appendix A (42 sections: 35 core + 7 extended)</span></h2>
         <div className="deliverable-block">
-          <div className="table-wrap">
+          <p className="deliverable-note" style={{ marginTop: 0, display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <span style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 999, padding: '2px 8px', fontSize: '0.68rem' }}>SerpAPI → 7d-cache → Brave → Bing Web → Bing RSS → ddgs</span>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>Provider per result visible in CSV evidence + /provider-status · DDG HTML leg removed v2026.2 · llms.txt scored for ChatGPT/Perplexity/Claude only (Google does NOT use llms.txt).</span>
+          </p>
+          <div className="table-wrap" style={{ maxHeight: 420, overflowY: 'auto' }}>
             <table>
-              <thead><tr><th style={{ width: '44px' }}>#</th><th>Module / feature</th><th style={{ width: '110px' }}>Status</th><th>Assessment / function signal</th><th style={{ width: '90px' }}>Findings</th></tr></thead>
+              <thead><tr><th style={{ width: '44px' }}>#</th><th>Module / feature</th><th style={{ width: '110px' }}>Status</th><th>Assessment / function signal</th><th style={{ width: '90px' }}>Findings</th><th style={{ width: '90px' }}>Confidence</th></tr></thead>
               <tbody>
                 {allKeys.sort().map((k, i) => {
                   const m: any = (sections as any)[k];
                   const st = String(m?.status ?? '—');
                   const badge = st === 'ok' ? 'low' : st === 'unavailable' ? 'high' : st === 'error' ? 'critical' : 'medium';
                   const fcount = Array.isArray(m?.findings) ? m.findings.length : 0;
+                  const conf = typeof m?.confidence === 'number' ? m.confidence : null;
+                  const provider = m?.provider || m?.method || '';
                   return (
                     <tr key={k}>
                       <td style={{ color: 'var(--text-muted)', fontWeight: 700 }}>{i + 1}</td>
-                      <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{String(m?.feature_name || k).slice(0, 60)}</td>
+                      <td style={{ fontWeight: 600, color: 'var(--text-primary)' }} title={provider ? `provider: ${provider}` : ''}>{String(m?.feature_name || m?.name || k).slice(0, 60)}{provider ? <span style={{ color: 'var(--text-muted)', fontWeight: 400, fontSize: '0.66rem' }}> · {String(provider).slice(0, 22)}</span> : null}</td>
                       <td><span className={`status-badge ${badge}`} style={{ fontSize: '0.66rem' }}>{st === 'ok' ? 'Verified' : st}</span></td>
                       <td style={{ fontSize: '0.78rem' }}>{String(m?.assessment || m?.executive_takeaway || '—').slice(0, 110)}</td>
                       <td style={{ textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 700 }}>{fcount}</td>
+                      <td style={{ textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{conf !== null ? conf.toFixed(2) : '—'}</td>
                     </tr>
                   );
                 })}
@@ -829,7 +846,7 @@ export default function Deliverables({ summary, sections, brandId, brandName, br
           </div>
           <p className="deliverable-note" style={{ marginBottom: 0, display: 'flex', gap: '0.45rem', alignItems: 'flex-start' }}>
             <FileText size={13} style={{ flexShrink: 0, marginTop: '2px' }} />
-            <span>Per-module deep dives (evidence tables, recommendations, actions, limitations, verified sources) live in the “All 35 Modules” tab and in full inside the downloaded PDF — cover, charts, all 5 outputs, Appendix A (35 modules) and Appendix B (methodology + source library).</span>
+            <span>Per-module deep dives (evidence tables, recommendations, actions, limitations, verified sources) live in the “All Modules” tab and in full inside the downloaded PDF — cover, charts, all 5 outputs, Appendix A (42 sections: 35 core + 7 extended) and Appendix B (methodology + source library). CSV includes confidence+evidence+provider per row.</span>
           </p>
         </div>
       </div>

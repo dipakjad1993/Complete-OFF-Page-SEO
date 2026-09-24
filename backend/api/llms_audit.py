@@ -1,8 +1,13 @@
 from __future__ import annotations
 
-"""llms.txt + MCP 29-check audit (P0).
+"""llms.txt + MCP 29-check audit (P0) — ChatGPT/Perplexity/Claude readiness, NOT Google.
 
-PerplexityBot hates redirects; GPTBot/CCBot need explicit robots lines.
+Google Search (AI Overviews / AI Mode) does NOT use llms.txt per the
+June 15 2026 clarification; good GEO is good SEO (factual density, not llms.txt).
+This audit scores readiness for ChatGPT (OAI-SearchBot/GPTBot), Perplexity
+(PerplexityBot), Claude (ClaudeBot), CCBot/Bytespider — where llms.txt +
+robots Allow + MCP/openapi actually govern crawl.
+
 29 checks: root 200 no-redirect, size/structure, robots Allow for
 GPTBot/OAI-SearchBot/PerplexityBot/CCBot/ClaudeBot/Bytespider/Google-Extended,
 MCP tools/resources exposure, sitemap + ai-plugin + openapi.
@@ -78,7 +83,9 @@ async def llms_audit(brand_id: int):
     passed = sum(1 for c in checks if c["passed"])
     return {"status": "ok", "domain": domain, "score_0_100": round(passed / 29 * 100, 1),
             "passed": passed, "total": 29, "checks": checks,
-            "fix_pack": ["Publish /llms.txt at root with 200 + no redirect.",
+            "scope_note": "ChatGPT/Perplexity/Claude readiness — Google Search does NOT use llms.txt (June 15 2026). For Google AIO/AI Mode, factual density + E-E-A-T are the levers.",
+            "google_note": "Per Google AI Optimization Guide May 15 2026: no llms.txt, no special AI schema, no chunking, no AI-voice rewrite required for Google. Inauthentic mentions = spam. Keep llms.txt for ChatGPT/Perplexity/Claude only.",
+            "fix_pack": ["Publish /llms.txt at root with 200 + no redirect (ChatGPT/Perplexity/Claude).",
                          "Add explicit Allow lines for GPTBot/OAI-SearchBot/PerplexityBot/CCBot/ClaudeBot.",
                          "Expose MCP tools (see mcp_server.py) + openapi.json + ai-plugin.json."],
-            "methodology": "29 live HTTP + content checks. Real-data-only."}
+            "methodology": "29 live HTTP + content checks. Real-data-only. llms.txt scored for ChatGPT/Perplexity/Claude; Google impact = none (Google guidance).", "provider": "live_http"}

@@ -692,13 +692,22 @@ async def run_full_analysis(brand_id: int, db: Session):
 
 @router.post("/run")
 async def run_analysis(req: AnalysisRequest, db: Session = Depends(get_db)):
+    """Blocking run — deprecated. Prefer POST /run-async (non-blocking, poll /progress/{brand_id}).
+
+    Blocking 60-180s holds a Render/worker connection and can hit proxy timeouts.
+    This endpoint is kept for scripts/CI only; UI must use /run-async.
+    """
+    from fastapi.responses import JSONResponse
     brand = db.query(Brand).filter(Brand.id == req.brand_id).first()
     if not brand:
         raise HTTPException(status_code=404, detail="Brand not found")
     results = await run_full_analysis(req.brand_id, db)
     if "error" in results:
         raise HTTPException(status_code=400, detail=results["error"])
-    return results
+    resp = JSONResponse(content=results)
+    resp.headers["X-Deprecated"] = "POST /api/v1/analysis/run is deprecated; use POST /api/v1/analysis/run-async + GET /api/v1/analysis/progress/{brand_id}"
+    resp.headers["Sunset"] = "2026-12-31"
+    return resp
 
 
 # ---- Non-blocking background jobs (fixes blocking POST /run) ----

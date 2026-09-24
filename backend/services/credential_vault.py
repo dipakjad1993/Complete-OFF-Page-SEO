@@ -21,7 +21,9 @@ def _fernet():
     raw = os.environ.get("CREDENTIALS_FERNET_KEY") or ""
     if not raw:
         from config.settings import settings
-        raw = settings.SECRET_KEY or "change-me-in-production"
+        if not settings.is_production_secret:
+            raise RuntimeError("CREDENTIALS_FERNET_KEY is required in production when SECRET_KEY is default. Set CREDENTIALS_FERNET_KEY (generate with: python -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())').")
+        raw = settings.SECRET_KEY
     digest = hashlib.sha256(raw.encode()).digest()
     return Fernet(base64.urlsafe_b64encode(digest))
 

@@ -7,10 +7,24 @@ GET /billing/plans, GET /billing/tenant, POST /billing/tenant (admin).
 White-label: WHITE_LABEL_BRAND env + per-tenant logo/theme/domain.
 """
 
-from fastapi import APIRouter, Header
+from fastapi import APIRouter, Header, HTTPException
 import os
 
 router = APIRouter()
+
+def _guard_default_secret():
+    """Block mutating billing in production when SECRET_KEY is still the default.
+    Read-only GET /plans and GET /tenant remain open; POST /tenant is gated.
+    Prevents credential/white-label takeover on Render demo deploys that forgot to rotate SECRET_KEY.
+    """
+    try:
+        from config.settings import settings
+        if not settings.is_production_secret:
+            raise HTTPException(status_code=403, detail="Refusing to mutate billing with default SECRET_KEY. Set a strong SECRET_KEY (16+ chars) in env.")
+    except HTTPException:
+        raise
+    except Exception:
+        pass
 
 PLANS = [
     {"id": "free", "name": "Free proxy tier", "price": 0, "runs_mo": 10, "seats": 1},
@@ -37,6 +51,7 @@ async def tenant(authorization: str | None = Header(default=None)):
 
 @router.post("/tenant")
 async def update_tenant(payload: dict, authorization: str | None = Header(default=None)):
+    _guard_default_secret()
     from backend.api.auth import verify_token, require_role
     tok = (authorization or "").replace("Bearer ", "")
     if not require_role(verify_token(tok), "admin"):

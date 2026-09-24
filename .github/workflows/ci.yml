@@ -24,4 +24,4 @@ jobs:
       - name: Python 3.11 f-string gate (tokenizer-level PEP-701 check)
         run: python scripts/py311_fstring_scan.py
       - name: "Unit tests (tests/ only; manual scripts excluded)"
-        run: pytest -q tests/
+        run: pytest -q -k "not live" tests/

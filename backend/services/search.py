@@ -56,6 +56,24 @@ def _pick_headers() -> dict:
         pass
     return h
 
+
+def _chain_hint() -> str:
+    """One-line search chain for logs / health so free-tier vs keyed is always visible."""
+    try:
+        from config.settings import settings as _s
+        parts = []
+        if getattr(_s, "SERPAPI_KEY", None):
+            parts.append("SerpAPI")
+        parts.append("7d-cache")
+        if getattr(_s, "BRAVE_SEARCH_API_KEY", None):
+            parts.append("Brave")
+        if getattr(_s, "BING_SEARCH_API_KEY", None):
+            parts.append("Bing Web")
+        parts += ["Bing RSS", "ddgs (DDG HTML leg removed v2026.2)"]
+        return " -> ".join(parts)
+    except Exception:
+        return "SerpAPI? -> 7d-cache -> Brave? -> Bing Web? -> Bing RSS -> ddgs"
+
 # Domains that are definition/reference pages and are almost never the
 # right "source" for a brand citation. Strictly rejected during relevance pass.
 BLOCKED_RESULT_DOMAINS = {

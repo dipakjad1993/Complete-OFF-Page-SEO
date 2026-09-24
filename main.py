@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from datetime import datetime
 from pathlib import Path
+import os
 import uvicorn
 
 from contextlib import asynccontextmanager
@@ -24,6 +25,7 @@ from backend.api import (
     pr_outreach, auth as auth_api,
     aio_tracker, zero_click, transcript_pipeline, llms_audit,
     sentiment, source_influence, cwv, billing,
+    link_intersect, reviews_local, scheduled_reports,
 )
 
 
@@ -34,14 +36,19 @@ async def lifespan(app: FastAPI):
         init_db()
     except Exception as e:
         print(f"[startup] DB init warning: {e}")
-    # Warn when running with default SECRET_KEY.
+    # Warn when running with default SECRET_KEY; enforce for credential vault + billing.
     try:
         w = settings.secret_warning()
         if w:
-            print(f"[startup] WARNING: {w}")
+            print(f"[startup] WARNING: {w} — POST /api/v1/billing/tenant and credential vault writes are BLOCKED until SECRET_KEY/CREDENTIALS_FERNET_KEY is set.")
+            if not os.environ.get("CREDENTIALS_FERNET_KEY"):
+                print("[startup] WARNING: CREDENTIALS_FERNET_KEY not set — vault writes will fail (set it to a Fernet key).")
         else:
             print("[startup] SECRET_KEY OK (custom)")
         print(f"[startup] Providers configured: {settings.configured_providers or 'none (free tier)'}")
+        # Surface free-tier chain so debugging is obvious
+        from backend.services.search import _chain_hint
+        print(f"[startup] Search chain: {_chain_hint()}")
     except Exception:
         pass
     # Optional periodic re-runs (SCHEDULE_ENABLED=true in .env).
@@ -117,6 +124,9 @@ app.include_router(sentiment.router, prefix="/api/v1/sentiment", tags=["Sentimen
 app.include_router(source_influence.router, prefix="/api/v1/source-influence", tags=["Source Influence ROI"])
 app.include_router(cwv.router, prefix="/api/v1/cwv", tags=["CWV & Hreflang"])
 app.include_router(billing.router, prefix="/api/v1/billing", tags=["Billing & White-Label"])
+app.include_router(link_intersect.router, prefix="/api/v1/link-intersect", tags=["Link Intersect & Disavow"])
+app.include_router(reviews_local.router, prefix="/api/v1/reviews-local", tags=["Reviews & Local Entity"])
+app.include_router(scheduled_reports.router, prefix="/api/v1/scheduled-reports", tags=["Scheduled Reports & Webhooks"])
 
 FRONTEND_DIST = Path(__file__).resolve().parent / "frontend" / "dist"
 SPA_HEADERS = {
@@ -136,7 +146,10 @@ async def api_info():
         "status": "operational",
         "features_count": 35,
         "extended_count": 7,
-        "p0_2026": ["aio-tracker", "zero-click", "transcripts", "llms-audit", "sentiment", "source-influence", "cwv"],
+        "enterprise_sections": 42,
+        "routers": 50,
+        "p0_2026": ["aio-tracker", "zero-click", "transcripts", "llms-audit", "sentiment", "source-influence", "cwv", "link-intersect", "reviews-local", "scheduled-reports"],
+        "search_chain": "SerpAPI -> 7d-cache -> Brave -> Bing Web -> Bing RSS -> ddgs (DDG HTML leg removed v2026.2)",
     }
 
 
@@ -208,6 +221,5 @@ async def serve_frontend(full_path: str):
 
 
 if __name__ == "__main__":
-    import os
     _port = int(os.environ.get("PORT", "8000"))
     uvicorn.run("main:app", host="0.0.0.0", port=_port, reload=True)
